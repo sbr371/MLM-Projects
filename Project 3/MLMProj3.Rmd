@@ -1,0 +1,226 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+dat<-read.csv("C:/Users/james/Documents/NYU Coursework/MLM_Spring17/classroom.csv")
+attach(dat)
+dat$math1st <- mathkind + mathgain
+```
+##UMM MODEL
+
+```{r, message=FALSE, warning=FALSE}
+require(lme4)
+require(lmerTest)
+umm.1 <- lmer(math1st ~ (1|schoolid/classid), data =dat)
+summary(umm.1)
+```
+
+$$
+MATH1ST_{ijk} = b_0 + \eta_{jk} + \zeta_{k} + \varepsilon_{ijk}
+$$
+With $\zeta_{k}$ ~ N(0,$\sigma^2_{\zeta}$), $\eta_{jk}$ ~ N(0,$\sigma^2_{\eta}$), and $\varepsilon_{ijk}$ ~ N(0,$\sigma^2_{\varepsilon}$)
+
+####ICC
+$$
+\sigma^2_{\eta} = 85.46
+$$
+$$
+\sigma^2_{\zeta} = 280.68
+$$
+$$
+\hat{\sigma}^2_{\varepsilon} = 1146.80
+$$
+$$
+ICC = \frac{\sigma^2_{\zeta}}{\sigma^2_{\zeta} + \sigma^2_{\varepsilon}} = \frac{}{364.23 + 1344.5} = 0.207306
+$$
+
+
+##Add school level predictors (HOUSEPOV)
+```{r}
+lme1<-lmer(math1st~housepov + (1|schoolid/classid),data=dat)
+summary(lme1)
+```
+
+```{r}
+rand(lme1)
+```
+
+####Report $\sigma^2_{\zeta}$
+$$
+\sigma^2_{\eta} = 82.36
+$$
+$$
+\sigma^2_{\zeta} = 250.93
+$$
+$$
+\hat{\sigma}^2_{\varepsilon} = 1146.95
+$$
+
+$\sigma^2_{\zeta}$ is reduced from 280.68 to 250.93. $\sigma^2_{\eta}$ is reduced from 85.46 to 82.36. The reduction in school variance is expected. The classroom variance is reduced slightly possibly due to aggregate effect, where classroom has both the school level and classroom effect.
+
+##ADD Class level preds & report if justifed.
+```{r}
+lme2<-lmer(math1st~housepov + mathknow + mathprep + yearstea + (1|schoolid/classid),data=dat)
+summary(lme2)
+```
+
+None of them are significant except for household poverty.
+
+####Justified?
+```{r}
+rand(lme2)
+```
+SIGNIFICANT
+
+####Report change in $\hat{\sigma}^2_{\eta}$.
+$$
+\sigma^2_{\eta} = 94.36
+$$
+####Report change in $\hat{\sigma}^2_{\varepsilon}.
+$$
+\sigma^2_{\varepsilon} = 1136.43
+$$
+
+####Hypothesis as to why sigma^2_epsilon is reduced, but not sigma^2_eta.
+repartitioning due to unbalanced design.
+
+##ADD student level preds & report if justifed.
+```{r}
+lme3<-lmer(math1st~housepov + mathknow + mathprep + yearstea + sex + minority + ses + (1|schoolid/classid),data=dat)
+summary(lme3)
+```
+
+####Report change in variance components for all levels; why did school level drop?
+$$
+\sigma^2_{\eta} = 93.89
+$$
+$$
+\sigma^2_{\zeta} = 169.45
+$$
+$$
+\hat{\sigma}^2_{\varepsilon} = 1064.95
+$$
+
+$$
+MATH1ST_{ijk} = b_0 + HOUSEPOV_{k} + MATHKNOW_{jk} + MATHPREP_{jk} + YEARSTEA_{jk} + SEX_{ijk} + MINORITY_{ijk} + SES_{ijk} + \eta_{jk} + \zeta_{k} + \varepsilon_{ijk}
+$$
+With $\zeta_{k}$ ~ N(0,$\sigma^2_{\zeta}$), $\eta_{jk}$ ~ N(0,$\sigma^2_{\eta}$), and $\varepsilon_{ijk}$ ~ N(0,$\sigma^2_{\varepsilon}$)
+
+##ADD a random slope for each teacher level predictor.
+
+#### MATHKNOW
+```{r}
+lme4.1<-lmer(math1st~housepov + mathknow + mathprep + yearstea + sex + minority + ses + (0+mathknow|schoolid) + (1|schoolid/classid),data=dat)
+summary(lme4.1)
+```
+
+#### MATHPREP
+```{r}
+lme4.2<-lmer(math1st~housepov + mathknow + mathprep + yearstea + sex + minority + ses + (0+mathprep|schoolid) + (1|schoolid/classid),data=dat)
+summary(lme4.2)
+```
+
+#### YEARSTEA
+```{r}
+lme4.3<-lmer(math1st~housepov + mathknow + mathprep + yearstea + sex + minority + ses + (0+yearstea|schoolid) + (1|schoolid/classid),data=dat)
+summary(lme4.3)
+```
+
+##Why not try for a random slope on the housepov effect?
+You can't because we can't observe higher level up.
+
+##Retry the above, allowing the slopes to be correlated with the random intercepts.
+
+#### MATHKNOW
+```{r, message=TRUE, warning=TRUE}
+lme4.1.1<-lmer(math1st~housepov + mathknow + mathprep + yearstea + sex + minority + ses + (mathknow|schoolid)+(1|classid),data=dat)
+summary(lme4.1.1)
+```
+
+#### MATHPREP
+```{r}
+lme4.2.1<-lmer(math1st~housepov + mathknow + mathprep + yearstea + sex + minority + ses + (mathprep|schoolid) + (1|classid),data=dat)
+summary(lme4.2.1)
+```
+
+#### YEARSTEA
+```{r}
+lme4.3.1<-lmer(math1st~housepov + mathknow + mathprep + yearstea + sex + minority + ses + (yearstea|schoolid) + (1|classid),data=dat)
+summary(lme4.3.1)
+```
+
+
+##report anything unusual about the variance components
+
+##try to add a random slope for each student level predictor at the classroom level (one by one - not all together)
+
+#### SEX
+```{r, message=TRUE, warning=TRUE}
+lme4.1.2<-lmer(math1st~housepov + mathknow + mathprep + yearstea + sex + minority + ses + (0 + sex|schoolid/classid) + (1|schoolid/classid),data=dat)
+summary(lme4.1.2)
+```
+
+#### MINORITY
+```{r, message=TRUE, warning=TRUE}
+lme4.2.2<-lmer(math1st~housepov + mathknow + mathprep + yearstea + sex + minority + ses + (0 + minority|schoolid/classid) + (1|schoolid/classid),data=dat)
+summary(lme4.2.2)
+```
+
+#### SES
+```{r, message=TRUE, warning=TRUE}
+lme4.3.2<-lmer(math1st~housepov + mathknow + mathprep + yearstea + sex + minority + ses + (0 + ses|schoolid/classid) + (1|schoolid/classid),data=dat)
+summary(lme4.3.2)
+```
+
+##retry the above, allowing the slopes to be correlated with the random intercepts.
+#### SEX
+```{r, message=TRUE, warning=TRUE}
+lme4.1.3<-lmer(math1st~housepov + mathknow + mathprep + yearstea + sex + minority + ses + (sex|schoolid) + (1|classid) ,data=dat)
+summary(lme4.1.3)
+```
+
+#### MINORITY
+```{r, message=TRUE, warning=TRUE}
+lme4.2.3<-lmer(math1st~housepov + mathknow + mathprep + yearstea + sex + minority + ses  + (minority|schoolid) + (1|classid),data=dat)
+summary(lme4.2.3)
+```
+
+#### SES
+```{r, message=TRUE, warning=TRUE}
+lme4.3.3<-lmer(math1st~housepov + mathknow + mathprep + yearstea + sex + minority + ses + (ses|schoolid) + (1|classid),data=dat)
+summary(lme4.3.3)
+```
+
+
+gen math1st = mathkind + mathgain
+*FIT ALL MODELS WITH REML (not default in STATA)
+*Compute the UMM with random intercepts for schools and classrooms
+*report ICC
+*WRITE OUT THIS MODEL in the notation given to you in class
+*ADD School level preds & report if justifed
+*report change in sigma^2_zeta
+*ADD Class level preds & report if justifed
+*report change in sigma^2_eta
+*report change in sigma^2_epsilon
+*any hypothesis as to why sigma^2_epsilon is reduced, but not sigma^2_eta?
+*ADD student level preds & report if justifed
+*report change in variance components for all levels; why did school level drop?
+*WRITE OUT THIS MODEL in the notation given to you in class
+*try to add a random slope for each teacher level predictor at the school level (one by one - not all together)
+*why not try for a random slope on the housepov effect?
+*retry the above, allowing the slopes to be correlated with the random intercepts.
+*report anything unusual about the variance components
+*try to add a random slope for each student level predictor at the classroom level (one by one - not all together)
+*why not consider a class-level variable with random slopes at the classroom level?
+*retry the above, allowing the slopes to be correlated with the random intercepts.
+*try to add a random slope for each student level predictor at the school level (one by one - not all together)
+*retry the above, allowing the slopes to be correlated with the random intercepts.
+*report anything unusual about the variance components
+*take the two predictors that had "signif." random slopes, in the forms in which they worked (indep. or correlated) 
+*and add both to the model, and test for need of one conditional on needing the other
+*is the more complex model justified?
+*WRITE OUT THIS MODEL in the notation given to you in class
+
+*report findings.  discuss.

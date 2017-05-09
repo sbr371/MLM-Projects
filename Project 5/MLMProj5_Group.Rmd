@@ -1,0 +1,224 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(readr)
+dat <- read_csv("classroom.csv")
+cc.data <- dat[(complete.cases(dat)),]
+```
+
+*we have two models to consider, but we first focus on the simpler one:
+```{r}
+attach(cc.data)
+cc.data$math1st <- mathkind + mathgain
+```
+
+```{r}
+require(lme4)
+require(lmerTest)
+fit1 <- lmer(math1st ~ housepov + yearstea + mathprep + mathknow + ses + sex + minority + (1|schoolid/classid), data=cc.data)
+summary(fit1)
+```
+
+*manually construct the residual that removes only the 'fixed effects'
+*hint: predict yhat, xb will generate the prediction for the outcome based on the fixed effects only
+* then subtract it from the outcome; call this residual: resFE
+```{r}
+pred.yhat <- predict(fit1, re.form = ~0)
+res1 <- cc.data$math1st - pred.yhat
+```
+
+*show that this residual is not independent within schools in some manner.  Hint: boxplot?
+```{r}
+dec.schoolid <- as.numeric(names(sort(table(schoolid))))
+cc.data$schoolid <- ordered(cc.data$schoolid, levels = dec.schoolid )
+with(cc.data, boxplot(res1~schoolid))
+abline(h=0, col = "red")
+
+ord<-order(unlist(tapply(res1,schoolid,median)))
+boxplot(split(res1,schoolid)[ord])
+```
+
+```{r}
+dec.classid <- as.numeric(names(sort(table(classid))))
+cc.data$classid <- ordered(cc.data$classid, levels = dec.classid )
+with(cc.data, boxplot(res1~classid))
+abline(h=0, col = "red")
+
+```
+
+
+*construct the residual that utilizes the BLUPs for the random effects.  Do it in these stages:
+* i) predict and save zeta0 
+* ii) predit and save eta0
+* iii) generate a new residual, called resFE_RE which subtracts yhat, zeta0 and eta0 from the outcome
+*note: there is an easier way to get the residuals in this case, predict ..., residuals, but we need to do it manually.
+```{r}
+idx.sch <- match(cc.data$schoolid, sort(unique(cc.data$schoolid)))
+idx.cls <- match(cc.data$classid, sort(unique(cc.data$classid))) 
+```
+
+```{r}
+attach(cc.data)
+ranefs <- ranef(fit1)
+zeta0 <- ranefs$schoolid[, 1]
+eta0 <- ranefs$classid[, 1]
+cc.data$zeta0 <- zeta0[idx.sch]
+cc.data$eta0 <- eta0[idx.cls]
+resFE_RE <- math1st - pred.yhat - cc.data$zeta0 - cc.data$eta0
+```
+
+
+* show that these new residuals, resFE_RE are MUCH LESS (if not completely un-) correlated within school 
+* using the same method as before (boxplot?)
+### ZARNI
+```{r}
+with(cc.data, boxplot(resFE_RE~schoolid))
+abline(h=1, col="red")
+
+ord2<-order(unlist(tapply(resFE_RE,schoolid,median)))
+boxplot(split(resFE_RE,schoolid)[ord2])
+
+```
+
+
+*examine the two sets of BLUPs (for random effects zeta0 and eta0) for normality
+*first 'tag' a single value from each grouping (e.g., school or classroom) so that you only have 
+* as many BLUPs as the grouping factor (should be less of an issue in R)
+```{r}
+plot(density(zeta0))
+qqnorm(zeta0)
+qqline(zeta0)
+```
+
+```{r}
+plot(density(eta0))
+qqnorm(eta0)
+qqline(eta0)
+```
+
+*if In a simpler setting, with no classroom level, if H0: \sigma^2_{\zeta_0}=0 were true, 
+* and you sampled 100 schools of size 10, what would be a potential expected estimate of \sigma_{\zeta_0} 
+* if you know that \sigma_{\epsilon}=1 ?  HINT: the Central Limit Theorem applies.  Simulate to find out.
+```{r}
+
+```
+
+
+*now reload the data and fit a slightly more complicated model:
+use "classroom.dta"
+gen math1st = mathkind + mathgain
+```{r}
+dat <- read.csv("classroom.csv")
+dat$math1st <- dat$mathkind + dat$mathgain
+dat <- dat[(complete.cases(dat)),]
+attach(dat)
+
+
+```
+
+
+
+mixed math1st housepov yearstea mathprep mathknow ses sex minority |||schoolid: minority, cov(un) || classid:, reml 
+est store M2
+
+```{r}
+M2 <- lmer(math1st ~ housepov + yearstea + mathprep + mathknow + ses + sex + minority + (0+minority|schoolid) + (1|schoolid) + (1|classid))
+summary(M2)
+
+```
+```{r}
+idx.sch <- match(dat$schoolid, sort(unique(dat$schoolid)))
+idx.cls <- match(dat$classid, sort(unique(dat$classid))) 
+```
+
+
+*manually construct the residual that removes only the 'fixed effects', call this residual: resFE
+```{r}
+pred.yhat.2 <- predict(M2, re.form = ~0)
+ranefs <- ranef(M2)
+zeta0 <- ranefs$schoolid[, 1]
+dat$zeta0 <- zeta0[idx.sch]
+resFE <- dat$math1st - pred.yhat.2 
+```
+
+*show that this residual is not independent within schools in some manner.  Hint: boxplot?
+```{r}
+
+
+
+```
+
+*construct the residual that utilizes the BLUPs for the random effects.  Do it in these stages:
+* i) predict and save zeta0 AND zeta1 (you need to give them in reverse order in STATA - ask me why if you want)
+* ii) predit and save eta0
+* iii) generate a new residual, called resFE_RE which subtracts yhat, zeta0, MINORITY*zeta1 and eta0 
+```{r}
+ranerr <- ranef(M2)
+zeta0 <- ranerr$schoolid[,1]
+zeta1 <- ranerr$schoolid[,2]
+eta0 <- ranerr$classid[,1]
+dat$zeta0 <- dat$zeta0[idx.sch]
+dat$zeta1 <- dat$zeta1[idx.sch]
+dat$eta0 <- dat$eta0[idx.cls]
+resFE_RE <- dat$math1st - (pred.yhat.2 + dat$zeta0 + dat$minority * dat$zeta1 + dat$eta0)
+```
+
+
+*      from the outcome
+
+* show that these new residuals, resFE_RE are MUCH LESS (if not completely un-) correlated within school 
+* using the same method as before (boxplot?)
+```{r}
+
+
+
+```
+
+*examine the three sets of BLUPs (for random effects zeta0 and eta0) for normality
+```{r}
+qqnorm(zeta0)
+qqline(zeta0)
+```
+
+```{r}
+qqnorm(zeta1)
+qqline(zeta1)
+```
+
+```{r}
+qqnorm(eta0)
+qqline(eta0)
+```
+
+
+*first 'tag' a single value from each grouping (e.g., school or classroom) so that you only have 
+* as many BLUPs as the grouping factor (should be less of an issue in R)
+
+*plot zeta0 vs. zeta1 to see whether the estimated correlation is consistent with the observed. 
+* Use tag to subset as before
+
+#No Correlation
+```{r}
+library(calibrate)
+```
+
+
+```{r}
+plot(jitter(zeta0), zeta1)
+text(zeta0, zeta1, labels=schoolid, cex= 0.7, pos=3)
+
+plot(jitter(zeta0[1:10], zeta1[1:10]))
+textxy(zeta0[1:10], zeta1[1:10], schoolid[1:10])
+
+```
+
+
+*track down those odd points in the scatterplot.  What schools are they?
+```{r}
+
+
+
+```
