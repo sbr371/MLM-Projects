@@ -395,8 +395,9 @@ v_e2=1064.95
 
 ```
 
-*now consider the model with a random slope in ses.  
-*what are: V_C, V_S(ses=0), V_E ?   We need to list 'ses=0' here, or we don't know how to use the slope variance
+##now consider the model with a random slope in ses.  
+
+###what are: V_C, V_S(ses=0), V_E ?   We need to list 'ses=0' here, or we don't know how to use the slope variance
 
 ```{r}
 
@@ -416,7 +417,7 @@ v_c+v_s
 
 ```
 
-*what are: V_S(ses=-0.50), V_S(ses=+0.5) ?   
+###what are: V_S(ses=-0.50), V_S(ses=+0.5) ?   
 
 ```{r}
 
@@ -430,8 +431,8 @@ v_c+v_s+(.5^2)*v_ses
 ```
 
 
-*now consider the model with a random slope in minority.  
-*what are: V_C, V_S(minority=0), V_E ?   We need to list 'minority=0' here, or we don't know how to use the slope variance
+##now consider the model with a random slope in minority.  
+###what are: V_C, V_S(minority=0), V_E ?   We need to list 'minority=0' here, or we don't know how to use the slope variance
 
 ```{r}
 
@@ -451,7 +452,7 @@ v_c+v_s
 ```
 
 
-*what are: V_S(minority=0.25), V_S(minority=+0.50), V_S(minority=+0.75) ?   
+###what are: V_S(minority=0.25), V_S(minority=+0.50), V_S(minority=+0.75) ?   
 ```{r}
 #V_S(minority=0.25)
 v_c+v_s+(.25^2)*v_ses
@@ -465,8 +466,8 @@ v_c+v_s+(.75^2)*v_ses
 
 ```
 
-*now consider the model with a random slope in ses & minority.
-*what are: V_C, V_S(minority=0,ses=0), V_E ?   We need to list 'ses=0, minority=0' here, or we don't know how to use the slope variance
+##now consider the model with a random slope in ses & minority.
+###what are: V_C, V_S(minority=0,ses=0), V_E ?   We need to list 'ses=0, minority=0' here, or we don't know how to use the slope variance
 
 ```{r}
 fit<-lmer(math1st~housepov + mathknow + mathprep + yearstea + sex + minority + ses + (0 + ses + minority|schoolid) + (1|schoolid/classid),data=dat)
@@ -487,7 +488,7 @@ v_c+v_s
 ```
 
 
-*what are: V_S(ses=0,minority=0.50), V_S(ses=0.50,minority=0), V_S(ses= 0.50, minority= 0.50) ? 
+###what are: V_S(ses=0,minority=0.50), V_S(ses=0.50,minority=0), V_S(ses= 0.50, minority= 0.50) ? 
 
 ```{r}
 #V_S(ses=0,minority=0.50)
@@ -503,7 +504,7 @@ v_c+v_s+.5^2*v_ses+.5^2*v_mino
 ```
 
 
-*In the last model, what is a "likely" (+/- 1 sd) range for \eta_{0jk}
+##In the last model, what is a "likely" (+/- 1 sd) range for \eta_{0jk}
 
 Since \eta_{0jk} has a mean of zero, the "likely" SD range is (-9.2963 , 9.2963)
 
@@ -515,8 +516,8 @@ print(VarCorr(fit), comp=("Std.Dev."))
 ```
 
 
-*Can we make a similar statement about $\zeta_{0k}$?  
-*If so, are you considering either of the two random slope terms, $\zeta_{1k}$ and $\zeta_{2k}$ for ses and minority?
+##Can we make a similar statement about $\zeta_{0k}$?  
+##If so, are you considering either of the two random slope terms, $\zeta_{1k}$ and $\zeta_{2k}$ for ses and minority?
 
 ```{r}
 
