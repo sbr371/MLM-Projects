@@ -1,6 +1,9 @@
 ---
 title: "R Notebook"
-output: html_notebook
+output:
+  word_document: default
+  pdf_document: default
+  html_notebook: default
 ---
 
 ```{r}
@@ -68,13 +71,19 @@ lme2<-lmer(math1st~housepov + mathknow + mathprep + yearstea + (1|schoolid/class
 summary(lme2)
 ```
 
-None of them are significant except for household poverty.
+None of the classroom covariates are significant except for household poverty.
 
 ####Justified?
 ```{r}
-anova(lme1,lme2)
+require(aod)
+wald.test(b=fixef(lme2),Sigma=summary(lme2)$vcov,Terms=3:5)
 ```
+The fixed effects using the Wald Test are not significant.
 
+```{r}
+rand(lme2)
+```
+However, the classroom-level random effects are statistically significant.
 
 ####Report change to $\sigma^2_{\eta}$
 $$
@@ -359,3 +368,157 @@ anova(lme6.2.1,lme.7)
 ```
 
 Both LRT show that having both the random slopes added is an improvement in the model.
+
+
+##For UCM, write down: V_C, V_S, V_E for the three variance components (simply the estimates).  
+```{r}
+v_c1=85.46
+v_s1=280.68
+v_e1=1146.80
+```
+
+
+###Think of them as possibly varying with a covariate, though. For the most complicated (all fixed effects) random INTERCEPTS ONLY model, what are: V_C, V_S, V_E ?
+
+```{r}
+v_c2=93.89
+v_s2=169.45
+v_e2=1064.95
+```
+
+###By what fraction did  each decrease with the new predictors in the model?
+
+```{r}
+(v_c1-v_c2)/v_c1
+(v_s1-v_s2)/v_s1
+(v_e1-v_e2)/v_e1
+
+```
+
+*now consider the model with a random slope in ses.  
+*what are: V_C, V_S(ses=0), V_E ?   We need to list 'ses=0' here, or we don't know how to use the slope variance
+
+```{r}
+
+fit<-lmer(math1st~housepov + mathknow + mathprep + yearstea + sex + minority + ses + (0 + ses|schoolid) + (1|schoolid/classid),data=dat)
+summary(fit)
+
+print(VarCorr(fit), comp=("Variance"))
+
+v_c=VarCorr(fit)[1]$classid.schoolid[1]
+v_s=VarCorr(fit)[2]$schoolid[1]
+v_ses=VarCorr(fit)[3]$schoolid.1[1]
+
+#V_S(ses=0)
+v_c+v_s
+
+
+
+```
+
+*what are: V_S(ses=-0.50), V_S(ses=+0.5) ?   
+
+```{r}
+
+#V_S(ses=-0.50)
+v_c+v_s+(-.5^2)*v_ses
+
+#V_S(ses=+0.5)
+v_c+v_s+(.5^2)*v_ses
+
+
+```
+
+
+*now consider the model with a random slope in minority.  
+*what are: V_C, V_S(minority=0), V_E ?   We need to list 'minority=0' here, or we don't know how to use the slope variance
+
+```{r}
+
+fit<-lmer(math1st~housepov + mathknow + mathprep + yearstea + sex + minority + ses + (0 + minority|schoolid) + (1|schoolid/classid),data=dat)
+summary(fit)
+
+print(VarCorr(fit), comp=("Variance"))
+
+v_c=VarCorr(fit)[1]$classid.schoolid[1]
+v_s=VarCorr(fit)[2]$schoolid[1]
+v_mino=VarCorr(fit)[3]$schoolid.1[1]
+
+#V_S(minority=0)
+v_c+v_s
+
+
+```
+
+
+*what are: V_S(minority=0.25), V_S(minority=+0.50), V_S(minority=+0.75) ?   
+```{r}
+#V_S(minority=0.25)
+v_c+v_s+(.25^2)*v_ses
+
+#V_S(minority=0.50)
+v_c+v_s+(.5^2)*v_ses
+
+#V_S(minority=0.75)
+v_c+v_s+(.75^2)*v_ses
+
+
+```
+
+*now consider the model with a random slope in ses & minority.
+*what are: V_C, V_S(minority=0,ses=0), V_E ?   We need to list 'ses=0, minority=0' here, or we don't know how to use the slope variance
+
+```{r}
+fit<-lmer(math1st~housepov + mathknow + mathprep + yearstea + sex + minority + ses + (0 + ses + minority|schoolid) + (1|schoolid/classid),data=dat)
+
+summary(fit)
+
+print(VarCorr(fit), comp=("Variance"))
+
+v_c=VarCorr(fit)[1]$classid.schoolid[1]
+v_s=VarCorr(fit)[2]$schoolid[1]
+v_ses=VarCorr(fit)[3]$schoolid.1[1]
+v_mino=VarCorr(fit)[3]$schoolid.1[4]
+
+#V_S(minority=0,ses=0)
+v_c+v_s
+
+
+```
+
+
+*what are: V_S(ses=0,minority=0.50), V_S(ses=0.50,minority=0), V_S(ses= 0.50, minority= 0.50) ? 
+
+```{r}
+#V_S(ses=0,minority=0.50)
+v_c+v_s+.5^2*v_mino
+
+#V_S(ses=0.50,minority=0)
+v_c+v_s+.5^2*v_ses
+
+#V_S(ses= 0.50, minority= 0.50)
+v_c+v_s+.5^2*v_ses+.5^2*v_mino
+
+
+```
+
+
+*In the last model, what is a "likely" (+/- 1 sd) range for \eta_{0jk}
+
+Since \eta_{0jk} has a mean of zero, the "likely" SD range is (-9.2963 , 9.2963)
+
+
+```{r}
+
+print(VarCorr(fit), comp=("Std.Dev."))
+
+```
+
+
+*Can we make a similar statement about $\zeta_{0k}$?  
+*If so, are you considering either of the two random slope terms, $\zeta_{1k}$ and $\zeta_{2k}$ for ses and minority?
+
+```{r}
+
+
+```

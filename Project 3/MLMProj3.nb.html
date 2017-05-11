@@ -191,28 +191,27 @@ require(lmerTest)
 umm.1 &lt;- lmer(math1st ~ (1|schoolid/classid), data =dat)
 summary(umm.1)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiTGluZWFyIG1peGVkIG1vZGVsIGZpdCBieSBSRU1MIFsnbG1lck1vZCddXG5Gb3JtdWxhOiBtYXRoMXN0IH4gKDEgfCBzY2hvb2xpZC9jbGFzc2lkKVxuICAgRGF0YTogZGF0XG5cblJFTUwgY3JpdGVyaW9uIGF0IGNvbnZlcmdlbmNlOiAxMTk0NC42XG5cblNjYWxlZCByZXNpZHVhbHM6IFxuICAgIE1pbiAgICAgIDFRICBNZWRpYW4gICAgICAzUSAgICAgTWF4IFxuLTUuMTg3MiAtMC42MTc0IC0wLjAyMDQgIDAuNTgyMSAgMy44MzM5IFxuXG5SYW5kb20gZWZmZWN0czpcbiBHcm91cHMgICAgICAgICAgIE5hbWUgICAgICAgIFZhcmlhbmNlIFN0ZC5EZXYuXG4gY2xhc3NpZDpzY2hvb2xpZCAoSW50ZXJjZXB0KSAgIDg1LjQ2ICAgOS4yNDQgIFxuIHNjaG9vbGlkICAgICAgICAgKEludGVyY2VwdCkgIDI4MC42OCAgMTYuNzU0ICBcbiBSZXNpZHVhbCAgICAgICAgICAgICAgICAgICAgIDExNDYuODAgIDMzLjg2NCAgXG5OdW1iZXIgb2Ygb2JzOiAxMTkwLCBncm91cHM6ICBcbmNsYXNzaWQ6c2Nob29saWQsIDMxMjsgc2Nob29saWQsIDEwN1xuXG5GaXhlZCBlZmZlY3RzOlxuICAgICAgICAgICAgRXN0aW1hdGUgU3RkLiBFcnJvciB0IHZhbHVlXG4oSW50ZXJjZXB0KSAgNTIyLjU0MCAgICAgIDIuMDM3ICAgMjU2LjZcbiJ9 -->
+<!-- rnb-output-begin eyJkYXRhIjoiTGluZWFyIG1peGVkIG1vZGVsIGZpdCBieSBSRU1MIFsnbG1lck1vZCddXG5Gb3JtdWxhOiBtYXRoMXN0IH4gKDEgfCBzY2hvb2xpZC9jbGFzc2lkKVxuICAgRGF0YTogZGF0XG5cblJFTUwgY3JpdGVyaW9uIGF0IGNvbnZlcmdlbmNlOiAxMDg0NC4yXG5cblNjYWxlZCByZXNpZHVhbHM6IFxuICAgIE1pbiAgICAgIDFRICBNZWRpYW4gICAgICAzUSAgICAgTWF4IFxuLTMuNTIwMiAtMC42MTUxIC0wLjAyNDEgIDAuNTk1OSAgMy44NjIxIFxuXG5SYW5kb20gZWZmZWN0czpcbiBHcm91cHMgICAgICAgICAgIE5hbWUgICAgICAgIFZhcmlhbmNlIFN0ZC5EZXYuXG4gY2xhc3NpZDpzY2hvb2xpZCAoSW50ZXJjZXB0KSAgMTAwLjUgICAxMC4wMiAgIFxuIHNjaG9vbGlkICAgICAgICAgKEludGVyY2VwdCkgIDI0OC40ICAgMTUuNzYgICBcbiBSZXNpZHVhbCAgICAgICAgICAgICAgICAgICAgIDExMzUuOSAgIDMzLjcwICAgXG5OdW1iZXIgb2Ygb2JzOiAxMDgxLCBncm91cHM6ICBjbGFzc2lkOnNjaG9vbGlkLCAyODU7IHNjaG9vbGlkLCAxMDVcblxuRml4ZWQgZWZmZWN0czpcbiAgICAgICAgICAgIEVzdGltYXRlIFN0ZC4gRXJyb3IgdCB2YWx1ZVxuKEludGVyY2VwdCkgIDUyMy4wMTYgICAgICAyLjAxNiAgIDI1OS40XG4ifQ== -->
 <pre><code>Linear mixed model fit by REML ['lmerMod']
 Formula: math1st ~ (1 | schoolid/classid)
    Data: dat
 
-REML criterion at convergence: 11944.6
+REML criterion at convergence: 10844.2
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
--5.1872 -0.6174 -0.0204  0.5821  3.8339 
+-3.5202 -0.6151 -0.0241  0.5959  3.8621 
 
 Random effects:
  Groups           Name        Variance Std.Dev.
- classid:schoolid (Intercept)   85.46   9.244  
- schoolid         (Intercept)  280.68  16.754  
- Residual                     1146.80  33.864  
-Number of obs: 1190, groups:  
-classid:schoolid, 312; schoolid, 107
+ classid:schoolid (Intercept)  100.5   10.02   
+ schoolid         (Intercept)  248.4   15.76   
+ Residual                     1135.9   33.70   
+Number of obs: 1081, groups:  classid:schoolid, 285; schoolid, 105
 
 Fixed effects:
             Estimate Std. Error t value
-(Intercept)  522.540      2.037   256.6</code></pre>
+(Intercept)  523.016      2.016   259.4</code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
@@ -325,12 +324,10 @@ Signif. codes:
 <pre class="r"><code>lme2&lt;-lmer(math1st~housepov + mathknow + mathprep + yearstea + (1|schoolid/classid),data=dat)
 summary(lme2)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiTGluZWFyIG1peGVkIG1vZGVsIGZpdCBieSBSRU1MIHQtdGVzdHMgdXNlXG4gIFNhdHRlcnRod2FpdGUgYXBwcm94aW1hdGlvbnMgdG8gZGVncmVlcyBvZlxuICBmcmVlZG9tIFtsbWVyTW9kXVxuRm9ybXVsYTogXG5tYXRoMXN0IH4gaG91c2Vwb3YgKyBtYXRoa25vdyArIG1hdGhwcmVwICsgeWVhcnN0ZWEgKyAoMSB8IHNjaG9vbGlkL2NsYXNzaWQpXG4gICBEYXRhOiBkYXRcblxuUkVNTCBjcml0ZXJpb24gYXQgY29udmVyZ2VuY2U6IDEwODIxXG5cblNjYWxlZCByZXNpZHVhbHM6IFxuICAgIE1pbiAgICAgIDFRICBNZWRpYW4gICAgICAzUSAgICAgTWF4IFxuLTMuNTU1MiAtMC42MTE4IC0wLjAzMTEgIDAuNTg2MyAgMy44MzE1IFxuXG5SYW5kb20gZWZmZWN0czpcbiBHcm91cHMgICAgICAgICAgIE5hbWUgICAgICAgIFZhcmlhbmNlIFN0ZC5EZXYuXG4gY2xhc3NpZDpzY2hvb2xpZCAoSW50ZXJjZXB0KSAgIDk0LjM2ICAgOS43MTQgIFxuIHNjaG9vbGlkICAgICAgICAgKEludGVyY2VwdCkgIDIyMy4zMSAgMTQuOTQzICBcbiBSZXNpZHVhbCAgICAgICAgICAgICAgICAgICAgIDExMzYuNDMgIDMzLjcxMSAgXG5OdW1iZXIgb2Ygb2JzOiAxMDgxLCBncm91cHM6ICBcbmNsYXNzaWQ6c2Nob29saWQsIDI4NTsgc2Nob29saWQsIDEwNVxuXG5GaXhlZCBlZmZlY3RzOlxuICAgICAgICAgICAgIEVzdGltYXRlIFN0ZC4gRXJyb3IgICAgICAgIGRmXG4oSW50ZXJjZXB0KSA1MzIuMjk4NTMgICAgNS4yMDQ5NiAyMjguODYwMDBcbmhvdXNlcG92ICAgIC00MS42MjExNiAgIDE0LjA4ODM1IDEwOS44MzAwMFxubWF0aGtub3cgICAgICAyLjU1MTQzICAgIDEuNDQ1MzAgMjMxLjA3MDAwXG5tYXRocHJlcCAgICAgLTAuNzU0NDAgICAgMS40MjgwOSAyMDMuMjEwMDBcbnllYXJzdGVhICAgICAgMC4wNjE5MyAgICAwLjE0NzE3IDIyMy43NzAwMFxuICAgICAgICAgICAgdCB2YWx1ZSBQcig+fHR8KSAgICBcbihJbnRlcmNlcHQpIDEwMi4yNjggIDwgMmUtMTYgKioqXG5ob3VzZXBvdiAgICAgLTIuOTU0ICAwLjAwMzgzICoqIFxubWF0aGtub3cgICAgICAxLjc2NSAgMC4wNzg4MyAuICBcbm1hdGhwcmVwICAgICAtMC41MjggIDAuNTk3OTAgICAgXG55ZWFyc3RlYSAgICAgIDAuNDIxICAwLjY3NDMyICAgIFxuLS0tXG5TaWduaWYuIGNvZGVzOiAgXG4wIOKAmCoqKuKAmSAwLjAwMSDigJgqKuKAmSAwLjAxIOKAmCrigJkgMC4wNSDigJgu4oCZIDAuMSDigJgg4oCZIDFcblxuQ29ycmVsYXRpb24gb2YgRml4ZWQgRWZmZWN0czpcbiAgICAgICAgIChJbnRyKSBob3VzcHYgbXRoa253IG10aHBycFxuaG91c2Vwb3YgLTAuNTY4ICAgICAgICAgICAgICAgICAgICAgXG5tYXRoa25vdyAtMC4wNTIgIDAuMDgyICAgICAgICAgICAgICBcbm1hdGhwcmVwIC0wLjY2NiAgMC4wMzIgIDAuMDA0ICAgICAgIFxueWVhcnN0ZWEgLTAuMjY0ICAwLjA3NyAgMC4wMzAgLTAuMTc1XG4ifQ== -->
-<pre><code>Linear mixed model fit by REML t-tests use
-  Satterthwaite approximations to degrees of
-  freedom [lmerMod]
-Formula: 
-math1st ~ housepov + mathknow + mathprep + yearstea + (1 | schoolid/classid)
+<!-- rnb-output-begin eyJkYXRhIjoiTGluZWFyIG1peGVkIG1vZGVsIGZpdCBieSBSRU1MIFxudC10ZXN0cyB1c2UgIFNhdHRlcnRod2FpdGUgYXBwcm94aW1hdGlvbnMgdG8gZGVncmVlcyBvZiBmcmVlZG9tIFsnbG1lck1vZCddXG5Gb3JtdWxhOiBtYXRoMXN0IH4gaG91c2Vwb3YgKyBtYXRoa25vdyArIG1hdGhwcmVwICsgeWVhcnN0ZWEgKyAoMSB8IHNjaG9vbGlkL2NsYXNzaWQpXG4gICBEYXRhOiBkYXRcblxuUkVNTCBjcml0ZXJpb24gYXQgY29udmVyZ2VuY2U6IDEwODIxXG5cblNjYWxlZCByZXNpZHVhbHM6IFxuICAgIE1pbiAgICAgIDFRICBNZWRpYW4gICAgICAzUSAgICAgTWF4IFxuLTMuNTU1MiAtMC42MTE4IC0wLjAzMTEgIDAuNTg2MyAgMy44MzE1IFxuXG5SYW5kb20gZWZmZWN0czpcbiBHcm91cHMgICAgICAgICAgIE5hbWUgICAgICAgIFZhcmlhbmNlIFN0ZC5EZXYuXG4gY2xhc3NpZDpzY2hvb2xpZCAoSW50ZXJjZXB0KSAgIDk0LjM2ICAgOS43MTQgIFxuIHNjaG9vbGlkICAgICAgICAgKEludGVyY2VwdCkgIDIyMy4zMSAgMTQuOTQzICBcbiBSZXNpZHVhbCAgICAgICAgICAgICAgICAgICAgIDExMzYuNDMgIDMzLjcxMSAgXG5OdW1iZXIgb2Ygb2JzOiAxMDgxLCBncm91cHM6ICBjbGFzc2lkOnNjaG9vbGlkLCAyODU7IHNjaG9vbGlkLCAxMDVcblxuRml4ZWQgZWZmZWN0czpcbiAgICAgICAgICAgICBFc3RpbWF0ZSBTdGQuIEVycm9yICAgICAgICBkZiB0IHZhbHVlIFByKD58dHwpICAgIFxuKEludGVyY2VwdCkgNTMyLjI5ODUzICAgIDUuMjA0OTYgMjI4Ljg2MDAwIDEwMi4yNjggIDwgMmUtMTYgKioqXG5ob3VzZXBvdiAgICAtNDEuNjIxMTYgICAxNC4wODgzNSAxMDkuODMwMDAgIC0yLjk1NCAgMC4wMDM4MyAqKiBcbm1hdGhrbm93ICAgICAgMi41NTE0MyAgICAxLjQ0NTMwIDIzMS4wNzAwMCAgIDEuNzY1ICAwLjA3ODgzIC4gIFxubWF0aHByZXAgICAgIC0wLjc1NDQwICAgIDEuNDI4MDkgMjAzLjIxMDAwICAtMC41MjggIDAuNTk3OTAgICAgXG55ZWFyc3RlYSAgICAgIDAuMDYxOTMgICAgMC4xNDcxNyAyMjMuNzcwMDAgICAwLjQyMSAgMC42NzQzMiAgICBcbi0tLVxuU2lnbmlmLiBjb2RlczogIDAg4oCYKioq4oCZIDAuMDAxIOKAmCoq4oCZIDAuMDEg4oCYKuKAmSAwLjA1IOKAmC7igJkgMC4xIOKAmCDigJkgMVxuXG5Db3JyZWxhdGlvbiBvZiBGaXhlZCBFZmZlY3RzOlxuICAgICAgICAgKEludHIpIGhvdXNwdiBtdGhrbncgbXRocHJwXG5ob3VzZXBvdiAtMC41NjggICAgICAgICAgICAgICAgICAgICBcbm1hdGhrbm93IC0wLjA1MiAgMC4wODIgICAgICAgICAgICAgIFxubWF0aHByZXAgLTAuNjY2ICAwLjAzMiAgMC4wMDQgICAgICAgXG55ZWFyc3RlYSAtMC4yNjQgIDAuMDc3ICAwLjAzMCAtMC4xNzVcbiJ9 -->
+<pre><code>Linear mixed model fit by REML 
+t-tests use  Satterthwaite approximations to degrees of freedom ['lmerMod']
+Formula: math1st ~ housepov + mathknow + mathprep + yearstea + (1 | schoolid/classid)
    Data: dat
 
 REML criterion at convergence: 10821
@@ -344,25 +341,17 @@ Random effects:
  classid:schoolid (Intercept)   94.36   9.714  
  schoolid         (Intercept)  223.31  14.943  
  Residual                     1136.43  33.711  
-Number of obs: 1081, groups:  
-classid:schoolid, 285; schoolid, 105
+Number of obs: 1081, groups:  classid:schoolid, 285; schoolid, 105
 
 Fixed effects:
-             Estimate Std. Error        df
-(Intercept) 532.29853    5.20496 228.86000
-housepov    -41.62116   14.08835 109.83000
-mathknow      2.55143    1.44530 231.07000
-mathprep     -0.75440    1.42809 203.21000
-yearstea      0.06193    0.14717 223.77000
-            t value Pr(&gt;|t|)    
-(Intercept) 102.268  &lt; 2e-16 ***
-housepov     -2.954  0.00383 ** 
-mathknow      1.765  0.07883 .  
-mathprep     -0.528  0.59790    
-yearstea      0.421  0.67432    
+             Estimate Std. Error        df t value Pr(&gt;|t|)    
+(Intercept) 532.29853    5.20496 228.86000 102.268  &lt; 2e-16 ***
+housepov    -41.62116   14.08835 109.83000  -2.954  0.00383 ** 
+mathknow      2.55143    1.44530 231.07000   1.765  0.07883 .  
+mathprep     -0.75440    1.42809 203.21000  -0.528  0.59790    
+yearstea      0.06193    0.14717 223.77000   0.421  0.67432    
 ---
-Signif. codes:  
-0 *** 0.001 ** 0.01 * 0.05 . 0.1   1
+Signif. codes:  0 *** 0.001 ** 0.01 * 0.05 . 0.1   1
 
 Correlation of Fixed Effects:
          (Intr) houspv mthknw mthprp
@@ -373,20 +362,40 @@ yearstea -0.264  0.077  0.030 -0.175</code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>None of them are significant except for household poverty.</p>
+<p>None of the classroom covariates are significant except for household poverty.</p>
 <div id="justified" class="section level4">
 <h4>Justified?</h4>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYW5vdmEobG1lMSxsbWUyKVxuYGBgIn0= -->
-<pre class="r"><code>anova(lme1,lme2)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmVxdWlyZShhb2QpXG53YWxkLnRlc3QoYj1maXhlZihsbWUyKSxTaWdtYT1zdW1tYXJ5KGxtZTIpJHZjb3YsVGVybXM9Mzo1KVxuYGBgIn0= -->
+<pre class="r"><code>require(aod)
+wald.test(b=fixef(lme2),Sigma=summary(lme2)$vcov,Terms=3:5)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiRXJyb3IgaW4gYW5vdmEubWVyTW9kKG9iamVjdCA9IG9iamVjdCwgLi4uID0gLi4uKSA6IFxuICBtb2RlbHMgd2VyZSBub3QgYWxsIGZpdHRlZCB0byB0aGUgc2FtZSBzaXplIG9mIGRhdGFzZXRcbiJ9 -->
-<pre><code>Error in anova.merMod(object = object, ... = ...) : 
-  models were not all fitted to the same size of dataset</code></pre>
+<!-- rnb-output-begin eyJkYXRhIjoiV2FsZCB0ZXN0OlxuLS0tLS0tLS0tLVxuXG5DaGktc3F1YXJlZCB0ZXN0OlxuWDIgPSAzLjUsIGRmID0gMywgUCg+IFgyKSA9IDAuMzJcbiJ9 -->
+<pre><code>Wald test:
+----------
+
+Chi-squared test:
+X2 = 3.5, df = 3, P(&gt; X2) = 0.32</code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+<p>The fixed effects using the Wald Test are not significant.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmFuZChsbWUyKVxuYGBgIn0= -->
+<pre class="r"><code>rand(lme2)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiQW5hbHlzaXMgb2YgUmFuZG9tIGVmZmVjdHMgVGFibGU6XG4gICAgICAgICAgICAgICAgIENoaS5zcSBDaGkuREYgcC52YWx1ZSAgICBcbnNjaG9vbGlkL2NsYXNzaWQgICAgMTA4ICAgICAgMSAgPDJlLTE2ICoqKlxuLS0tXG5TaWduaWYuIGNvZGVzOiAgMCDigJgqKirigJkgMC4wMDEg4oCYKirigJkgMC4wMSDigJgq4oCZIDAuMDUg4oCYLuKAmSAwLjEg4oCYIOKAmSAxXG4ifQ== -->
+<pre><code>Analysis of Random effects Table:
+                 Chi.sq Chi.DF p.value    
+schoolid/classid    108      1  &lt;2e-16 ***
+---
+Signif. codes:  0 *** 0.001 ** 0.01 * 0.05 . 0.1   1</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>However, the classroom-level random effects are statistically significant.</p>
 </div>
 <div id="report-change-to-sigma2_eta" class="section level4">
 <h4>Report change to <span class="math inline">\(\sigma^2_{\eta}\)</span></h4>
@@ -413,70 +422,6 @@ yearstea -0.264  0.077  0.030 -0.175</code></pre>
 <pre class="r"><code>lme3&lt;-lmer(math1st~housepov + mathknow + mathprep + yearstea + sex + minority + ses + (1|schoolid/classid),data=dat)
 summary(lme3)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiTGluZWFyIG1peGVkIG1vZGVsIGZpdCBieSBSRU1MIHQtdGVzdHMgdXNlXG4gIFNhdHRlcnRod2FpdGUgYXBwcm94aW1hdGlvbnMgdG8gZGVncmVlcyBvZlxuICBmcmVlZG9tIFtsbWVyTW9kXVxuRm9ybXVsYTogXG5tYXRoMXN0IH4gaG91c2Vwb3YgKyBtYXRoa25vdyArIG1hdGhwcmVwICsgeWVhcnN0ZWEgKyBzZXggKyBtaW5vcml0eSArICBcbiAgICBzZXMgKyAoMSB8IHNjaG9vbGlkL2NsYXNzaWQpXG4gICBEYXRhOiBkYXRcblxuUkVNTCBjcml0ZXJpb24gYXQgY29udmVyZ2VuY2U6IDEwNzI5LjVcblxuU2NhbGVkIHJlc2lkdWFsczogXG4gICAgTWluICAgICAgMVEgIE1lZGlhbiAgICAgIDNRICAgICBNYXggXG4tMy44NTgwIC0wLjYxMzQgLTAuMDMyMSAgMC41OTcxICAzLjY1OTggXG5cblJhbmRvbSBlZmZlY3RzOlxuIEdyb3VwcyAgICAgICAgICAgTmFtZSAgICAgICAgVmFyaWFuY2UgU3RkLkRldi5cbiBjbGFzc2lkOnNjaG9vbGlkIChJbnRlcmNlcHQpICAgOTMuODkgICA5LjY5ICAgXG4gc2Nob29saWQgICAgICAgICAoSW50ZXJjZXB0KSAgMTY5LjQ1ICAxMy4wMiAgIFxuIFJlc2lkdWFsICAgICAgICAgICAgICAgICAgICAgMTA2NC45NSAgMzIuNjMgICBcbk51bWJlciBvZiBvYnM6IDEwODEsIGdyb3VwczogIFxuY2xhc3NpZDpzY2hvb2xpZCwgMjg1OyBzY2hvb2xpZCwgMTA1XG5cbkZpeGVkIGVmZmVjdHM6XG4gICAgICAgICAgICAgIEVzdGltYXRlIFN0ZC4gRXJyb3IgICAgICAgICBkZlxuKEludGVyY2VwdCkgIDUzOS42MzA0MiAgICA1LjMxMjEwICAyNzUuNDAwMDBcbmhvdXNlcG92ICAgICAtMTcuNjQ4NDcgICAxMy4yMTc1NyAgMTEzLjkwMDAwXG5tYXRoa25vdyAgICAgICAxLjM1MDA0ICAgIDEuMzkxNjggIDIzNC41MDAwMFxubWF0aHByZXAgICAgICAtMC4yNzcwNSAgICAxLjM3NTgzICAyMDUuMzAwMDBcbnllYXJzdGVhICAgICAgIDAuMDExMjkgICAgMC4xNDE0MSAgMjI2LjgwMDAwXG5zZXggICAgICAgICAgIC0xLjIxNDE5ICAgIDIuMDk0ODMgMTAyMi41MDAwMFxubWlub3JpdHkgICAgIC0xNi4xODY3OCAgICAzLjAyNjA1ICA3MDQuNTAwMDBcbnNlcyAgICAgICAgICAgMTAuMDUwNzUgICAgMS41NDQ4NCAxMDY2LjYwMDAwXG4gICAgICAgICAgICB0IHZhbHVlIFByKD58dHwpICAgIFxuKEludGVyY2VwdCkgMTAxLjU4NSAgPCAyZS0xNiAqKipcbmhvdXNlcG92ICAgICAtMS4zMzUgICAgMC4xODQgICAgXG5tYXRoa25vdyAgICAgIDAuOTcwICAgIDAuMzMzICAgIFxubWF0aHByZXAgICAgIC0wLjIwMSAgICAwLjg0MSAgICBcbnllYXJzdGVhICAgICAgMC4wODAgICAgMC45MzYgICAgXG5zZXggICAgICAgICAgLTAuNTgwICAgIDAuNTYyICAgIFxubWlub3JpdHkgICAgIC01LjM0OSAxLjIwZS0wNyAqKipcbnNlcyAgICAgICAgICAgNi41MDYgMS4xOGUtMTAgKioqXG4tLS1cblNpZ25pZi4gY29kZXM6ICBcbjAg4oCYKioq4oCZIDAuMDAxIOKAmCoq4oCZIDAuMDEg4oCYKuKAmSAwLjA1IOKAmC7igJkgMC4xIOKAmCDigJkgMVxuXG5Db3JyZWxhdGlvbiBvZiBGaXhlZCBFZmZlY3RzOlxuICAgICAgICAgKEludHIpIGhvdXNwdiBtdGhrbncgbXRocHJwIHllYXJzdFxuaG91c2Vwb3YgLTAuNDUxICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxubWF0aGtub3cgLTAuMDgzICAwLjA1OCAgICAgICAgICAgICAgICAgICAgIFxubWF0aHByZXAgLTAuNjMxICAwLjAzOCAgMC4wMDQgICAgICAgICAgICAgIFxueWVhcnN0ZWEgLTAuMjU5ICAwLjA3MSAgMC4wMjkgLTAuMTcyICAgICAgIFxuc2V4ICAgICAgLTAuMTkwIC0wLjAwNyAgMC4wMDcgLTAuMDA2ICAwLjAxNlxubWlub3JpdHkgLTAuMzIwIC0wLjE3OCAgMC4xMTUgIDAuMDAxICAwLjAyNFxuc2VzICAgICAgLTAuMTIxICAwLjA4MiAtMC4wMDcgIDAuMDUzIC0wLjAyOFxuICAgICAgICAgc2V4ICAgIG1pbnJ0eVxuaG91c2Vwb3YgICAgICAgICAgICAgIFxubWF0aGtub3cgICAgICAgICAgICAgIFxubWF0aHByZXAgICAgICAgICAgICAgIFxueWVhcnN0ZWEgICAgICAgICAgICAgIFxuc2V4ICAgICAgICAgICAgICAgICAgIFxubWlub3JpdHkgLTAuMDExICAgICAgIFxuc2VzICAgICAgIDAuMDIwICAwLjE2MlxuIn0= -->
-<pre><code>Linear mixed model fit by REML t-tests use
-  Satterthwaite approximations to degrees of
-  freedom [lmerMod]
-Formula: 
-math1st ~ housepov + mathknow + mathprep + yearstea + sex + minority +  
-    ses + (1 | schoolid/classid)
-   Data: dat
-
-REML criterion at convergence: 10729.5
-
-Scaled residuals: 
-    Min      1Q  Median      3Q     Max 
--3.8580 -0.6134 -0.0321  0.5971  3.6598 
-
-Random effects:
- Groups           Name        Variance Std.Dev.
- classid:schoolid (Intercept)   93.89   9.69   
- schoolid         (Intercept)  169.45  13.02   
- Residual                     1064.95  32.63   
-Number of obs: 1081, groups:  
-classid:schoolid, 285; schoolid, 105
-
-Fixed effects:
-              Estimate Std. Error         df
-(Intercept)  539.63042    5.31210  275.40000
-housepov     -17.64847   13.21757  113.90000
-mathknow       1.35004    1.39168  234.50000
-mathprep      -0.27705    1.37583  205.30000
-yearstea       0.01129    0.14141  226.80000
-sex           -1.21419    2.09483 1022.50000
-minority     -16.18678    3.02605  704.50000
-ses           10.05075    1.54484 1066.60000
-            t value Pr(&gt;|t|)    
-(Intercept) 101.585  &lt; 2e-16 ***
-housepov     -1.335    0.184    
-mathknow      0.970    0.333    
-mathprep     -0.201    0.841    
-yearstea      0.080    0.936    
-sex          -0.580    0.562    
-minority     -5.349 1.20e-07 ***
-ses           6.506 1.18e-10 ***
----
-Signif. codes:  
-0 *** 0.001 ** 0.01 * 0.05 . 0.1   1
-
-Correlation of Fixed Effects:
-         (Intr) houspv mthknw mthprp yearst
-housepov -0.451                            
-mathknow -0.083  0.058                     
-mathprep -0.631  0.038  0.004              
-yearstea -0.259  0.071  0.029 -0.172       
-sex      -0.190 -0.007  0.007 -0.006  0.016
-minority -0.320 -0.178  0.115  0.001  0.024
-ses      -0.121  0.082 -0.007  0.053 -0.028
-         sex    minrty
-housepov              
-mathknow              
-mathprep              
-yearstea              
-sex                   
-minority -0.011       
-ses       0.020  0.162</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
@@ -484,25 +429,6 @@ ses       0.020  0.162</code></pre>
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYW5vdmEobG1lMixsbWUzKVxuYGBgIn0= -->
 <pre class="r"><code>anova(lme2,lme3)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoicmVmaXR0aW5nIG1vZGVsKHMpIHdpdGggTUwgKGluc3RlYWQgb2YgUkVNTClcbiJ9 -->
-<pre><code>refitting model(s) with ML (instead of REML)</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiRGF0YTogZGF0XG5Nb2RlbHM6XG5vYmplY3Q6IG1hdGgxc3QgfiBob3VzZXBvdiArIG1hdGhrbm93ICsgbWF0aHByZXAgKyB5ZWFyc3RlYSArICgxIHwgc2Nob29saWQvY2xhc3NpZClcbi4uMTogbWF0aDFzdCB+IGhvdXNlcG92ICsgbWF0aGtub3cgKyBtYXRocHJlcCArIHllYXJzdGVhICsgc2V4ICsgbWlub3JpdHkgKyBcbi4uMTogICAgIHNlcyArICgxIHwgc2Nob29saWQvY2xhc3NpZClcbiAgICAgICBEZiAgIEFJQyAgIEJJQyAgbG9nTGlrIGRldmlhbmNlICBDaGlzcVxub2JqZWN0ICA4IDEwODUwIDEwODkwIC01NDE3LjEgICAgMTA4MzQgICAgICAgXG4uLjEgICAgMTEgMTA3NzQgMTA4MjkgLTUzNzYuMSAgICAxMDc1MiA4Mi4wMTdcbiAgICAgICBDaGkgRGYgUHIoPkNoaXNxKSAgICBcbm9iamVjdCAgICAgICAgICAgICAgICAgICAgICBcbi4uMSAgICAgICAgIDMgIDwgMi4yZS0xNiAqKipcbi0tLVxuU2lnbmlmLiBjb2RlczogIFxuMCDigJgqKirigJkgMC4wMDEg4oCYKirigJkgMC4wMSDigJgq4oCZIDAuMDUg4oCYLuKAmSAwLjEg4oCYIOKAmSAxXG4ifQ== -->
-<pre><code>Data: dat
-Models:
-object: math1st ~ housepov + mathknow + mathprep + yearstea + (1 | schoolid/classid)
-..1: math1st ~ housepov + mathknow + mathprep + yearstea + sex + minority + 
-..1:     ses + (1 | schoolid/classid)
-       Df   AIC   BIC  logLik deviance  Chisq
-object  8 10850 10890 -5417.1    10834       
-..1    11 10774 10829 -5376.1    10752 82.017
-       Chi Df Pr(&gt;Chisq)    
-object                      
-..1         3  &lt; 2.2e-16 ***
----
-Signif. codes:  
-0 *** 0.001 ** 0.01 * 0.05 . 0.1   1</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>The addition of all the student-level predictors is an improvement from the previous model (LRT p-value &lt;0.05).</p>
@@ -532,63 +458,11 @@ MATH1ST_{ijk} = b_0 + b_1HOUSEPOV_{k} + b_2MATHKNOW_{jk} + b_3MATHPREP_{jk} + b_
 <pre class="r"><code>lme4.1&lt;-lmer(math1st~housepov + mathknow + mathprep + yearstea + sex + minority + ses + (0+mathknow|schoolid) + (1|schoolid/classid),data=dat)
 summary(lme4.1)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiTGluZWFyIG1peGVkIG1vZGVsIGZpdCBieSBSRU1MIFxudC10ZXN0cyB1c2UgIFNhdHRlcnRod2FpdGUgYXBwcm94aW1hdGlvbnMgdG8gZGVncmVlcyBvZiBmcmVlZG9tIFsnbG1lck1vZCddXG5Gb3JtdWxhOiBtYXRoMXN0IH4gaG91c2Vwb3YgKyBtYXRoa25vdyArIG1hdGhwcmVwICsgeWVhcnN0ZWEgKyBzZXggKyBtaW5vcml0eSArICBcbiAgICBzZXMgKyAoMCArIG1hdGhrbm93IHwgc2Nob29saWQpICsgKDEgfCBzY2hvb2xpZC9jbGFzc2lkKVxuICAgRGF0YTogZGF0XG5cblJFTUwgY3JpdGVyaW9uIGF0IGNvbnZlcmdlbmNlOiAxMDcyOS41XG5cblNjYWxlZCByZXNpZHVhbHM6IFxuICAgIE1pbiAgICAgIDFRICBNZWRpYW4gICAgICAzUSAgICAgTWF4IFxuLTMuODU4MCAtMC42MTM0IC0wLjAzMjEgIDAuNTk3MSAgMy42NTk4IFxuXG5SYW5kb20gZWZmZWN0czpcbiBHcm91cHMgICAgICAgICAgIE5hbWUgICAgICAgIFZhcmlhbmNlICBTdGQuRGV2LiBcbiBjbGFzc2lkLnNjaG9vbGlkIChJbnRlcmNlcHQpIDkuMzg5ZSswMSA5LjY5MGUrMDBcbiBzY2hvb2xpZCAgICAgICAgIChJbnRlcmNlcHQpIDEuNjk0ZSswMiAxLjMwMmUrMDFcbiBzY2hvb2xpZC4xICAgICAgIG1hdGhrbm93ICAgIDQuMjYwZS0xMSA2LjUyN2UtMDZcbiBSZXNpZHVhbCAgICAgICAgICAgICAgICAgICAgIDEuMDY1ZSswMyAzLjI2M2UrMDFcbk51bWJlciBvZiBvYnM6IDEwODEsIGdyb3VwczogIGNsYXNzaWQ6c2Nob29saWQsIDI4NTsgc2Nob29saWQsIDEwNVxuXG5GaXhlZCBlZmZlY3RzOlxuICAgICAgICAgICAgICBFc3RpbWF0ZSBTdGQuIEVycm9yICAgICAgICAgZGYgdCB2YWx1ZSBQcig+fHR8KSAgICBcbihJbnRlcmNlcHQpICA1MzkuNjMwNDIgICAgNS4zMTIxMCAgMjc1LjQwMDAwIDEwMS41ODUgIDwgMmUtMTYgKioqXG5ob3VzZXBvdiAgICAgLTE3LjY0ODQ3ICAgMTMuMjE3NTcgIDExMy45MDAwMCAgLTEuMzM1ICAgIDAuMTg0ICAgIFxubWF0aGtub3cgICAgICAgMS4zNTAwNCAgICAxLjM5MTY4ICAyMzQuNTAwMDAgICAwLjk3MCAgICAwLjMzMyAgICBcbm1hdGhwcmVwICAgICAgLTAuMjc3MDUgICAgMS4zNzU4MyAgMjA1LjMwMDAwICAtMC4yMDEgICAgMC44NDEgICAgXG55ZWFyc3RlYSAgICAgICAwLjAxMTI5ICAgIDAuMTQxNDEgIDIyNi44MDAwMCAgIDAuMDgwICAgIDAuOTM2ICAgIFxuc2V4ICAgICAgICAgICAtMS4yMTQxOSAgICAyLjA5NDgzIDEwMjIuNTAwMDAgIC0wLjU4MCAgICAwLjU2MiAgICBcbm1pbm9yaXR5ICAgICAtMTYuMTg2NzggICAgMy4wMjYwNSAgNzA0LjUwMDAwICAtNS4zNDkgMS4yMGUtMDcgKioqXG5zZXMgICAgICAgICAgIDEwLjA1MDc1ICAgIDEuNTQ0ODQgMTA2Ni42MDAwMCAgIDYuNTA2IDEuMThlLTEwICoqKlxuLS0tXG5TaWduaWYuIGNvZGVzOiAgMCDigJgqKirigJkgMC4wMDEg4oCYKirigJkgMC4wMSDigJgq4oCZIDAuMDUg4oCYLuKAmSAwLjEg4oCYIOKAmSAxXG5cbkNvcnJlbGF0aW9uIG9mIEZpeGVkIEVmZmVjdHM6XG4gICAgICAgICAoSW50cikgaG91c3B2IG10aGtudyBtdGhwcnAgeWVhcnN0IHNleCAgICBtaW5ydHlcbmhvdXNlcG92IC0wLjQ1MSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxubWF0aGtub3cgLTAuMDgzICAwLjA1OCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG5tYXRocHJlcCAtMC42MzEgIDAuMDM4ICAwLjAwNCAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbnllYXJzdGVhIC0wLjI1OSAgMC4wNzEgIDAuMDI5IC0wLjE3MiAgICAgICAgICAgICAgICAgICAgIFxuc2V4ICAgICAgLTAuMTkwIC0wLjAwNyAgMC4wMDcgLTAuMDA2ICAwLjAxNiAgICAgICAgICAgICAgXG5taW5vcml0eSAtMC4zMjAgLTAuMTc4ICAwLjExNSAgMC4wMDEgIDAuMDI0IC0wLjAxMSAgICAgICBcbnNlcyAgICAgIC0wLjEyMSAgMC4wODIgLTAuMDA3ICAwLjA1MyAtMC4wMjggIDAuMDIwICAwLjE2MlxuIn0= -->
-<pre><code>Linear mixed model fit by REML 
-t-tests use  Satterthwaite approximations to degrees of freedom ['lmerMod']
-Formula: math1st ~ housepov + mathknow + mathprep + yearstea + sex + minority +  
-    ses + (0 + mathknow | schoolid) + (1 | schoolid/classid)
-   Data: dat
-
-REML criterion at convergence: 10729.5
-
-Scaled residuals: 
-    Min      1Q  Median      3Q     Max 
--3.8580 -0.6134 -0.0321  0.5971  3.6598 
-
-Random effects:
- Groups           Name        Variance  Std.Dev. 
- classid.schoolid (Intercept) 9.389e+01 9.690e+00
- schoolid         (Intercept) 1.694e+02 1.302e+01
- schoolid.1       mathknow    4.260e-11 6.527e-06
- Residual                     1.065e+03 3.263e+01
-Number of obs: 1081, groups:  classid:schoolid, 285; schoolid, 105
-
-Fixed effects:
-              Estimate Std. Error         df t value Pr(&gt;|t|)    
-(Intercept)  539.63042    5.31210  275.40000 101.585  &lt; 2e-16 ***
-housepov     -17.64847   13.21757  113.90000  -1.335    0.184    
-mathknow       1.35004    1.39168  234.50000   0.970    0.333    
-mathprep      -0.27705    1.37583  205.30000  -0.201    0.841    
-yearstea       0.01129    0.14141  226.80000   0.080    0.936    
-sex           -1.21419    2.09483 1022.50000  -0.580    0.562    
-minority     -16.18678    3.02605  704.50000  -5.349 1.20e-07 ***
-ses           10.05075    1.54484 1066.60000   6.506 1.18e-10 ***
----
-Signif. codes:  0 *** 0.001 ** 0.01 * 0.05 . 0.1   1
-
-Correlation of Fixed Effects:
-         (Intr) houspv mthknw mthprp yearst sex    minrty
-housepov -0.451                                          
-mathknow -0.083  0.058                                   
-mathprep -0.631  0.038  0.004                            
-yearstea -0.259  0.071  0.029 -0.172                     
-sex      -0.190 -0.007  0.007 -0.006  0.016              
-minority -0.320 -0.178  0.115  0.001  0.024 -0.011       
-ses      -0.121  0.082 -0.007  0.053 -0.028  0.020  0.162</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmFuZChsbWU0LjEpXG5gYGAifQ== -->
 <pre class="r"><code>rand(lme4.1)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiQW5hbHlzaXMgb2YgUmFuZG9tIGVmZmVjdHMgVGFibGU6XG4gICAgICAgICAgICAgICAgICAgIENoaS5zcSBDaGkuREYgcC52YWx1ZSAgICBcbm1hdGhrbm93OnNjaG9vbGlkIDEuODJlLTEyICAgICAgMSAgICAgICAxICAgIFxuc2Nob29saWQvY2xhc3NpZCAgNi4yOWUrMDEgICAgICAyICAgMmUtMTQgKioqXG4tLS1cblNpZ25pZi4gY29kZXM6ICAwIOKAmCoqKuKAmSAwLjAwMSDigJgqKuKAmSAwLjAxIOKAmCrigJkgMC4wNSDigJgu4oCZIDAuMSDigJgg4oCZIDFcbiJ9 -->
-<pre><code>Analysis of Random effects Table:
-                    Chi.sq Chi.DF p.value    
-mathknow:schoolid 1.82e-12      1       1    
-schoolid/classid  6.29e+01      2   2e-14 ***
----
-Signif. codes:  0 *** 0.001 ** 0.01 * 0.05 . 0.1   1</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
@@ -600,63 +474,11 @@ Signif. codes:  0 *** 0.001 ** 0.01 * 0.05 . 0.1   1</code><
 <pre class="r"><code>lme4.2&lt;-lmer(math1st~housepov + mathknow + mathprep + yearstea + sex + minority + ses + (0+mathprep|schoolid) + (1|schoolid/classid),data=dat)
 summary(lme4.2)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiTGluZWFyIG1peGVkIG1vZGVsIGZpdCBieSBSRU1MIFxudC10ZXN0cyB1c2UgIFNhdHRlcnRod2FpdGUgYXBwcm94aW1hdGlvbnMgdG8gZGVncmVlcyBvZiBmcmVlZG9tIFsnbG1lck1vZCddXG5Gb3JtdWxhOiBtYXRoMXN0IH4gaG91c2Vwb3YgKyBtYXRoa25vdyArIG1hdGhwcmVwICsgeWVhcnN0ZWEgKyBzZXggKyBtaW5vcml0eSArICBcbiAgICBzZXMgKyAoMCArIG1hdGhwcmVwIHwgc2Nob29saWQpICsgKDEgfCBzY2hvb2xpZC9jbGFzc2lkKVxuICAgRGF0YTogZGF0XG5cblJFTUwgY3JpdGVyaW9uIGF0IGNvbnZlcmdlbmNlOiAxMDcyOS41XG5cblNjYWxlZCByZXNpZHVhbHM6IFxuICAgIE1pbiAgICAgIDFRICBNZWRpYW4gICAgICAzUSAgICAgTWF4IFxuLTMuODU4MCAtMC42MTM0IC0wLjAzMjEgIDAuNTk3MSAgMy42NTk4IFxuXG5SYW5kb20gZWZmZWN0czpcbiBHcm91cHMgICAgICAgICAgIE5hbWUgICAgICAgIFZhcmlhbmNlIFN0ZC5EZXYuXG4gY2xhc3NpZC5zY2hvb2xpZCAoSW50ZXJjZXB0KSAgIDkzLjg5ICAgOS42OSAgIFxuIHNjaG9vbGlkICAgICAgICAgKEludGVyY2VwdCkgIDE2OS40NSAgMTMuMDIgICBcbiBzY2hvb2xpZC4xICAgICAgIG1hdGhwcmVwICAgICAgIDAuMDAgICAwLjAwICAgXG4gUmVzaWR1YWwgICAgICAgICAgICAgICAgICAgICAxMDY0Ljk1ICAzMi42MyAgIFxuTnVtYmVyIG9mIG9iczogMTA4MSwgZ3JvdXBzOiAgY2xhc3NpZDpzY2hvb2xpZCwgMjg1OyBzY2hvb2xpZCwgMTA1XG5cbkZpeGVkIGVmZmVjdHM6XG4gICAgICAgICAgICAgIEVzdGltYXRlIFN0ZC4gRXJyb3IgICAgICAgICBkZiB0IHZhbHVlIFByKD58dHwpICAgIFxuKEludGVyY2VwdCkgIDUzOS42MzA0MiAgICA1LjMxMjEwICAyNzUuNDAwMDAgMTAxLjU4NSAgPCAyZS0xNiAqKipcbmhvdXNlcG92ICAgICAtMTcuNjQ4NDcgICAxMy4yMTc1NyAgMTEzLjkwMDAwICAtMS4zMzUgICAgMC4xODQgICAgXG5tYXRoa25vdyAgICAgICAxLjM1MDA0ICAgIDEuMzkxNjggIDIzNC41MDAwMCAgIDAuOTcwICAgIDAuMzMzICAgIFxubWF0aHByZXAgICAgICAtMC4yNzcwNSAgICAxLjM3NTgzICAyMDUuMzAwMDAgIC0wLjIwMSAgICAwLjg0MSAgICBcbnllYXJzdGVhICAgICAgIDAuMDExMjkgICAgMC4xNDE0MSAgMjI2LjgwMDAwICAgMC4wODAgICAgMC45MzYgICAgXG5zZXggICAgICAgICAgIC0xLjIxNDE5ICAgIDIuMDk0ODMgMTAyMi4zMDAwMCAgLTAuNTgwICAgIDAuNTYyICAgIFxubWlub3JpdHkgICAgIC0xNi4xODY3OCAgICAzLjAyNjA1ICA3MDQuNTAwMDAgIC01LjM0OSAxLjIwZS0wNyAqKipcbnNlcyAgICAgICAgICAgMTAuMDUwNzUgICAgMS41NDQ4NCAxMDY2LjUwMDAwICAgNi41MDYgMS4xOGUtMTAgKioqXG4tLS1cblNpZ25pZi4gY29kZXM6ICAwIOKAmCoqKuKAmSAwLjAwMSDigJgqKuKAmSAwLjAxIOKAmCrigJkgMC4wNSDigJgu4oCZIDAuMSDigJgg4oCZIDFcblxuQ29ycmVsYXRpb24gb2YgRml4ZWQgRWZmZWN0czpcbiAgICAgICAgIChJbnRyKSBob3VzcHYgbXRoa253IG10aHBycCB5ZWFyc3Qgc2V4ICAgIG1pbnJ0eVxuaG91c2Vwb3YgLTAuNDUxICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG5tYXRoa25vdyAtMC4wODMgIDAuMDU4ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbm1hdGhwcmVwIC0wLjYzMSAgMC4wMzggIDAuMDA0ICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxueWVhcnN0ZWEgLTAuMjU5ICAwLjA3MSAgMC4wMjkgLTAuMTcyICAgICAgICAgICAgICAgICAgICAgXG5zZXggICAgICAtMC4xOTAgLTAuMDA3ICAwLjAwNyAtMC4wMDYgIDAuMDE2ICAgICAgICAgICAgICBcbm1pbm9yaXR5IC0wLjMyMCAtMC4xNzggIDAuMTE1ICAwLjAwMSAgMC4wMjQgLTAuMDExICAgICAgIFxuc2VzICAgICAgLTAuMTIxICAwLjA4MiAtMC4wMDcgIDAuMDUzIC0wLjAyOCAgMC4wMjAgIDAuMTYyXG4ifQ== -->
-<pre><code>Linear mixed model fit by REML 
-t-tests use  Satterthwaite approximations to degrees of freedom ['lmerMod']
-Formula: math1st ~ housepov + mathknow + mathprep + yearstea + sex + minority +  
-    ses + (0 + mathprep | schoolid) + (1 | schoolid/classid)
-   Data: dat
-
-REML criterion at convergence: 10729.5
-
-Scaled residuals: 
-    Min      1Q  Median      3Q     Max 
--3.8580 -0.6134 -0.0321  0.5971  3.6598 
-
-Random effects:
- Groups           Name        Variance Std.Dev.
- classid.schoolid (Intercept)   93.89   9.69   
- schoolid         (Intercept)  169.45  13.02   
- schoolid.1       mathprep       0.00   0.00   
- Residual                     1064.95  32.63   
-Number of obs: 1081, groups:  classid:schoolid, 285; schoolid, 105
-
-Fixed effects:
-              Estimate Std. Error         df t value Pr(&gt;|t|)    
-(Intercept)  539.63042    5.31210  275.40000 101.585  &lt; 2e-16 ***
-housepov     -17.64847   13.21757  113.90000  -1.335    0.184    
-mathknow       1.35004    1.39168  234.50000   0.970    0.333    
-mathprep      -0.27705    1.37583  205.30000  -0.201    0.841    
-yearstea       0.01129    0.14141  226.80000   0.080    0.936    
-sex           -1.21419    2.09483 1022.30000  -0.580    0.562    
-minority     -16.18678    3.02605  704.50000  -5.349 1.20e-07 ***
-ses           10.05075    1.54484 1066.50000   6.506 1.18e-10 ***
----
-Signif. codes:  0 *** 0.001 ** 0.01 * 0.05 . 0.1   1
-
-Correlation of Fixed Effects:
-         (Intr) houspv mthknw mthprp yearst sex    minrty
-housepov -0.451                                          
-mathknow -0.083  0.058                                   
-mathprep -0.631  0.038  0.004                            
-yearstea -0.259  0.071  0.029 -0.172                     
-sex      -0.190 -0.007  0.007 -0.006  0.016              
-minority -0.320 -0.178  0.115  0.001  0.024 -0.011       
-ses      -0.121  0.082 -0.007  0.053 -0.028  0.020  0.162</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmFuZChsbWU0LjIpXG5gYGAifQ== -->
 <pre class="r"><code>rand(lme4.2)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiQW5hbHlzaXMgb2YgUmFuZG9tIGVmZmVjdHMgVGFibGU6XG4gICAgICAgICAgICAgICAgICBDaGkuc3EgQ2hpLkRGIHAudmFsdWUgICAgXG5tYXRocHJlcDpzY2hvb2xpZCAgICAgIDAgICAgICAxICAgICAgIDEgICAgXG5zY2hvb2xpZC9jbGFzc2lkICAgICAgMjggICAgICAyICAgOGUtMDcgKioqXG4tLS1cblNpZ25pZi4gY29kZXM6ICAwIOKAmCoqKuKAmSAwLjAwMSDigJgqKuKAmSAwLjAxIOKAmCrigJkgMC4wNSDigJgu4oCZIDAuMSDigJgg4oCZIDFcbiJ9 -->
-<pre><code>Analysis of Random effects Table:
-                  Chi.sq Chi.DF p.value    
-mathprep:schoolid      0      1       1    
-schoolid/classid      28      2   8e-07 ***
----
-Signif. codes:  0 *** 0.001 ** 0.01 * 0.05 . 0.1   1</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
@@ -668,63 +490,11 @@ Signif. codes:  0 *** 0.001 ** 0.01 * 0.05 . 0.1   1</code><
 <pre class="r"><code>lme4.3&lt;-lmer(math1st~housepov + mathknow + mathprep + yearstea + sex + minority + ses + (0+yearstea|schoolid) + (1|schoolid/classid),data=dat)
 summary(lme4.3)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiTGluZWFyIG1peGVkIG1vZGVsIGZpdCBieSBSRU1MIFxudC10ZXN0cyB1c2UgIFNhdHRlcnRod2FpdGUgYXBwcm94aW1hdGlvbnMgdG8gZGVncmVlcyBvZiBmcmVlZG9tIFsnbG1lck1vZCddXG5Gb3JtdWxhOiBtYXRoMXN0IH4gaG91c2Vwb3YgKyBtYXRoa25vdyArIG1hdGhwcmVwICsgeWVhcnN0ZWEgKyBzZXggKyBtaW5vcml0eSArICBcbiAgICBzZXMgKyAoMCArIHllYXJzdGVhIHwgc2Nob29saWQpICsgKDEgfCBzY2hvb2xpZC9jbGFzc2lkKVxuICAgRGF0YTogZGF0XG5cblJFTUwgY3JpdGVyaW9uIGF0IGNvbnZlcmdlbmNlOiAxMDcyOS41XG5cblNjYWxlZCByZXNpZHVhbHM6IFxuICAgIE1pbiAgICAgIDFRICBNZWRpYW4gICAgICAzUSAgICAgTWF4IFxuLTMuODQ4NSAtMC42MTQ5IC0wLjAzMjMgIDAuNTk4MCAgMy42NjAwIFxuXG5SYW5kb20gZWZmZWN0czpcbiBHcm91cHMgICAgICAgICAgIE5hbWUgICAgICAgIFZhcmlhbmNlICBTdGQuRGV2LlxuIGNsYXNzaWQuc2Nob29saWQgKEludGVyY2VwdCkgOS4yNjZlKzAxICA5LjYyNTkzXG4gc2Nob29saWQgICAgICAgICAoSW50ZXJjZXB0KSAxLjY4NWUrMDIgMTIuOTc4OTNcbiBzY2hvb2xpZC4xICAgICAgIHllYXJzdGVhICAgIDkuNjY5ZS0wMyAgMC4wOTgzM1xuIFJlc2lkdWFsICAgICAgICAgICAgICAgICAgICAgMS4wNjVlKzAzIDMyLjYzNDUyXG5OdW1iZXIgb2Ygb2JzOiAxMDgxLCBncm91cHM6ICBjbGFzc2lkOnNjaG9vbGlkLCAyODU7IHNjaG9vbGlkLCAxMDVcblxuRml4ZWQgZWZmZWN0czpcbiAgICAgICAgICAgICAgRXN0aW1hdGUgU3RkLiBFcnJvciAgICAgICAgIGRmIHQgdmFsdWUgUHIoPnx0fCkgICAgXG4oSW50ZXJjZXB0KSAgNTM5LjYwMDYwICAgIDUuMzA4NjUgIDI2Ni4zMDAwMCAxMDEuNjQ1ICA8IDJlLTE2ICoqKlxuaG91c2Vwb3YgICAgIC0xNy43MTcyNyAgIDEzLjIxODU0ICAxMTMuNjAwMDAgIC0xLjM0MCAgICAwLjE4MyAgICBcbm1hdGhrbm93ICAgICAgIDEuMzMxOTggICAgMS4zOTE3NyAgMjM0LjMwMDAwICAgMC45NTcgICAgMC4zNDAgICAgXG5tYXRocHJlcCAgICAgIC0wLjI2NjMzICAgIDEuMzc2MTAgIDIwNC45MDAwMCAgLTAuMTk0ICAgIDAuODQ3ICAgIFxueWVhcnN0ZWEgICAgICAgMC4wMTEyNCAgICAwLjE0MTkzICAxMjIuNDAwMDAgICAwLjA3OSAgICAwLjkzNyAgICBcbnNleCAgICAgICAgICAgLTEuMjEwNzcgICAgMi4wOTQ3NiAxMDIyLjIwMDAwICAtMC41NzggICAgMC41NjMgICAgXG5taW5vcml0eSAgICAgLTE2LjE2ODMzICAgIDMuMDI2NDEgIDcwMi42MDAwMCAgLTUuMzQyIDEuMjRlLTA3ICoqKlxuc2VzICAgICAgICAgICAxMC4wNDUyOSAgICAxLjU0NDkwIDEwNjYuMTAwMDAgICA2LjUwMiAxLjIxZS0xMCAqKipcbi0tLVxuU2lnbmlmLiBjb2RlczogIDAg4oCYKioq4oCZIDAuMDAxIOKAmCoq4oCZIDAuMDEg4oCYKuKAmSAwLjA1IOKAmC7igJkgMC4xIOKAmCDigJkgMVxuXG5Db3JyZWxhdGlvbiBvZiBGaXhlZCBFZmZlY3RzOlxuICAgICAgICAgKEludHIpIGhvdXNwdiBtdGhrbncgbXRocHJwIHllYXJzdCBzZXggICAgbWlucnR5XG5ob3VzZXBvdiAtMC40NTAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbm1hdGhrbm93IC0wLjA4MiAgMC4wNTcgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxubWF0aHByZXAgLTAuNjMyICAwLjAzNyAgMC4wMDMgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG55ZWFyc3RlYSAtMC4yNTggIDAuMDcwICAwLjAyOCAtMC4xNzIgICAgICAgICAgICAgICAgICAgICBcbnNleCAgICAgIC0wLjE5MCAtMC4wMDcgIDAuMDA2IC0wLjAwNiAgMC4wMTUgICAgICAgICAgICAgIFxubWlub3JpdHkgLTAuMzIwIC0wLjE3OSAgMC4xMTUgIDAuMDAxICAwLjAyMyAtMC4wMTAgICAgICAgXG5zZXMgICAgICAtMC4xMjEgIDAuMDgyIC0wLjAwNyAgMC4wNTMgLTAuMDI3ICAwLjAyMCAgMC4xNjJcbiJ9 -->
-<pre><code>Linear mixed model fit by REML 
-t-tests use  Satterthwaite approximations to degrees of freedom ['lmerMod']
-Formula: math1st ~ housepov + mathknow + mathprep + yearstea + sex + minority +  
-    ses + (0 + yearstea | schoolid) + (1 | schoolid/classid)
-   Data: dat
-
-REML criterion at convergence: 10729.5
-
-Scaled residuals: 
-    Min      1Q  Median      3Q     Max 
--3.8485 -0.6149 -0.0323  0.5980  3.6600 
-
-Random effects:
- Groups           Name        Variance  Std.Dev.
- classid.schoolid (Intercept) 9.266e+01  9.62593
- schoolid         (Intercept) 1.685e+02 12.97893
- schoolid.1       yearstea    9.669e-03  0.09833
- Residual                     1.065e+03 32.63452
-Number of obs: 1081, groups:  classid:schoolid, 285; schoolid, 105
-
-Fixed effects:
-              Estimate Std. Error         df t value Pr(&gt;|t|)    
-(Intercept)  539.60060    5.30865  266.30000 101.645  &lt; 2e-16 ***
-housepov     -17.71727   13.21854  113.60000  -1.340    0.183    
-mathknow       1.33198    1.39177  234.30000   0.957    0.340    
-mathprep      -0.26633    1.37610  204.90000  -0.194    0.847    
-yearstea       0.01124    0.14193  122.40000   0.079    0.937    
-sex           -1.21077    2.09476 1022.20000  -0.578    0.563    
-minority     -16.16833    3.02641  702.60000  -5.342 1.24e-07 ***
-ses           10.04529    1.54490 1066.10000   6.502 1.21e-10 ***
----
-Signif. codes:  0 *** 0.001 ** 0.01 * 0.05 . 0.1   1
-
-Correlation of Fixed Effects:
-         (Intr) houspv mthknw mthprp yearst sex    minrty
-housepov -0.450                                          
-mathknow -0.082  0.057                                   
-mathprep -0.632  0.037  0.003                            
-yearstea -0.258  0.070  0.028 -0.172                     
-sex      -0.190 -0.007  0.006 -0.006  0.015              
-minority -0.320 -0.179  0.115  0.001  0.023 -0.010       
-ses      -0.121  0.082 -0.007  0.053 -0.027  0.020  0.162</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmFuZChsbWU0LjMpXG5gYGAifQ== -->
 <pre class="r"><code>rand(lme4.3)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiQW5hbHlzaXMgb2YgUmFuZG9tIGVmZmVjdHMgVGFibGU6XG4gICAgICAgICAgICAgICAgICAgIENoaS5zcSBDaGkuREYgcC52YWx1ZSAgICBcbnllYXJzdGVhOnNjaG9vbGlkICAwLjAwNjk4ICAgICAgMSAgICAgMC45ICAgIFxuc2Nob29saWQvY2xhc3NpZCAgNDkuODg3NjYgICAgICAyICAgMWUtMTEgKioqXG4tLS1cblNpZ25pZi4gY29kZXM6ICAwIOKAmCoqKuKAmSAwLjAwMSDigJgqKuKAmSAwLjAxIOKAmCrigJkgMC4wNSDigJgu4oCZIDAuMSDigJgg4oCZIDFcbiJ9 -->
-<pre><code>Analysis of Random effects Table:
-                    Chi.sq Chi.DF p.value    
-yearstea:schoolid  0.00698      1     0.9    
-schoolid/classid  49.88766      2   1e-11 ***
----
-Signif. codes:  0 *** 0.001 ** 0.01 * 0.05 . 0.1   1</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
@@ -743,63 +513,11 @@ Signif. codes:  0 *** 0.001 ** 0.01 * 0.05 . 0.1   1</code><
 <pre class="r"><code>lme4.1.1&lt;-lmer(math1st~housepov + mathknow + mathprep + yearstea + sex + minority + ses + (mathknow|schoolid)+(1|classid),data=dat)
 summary(lme4.1.1)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiTGluZWFyIG1peGVkIG1vZGVsIGZpdCBieSBSRU1MIFxudC10ZXN0cyB1c2UgIFNhdHRlcnRod2FpdGUgYXBwcm94aW1hdGlvbnMgdG8gZGVncmVlcyBvZiBmcmVlZG9tIFsnbG1lck1vZCddXG5Gb3JtdWxhOiBtYXRoMXN0IH4gaG91c2Vwb3YgKyBtYXRoa25vdyArIG1hdGhwcmVwICsgeWVhcnN0ZWEgKyBzZXggKyBtaW5vcml0eSArICBcbiAgICBzZXMgKyAobWF0aGtub3cgfCBzY2hvb2xpZCkgKyAoMSB8IGNsYXNzaWQpXG4gICBEYXRhOiBkYXRcblxuUkVNTCBjcml0ZXJpb24gYXQgY29udmVyZ2VuY2U6IDEwNzI5LjVcblxuU2NhbGVkIHJlc2lkdWFsczogXG4gICAgTWluICAgICAgMVEgIE1lZGlhbiAgICAgIDNRICAgICBNYXggXG4tMy44NTgxIC0wLjYxMzEgLTAuMDMyNCAgMC41OTY5ICAzLjY2MDMgXG5cblJhbmRvbSBlZmZlY3RzOlxuIEdyb3VwcyAgIE5hbWUgICAgICAgIFZhcmlhbmNlICBTdGQuRGV2LiBDb3JyXG4gY2xhc3NpZCAgKEludGVyY2VwdCkgOS4zOTRlKzAxICA5LjY5MjA1ICAgICBcbiBzY2hvb2xpZCAoSW50ZXJjZXB0KSAxLjY5M2UrMDIgMTMuMDEyMjMgICAgIFxuICAgICAgICAgIG1hdGhrbm93ICAgIDguNTk3ZS0wNCAgMC4wMjkzMiAxLjAwXG4gUmVzaWR1YWwgICAgICAgICAgICAgMS4wNjVlKzAzIDMyLjYzMzkzICAgICBcbk51bWJlciBvZiBvYnM6IDEwODEsIGdyb3VwczogIGNsYXNzaWQsIDI4NTsgc2Nob29saWQsIDEwNVxuXG5GaXhlZCBlZmZlY3RzOlxuICAgICAgICAgICAgICBFc3RpbWF0ZSBTdGQuIEVycm9yICAgICAgICAgZGYgdCB2YWx1ZSBQcig+fHR8KSAgICBcbihJbnRlcmNlcHQpICA1MzkuNjQwMzcgICAgNS4zMTIxMiAgMjc1LjQwMDAwIDEwMS41ODcgIDwgMmUtMTYgKioqXG5ob3VzZXBvdiAgICAgLTE3LjY0MTQ4ICAgMTMuMjEyNzQgIDEwNC4wMDAwMCAgLTEuMzM1ICAgIDAuMTg1ICAgIFxubWF0aGtub3cgICAgICAgMS4zNTQ1OSAgICAxLjM5MjAzICAyMTQuNjAwMDAgICAwLjk3MyAgICAwLjMzMiAgICBcbm1hdGhwcmVwICAgICAgLTAuMjc3NTMgICAgMS4zNzYwMSAgMjAxLjMwMDAwICAtMC4yMDIgICAgMC44NDAgICAgXG55ZWFyc3RlYSAgICAgICAwLjAxMTE0ICAgIDAuMTQxNDEgIDIyNi45MDAwMCAgIDAuMDc5ICAgIDAuOTM3ICAgIFxuc2V4ICAgICAgICAgICAtMS4yMTMyOSAgICAyLjA5NDg1IDEwMjEuNzAwMDAgIC0wLjU3OSAgICAwLjU2MyAgICBcbm1pbm9yaXR5ICAgICAtMTYuMTkzNzYgICAgMy4wMjYwOSAgNzAzLjgwMDAwICAtNS4zNTEgMS4xOGUtMDcgKioqXG5zZXMgICAgICAgICAgIDEwLjA0Nzg4ICAgIDEuNTQ0ODggMTA2Mi4wMDAwMCAgIDYuNTA0IDEuMjBlLTEwICoqKlxuLS0tXG5TaWduaWYuIGNvZGVzOiAgMCDigJgqKirigJkgMC4wMDEg4oCYKirigJkgMC4wMSDigJgq4oCZIDAuMDUg4oCYLuKAmSAwLjEg4oCYIOKAmSAxXG5cbkNvcnJlbGF0aW9uIG9mIEZpeGVkIEVmZmVjdHM6XG4gICAgICAgICAoSW50cikgaG91c3B2IG10aGtudyBtdGhwcnAgeWVhcnN0IHNleCAgICBtaW5ydHlcbmhvdXNlcG92IC0wLjQ1MSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxubWF0aGtub3cgLTAuMDgyICAwLjA1NyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG5tYXRocHJlcCAtMC42MzEgIDAuMDM4ICAwLjAwNCAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbnllYXJzdGVhIC0wLjI1OSAgMC4wNzEgIDAuMDI5IC0wLjE3MyAgICAgICAgICAgICAgICAgICAgIFxuc2V4ICAgICAgLTAuMTkwIC0wLjAwNyAgMC4wMDcgLTAuMDA2ICAwLjAxNiAgICAgICAgICAgICAgXG5taW5vcml0eSAtMC4zMjAgLTAuMTc4ICAwLjExNSAgMC4wMDEgIDAuMDI0IC0wLjAxMSAgICAgICBcbnNlcyAgICAgIC0wLjEyMSAgMC4wODIgLTAuMDA3ICAwLjA1MyAtMC4wMjggIDAuMDIwICAwLjE2MlxuIn0= -->
-<pre><code>Linear mixed model fit by REML 
-t-tests use  Satterthwaite approximations to degrees of freedom ['lmerMod']
-Formula: math1st ~ housepov + mathknow + mathprep + yearstea + sex + minority +  
-    ses + (mathknow | schoolid) + (1 | classid)
-   Data: dat
-
-REML criterion at convergence: 10729.5
-
-Scaled residuals: 
-    Min      1Q  Median      3Q     Max 
--3.8581 -0.6131 -0.0324  0.5969  3.6603 
-
-Random effects:
- Groups   Name        Variance  Std.Dev. Corr
- classid  (Intercept) 9.394e+01  9.69205     
- schoolid (Intercept) 1.693e+02 13.01223     
-          mathknow    8.597e-04  0.02932 1.00
- Residual             1.065e+03 32.63393     
-Number of obs: 1081, groups:  classid, 285; schoolid, 105
-
-Fixed effects:
-              Estimate Std. Error         df t value Pr(&gt;|t|)    
-(Intercept)  539.64037    5.31212  275.40000 101.587  &lt; 2e-16 ***
-housepov     -17.64148   13.21274  104.00000  -1.335    0.185    
-mathknow       1.35459    1.39203  214.60000   0.973    0.332    
-mathprep      -0.27753    1.37601  201.30000  -0.202    0.840    
-yearstea       0.01114    0.14141  226.90000   0.079    0.937    
-sex           -1.21329    2.09485 1021.70000  -0.579    0.563    
-minority     -16.19376    3.02609  703.80000  -5.351 1.18e-07 ***
-ses           10.04788    1.54488 1062.00000   6.504 1.20e-10 ***
----
-Signif. codes:  0 *** 0.001 ** 0.01 * 0.05 . 0.1   1
-
-Correlation of Fixed Effects:
-         (Intr) houspv mthknw mthprp yearst sex    minrty
-housepov -0.451                                          
-mathknow -0.082  0.057                                   
-mathprep -0.631  0.038  0.004                            
-yearstea -0.259  0.071  0.029 -0.173                     
-sex      -0.190 -0.007  0.007 -0.006  0.016              
-minority -0.320 -0.178  0.115  0.001  0.024 -0.011       
-ses      -0.121  0.082 -0.007  0.053 -0.028  0.020  0.162</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmFuZChsbWU0LjEuMSlcbmBgYCJ9 -->
 <pre class="r"><code>rand(lme4.1.1)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiQW5hbHlzaXMgb2YgUmFuZG9tIGVmZmVjdHMgVGFibGU6XG4gICAgICAgICAgICAgICAgICAgIENoaS5zcSBDaGkuREYgcC52YWx1ZSAgIFxubWF0aGtub3c6c2Nob29saWQgMC4wMDAzMjEgICAgICAyICAgIDEuMDAgICBcbmNsYXNzaWQgICAgICAgICAgIDYuNjc2ODQyICAgICAgMSAgICAwLjAxICoqXG4tLS1cblNpZ25pZi4gY29kZXM6ICAwIOKAmCoqKuKAmSAwLjAwMSDigJgqKuKAmSAwLjAxIOKAmCrigJkgMC4wNSDigJgu4oCZIDAuMSDigJgg4oCZIDFcbiJ9 -->
-<pre><code>Analysis of Random effects Table:
-                    Chi.sq Chi.DF p.value   
-mathknow:schoolid 0.000321      2    1.00   
-classid           6.676842      1    0.01 **
----
-Signif. codes:  0 *** 0.001 ** 0.01 * 0.05 . 0.1   1</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
@@ -811,84 +529,11 @@ Signif. codes:  0 *** 0.001 ** 0.01 * 0.05 . 0.1   1</code><
 <pre class="r"><code>lme4.2.1&lt;-lmer(math1st~housepov + mathknow + mathprep + yearstea + sex + minority + ses + (mathprep|schoolid) + (1|classid),data=dat)
 summary(lme4.2.1)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiTGluZWFyIG1peGVkIG1vZGVsIGZpdCBieSBSRU1MIHQtdGVzdHMgdXNlXG4gIFNhdHRlcnRod2FpdGUgYXBwcm94aW1hdGlvbnMgdG8gZGVncmVlcyBvZlxuICBmcmVlZG9tIFtsbWVyTW9kXVxuRm9ybXVsYTogXG5tYXRoMXN0IH4gaG91c2Vwb3YgKyBtYXRoa25vdyArIG1hdGhwcmVwICsgeWVhcnN0ZWEgKyBzZXggKyBtaW5vcml0eSArICBcbiAgICBzZXMgKyAobWF0aHByZXAgfCBzY2hvb2xpZCkgKyAoMSB8IGNsYXNzaWQpXG4gICBEYXRhOiBkYXRcblxuUkVNTCBjcml0ZXJpb24gYXQgY29udmVyZ2VuY2U6IDEwNzI0LjdcblxuU2NhbGVkIHJlc2lkdWFsczogXG4gICAgTWluICAgICAgMVEgIE1lZGlhbiAgICAgIDNRICAgICBNYXggXG4tMy44NTQyIC0wLjYwMzQgLTAuMDIyMSAgMC41OTE1ICAzLjY0NzUgXG5cblJhbmRvbSBlZmZlY3RzOlxuIEdyb3VwcyAgIE5hbWUgICAgICAgIFZhcmlhbmNlIFN0ZC5EZXYuIENvcnIgXG4gY2xhc3NpZCAgKEludGVyY2VwdCkgICA3OC40NiAgIDguODU4ICAgICAgICBcbiBzY2hvb2xpZCAoSW50ZXJjZXB0KSAgNTUyLjc2ICAyMy41MTEgICAgICAgIFxuICAgICAgICAgIG1hdGhwcmVwICAgICAgMTUuODkgICAzLjk4NiAgIC0xLjAwXG4gUmVzaWR1YWwgICAgICAgICAgICAgMTA2NC4yNiAgMzIuNjIzICAgICAgICBcbk51bWJlciBvZiBvYnM6IDEwODEsIGdyb3VwczogIFxuY2xhc3NpZCwgMjg1OyBzY2hvb2xpZCwgMTA1XG5cbkZpeGVkIGVmZmVjdHM6XG4gICAgICAgICAgICAgIEVzdGltYXRlIFN0ZC4gRXJyb3IgICAgICAgICBkZlxuKEludGVyY2VwdCkgIDUzOC42MDg1NSAgICA1LjYwODEzICAxNTkuOTAwMDBcbmhvdXNlcG92ICAgICAtMTQuMDEzMDcgICAxMi44ODY5MCAgMTE2LjEwMDAwXG5tYXRoa25vdyAgICAgICAxLjI5ODg0ICAgIDEuMzcxOTQgIDIyOS43MDAwMFxubWF0aHByZXAgICAgICAgMC4wNDA3NCAgICAxLjM0ODQ1ICAxMzkuMDAwMDBcbnllYXJzdGVhICAgICAgLTAuMDI1ODYgICAgMC4xMzk0OSAgMjIzLjUwMDAwXG5zZXggICAgICAgICAgIC0xLjE2NzU5ICAgIDIuMDg2OTcgMTAyMy4yMDAwMFxubWlub3JpdHkgICAgIC0xNi40NjQyMiAgICAyLjk5NTI0ICA2NjMuNzAwMDBcbnNlcyAgICAgICAgICAgMTAuMTQxNjYgICAgMS41Mzk2MSAxMDYwLjkwMDAwXG4gICAgICAgICAgICB0IHZhbHVlIFByKD58dHwpICAgIFxuKEludGVyY2VwdCkgIDk2LjA0MSAgPCAyZS0xNiAqKipcbmhvdXNlcG92ICAgICAtMS4wODcgICAgMC4yNzkgICAgXG5tYXRoa25vdyAgICAgIDAuOTQ3ICAgIDAuMzQ1ICAgIFxubWF0aHByZXAgICAgICAwLjAzMCAgICAwLjk3NiAgICBcbnllYXJzdGVhICAgICAtMC4xODUgICAgMC44NTMgICAgXG5zZXggICAgICAgICAgLTAuNTU5ICAgIDAuNTc2ICAgIFxubWlub3JpdHkgICAgIC01LjQ5NyA1LjUyZS0wOCAqKipcbnNlcyAgICAgICAgICAgNi41ODcgNy4wNGUtMTEgKioqXG4tLS1cblNpZ25pZi4gY29kZXM6ICBcbjAg4oCYKioq4oCZIDAuMDAxIOKAmCoq4oCZIDAuMDEg4oCYKuKAmSAwLjA1IOKAmC7igJkgMC4xIOKAmCDigJkgMVxuXG5Db3JyZWxhdGlvbiBvZiBGaXhlZCBFZmZlY3RzOlxuICAgICAgICAgKEludHIpIGhvdXNwdiBtdGhrbncgbXRocHJwIHllYXJzdFxuaG91c2Vwb3YgLTAuNDYxICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxubWF0aGtub3cgLTAuMDcxICAwLjAyNyAgICAgICAgICAgICAgICAgICAgIFxubWF0aHByZXAgLTAuNjkyICAwLjEwNyAgMC4wMTIgICAgICAgICAgICAgIFxueWVhcnN0ZWEgLTAuMjYwICAwLjA4OSAgMC4wNDkgLTAuMTU1ICAgICAgIFxuc2V4ICAgICAgLTAuMTgzICAwLjAwMyAgMC4wMDIgLTAuMDA4ICAwLjAyM1xubWlub3JpdHkgLTAuMjc1IC0wLjE4NyAgMC4xMDcgLTAuMDM1ICAwLjAyNVxuc2VzICAgICAgLTAuMTIxICAwLjA5NSAtMC4wMDEgIDAuMDYxIC0wLjAzM1xuICAgICAgICAgc2V4ICAgIG1pbnJ0eVxuaG91c2Vwb3YgICAgICAgICAgICAgIFxubWF0aGtub3cgICAgICAgICAgICAgIFxubWF0aHByZXAgICAgICAgICAgICAgIFxueWVhcnN0ZWEgICAgICAgICAgICAgIFxuc2V4ICAgICAgICAgICAgICAgICAgIFxubWlub3JpdHkgLTAuMDEzICAgICAgIFxuc2VzICAgICAgIDAuMDI0ICAwLjE2MVxuIn0= -->
-<pre><code>Linear mixed model fit by REML t-tests use
-  Satterthwaite approximations to degrees of
-  freedom [lmerMod]
-Formula: 
-math1st ~ housepov + mathknow + mathprep + yearstea + sex + minority +  
-    ses + (mathprep | schoolid) + (1 | classid)
-   Data: dat
-
-REML criterion at convergence: 10724.7
-
-Scaled residuals: 
-    Min      1Q  Median      3Q     Max 
--3.8542 -0.6034 -0.0221  0.5915  3.6475 
-
-Random effects:
- Groups   Name        Variance Std.Dev. Corr 
- classid  (Intercept)   78.46   8.858        
- schoolid (Intercept)  552.76  23.511        
-          mathprep      15.89   3.986   -1.00
- Residual             1064.26  32.623        
-Number of obs: 1081, groups:  
-classid, 285; schoolid, 105
-
-Fixed effects:
-              Estimate Std. Error         df
-(Intercept)  538.60855    5.60813  159.90000
-housepov     -14.01307   12.88690  116.10000
-mathknow       1.29884    1.37194  229.70000
-mathprep       0.04074    1.34845  139.00000
-yearstea      -0.02586    0.13949  223.50000
-sex           -1.16759    2.08697 1023.20000
-minority     -16.46422    2.99524  663.70000
-ses           10.14166    1.53961 1060.90000
-            t value Pr(&gt;|t|)    
-(Intercept)  96.041  &lt; 2e-16 ***
-housepov     -1.087    0.279    
-mathknow      0.947    0.345    
-mathprep      0.030    0.976    
-yearstea     -0.185    0.853    
-sex          -0.559    0.576    
-minority     -5.497 5.52e-08 ***
-ses           6.587 7.04e-11 ***
----
-Signif. codes:  
-0 *** 0.001 ** 0.01 * 0.05 . 0.1   1
-
-Correlation of Fixed Effects:
-         (Intr) houspv mthknw mthprp yearst
-housepov -0.461                            
-mathknow -0.071  0.027                     
-mathprep -0.692  0.107  0.012              
-yearstea -0.260  0.089  0.049 -0.155       
-sex      -0.183  0.003  0.002 -0.008  0.023
-minority -0.275 -0.187  0.107 -0.035  0.025
-ses      -0.121  0.095 -0.001  0.061 -0.033
-         sex    minrty
-housepov              
-mathknow              
-mathprep              
-yearstea              
-sex                   
-minority -0.013       
-ses       0.024  0.161</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmFuZChsbWU0LjIuMSlcbmBgYCJ9 -->
 <pre class="r"><code>rand(lme4.2.1)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiQW5hbHlzaXMgb2YgUmFuZG9tIGVmZmVjdHMgVGFibGU6XG4gICAgICAgICAgICAgICAgICBDaGkuc3EgQ2hpLkRGIHAudmFsdWUgIFxubWF0aHByZXA6c2Nob29saWQgICA0LjgxICAgICAgMiAgICAwLjA5IC5cbmNsYXNzaWQgICAgICAgICAgICAgNS4xMCAgICAgIDEgICAgMC4wMiAqXG4tLS1cblNpZ25pZi4gY29kZXM6ICAwIOKAmCoqKuKAmSAwLjAwMSDigJgqKuKAmSAwLjAxIOKAmCrigJkgMC4wNSDigJgu4oCZIDAuMSDigJgg4oCZIDFcbiJ9 -->
-<pre><code>Analysis of Random effects Table:
-                  Chi.sq Chi.DF p.value  
-mathprep:schoolid   4.81      2    0.09 .
-classid             5.10      1    0.02 *
----
-Signif. codes:  0 *** 0.001 ** 0.01 * 0.05 . 0.1   1</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
@@ -900,84 +545,11 @@ Signif. codes:  0 *** 0.001 ** 0.01 * 0.05 . 0.1   1</code><
 <pre class="r"><code>lme4.3.1&lt;-lmer(math1st~housepov + mathknow + mathprep + yearstea + sex + minority + ses + (yearstea|schoolid) + (1|classid),data=dat)
 summary(lme4.3.1)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiTGluZWFyIG1peGVkIG1vZGVsIGZpdCBieSBSRU1MIHQtdGVzdHMgdXNlXG4gIFNhdHRlcnRod2FpdGUgYXBwcm94aW1hdGlvbnMgdG8gZGVncmVlcyBvZlxuICBmcmVlZG9tIFtsbWVyTW9kXVxuRm9ybXVsYTogXG5tYXRoMXN0IH4gaG91c2Vwb3YgKyBtYXRoa25vdyArIG1hdGhwcmVwICsgeWVhcnN0ZWEgKyBzZXggKyBtaW5vcml0eSArICBcbiAgICBzZXMgKyAoeWVhcnN0ZWEgfCBzY2hvb2xpZCkgKyAoMSB8IGNsYXNzaWQpXG4gICBEYXRhOiBkYXRcblxuUkVNTCBjcml0ZXJpb24gYXQgY29udmVyZ2VuY2U6IDEwNzIzLjdcblxuU2NhbGVkIHJlc2lkdWFsczogXG4gICAgTWluICAgICAgMVEgIE1lZGlhbiAgICAgIDNRICAgICBNYXggXG4tMy43NDYyIC0wLjYwMzYgLTAuMDI5MCAgMC42MDQxICAzLjg0NDkgXG5cblJhbmRvbSBlZmZlY3RzOlxuIEdyb3VwcyAgIE5hbWUgICAgICAgIFZhcmlhbmNlICBTdGQuRGV2LiBDb3JyIFxuIGNsYXNzaWQgIChJbnRlcmNlcHQpICAgMzcuOTI4MiAgNi4xNTg2ICAgICAgIFxuIHNjaG9vbGlkIChJbnRlcmNlcHQpICAzNjYuMTE3NSAxOS4xMzQyICAgICAgIFxuICAgICAgICAgIHllYXJzdGVhICAgICAgIDAuNTUyMyAgMC43NDMyICAtMC43OFxuIFJlc2lkdWFsICAgICAgICAgICAgIDEwNjYuNDUwOCAzMi42NTY2ICAgICAgIFxuTnVtYmVyIG9mIG9iczogMTA4MSwgZ3JvdXBzOiAgXG5jbGFzc2lkLCAyODU7IHNjaG9vbGlkLCAxMDVcblxuRml4ZWQgZWZmZWN0czpcbiAgICAgICAgICAgICAgRXN0aW1hdGUgU3RkLiBFcnJvciAgICAgICAgIGRmXG4oSW50ZXJjZXB0KSAgNTM4Ljk1MjQ1ICAgIDUuNDg4MjUgIDIyMi43MDAwMFxuaG91c2Vwb3YgICAgIC0xNy4xMzk5MiAgIDEzLjQ1OTYwICAxMTkuNjAwMDBcbm1hdGhrbm93ICAgICAgIDEuMDQ2MzUgICAgMS4zNDM4MSAgMjA5LjcwMDAwXG5tYXRocHJlcCAgICAgICAwLjA1MDQ3ICAgIDEuMzQ1NDkgIDE5MC44MDAwMFxueWVhcnN0ZWEgICAgICAgMC4wMjIwNCAgICAwLjE1NzY2ICAgNzUuODAwMDBcbnNleCAgICAgICAgICAgLTEuMzM1NTMgICAgMi4wODc3NCAxMDI0LjUwMDAwXG5taW5vcml0eSAgICAgLTE2LjQ0NTU2ICAgIDIuOTk2NTUgIDY2OS41MDAwMFxuc2VzICAgICAgICAgICAxMC4xNTAzOCAgICAxLjUzODczIDEwNjIuNzAwMDBcbiAgICAgICAgICAgIHQgdmFsdWUgUHIoPnx0fCkgICAgXG4oSW50ZXJjZXB0KSAgOTguMjAxICA8IDJlLTE2ICoqKlxuaG91c2Vwb3YgICAgIC0xLjI3MyAgICAwLjIwNSAgICBcbm1hdGhrbm93ICAgICAgMC43NzkgICAgMC40MzcgICAgXG5tYXRocHJlcCAgICAgIDAuMDM4ICAgIDAuOTcwICAgIFxueWVhcnN0ZWEgICAgICAwLjE0MCAgICAwLjg4OSAgICBcbnNleCAgICAgICAgICAtMC42NDAgICAgMC41MjMgICAgXG5taW5vcml0eSAgICAgLTUuNDg4IDUuNzdlLTA4ICoqKlxuc2VzICAgICAgICAgICA2LjU5NyA2LjYyZS0xMSAqKipcbi0tLVxuU2lnbmlmLiBjb2RlczogIFxuMCDigJgqKirigJkgMC4wMDEg4oCYKirigJkgMC4wMSDigJgq4oCZIDAuMDUg4oCYLuKAmSAwLjEg4oCYIOKAmSAxXG5cbkNvcnJlbGF0aW9uIG9mIEZpeGVkIEVmZmVjdHM6XG4gICAgICAgICAoSW50cikgaG91c3B2IG10aGtudyBtdGhwcnAgeWVhcnN0XG5ob3VzZXBvdiAtMC40NTUgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG5tYXRoa25vdyAtMC4wODUgIDAuMDQ5ICAgICAgICAgICAgICAgICAgICAgXG5tYXRocHJlcCAtMC42MDYgIDAuMDUwICAwLjAxNCAgICAgICAgICAgICAgXG55ZWFyc3RlYSAtMC4zNzAgIDAuMDg0ICAwLjAxMiAtMC4xMzkgICAgICAgXG5zZXggICAgICAtMC4xODQgLTAuMDA0ICAwLjAwOCAtMC4wMDQgIDAuMDA5XG5taW5vcml0eSAtMC4zMDUgLTAuMTY5ICAwLjEyMiAtMC4wMDcgIDAuMDMyXG5zZXMgICAgICAtMC4xMTkgIDAuMDc5IC0wLjAwMSAgMC4wNDkgLTAuMDE5XG4gICAgICAgICBzZXggICAgbWlucnR5XG5ob3VzZXBvdiAgICAgICAgICAgICAgXG5tYXRoa25vdyAgICAgICAgICAgICAgXG5tYXRocHJlcCAgICAgICAgICAgICAgXG55ZWFyc3RlYSAgICAgICAgICAgICAgXG5zZXggICAgICAgICAgICAgICAgICAgXG5taW5vcml0eSAtMC4wMTIgICAgICAgXG5zZXMgICAgICAgMC4wMjIgIDAuMTY4XG4ifQ== -->
-<pre><code>Linear mixed model fit by REML t-tests use
-  Satterthwaite approximations to degrees of
-  freedom [lmerMod]
-Formula: 
-math1st ~ housepov + mathknow + mathprep + yearstea + sex + minority +  
-    ses + (yearstea | schoolid) + (1 | classid)
-   Data: dat
-
-REML criterion at convergence: 10723.7
-
-Scaled residuals: 
-    Min      1Q  Median      3Q     Max 
--3.7462 -0.6036 -0.0290  0.6041  3.8449 
-
-Random effects:
- Groups   Name        Variance  Std.Dev. Corr 
- classid  (Intercept)   37.9282  6.1586       
- schoolid (Intercept)  366.1175 19.1342       
-          yearstea       0.5523  0.7432  -0.78
- Residual             1066.4508 32.6566       
-Number of obs: 1081, groups:  
-classid, 285; schoolid, 105
-
-Fixed effects:
-              Estimate Std. Error         df
-(Intercept)  538.95245    5.48825  222.70000
-housepov     -17.13992   13.45960  119.60000
-mathknow       1.04635    1.34381  209.70000
-mathprep       0.05047    1.34549  190.80000
-yearstea       0.02204    0.15766   75.80000
-sex           -1.33553    2.08774 1024.50000
-minority     -16.44556    2.99655  669.50000
-ses           10.15038    1.53873 1062.70000
-            t value Pr(&gt;|t|)    
-(Intercept)  98.201  &lt; 2e-16 ***
-housepov     -1.273    0.205    
-mathknow      0.779    0.437    
-mathprep      0.038    0.970    
-yearstea      0.140    0.889    
-sex          -0.640    0.523    
-minority     -5.488 5.77e-08 ***
-ses           6.597 6.62e-11 ***
----
-Signif. codes:  
-0 *** 0.001 ** 0.01 * 0.05 . 0.1   1
-
-Correlation of Fixed Effects:
-         (Intr) houspv mthknw mthprp yearst
-housepov -0.455                            
-mathknow -0.085  0.049                     
-mathprep -0.606  0.050  0.014              
-yearstea -0.370  0.084  0.012 -0.139       
-sex      -0.184 -0.004  0.008 -0.004  0.009
-minority -0.305 -0.169  0.122 -0.007  0.032
-ses      -0.119  0.079 -0.001  0.049 -0.019
-         sex    minrty
-housepov              
-mathknow              
-mathprep              
-yearstea              
-sex                   
-minority -0.012       
-ses       0.022  0.168</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmFuZChsbWU0LjMuMSlcbmBgYCJ9 -->
 <pre class="r"><code>rand(lme4.3.1)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiQW5hbHlzaXMgb2YgUmFuZG9tIGVmZmVjdHMgVGFibGU6XG4gICAgICAgICAgICAgICAgICBDaGkuc3EgQ2hpLkRGIHAudmFsdWUgIFxueWVhcnN0ZWE6c2Nob29saWQgIDUuODI1ICAgICAgMiAgICAwLjA1IC5cbmNsYXNzaWQgICAgICAgICAgICAwLjkwMyAgICAgIDEgICAgMC4zNCAgXG4tLS1cblNpZ25pZi4gY29kZXM6ICAwIOKAmCoqKuKAmSAwLjAwMSDigJgqKuKAmSAwLjAxIOKAmCrigJkgMC4wNSDigJgu4oCZIDAuMSDigJgg4oCZIDFcbiJ9 -->
-<pre><code>Analysis of Random effects Table:
-                  Chi.sq Chi.DF p.value  
-yearstea:schoolid  5.825      2    0.05 .
-classid            0.903      1    0.34  
----
-Signif. codes:  0 *** 0.001 ** 0.01 * 0.05 . 0.1   1</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
@@ -995,63 +567,11 @@ Signif. codes:  0 *** 0.001 ** 0.01 * 0.05 . 0.1   1</code><
 <pre class="r"><code>lme5.1&lt;-lmer(math1st~housepov + mathknow + mathprep + yearstea + sex + minority + ses + (0 + sex|classid) + (1|schoolid/classid),data=dat)
 summary(lme5.1)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiTGluZWFyIG1peGVkIG1vZGVsIGZpdCBieSBSRU1MIFxudC10ZXN0cyB1c2UgIFNhdHRlcnRod2FpdGUgYXBwcm94aW1hdGlvbnMgdG8gZGVncmVlcyBvZiBmcmVlZG9tIFsnbG1lck1vZCddXG5Gb3JtdWxhOiBtYXRoMXN0IH4gaG91c2Vwb3YgKyBtYXRoa25vdyArIG1hdGhwcmVwICsgeWVhcnN0ZWEgKyBzZXggKyBtaW5vcml0eSArICBcbiAgICBzZXMgKyAoMCArIHNleCB8IGNsYXNzaWQpICsgKDEgfCBzY2hvb2xpZC9jbGFzc2lkKVxuICAgRGF0YTogZGF0XG5cblJFTUwgY3JpdGVyaW9uIGF0IGNvbnZlcmdlbmNlOiAxMDcyOS41XG5cblNjYWxlZCByZXNpZHVhbHM6IFxuICAgIE1pbiAgICAgIDFRICBNZWRpYW4gICAgICAzUSAgICAgTWF4IFxuLTMuODU4MCAtMC42MTM0IC0wLjAzMjEgIDAuNTk3MSAgMy42NTk4IFxuXG5SYW5kb20gZWZmZWN0czpcbiBHcm91cHMgICAgICAgICAgIE5hbWUgICAgICAgIFZhcmlhbmNlIFN0ZC5EZXYuXG4gY2xhc3NpZCAgICAgICAgICBzZXggICAgICAgICAgICAwLjAwICAgMC4wMCAgIFxuIGNsYXNzaWQ6c2Nob29saWQgKEludGVyY2VwdCkgICA5My44OSAgIDkuNjkgICBcbiBzY2hvb2xpZCAgICAgICAgIChJbnRlcmNlcHQpICAxNjkuNDUgIDEzLjAyICAgXG4gUmVzaWR1YWwgICAgICAgICAgICAgICAgICAgICAxMDY0Ljk1ICAzMi42MyAgIFxuTnVtYmVyIG9mIG9iczogMTA4MSwgZ3JvdXBzOiAgY2xhc3NpZCwgMjg1OyBjbGFzc2lkOnNjaG9vbGlkLCAyODU7IHNjaG9vbGlkLCAxMDVcblxuRml4ZWQgZWZmZWN0czpcbiAgICAgICAgICAgICAgRXN0aW1hdGUgU3RkLiBFcnJvciAgICAgICAgIGRmIHQgdmFsdWUgUHIoPnx0fCkgICAgXG4oSW50ZXJjZXB0KSAgNTM5LjYzMDQyICAgIDUuMzEyMTAgIDI3NS40MDAwMCAxMDEuNTg1ICA8IDJlLTE2ICoqKlxuaG91c2Vwb3YgICAgIC0xNy42NDg0NyAgIDEzLjIxNzU3ICAxMTMuOTAwMDAgIC0xLjMzNSAgICAwLjE4NCAgICBcbm1hdGhrbm93ICAgICAgIDEuMzUwMDQgICAgMS4zOTE2OCAgMjM0LjUwMDAwICAgMC45NzAgICAgMC4zMzMgICAgXG5tYXRocHJlcCAgICAgIC0wLjI3NzA1ICAgIDEuMzc1ODMgIDIwNS4zMDAwMCAgLTAuMjAxICAgIDAuODQxICAgIFxueWVhcnN0ZWEgICAgICAgMC4wMTEyOSAgICAwLjE0MTQxICAyMjYuODAwMDAgICAwLjA4MCAgICAwLjkzNiAgICBcbnNleCAgICAgICAgICAgLTEuMjE0MTkgICAgMi4wOTQ4MyAxMDIyLjQwMDAwICAtMC41ODAgICAgMC41NjIgICAgXG5taW5vcml0eSAgICAgLTE2LjE4Njc4ICAgIDMuMDI2MDUgIDcwNC41MDAwMCAgLTUuMzQ5IDEuMjBlLTA3ICoqKlxuc2VzICAgICAgICAgICAxMC4wNTA3NSAgICAxLjU0NDg0IDEwNjYuNTAwMDAgICA2LjUwNiAxLjE4ZS0xMCAqKipcbi0tLVxuU2lnbmlmLiBjb2RlczogIDAg4oCYKioq4oCZIDAuMDAxIOKAmCoq4oCZIDAuMDEg4oCYKuKAmSAwLjA1IOKAmC7igJkgMC4xIOKAmCDigJkgMVxuXG5Db3JyZWxhdGlvbiBvZiBGaXhlZCBFZmZlY3RzOlxuICAgICAgICAgKEludHIpIGhvdXNwdiBtdGhrbncgbXRocHJwIHllYXJzdCBzZXggICAgbWlucnR5XG5ob3VzZXBvdiAtMC40NTEgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbm1hdGhrbm93IC0wLjA4MyAgMC4wNTggICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxubWF0aHByZXAgLTAuNjMxICAwLjAzOCAgMC4wMDQgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG55ZWFyc3RlYSAtMC4yNTkgIDAuMDcxICAwLjAyOSAtMC4xNzIgICAgICAgICAgICAgICAgICAgICBcbnNleCAgICAgIC0wLjE5MCAtMC4wMDcgIDAuMDA3IC0wLjAwNiAgMC4wMTYgICAgICAgICAgICAgIFxubWlub3JpdHkgLTAuMzIwIC0wLjE3OCAgMC4xMTUgIDAuMDAxICAwLjAyNCAtMC4wMTEgICAgICAgXG5zZXMgICAgICAtMC4xMjEgIDAuMDgyIC0wLjAwNyAgMC4wNTMgLTAuMDI4ICAwLjAyMCAgMC4xNjJcbiJ9 -->
-<pre><code>Linear mixed model fit by REML 
-t-tests use  Satterthwaite approximations to degrees of freedom ['lmerMod']
-Formula: math1st ~ housepov + mathknow + mathprep + yearstea + sex + minority +  
-    ses + (0 + sex | classid) + (1 | schoolid/classid)
-   Data: dat
-
-REML criterion at convergence: 10729.5
-
-Scaled residuals: 
-    Min      1Q  Median      3Q     Max 
--3.8580 -0.6134 -0.0321  0.5971  3.6598 
-
-Random effects:
- Groups           Name        Variance Std.Dev.
- classid          sex            0.00   0.00   
- classid:schoolid (Intercept)   93.89   9.69   
- schoolid         (Intercept)  169.45  13.02   
- Residual                     1064.95  32.63   
-Number of obs: 1081, groups:  classid, 285; classid:schoolid, 285; schoolid, 105
-
-Fixed effects:
-              Estimate Std. Error         df t value Pr(&gt;|t|)    
-(Intercept)  539.63042    5.31210  275.40000 101.585  &lt; 2e-16 ***
-housepov     -17.64847   13.21757  113.90000  -1.335    0.184    
-mathknow       1.35004    1.39168  234.50000   0.970    0.333    
-mathprep      -0.27705    1.37583  205.30000  -0.201    0.841    
-yearstea       0.01129    0.14141  226.80000   0.080    0.936    
-sex           -1.21419    2.09483 1022.40000  -0.580    0.562    
-minority     -16.18678    3.02605  704.50000  -5.349 1.20e-07 ***
-ses           10.05075    1.54484 1066.50000   6.506 1.18e-10 ***
----
-Signif. codes:  0 *** 0.001 ** 0.01 * 0.05 . 0.1   1
-
-Correlation of Fixed Effects:
-         (Intr) houspv mthknw mthprp yearst sex    minrty
-housepov -0.451                                          
-mathknow -0.083  0.058                                   
-mathprep -0.631  0.038  0.004                            
-yearstea -0.259  0.071  0.029 -0.172                     
-sex      -0.190 -0.007  0.007 -0.006  0.016              
-minority -0.320 -0.178  0.115  0.001  0.024 -0.011       
-ses      -0.121  0.082 -0.007  0.053 -0.028  0.020  0.162</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmFuZChsbWU1LjEpXG5gYGAifQ== -->
 <pre class="r"><code>rand(lme5.1)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiQW5hbHlzaXMgb2YgUmFuZG9tIGVmZmVjdHMgVGFibGU6XG4gICAgICAgICAgICAgICAgIENoaS5zcSBDaGkuREYgcC52YWx1ZSAgICBcbnNleDpjbGFzc2lkICAgICAgICAgMC4wICAgICAgMSAgICAgICAxICAgIFxuc2Nob29saWQvY2xhc3NpZCAgIDcwLjQgICAgICAyICAgNWUtMTYgKioqXG4tLS1cblNpZ25pZi4gY29kZXM6ICAwIOKAmCoqKuKAmSAwLjAwMSDigJgqKuKAmSAwLjAxIOKAmCrigJkgMC4wNSDigJgu4oCZIDAuMSDigJgg4oCZIDFcbiJ9 -->
-<pre><code>Analysis of Random effects Table:
-                 Chi.sq Chi.DF p.value    
-sex:classid         0.0      1       1    
-schoolid/classid   70.4      2   5e-16 ***
----
-Signif. codes:  0 *** 0.001 ** 0.01 * 0.05 . 0.1   1</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
@@ -1063,63 +583,11 @@ Signif. codes:  0 *** 0.001 ** 0.01 * 0.05 . 0.1   1</code><
 <pre class="r"><code>lme5.2&lt;-lmer(math1st~housepov + mathknow + mathprep + yearstea + sex + minority + ses + (0 + minority|classid) + (1|schoolid/classid),data=dat)
 summary(lme5.2)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiTGluZWFyIG1peGVkIG1vZGVsIGZpdCBieSBSRU1MIFxudC10ZXN0cyB1c2UgIFNhdHRlcnRod2FpdGUgYXBwcm94aW1hdGlvbnMgdG8gZGVncmVlcyBvZiBmcmVlZG9tIFsnbG1lck1vZCddXG5Gb3JtdWxhOiBtYXRoMXN0IH4gaG91c2Vwb3YgKyBtYXRoa25vdyArIG1hdGhwcmVwICsgeWVhcnN0ZWEgKyBzZXggKyBtaW5vcml0eSArICBcbiAgICBzZXMgKyAoMCArIG1pbm9yaXR5IHwgY2xhc3NpZCkgKyAoMSB8IHNjaG9vbGlkL2NsYXNzaWQpXG4gICBEYXRhOiBkYXRcblxuUkVNTCBjcml0ZXJpb24gYXQgY29udmVyZ2VuY2U6IDEwNzI5LjVcblxuU2NhbGVkIHJlc2lkdWFsczogXG4gICAgTWluICAgICAgMVEgIE1lZGlhbiAgICAgIDNRICAgICBNYXggXG4tMy44NTgwIC0wLjYxMzQgLTAuMDMyMSAgMC41OTcxICAzLjY1OTggXG5cblJhbmRvbSBlZmZlY3RzOlxuIEdyb3VwcyAgICAgICAgICAgTmFtZSAgICAgICAgVmFyaWFuY2UgIFN0ZC5EZXYuIFxuIGNsYXNzaWQgICAgICAgICAgbWlub3JpdHkgICAgNC40OTVlLTExIDYuNzA0ZS0wNlxuIGNsYXNzaWQ6c2Nob29saWQgKEludGVyY2VwdCkgOS4zODllKzAxIDkuNjkwZSswMFxuIHNjaG9vbGlkICAgICAgICAgKEludGVyY2VwdCkgMS42OTRlKzAyIDEuMzAyZSswMVxuIFJlc2lkdWFsICAgICAgICAgICAgICAgICAgICAgMS4wNjVlKzAzIDMuMjYzZSswMVxuTnVtYmVyIG9mIG9iczogMTA4MSwgZ3JvdXBzOiAgY2xhc3NpZCwgMjg1OyBjbGFzc2lkOnNjaG9vbGlkLCAyODU7IHNjaG9vbGlkLCAxMDVcblxuRml4ZWQgZWZmZWN0czpcbiAgICAgICAgICAgICAgRXN0aW1hdGUgU3RkLiBFcnJvciAgICAgICAgIGRmIHQgdmFsdWUgUHIoPnx0fCkgICAgXG4oSW50ZXJjZXB0KSAgNTM5LjYzMDQyICAgIDUuMzEyMTAgIDI3NS40MDAwMCAxMDEuNTg1ICA8IDJlLTE2ICoqKlxuaG91c2Vwb3YgICAgIC0xNy42NDg0NyAgIDEzLjIxNzU3ICAxMTMuOTAwMDAgIC0xLjMzNSAgICAwLjE4NCAgICBcbm1hdGhrbm93ICAgICAgIDEuMzUwMDQgICAgMS4zOTE2OCAgMjM0LjUwMDAwICAgMC45NzAgICAgMC4zMzMgICAgXG5tYXRocHJlcCAgICAgIC0wLjI3NzA1ICAgIDEuMzc1ODMgIDIwNS4zMDAwMCAgLTAuMjAxICAgIDAuODQxICAgIFxueWVhcnN0ZWEgICAgICAgMC4wMTEyOSAgICAwLjE0MTQxICAyMjYuODAwMDAgICAwLjA4MCAgICAwLjkzNiAgICBcbnNleCAgICAgICAgICAgLTEuMjE0MTkgICAgMi4wOTQ4MyAxMDIyLjQwMDAwICAtMC41ODAgICAgMC41NjIgICAgXG5taW5vcml0eSAgICAgLTE2LjE4Njc4ICAgIDMuMDI2MDUgIDcwNC41MDAwMCAgLTUuMzQ5IDEuMjBlLTA3ICoqKlxuc2VzICAgICAgICAgICAxMC4wNTA3NSAgICAxLjU0NDg0IDEwNjYuNTAwMDAgICA2LjUwNiAxLjE4ZS0xMCAqKipcbi0tLVxuU2lnbmlmLiBjb2RlczogIDAg4oCYKioq4oCZIDAuMDAxIOKAmCoq4oCZIDAuMDEg4oCYKuKAmSAwLjA1IOKAmC7igJkgMC4xIOKAmCDigJkgMVxuXG5Db3JyZWxhdGlvbiBvZiBGaXhlZCBFZmZlY3RzOlxuICAgICAgICAgKEludHIpIGhvdXNwdiBtdGhrbncgbXRocHJwIHllYXJzdCBzZXggICAgbWlucnR5XG5ob3VzZXBvdiAtMC40NTEgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbm1hdGhrbm93IC0wLjA4MyAgMC4wNTggICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxubWF0aHByZXAgLTAuNjMxICAwLjAzOCAgMC4wMDQgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG55ZWFyc3RlYSAtMC4yNTkgIDAuMDcxICAwLjAyOSAtMC4xNzIgICAgICAgICAgICAgICAgICAgICBcbnNleCAgICAgIC0wLjE5MCAtMC4wMDcgIDAuMDA3IC0wLjAwNiAgMC4wMTYgICAgICAgICAgICAgIFxubWlub3JpdHkgLTAuMzIwIC0wLjE3OCAgMC4xMTUgIDAuMDAxICAwLjAyNCAtMC4wMTEgICAgICAgXG5zZXMgICAgICAtMC4xMjEgIDAuMDgyIC0wLjAwNyAgMC4wNTMgLTAuMDI4ICAwLjAyMCAgMC4xNjJcbiJ9 -->
-<pre><code>Linear mixed model fit by REML 
-t-tests use  Satterthwaite approximations to degrees of freedom ['lmerMod']
-Formula: math1st ~ housepov + mathknow + mathprep + yearstea + sex + minority +  
-    ses + (0 + minority | classid) + (1 | schoolid/classid)
-   Data: dat
-
-REML criterion at convergence: 10729.5
-
-Scaled residuals: 
-    Min      1Q  Median      3Q     Max 
--3.8580 -0.6134 -0.0321  0.5971  3.6598 
-
-Random effects:
- Groups           Name        Variance  Std.Dev. 
- classid          minority    4.495e-11 6.704e-06
- classid:schoolid (Intercept) 9.389e+01 9.690e+00
- schoolid         (Intercept) 1.694e+02 1.302e+01
- Residual                     1.065e+03 3.263e+01
-Number of obs: 1081, groups:  classid, 285; classid:schoolid, 285; schoolid, 105
-
-Fixed effects:
-              Estimate Std. Error         df t value Pr(&gt;|t|)    
-(Intercept)  539.63042    5.31210  275.40000 101.585  &lt; 2e-16 ***
-housepov     -17.64847   13.21757  113.90000  -1.335    0.184    
-mathknow       1.35004    1.39168  234.50000   0.970    0.333    
-mathprep      -0.27705    1.37583  205.30000  -0.201    0.841    
-yearstea       0.01129    0.14141  226.80000   0.080    0.936    
-sex           -1.21419    2.09483 1022.40000  -0.580    0.562    
-minority     -16.18678    3.02605  704.50000  -5.349 1.20e-07 ***
-ses           10.05075    1.54484 1066.50000   6.506 1.18e-10 ***
----
-Signif. codes:  0 *** 0.001 ** 0.01 * 0.05 . 0.1   1
-
-Correlation of Fixed Effects:
-         (Intr) houspv mthknw mthprp yearst sex    minrty
-housepov -0.451                                          
-mathknow -0.083  0.058                                   
-mathprep -0.631  0.038  0.004                            
-yearstea -0.259  0.071  0.029 -0.172                     
-sex      -0.190 -0.007  0.007 -0.006  0.016              
-minority -0.320 -0.178  0.115  0.001  0.024 -0.011       
-ses      -0.121  0.082 -0.007  0.053 -0.028  0.020  0.162</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmFuZChsbWU1LjIpXG5gYGAifQ== -->
 <pre class="r"><code>rand(lme5.2)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiQW5hbHlzaXMgb2YgUmFuZG9tIGVmZmVjdHMgVGFibGU6XG4gICAgICAgICAgICAgICAgICAgQ2hpLnNxIENoaS5ERiBwLnZhbHVlICAgIFxubWlub3JpdHk6Y2xhc3NpZCAxLjgyZS0xMiAgICAgIDEgICAgICAgMSAgICBcbnNjaG9vbGlkL2NsYXNzaWQgNi43N2UrMDEgICAgICAyICAgMmUtMTUgKioqXG4tLS1cblNpZ25pZi4gY29kZXM6ICAwIOKAmCoqKuKAmSAwLjAwMSDigJgqKuKAmSAwLjAxIOKAmCrigJkgMC4wNSDigJgu4oCZIDAuMSDigJgg4oCZIDFcbiJ9 -->
-<pre><code>Analysis of Random effects Table:
-                   Chi.sq Chi.DF p.value    
-minority:classid 1.82e-12      1       1    
-schoolid/classid 6.77e+01      2   2e-15 ***
----
-Signif. codes:  0 *** 0.001 ** 0.01 * 0.05 . 0.1   1</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
@@ -1131,63 +599,11 @@ Signif. codes:  0 *** 0.001 ** 0.01 * 0.05 . 0.1   1</code><
 <pre class="r"><code>lme5.3&lt;-lmer(math1st~housepov + mathknow + mathprep + yearstea + sex + minority + ses + (0 + ses|classid) + (1|schoolid/classid),data=dat)
 summary(lme5.3)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiTGluZWFyIG1peGVkIG1vZGVsIGZpdCBieSBSRU1MIFxudC10ZXN0cyB1c2UgIFNhdHRlcnRod2FpdGUgYXBwcm94aW1hdGlvbnMgdG8gZGVncmVlcyBvZiBmcmVlZG9tIFsnbG1lck1vZCddXG5Gb3JtdWxhOiBtYXRoMXN0IH4gaG91c2Vwb3YgKyBtYXRoa25vdyArIG1hdGhwcmVwICsgeWVhcnN0ZWEgKyBzZXggKyBtaW5vcml0eSArICBcbiAgICBzZXMgKyAoMCArIHNlcyB8IGNsYXNzaWQpICsgKDEgfCBzY2hvb2xpZC9jbGFzc2lkKVxuICAgRGF0YTogZGF0XG5cblJFTUwgY3JpdGVyaW9uIGF0IGNvbnZlcmdlbmNlOiAxMDcyNy45XG5cblNjYWxlZCByZXNpZHVhbHM6IFxuICAgIE1pbiAgICAgIDFRICBNZWRpYW4gICAgICAzUSAgICAgTWF4IFxuLTMuNzE2MyAtMC42MDMyIC0wLjAzMzEgIDAuNTg1NSAgMy42ODQwIFxuXG5SYW5kb20gZWZmZWN0czpcbiBHcm91cHMgICAgICAgICAgIE5hbWUgICAgICAgIFZhcmlhbmNlIFN0ZC5EZXYuXG4gY2xhc3NpZCAgICAgICAgICBzZXMgICAgICAgICAgIDQ5LjYwICAgNy4wNDMgIFxuIGNsYXNzaWQ6c2Nob29saWQgKEludGVyY2VwdCkgICA4Ny4xMSAgIDkuMzMzICBcbiBzY2hvb2xpZCAgICAgICAgIChJbnRlcmNlcHQpICAxNzEuMDIgIDEzLjA3NyAgXG4gUmVzaWR1YWwgICAgICAgICAgICAgICAgICAgICAxMDQzLjQ0ICAzMi4zMDIgIFxuTnVtYmVyIG9mIG9iczogMTA4MSwgZ3JvdXBzOiAgY2xhc3NpZCwgMjg1OyBjbGFzc2lkOnNjaG9vbGlkLCAyODU7IHNjaG9vbGlkLCAxMDVcblxuRml4ZWQgZWZmZWN0czpcbiAgICAgICAgICAgICAgRXN0aW1hdGUgU3RkLiBFcnJvciAgICAgICAgIGRmIHQgdmFsdWUgUHIoPnx0fCkgICAgXG4oSW50ZXJjZXB0KSAgNTM5LjcxMjI2ICAgIDUuMzA2NDEgIDI3NC41MDAwMCAxMDEuNzEwICA8IDJlLTE2ICoqKlxuaG91c2Vwb3YgICAgIC0xNy41MDg3OSAgIDEzLjIxNzc1ICAxMTMuNDAwMDAgIC0xLjMyNSAgICAwLjE4OCAgICBcbm1hdGhrbm93ICAgICAgIDEuMzY3OTYgICAgMS4zODU2MyAgMjI5LjQwMDAwICAgMC45ODcgICAgMC4zMjUgICAgXG5tYXRocHJlcCAgICAgIC0wLjI3OTM4ICAgIDEuMzcxNzEgIDIwNC45MDAwMCAgLTAuMjA0ICAgIDAuODM5ICAgIFxueWVhcnN0ZWEgICAgICAgMC4wMTEwMyAgICAwLjE0MTE3ICAyMjcuMDAwMDAgICAwLjA3OCAgICAwLjkzOCAgICBcbnNleCAgICAgICAgICAgLTEuMzc3MzMgICAgMi4wOTMzNCAxMDIyLjkwMDAwICAtMC42NTggICAgMC41MTEgICAgXG5taW5vcml0eSAgICAgLTE2LjI5MzYyICAgIDMuMDI0NjQgIDcwMy4zMDAwMCAgLTUuMzg3IDkuNzhlLTA4ICoqKlxuc2VzICAgICAgICAgICAxMC4xNDM2MyAgICAxLjY0MjQ4ICAxNzYuNDAwMDAgICA2LjE3NiA0LjQxZS0wOSAqKipcbi0tLVxuU2lnbmlmLiBjb2RlczogIDAg4oCYKioq4oCZIDAuMDAxIOKAmCoq4oCZIDAuMDEg4oCYKuKAmSAwLjA1IOKAmC7igJkgMC4xIOKAmCDigJkgMVxuXG5Db3JyZWxhdGlvbiBvZiBGaXhlZCBFZmZlY3RzOlxuICAgICAgICAgKEludHIpIGhvdXNwdiBtdGhrbncgbXRocHJwIHllYXJzdCBzZXggICAgbWlucnR5XG5ob3VzZXBvdiAtMC40NTEgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbm1hdGhrbm93IC0wLjA4MiAgMC4wNTggICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxubWF0aHByZXAgLTAuNjMxICAwLjA0MCAgMC4wMDUgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG55ZWFyc3RlYSAtMC4yNTkgIDAuMDcwICAwLjAyOSAtMC4xNzIgICAgICAgICAgICAgICAgICAgICBcbnNleCAgICAgIC0wLjE5MCAtMC4wMDcgIDAuMDA2IC0wLjAwNSAgMC4wMTQgICAgICAgICAgICAgIFxubWlub3JpdHkgLTAuMzIxIC0wLjE4MCAgMC4xMTEgIDAuMDAyICAwLjAyNSAtMC4wMTEgICAgICAgXG5zZXMgICAgICAtMC4xMDggIDAuMDgxICAwLjAwMiAgMC4wNTAgLTAuMDI2ICAwLjAyMCAgMC4xNDVcbiJ9 -->
-<pre><code>Linear mixed model fit by REML 
-t-tests use  Satterthwaite approximations to degrees of freedom ['lmerMod']
-Formula: math1st ~ housepov + mathknow + mathprep + yearstea + sex + minority +  
-    ses + (0 + ses | classid) + (1 | schoolid/classid)
-   Data: dat
-
-REML criterion at convergence: 10727.9
-
-Scaled residuals: 
-    Min      1Q  Median      3Q     Max 
--3.7163 -0.6032 -0.0331  0.5855  3.6840 
-
-Random effects:
- Groups           Name        Variance Std.Dev.
- classid          ses           49.60   7.043  
- classid:schoolid (Intercept)   87.11   9.333  
- schoolid         (Intercept)  171.02  13.077  
- Residual                     1043.44  32.302  
-Number of obs: 1081, groups:  classid, 285; classid:schoolid, 285; schoolid, 105
-
-Fixed effects:
-              Estimate Std. Error         df t value Pr(&gt;|t|)    
-(Intercept)  539.71226    5.30641  274.50000 101.710  &lt; 2e-16 ***
-housepov     -17.50879   13.21775  113.40000  -1.325    0.188    
-mathknow       1.36796    1.38563  229.40000   0.987    0.325    
-mathprep      -0.27938    1.37171  204.90000  -0.204    0.839    
-yearstea       0.01103    0.14117  227.00000   0.078    0.938    
-sex           -1.37733    2.09334 1022.90000  -0.658    0.511    
-minority     -16.29362    3.02464  703.30000  -5.387 9.78e-08 ***
-ses           10.14363    1.64248  176.40000   6.176 4.41e-09 ***
----
-Signif. codes:  0 *** 0.001 ** 0.01 * 0.05 . 0.1   1
-
-Correlation of Fixed Effects:
-         (Intr) houspv mthknw mthprp yearst sex    minrty
-housepov -0.451                                          
-mathknow -0.082  0.058                                   
-mathprep -0.631  0.040  0.005                            
-yearstea -0.259  0.070  0.029 -0.172                     
-sex      -0.190 -0.007  0.006 -0.005  0.014              
-minority -0.321 -0.180  0.111  0.002  0.025 -0.011       
-ses      -0.108  0.081  0.002  0.050 -0.026  0.020  0.145</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmFuZChsbWU1LjMpXG5gYGAifQ== -->
 <pre class="r"><code>rand(lme5.3)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiQW5hbHlzaXMgb2YgUmFuZG9tIGVmZmVjdHMgVGFibGU6XG4gICAgICAgICAgICAgICAgIENoaS5zcSBDaGkuREYgcC52YWx1ZSAgICBcbnNlczpjbGFzc2lkICAgICAgICAgMS42ICAgICAgMSAgICAgMC4yICAgIFxuc2Nob29saWQvY2xhc3NpZCAgIDc3LjkgICAgICAyICA8MmUtMTYgKioqXG4tLS1cblNpZ25pZi4gY29kZXM6ICAwIOKAmCoqKuKAmSAwLjAwMSDigJgqKuKAmSAwLjAxIOKAmCrigJkgMC4wNSDigJgu4oCZIDAuMSDigJgg4oCZIDFcbiJ9 -->
-<pre><code>Analysis of Random effects Table:
-                 Chi.sq Chi.DF p.value    
-ses:classid         1.6      1     0.2    
-schoolid/classid   77.9      2  &lt;2e-16 ***
----
-Signif. codes:  0 *** 0.001 ** 0.01 * 0.05 . 0.1   1</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
@@ -1206,63 +622,11 @@ Signif. codes:  0 *** 0.001 ** 0.01 * 0.05 . 0.1   1</code><
 <pre class="r"><code>lme5.1.1&lt;-lmer(math1st~housepov + mathknow + mathprep + yearstea + sex + minority + ses + (sex|classid) + (1|schoolid) ,data=dat)
 summary(lme5.1.1)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiTGluZWFyIG1peGVkIG1vZGVsIGZpdCBieSBSRU1MIFxudC10ZXN0cyB1c2UgIFNhdHRlcnRod2FpdGUgYXBwcm94aW1hdGlvbnMgdG8gZGVncmVlcyBvZiBmcmVlZG9tIFsnbG1lck1vZCddXG5Gb3JtdWxhOiBtYXRoMXN0IH4gaG91c2Vwb3YgKyBtYXRoa25vdyArIG1hdGhwcmVwICsgeWVhcnN0ZWEgKyBzZXggKyBtaW5vcml0eSArICBcbiAgICBzZXMgKyAoc2V4IHwgY2xhc3NpZCkgKyAoMSB8IHNjaG9vbGlkKVxuICAgRGF0YTogZGF0XG5cblJFTUwgY3JpdGVyaW9uIGF0IGNvbnZlcmdlbmNlOiAxMDcyOVxuXG5TY2FsZWQgcmVzaWR1YWxzOiBcbiAgICBNaW4gICAgICAxUSAgTWVkaWFuICAgICAgM1EgICAgIE1heCBcbi0zLjc1NjUgLTAuNjEzNCAtMC4wMzA3ICAwLjU5MTYgIDMuNzExNiBcblxuUmFuZG9tIGVmZmVjdHM6XG4gR3JvdXBzICAgTmFtZSAgICAgICAgVmFyaWFuY2UgU3RkLkRldi4gQ29yciBcbiBjbGFzc2lkICAoSW50ZXJjZXB0KSAgMTMwLjA3ICAxMS40MSAgICAgICAgIFxuICAgICAgICAgIHNleCAgICAgICAgICAgMzEuMzYgICA1LjYwICAgIC0wLjY3XG4gc2Nob29saWQgKEludGVyY2VwdCkgIDE2OS44NSAgMTMuMDMgICAgICAgICBcbiBSZXNpZHVhbCAgICAgICAgICAgICAxMDU2LjQxICAzMi41MCAgICAgICAgIFxuTnVtYmVyIG9mIG9iczogMTA4MSwgZ3JvdXBzOiAgY2xhc3NpZCwgMjg1OyBzY2hvb2xpZCwgMTA1XG5cbkZpeGVkIGVmZmVjdHM6XG4gICAgICAgICAgICAgIEVzdGltYXRlIFN0ZC4gRXJyb3IgICAgICAgICBkZiB0IHZhbHVlIFByKD58dHwpICAgIFxuKEludGVyY2VwdCkgIDUuNDAwZSswMiAgNS4zMzJlKzAwICAyLjcyM2UrMDIgMTAxLjI4NSAgPCAyZS0xNiAqKipcbmhvdXNlcG92ICAgIC0xLjgyOWUrMDEgIDEuMzIzZSswMSAgMS4xNDVlKzAyICAtMS4zODIgICAgMC4xNzAgICAgXG5tYXRoa25vdyAgICAgMS4zMDZlKzAwICAxLjM5MWUrMDAgIDIuMzE1ZSswMiAgIDAuOTM5ICAgIDAuMzQ5ICAgIFxubWF0aHByZXAgICAgLTMuNDU5ZS0wMSAgMS4zNzRlKzAwICAyLjAxNGUrMDIgIC0wLjI1MiAgICAwLjgwMSAgICBcbnllYXJzdGVhICAgICAzLjA4N2UtMDMgIDEuNDE2ZS0wMSAgMi4yNzBlKzAyICAgMC4wMjIgICAgMC45ODMgICAgXG5zZXggICAgICAgICAtMS4xOTdlKzAwICAyLjEyMmUrMDAgIDIuMTYwZSswMiAgLTAuNTY0ICAgIDAuNTczICAgIFxubWlub3JpdHkgICAgLTEuNjE5ZSswMSAgMy4wMjhlKzAwICA3LjA0MmUrMDIgIC01LjM0NyAxLjIxZS0wNyAqKipcbnNlcyAgICAgICAgICAxLjAxMGUrMDEgIDEuNTQ0ZSswMCAgMS4wNjVlKzAzICAgNi41MzkgOS42MmUtMTEgKioqXG4tLS1cblNpZ25pZi4gY29kZXM6ICAwIOKAmCoqKuKAmSAwLjAwMSDigJgqKuKAmSAwLjAxIOKAmCrigJkgMC4wNSDigJgu4oCZIDAuMSDigJgg4oCZIDFcblxuQ29ycmVsYXRpb24gb2YgRml4ZWQgRWZmZWN0czpcbiAgICAgICAgIChJbnRyKSBob3VzcHYgbXRoa253IG10aHBycCB5ZWFyc3Qgc2V4ICAgIG1pbnJ0eVxuaG91c2Vwb3YgLTAuNDUyICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG5tYXRoa25vdyAtMC4wODUgIDAuMDYwICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbm1hdGhwcmVwIC0wLjYyOCAgMC4wNDAgIDAuMDA1ICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxueWVhcnN0ZWEgLTAuMjU4ICAwLjA3MiAgMC4wMjkgLTAuMTc0ICAgICAgICAgICAgICAgICAgICAgXG5zZXggICAgICAtMC4yMDMgLTAuMDA1ICAwLjAwMyAtMC4wMDggIDAuMDE1ICAgICAgICAgICAgICBcbm1pbm9yaXR5IC0wLjMyMSAtMC4xNzggIDAuMTE2ICAwLjAwMyAgMC4wMjQgLTAuMDA5ICAgICAgIFxuc2VzICAgICAgLTAuMTIzICAwLjA4MyAtMC4wMDUgIDAuMDU0IC0wLjAyNyAgMC4wMjAgIDAuMTY0XG4ifQ== -->
-<pre><code>Linear mixed model fit by REML 
-t-tests use  Satterthwaite approximations to degrees of freedom ['lmerMod']
-Formula: math1st ~ housepov + mathknow + mathprep + yearstea + sex + minority +  
-    ses + (sex | classid) + (1 | schoolid)
-   Data: dat
-
-REML criterion at convergence: 10729
-
-Scaled residuals: 
-    Min      1Q  Median      3Q     Max 
--3.7565 -0.6134 -0.0307  0.5916  3.7116 
-
-Random effects:
- Groups   Name        Variance Std.Dev. Corr 
- classid  (Intercept)  130.07  11.41         
-          sex           31.36   5.60    -0.67
- schoolid (Intercept)  169.85  13.03         
- Residual             1056.41  32.50         
-Number of obs: 1081, groups:  classid, 285; schoolid, 105
-
-Fixed effects:
-              Estimate Std. Error         df t value Pr(&gt;|t|)    
-(Intercept)  5.400e+02  5.332e+00  2.723e+02 101.285  &lt; 2e-16 ***
-housepov    -1.829e+01  1.323e+01  1.145e+02  -1.382    0.170    
-mathknow     1.306e+00  1.391e+00  2.315e+02   0.939    0.349    
-mathprep    -3.459e-01  1.374e+00  2.014e+02  -0.252    0.801    
-yearstea     3.087e-03  1.416e-01  2.270e+02   0.022    0.983    
-sex         -1.197e+00  2.122e+00  2.160e+02  -0.564    0.573    
-minority    -1.619e+01  3.028e+00  7.042e+02  -5.347 1.21e-07 ***
-ses          1.010e+01  1.544e+00  1.065e+03   6.539 9.62e-11 ***
----
-Signif. codes:  0 *** 0.001 ** 0.01 * 0.05 . 0.1   1
-
-Correlation of Fixed Effects:
-         (Intr) houspv mthknw mthprp yearst sex    minrty
-housepov -0.452                                          
-mathknow -0.085  0.060                                   
-mathprep -0.628  0.040  0.005                            
-yearstea -0.258  0.072  0.029 -0.174                     
-sex      -0.203 -0.005  0.003 -0.008  0.015              
-minority -0.321 -0.178  0.116  0.003  0.024 -0.009       
-ses      -0.123  0.083 -0.005  0.054 -0.027  0.020  0.164</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmFuZChsbWU1LjEuMSlcbmBgYCJ9 -->
 <pre class="r"><code>rand(lme5.1.1)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiQW5hbHlzaXMgb2YgUmFuZG9tIGVmZmVjdHMgVGFibGU6XG4gICAgICAgICAgICBDaGkuc3EgQ2hpLkRGIHAudmFsdWUgICAgXG5zZXg6Y2xhc3NpZCAgICAwLjUgICAgICAyICAgICAwLjggICAgXG5zY2hvb2xpZCAgICAgIDI0LjkgICAgICAxICAgNmUtMDcgKioqXG4tLS1cblNpZ25pZi4gY29kZXM6ICAwIOKAmCoqKuKAmSAwLjAwMSDigJgqKuKAmSAwLjAxIOKAmCrigJkgMC4wNSDigJgu4oCZIDAuMSDigJgg4oCZIDFcbiJ9 -->
-<pre><code>Analysis of Random effects Table:
-            Chi.sq Chi.DF p.value    
-sex:classid    0.5      2     0.8    
-schoolid      24.9      1   6e-07 ***
----
-Signif. codes:  0 *** 0.001 ** 0.01 * 0.05 . 0.1   1</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
@@ -1274,63 +638,11 @@ Signif. codes:  0 *** 0.001 ** 0.01 * 0.05 . 0.1   1</code><
 <pre class="r"><code>lme5.2.1&lt;-lmer(math1st~housepov + mathknow + mathprep + yearstea + sex + minority + ses  + (minority|classid) + (1|schoolid),data=dat)
 summary(lme5.2.1)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiTGluZWFyIG1peGVkIG1vZGVsIGZpdCBieSBSRU1MIFxudC10ZXN0cyB1c2UgIFNhdHRlcnRod2FpdGUgYXBwcm94aW1hdGlvbnMgdG8gZGVncmVlcyBvZiBmcmVlZG9tIFsnbG1lck1vZCddXG5Gb3JtdWxhOiBtYXRoMXN0IH4gaG91c2Vwb3YgKyBtYXRoa25vdyArIG1hdGhwcmVwICsgeWVhcnN0ZWEgKyBzZXggKyBtaW5vcml0eSArICBcbiAgICBzZXMgKyAobWlub3JpdHkgfCBjbGFzc2lkKSArICgxIHwgc2Nob29saWQpXG4gICBEYXRhOiBkYXRcblxuUkVNTCBjcml0ZXJpb24gYXQgY29udmVyZ2VuY2U6IDEwNzI2LjNcblxuU2NhbGVkIHJlc2lkdWFsczogXG4gICAgTWluICAgICAgMVEgIE1lZGlhbiAgICAgIDNRICAgICBNYXggXG4tMy45MDM3IC0wLjYyMjEgLTAuMDI5NSAgMC42MDMzICAzLjQ1NzQgXG5cblJhbmRvbSBlZmZlY3RzOlxuIEdyb3VwcyAgIE5hbWUgICAgICAgIFZhcmlhbmNlIFN0ZC5EZXYuIENvcnIgXG4gY2xhc3NpZCAgKEludGVyY2VwdCkgIDIyNS40ICAgMTUuMDEgICAgICAgICBcbiAgICAgICAgICBtaW5vcml0eSAgICAgMTcxLjMgICAxMy4wOSAgICAtMC44MlxuIHNjaG9vbGlkIChJbnRlcmNlcHQpICAxNTcuNCAgIDEyLjU1ICAgICAgICAgXG4gUmVzaWR1YWwgICAgICAgICAgICAgMTA0NS4zICAgMzIuMzMgICAgICAgICBcbk51bWJlciBvZiBvYnM6IDEwODEsIGdyb3VwczogIGNsYXNzaWQsIDI4NTsgc2Nob29saWQsIDEwNVxuXG5GaXhlZCBlZmZlY3RzOlxuICAgICAgICAgICAgICBFc3RpbWF0ZSBTdGQuIEVycm9yICAgICAgICAgZGYgdCB2YWx1ZSBQcig+fHR8KSAgICBcbihJbnRlcmNlcHQpICA1MzkuNzM1OTQgICAgNS4zODAyMyAgMjcwLjcwMDAwIDEwMC4zMTggIDwgMmUtMTYgKioqXG5ob3VzZXBvdiAgICAgLTE3LjM0Njk4ICAgMTIuOTEyNjggIDEwMy4zMDAwMCAgLTEuMzQzICAgIDAuMTgyICAgIFxubWF0aGtub3cgICAgICAgMS40NTcwMiAgICAxLjM5MzU1ICAyMzQuMDAwMDAgICAxLjA0NiAgICAwLjI5NyAgICBcbm1hdGhwcmVwICAgICAgLTAuMTM1MjAgICAgMS4zNzAxOCAgMjA0LjAwMDAwICAtMC4wOTkgICAgMC45MjEgICAgXG55ZWFyc3RlYSAgICAgIC0wLjAxNjM2ICAgIDAuMTQyODUgIDIzNC4zMDAwMCAgLTAuMTE1ICAgIDAuOTA5ICAgIFxuc2V4ICAgICAgICAgICAtMS4wMTAxMiAgICAyLjA4OTY2IDEwMTUuODAwMDAgIC0wLjQ4MyAgICAwLjYyOSAgICBcbm1pbm9yaXR5ICAgICAtMTYuNDg2MTQgICAgMy4yMTc1NiAgMTgzLjIwMDAwICAtNS4xMjQgNy41NWUtMDcgKioqXG5zZXMgICAgICAgICAgICA5Ljg5MzUwICAgIDEuNTQ1OTUgMTA2Mi45MDAwMCAgIDYuNDAwIDIuMzNlLTEwICoqKlxuLS0tXG5TaWduaWYuIGNvZGVzOiAgMCDigJgqKirigJkgMC4wMDEg4oCYKirigJkgMC4wMSDigJgq4oCZIDAuMDUg4oCYLuKAmSAwLjEg4oCYIOKAmSAxXG5cbkNvcnJlbGF0aW9uIG9mIEZpeGVkIEVmZmVjdHM6XG4gICAgICAgICAoSW50cikgaG91c3B2IG10aGtudyBtdGhwcnAgeWVhcnN0IHNleCAgICBtaW5ydHlcbmhvdXNlcG92IC0wLjQzNSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxubWF0aGtub3cgLTAuMDc5ICAwLjA2MSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG5tYXRocHJlcCAtMC42MTggIDAuMDM3IC0wLjAwNiAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbnllYXJzdGVhIC0wLjI2NSAgMC4wODAgIDAuMDM4IC0wLjE3MSAgICAgICAgICAgICAgICAgICAgIFxuc2V4ICAgICAgLTAuMTg4IC0wLjAwOSAgMC4wMDkgLTAuMDA1ICAwLjAxNSAgICAgICAgICAgICAgXG5taW5vcml0eSAtMC4zNjggLTAuMTcxICAwLjEwOCAtMC4wMDQgIDAuMDI1IC0wLjAwOSAgICAgICBcbnNlcyAgICAgIC0wLjExNyAgMC4wODUgIDAuMDAxICAwLjA1MSAtMC4wMjMgIDAuMDIxICAwLjE0OVxuIn0= -->
-<pre><code>Linear mixed model fit by REML 
-t-tests use  Satterthwaite approximations to degrees of freedom ['lmerMod']
-Formula: math1st ~ housepov + mathknow + mathprep + yearstea + sex + minority +  
-    ses + (minority | classid) + (1 | schoolid)
-   Data: dat
-
-REML criterion at convergence: 10726.3
-
-Scaled residuals: 
-    Min      1Q  Median      3Q     Max 
--3.9037 -0.6221 -0.0295  0.6033  3.4574 
-
-Random effects:
- Groups   Name        Variance Std.Dev. Corr 
- classid  (Intercept)  225.4   15.01         
-          minority     171.3   13.09    -0.82
- schoolid (Intercept)  157.4   12.55         
- Residual             1045.3   32.33         
-Number of obs: 1081, groups:  classid, 285; schoolid, 105
-
-Fixed effects:
-              Estimate Std. Error         df t value Pr(&gt;|t|)    
-(Intercept)  539.73594    5.38023  270.70000 100.318  &lt; 2e-16 ***
-housepov     -17.34698   12.91268  103.30000  -1.343    0.182    
-mathknow       1.45702    1.39355  234.00000   1.046    0.297    
-mathprep      -0.13520    1.37018  204.00000  -0.099    0.921    
-yearstea      -0.01636    0.14285  234.30000  -0.115    0.909    
-sex           -1.01012    2.08966 1015.80000  -0.483    0.629    
-minority     -16.48614    3.21756  183.20000  -5.124 7.55e-07 ***
-ses            9.89350    1.54595 1062.90000   6.400 2.33e-10 ***
----
-Signif. codes:  0 *** 0.001 ** 0.01 * 0.05 . 0.1   1
-
-Correlation of Fixed Effects:
-         (Intr) houspv mthknw mthprp yearst sex    minrty
-housepov -0.435                                          
-mathknow -0.079  0.061                                   
-mathprep -0.618  0.037 -0.006                            
-yearstea -0.265  0.080  0.038 -0.171                     
-sex      -0.188 -0.009  0.009 -0.005  0.015              
-minority -0.368 -0.171  0.108 -0.004  0.025 -0.009       
-ses      -0.117  0.085  0.001  0.051 -0.023  0.021  0.149</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmFuZChsbWU1LjIuMSlcbmBgYCJ9 -->
 <pre class="r"><code>rand(lme5.2.1)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiQW5hbHlzaXMgb2YgUmFuZG9tIGVmZmVjdHMgVGFibGU6XG4gICAgICAgICAgICAgICAgIENoaS5zcSBDaGkuREYgcC52YWx1ZSAgICBcbm1pbm9yaXR5OmNsYXNzaWQgICAgMy4yICAgICAgMiAgICAgMC4yICAgIFxuc2Nob29saWQgICAgICAgICAgIDIwLjEgICAgICAxICAgN2UtMDYgKioqXG4tLS1cblNpZ25pZi4gY29kZXM6ICAwIOKAmCoqKuKAmSAwLjAwMSDigJgqKuKAmSAwLjAxIOKAmCrigJkgMC4wNSDigJgu4oCZIDAuMSDigJgg4oCZIDFcbiJ9 -->
-<pre><code>Analysis of Random effects Table:
-                 Chi.sq Chi.DF p.value    
-minority:classid    3.2      2     0.2    
-schoolid           20.1      1   7e-06 ***
----
-Signif. codes:  0 *** 0.001 ** 0.01 * 0.05 . 0.1   1</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
@@ -1342,63 +654,11 @@ Signif. codes:  0 *** 0.001 ** 0.01 * 0.05 . 0.1   1</code><
 <pre class="r"><code>lme5.3.1&lt;-lmer(math1st~housepov + mathknow + mathprep + yearstea + sex + minority + ses + (ses|classid) + (1|schoolid),data=dat)
 summary(lme5.3.1)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiTGluZWFyIG1peGVkIG1vZGVsIGZpdCBieSBSRU1MIFxudC10ZXN0cyB1c2UgIFNhdHRlcnRod2FpdGUgYXBwcm94aW1hdGlvbnMgdG8gZGVncmVlcyBvZiBmcmVlZG9tIFsnbG1lck1vZCddXG5Gb3JtdWxhOiBtYXRoMXN0IH4gaG91c2Vwb3YgKyBtYXRoa25vdyArIG1hdGhwcmVwICsgeWVhcnN0ZWEgKyBzZXggKyBtaW5vcml0eSArICBcbiAgICBzZXMgKyAoc2VzIHwgY2xhc3NpZCkgKyAoMSB8IHNjaG9vbGlkKVxuICAgRGF0YTogZGF0XG5cblJFTUwgY3JpdGVyaW9uIGF0IGNvbnZlcmdlbmNlOiAxMDcyNS43XG5cblNjYWxlZCByZXNpZHVhbHM6IFxuICAgIE1pbiAgICAgIDFRICBNZWRpYW4gICAgICAzUSAgICAgTWF4IFxuLTMuNTY4OCAtMC42MDA0IC0wLjAzMTYgIDAuNTk1OSAgMy42MTc2IFxuXG5SYW5kb20gZWZmZWN0czpcbiBHcm91cHMgICBOYW1lICAgICAgICBWYXJpYW5jZSBTdGQuRGV2LiBDb3JyXG4gY2xhc3NpZCAgKEludGVyY2VwdCkgICA4Ni4wNiAgIDkuMjc3ICAgICAgIFxuICAgICAgICAgIHNlcyAgICAgICAgICAgNDQuMDkgICA2LjY0MCAgIDAuNzVcbiBzY2hvb2xpZCAoSW50ZXJjZXB0KSAgMTczLjE2ICAxMy4xNTkgICAgICAgXG4gUmVzaWR1YWwgICAgICAgICAgICAgMTA0OC4zMiAgMzIuMzc4ICAgICAgIFxuTnVtYmVyIG9mIG9iczogMTA4MSwgZ3JvdXBzOiAgY2xhc3NpZCwgMjg1OyBzY2hvb2xpZCwgMTA1XG5cbkZpeGVkIGVmZmVjdHM6XG4gICAgICAgICAgICAgIEVzdGltYXRlIFN0ZC4gRXJyb3IgICAgICAgICBkZiB0IHZhbHVlIFByKD58dHwpICAgIFxuKEludGVyY2VwdCkgIDUzOS41MjA5MyAgICA1LjI2NjY1ICAyNjkuNjAwMDAgMTAyLjQ0MSAgPCAyZS0xNiAqKipcbmhvdXNlcG92ICAgICAtMTYuMjg5OTQgICAxMy4xMzQ0NSAgMTExLjMwMDAwICAtMS4yNDAgICAgMC4yMTcgICAgXG5tYXRoa25vdyAgICAgICAxLjM3OTk2ICAgIDEuMzcyOTQgIDIyMi40MDAwMCAgIDEuMDA1ICAgIDAuMzE2ICAgIFxubWF0aHByZXAgICAgICAtMC4zNzczNCAgICAxLjM0NjAzICAxODIuODAwMDAgIC0wLjI4MCAgICAwLjc4MCAgICBcbnllYXJzdGVhICAgICAgIDAuMDE2MDUgICAgMC4xNDA4MCAgMjI3LjYwMDAwICAgMC4xMTQgICAgMC45MDkgICAgXG5zZXggICAgICAgICAgIC0xLjMyMTc4ICAgIDIuMDg3OTQgMTAxNy4xMDAwMCAgLTAuNjMzICAgIDAuNTI3ICAgIFxubWlub3JpdHkgICAgIC0xNi4wOTI3MiAgICAzLjAzNDk3ICA3MTcuNzAwMDAgIC01LjMwMiAxLjUyZS0wNyAqKipcbnNlcyAgICAgICAgICAgMTAuMDU1MzUgICAgMS42NDUwNyAgMTcxLjEwMDAwICAgNi4xMTIgNi40NGUtMDkgKioqXG4tLS1cblNpZ25pZi4gY29kZXM6ICAwIOKAmCoqKuKAmSAwLjAwMSDigJgqKuKAmSAwLjAxIOKAmCrigJkgMC4wNSDigJgu4oCZIDAuMSDigJgg4oCZIDFcblxuQ29ycmVsYXRpb24gb2YgRml4ZWQgRWZmZWN0czpcbiAgICAgICAgIChJbnRyKSBob3VzcHYgbXRoa253IG10aHBycCB5ZWFyc3Qgc2V4ICAgIG1pbnJ0eVxuaG91c2Vwb3YgLTAuNDUwICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG5tYXRoa25vdyAtMC4wNzggIDAuMDU5ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbm1hdGhwcmVwIC0wLjYyNSAgMC4wMzYgLTAuMDAxICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxueWVhcnN0ZWEgLTAuMjY2ICAwLjA3NCAgMC4wMzAgLTAuMTY1ICAgICAgICAgICAgICAgICAgICAgXG5zZXggICAgICAtMC4xODYgLTAuMDA5ICAwLjAwNyAtMC4wMDkgIDAuMDEzICAgICAgICAgICAgICBcbm1pbm9yaXR5IC0wLjMyNSAtMC4xODEgIDAuMTA4ICAwLjAwNCAgMC4wMjEgLTAuMDE0ICAgICAgIFxuc2VzICAgICAgLTAuMDg0ICAwLjA3OCAgMC4wMTUgIDAuMDU2IC0wLjAyNCAgMC4wMjIgIDAuMTQyXG4ifQ== -->
-<pre><code>Linear mixed model fit by REML 
-t-tests use  Satterthwaite approximations to degrees of freedom ['lmerMod']
-Formula: math1st ~ housepov + mathknow + mathprep + yearstea + sex + minority +  
-    ses + (ses | classid) + (1 | schoolid)
-   Data: dat
-
-REML criterion at convergence: 10725.7
-
-Scaled residuals: 
-    Min      1Q  Median      3Q     Max 
--3.5688 -0.6004 -0.0316  0.5959  3.6176 
-
-Random effects:
- Groups   Name        Variance Std.Dev. Corr
- classid  (Intercept)   86.06   9.277       
-          ses           44.09   6.640   0.75
- schoolid (Intercept)  173.16  13.159       
- Residual             1048.32  32.378       
-Number of obs: 1081, groups:  classid, 285; schoolid, 105
-
-Fixed effects:
-              Estimate Std. Error         df t value Pr(&gt;|t|)    
-(Intercept)  539.52093    5.26665  269.60000 102.441  &lt; 2e-16 ***
-housepov     -16.28994   13.13445  111.30000  -1.240    0.217    
-mathknow       1.37996    1.37294  222.40000   1.005    0.316    
-mathprep      -0.37734    1.34603  182.80000  -0.280    0.780    
-yearstea       0.01605    0.14080  227.60000   0.114    0.909    
-sex           -1.32178    2.08794 1017.10000  -0.633    0.527    
-minority     -16.09272    3.03497  717.70000  -5.302 1.52e-07 ***
-ses           10.05535    1.64507  171.10000   6.112 6.44e-09 ***
----
-Signif. codes:  0 *** 0.001 ** 0.01 * 0.05 . 0.1   1
-
-Correlation of Fixed Effects:
-         (Intr) houspv mthknw mthprp yearst sex    minrty
-housepov -0.450                                          
-mathknow -0.078  0.059                                   
-mathprep -0.625  0.036 -0.001                            
-yearstea -0.266  0.074  0.030 -0.165                     
-sex      -0.186 -0.009  0.007 -0.009  0.013              
-minority -0.325 -0.181  0.108  0.004  0.021 -0.014       
-ses      -0.084  0.078  0.015  0.056 -0.024  0.022  0.142</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmFuZChsbWU1LjMuMSlcbmBgYCJ9 -->
 <pre class="r"><code>rand(lme5.3.1)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiQW5hbHlzaXMgb2YgUmFuZG9tIGVmZmVjdHMgVGFibGU6XG4gICAgICAgICAgICBDaGkuc3EgQ2hpLkRGIHAudmFsdWUgICAgXG5zZXM6Y2xhc3NpZCAgIDMuODQgICAgICAyICAgICAwLjEgICAgXG5zY2hvb2xpZCAgICAgMjYuMDIgICAgICAxICAgM2UtMDcgKioqXG4tLS1cblNpZ25pZi4gY29kZXM6ICAwIOKAmCoqKuKAmSAwLjAwMSDigJgqKuKAmSAwLjAxIOKAmCrigJkgMC4wNSDigJgu4oCZIDAuMSDigJgg4oCZIDFcbiJ9 -->
-<pre><code>Analysis of Random effects Table:
-            Chi.sq Chi.DF p.value    
-ses:classid   3.84      2     0.1    
-schoolid     26.02      1   3e-07 ***
----
-Signif. codes:  0 *** 0.001 ** 0.01 * 0.05 . 0.1   1</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
@@ -1413,63 +673,11 @@ Signif. codes:  0 *** 0.001 ** 0.01 * 0.05 . 0.1   1</code><
 <pre class="r"><code>lme6.1&lt;-lmer(math1st~housepov + mathknow + mathprep + yearstea + sex + minority + ses + (0 + sex|schoolid) + (1|schoolid/classid),data=dat)
 summary(lme6.1)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiTGluZWFyIG1peGVkIG1vZGVsIGZpdCBieSBSRU1MIFxudC10ZXN0cyB1c2UgIFNhdHRlcnRod2FpdGUgYXBwcm94aW1hdGlvbnMgdG8gZGVncmVlcyBvZiBmcmVlZG9tIFsnbG1lck1vZCddXG5Gb3JtdWxhOiBtYXRoMXN0IH4gaG91c2Vwb3YgKyBtYXRoa25vdyArIG1hdGhwcmVwICsgeWVhcnN0ZWEgKyBzZXggKyBtaW5vcml0eSArICBcbiAgICBzZXMgKyAoMCArIHNleCB8IHNjaG9vbGlkKSArICgxIHwgc2Nob29saWQvY2xhc3NpZClcbiAgIERhdGE6IGRhdFxuXG5SRU1MIGNyaXRlcmlvbiBhdCBjb252ZXJnZW5jZTogMTA3MjguOVxuXG5TY2FsZWQgcmVzaWR1YWxzOiBcbiAgICBNaW4gICAgICAxUSAgTWVkaWFuICAgICAgM1EgICAgIE1heCBcbi0zLjg1NzggLTAuNjExMCAtMC4wMjU5ICAwLjU5MjIgIDMuNTU1NyBcblxuUmFuZG9tIGVmZmVjdHM6XG4gR3JvdXBzICAgICAgICAgICBOYW1lICAgICAgICBWYXJpYW5jZSBTdGQuRGV2LlxuIGNsYXNzaWQuc2Nob29saWQgKEludGVyY2VwdCkgICA5Ni4wOCAgIDkuODAyICBcbiBzY2hvb2xpZCAgICAgICAgIChJbnRlcmNlcHQpICAxNjEuNjMgIDEyLjcxMyAgXG4gc2Nob29saWQuMSAgICAgICBzZXggICAgICAgICAgIDM1LjgzICAgNS45ODYgIFxuIFJlc2lkdWFsICAgICAgICAgICAgICAgICAgICAgMTA1NC4zNiAgMzIuNDcxICBcbk51bWJlciBvZiBvYnM6IDEwODEsIGdyb3VwczogIGNsYXNzaWQ6c2Nob29saWQsIDI4NTsgc2Nob29saWQsIDEwNVxuXG5GaXhlZCBlZmZlY3RzOlxuICAgICAgICAgICAgICBFc3RpbWF0ZSBTdGQuIEVycm9yICAgICAgICAgZGYgdCB2YWx1ZSBQcig+fHR8KSAgICBcbihJbnRlcmNlcHQpICA1MzkuNDM1MTcgICAgNS4zMDc0MCAgMjcyLjUwMDAwIDEwMS42MzggIDwgMmUtMTYgKioqXG5ob3VzZXBvdiAgICAgLTE2Ljc3NjYxICAgMTMuMjI4ODEgIDExMi40MDAwMCAgLTEuMjY4ICAgIDAuMjA3ICAgIFxubWF0aGtub3cgICAgICAgMS40MDA2NyAgICAxLjM5NDY0ICAyMzQuNTAwMDAgICAxLjAwNCAgICAwLjMxNiAgICBcbm1hdGhwcmVwICAgICAgLTAuMjcxOTMgICAgMS4zODAxMCAgMjA1LjgwMDAwICAtMC4xOTcgICAgMC44NDQgICAgXG55ZWFyc3RlYSAgICAgICAwLjAxNDQ4ICAgIDAuMTQxNjMgIDIyNi40MDAwMCAgIDAuMTAyICAgIDAuOTE5ICAgIFxuc2V4ICAgICAgICAgICAtMS4zMzUzNCAgICAyLjE4NzQ2ICAxMzguMTAwMDAgIC0wLjYxMCAgICAwLjU0MyAgICBcbm1pbm9yaXR5ICAgICAtMTYuMTY1MzYgICAgMy4wMjg2MSAgNzA0LjIwMDAwICAtNS4zMzggMS4yN2UtMDcgKioqXG5zZXMgICAgICAgICAgICA5Ljk4NDc3ICAgIDEuNTQyNDMgMTA1OC4yMDAwMCAgIDYuNDczIDEuNDZlLTEwICoqKlxuLS0tXG5TaWduaWYuIGNvZGVzOiAgMCDigJgqKirigJkgMC4wMDEg4oCYKirigJkgMC4wMSDigJgq4oCZIDAuMDUg4oCYLuKAmSAwLjEg4oCYIOKAmSAxXG5cbkNvcnJlbGF0aW9uIG9mIEZpeGVkIEVmZmVjdHM6XG4gICAgICAgICAoSW50cikgaG91c3B2IG10aGtudyBtdGhwcnAgeWVhcnN0IHNleCAgICBtaW5ydHlcbmhvdXNlcG92IC0wLjQ0OSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxubWF0aGtub3cgLTAuMDgxICAwLjA1NSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG5tYXRocHJlcCAtMC42MzMgIDAuMDM2ICAwLjAwNCAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbnllYXJzdGVhIC0wLjI1OSAgMC4wNzAgIDAuMDI4IC0wLjE3MiAgICAgICAgICAgICAgICAgICAgIFxuc2V4ICAgICAgLTAuMTc5IC0wLjAxMCAgMC4wMDcgLTAuMDA0ICAwLjAxMyAgICAgICAgICAgICAgXG5taW5vcml0eSAtMC4zMjAgLTAuMTc4ICAwLjExNCAgMC4wMDEgIDAuMDI0IC0wLjAxNSAgICAgICBcbnNlcyAgICAgIC0wLjEyMCAgMC4wODEgLTAuMDA3ICAwLjA1MiAtMC4wMjkgIDAuMDIwICAwLjE2MVxuIn0= -->
-<pre><code>Linear mixed model fit by REML 
-t-tests use  Satterthwaite approximations to degrees of freedom ['lmerMod']
-Formula: math1st ~ housepov + mathknow + mathprep + yearstea + sex + minority +  
-    ses + (0 + sex | schoolid) + (1 | schoolid/classid)
-   Data: dat
-
-REML criterion at convergence: 10728.9
-
-Scaled residuals: 
-    Min      1Q  Median      3Q     Max 
--3.8578 -0.6110 -0.0259  0.5922  3.5557 
-
-Random effects:
- Groups           Name        Variance Std.Dev.
- classid.schoolid (Intercept)   96.08   9.802  
- schoolid         (Intercept)  161.63  12.713  
- schoolid.1       sex           35.83   5.986  
- Residual                     1054.36  32.471  
-Number of obs: 1081, groups:  classid:schoolid, 285; schoolid, 105
-
-Fixed effects:
-              Estimate Std. Error         df t value Pr(&gt;|t|)    
-(Intercept)  539.43517    5.30740  272.50000 101.638  &lt; 2e-16 ***
-housepov     -16.77661   13.22881  112.40000  -1.268    0.207    
-mathknow       1.40067    1.39464  234.50000   1.004    0.316    
-mathprep      -0.27193    1.38010  205.80000  -0.197    0.844    
-yearstea       0.01448    0.14163  226.40000   0.102    0.919    
-sex           -1.33534    2.18746  138.10000  -0.610    0.543    
-minority     -16.16536    3.02861  704.20000  -5.338 1.27e-07 ***
-ses            9.98477    1.54243 1058.20000   6.473 1.46e-10 ***
----
-Signif. codes:  0 *** 0.001 ** 0.01 * 0.05 . 0.1   1
-
-Correlation of Fixed Effects:
-         (Intr) houspv mthknw mthprp yearst sex    minrty
-housepov -0.449                                          
-mathknow -0.081  0.055                                   
-mathprep -0.633  0.036  0.004                            
-yearstea -0.259  0.070  0.028 -0.172                     
-sex      -0.179 -0.010  0.007 -0.004  0.013              
-minority -0.320 -0.178  0.114  0.001  0.024 -0.015       
-ses      -0.120  0.081 -0.007  0.052 -0.029  0.020  0.161</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmFuZChsbWU2LjEpXG5gYGAifQ== -->
 <pre class="r"><code>rand(lme6.1)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiQW5hbHlzaXMgb2YgUmFuZG9tIGVmZmVjdHMgVGFibGU6XG4gICAgICAgICAgICAgICAgIENoaS5zcSBDaGkuREYgcC52YWx1ZSAgICBcbnNleDpzY2hvb2xpZCAgICAgIDAuNjE0ICAgICAgMSAgICAgMC40ICAgIFxuc2Nob29saWQvY2xhc3NpZCA1Ni43MDEgICAgICAyICAgNWUtMTMgKioqXG4tLS1cblNpZ25pZi4gY29kZXM6ICAwIOKAmCoqKuKAmSAwLjAwMSDigJgqKuKAmSAwLjAxIOKAmCrigJkgMC4wNSDigJgu4oCZIDAuMSDigJgg4oCZIDFcbiJ9 -->
-<pre><code>Analysis of Random effects Table:
-                 Chi.sq Chi.DF p.value    
-sex:schoolid      0.614      1     0.4    
-schoolid/classid 56.701      2   5e-13 ***
----
-Signif. codes:  0 *** 0.001 ** 0.01 * 0.05 . 0.1   1</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
@@ -1481,63 +689,11 @@ Signif. codes:  0 *** 0.001 ** 0.01 * 0.05 . 0.1   1</code><
 <pre class="r"><code>lme6.2&lt;-lmer(math1st~housepov + mathknow + mathprep + yearstea + sex + minority + ses + (0 + minority|schoolid) + (1|schoolid/classid),data=dat)
 summary(lme6.2)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiTGluZWFyIG1peGVkIG1vZGVsIGZpdCBieSBSRU1MIFxudC10ZXN0cyB1c2UgIFNhdHRlcnRod2FpdGUgYXBwcm94aW1hdGlvbnMgdG8gZGVncmVlcyBvZiBmcmVlZG9tIFsnbG1lck1vZCddXG5Gb3JtdWxhOiBtYXRoMXN0IH4gaG91c2Vwb3YgKyBtYXRoa25vdyArIG1hdGhwcmVwICsgeWVhcnN0ZWEgKyBzZXggKyBtaW5vcml0eSArICBcbiAgICBzZXMgKyAoMCArIG1pbm9yaXR5IHwgc2Nob29saWQpICsgKDEgfCBzY2hvb2xpZC9jbGFzc2lkKVxuICAgRGF0YTogZGF0XG5cblJFTUwgY3JpdGVyaW9uIGF0IGNvbnZlcmdlbmNlOiAxMDcyOS41XG5cblNjYWxlZCByZXNpZHVhbHM6IFxuICAgIE1pbiAgICAgIDFRICBNZWRpYW4gICAgICAzUSAgICAgTWF4IFxuLTMuODU4MCAtMC42MTM0IC0wLjAzMjEgIDAuNTk3MSAgMy42NTk4IFxuXG5SYW5kb20gZWZmZWN0czpcbiBHcm91cHMgICAgICAgICAgIE5hbWUgICAgICAgIFZhcmlhbmNlIFN0ZC5EZXYuXG4gY2xhc3NpZC5zY2hvb2xpZCAoSW50ZXJjZXB0KSAgIDkzLjg5ICAgOS42OSAgIFxuIHNjaG9vbGlkICAgICAgICAgKEludGVyY2VwdCkgIDE2OS40NSAgMTMuMDIgICBcbiBzY2hvb2xpZC4xICAgICAgIG1pbm9yaXR5ICAgICAgIDAuMDAgICAwLjAwICAgXG4gUmVzaWR1YWwgICAgICAgICAgICAgICAgICAgICAxMDY0Ljk1ICAzMi42MyAgIFxuTnVtYmVyIG9mIG9iczogMTA4MSwgZ3JvdXBzOiAgY2xhc3NpZDpzY2hvb2xpZCwgMjg1OyBzY2hvb2xpZCwgMTA1XG5cbkZpeGVkIGVmZmVjdHM6XG4gICAgICAgICAgICAgIEVzdGltYXRlIFN0ZC4gRXJyb3IgICAgICAgICBkZiB0IHZhbHVlIFByKD58dHwpICAgIFxuKEludGVyY2VwdCkgIDUzOS42MzA0MiAgICA1LjMxMjEwICAyNzUuNDAwMDAgMTAxLjU4NSAgPCAyZS0xNiAqKipcbmhvdXNlcG92ICAgICAtMTcuNjQ4NDcgICAxMy4yMTc1NyAgMTEzLjkwMDAwICAtMS4zMzUgICAgMC4xODQgICAgXG5tYXRoa25vdyAgICAgICAxLjM1MDA0ICAgIDEuMzkxNjggIDIzNC41MDAwMCAgIDAuOTcwICAgIDAuMzMzICAgIFxubWF0aHByZXAgICAgICAtMC4yNzcwNSAgICAxLjM3NTgzICAyMDUuMzAwMDAgIC0wLjIwMSAgICAwLjg0MSAgICBcbnllYXJzdGVhICAgICAgIDAuMDExMjkgICAgMC4xNDE0MSAgMjI2LjgwMDAwICAgMC4wODAgICAgMC45MzYgICAgXG5zZXggICAgICAgICAgIC0xLjIxNDE5ICAgIDIuMDk0ODMgMTAyMi41MDAwMCAgLTAuNTgwICAgIDAuNTYyICAgIFxubWlub3JpdHkgICAgIC0xNi4xODY3OCAgICAzLjAyNjA1ICA3MDQuNTAwMDAgIC01LjM0OSAxLjIwZS0wNyAqKipcbnNlcyAgICAgICAgICAgMTAuMDUwNzUgICAgMS41NDQ4NCAxMDY2LjYwMDAwICAgNi41MDYgMS4xOGUtMTAgKioqXG4tLS1cblNpZ25pZi4gY29kZXM6ICAwIOKAmCoqKuKAmSAwLjAwMSDigJgqKuKAmSAwLjAxIOKAmCrigJkgMC4wNSDigJgu4oCZIDAuMSDigJgg4oCZIDFcblxuQ29ycmVsYXRpb24gb2YgRml4ZWQgRWZmZWN0czpcbiAgICAgICAgIChJbnRyKSBob3VzcHYgbXRoa253IG10aHBycCB5ZWFyc3Qgc2V4ICAgIG1pbnJ0eVxuaG91c2Vwb3YgLTAuNDUxICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG5tYXRoa25vdyAtMC4wODMgIDAuMDU4ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbm1hdGhwcmVwIC0wLjYzMSAgMC4wMzggIDAuMDA0ICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxueWVhcnN0ZWEgLTAuMjU5ICAwLjA3MSAgMC4wMjkgLTAuMTcyICAgICAgICAgICAgICAgICAgICAgXG5zZXggICAgICAtMC4xOTAgLTAuMDA3ICAwLjAwNyAtMC4wMDYgIDAuMDE2ICAgICAgICAgICAgICBcbm1pbm9yaXR5IC0wLjMyMCAtMC4xNzggIDAuMTE1ICAwLjAwMSAgMC4wMjQgLTAuMDExICAgICAgIFxuc2VzICAgICAgLTAuMTIxICAwLjA4MiAtMC4wMDcgIDAuMDUzIC0wLjAyOCAgMC4wMjAgIDAuMTYyXG4ifQ== -->
-<pre><code>Linear mixed model fit by REML 
-t-tests use  Satterthwaite approximations to degrees of freedom ['lmerMod']
-Formula: math1st ~ housepov + mathknow + mathprep + yearstea + sex + minority +  
-    ses + (0 + minority | schoolid) + (1 | schoolid/classid)
-   Data: dat
-
-REML criterion at convergence: 10729.5
-
-Scaled residuals: 
-    Min      1Q  Median      3Q     Max 
--3.8580 -0.6134 -0.0321  0.5971  3.6598 
-
-Random effects:
- Groups           Name        Variance Std.Dev.
- classid.schoolid (Intercept)   93.89   9.69   
- schoolid         (Intercept)  169.45  13.02   
- schoolid.1       minority       0.00   0.00   
- Residual                     1064.95  32.63   
-Number of obs: 1081, groups:  classid:schoolid, 285; schoolid, 105
-
-Fixed effects:
-              Estimate Std. Error         df t value Pr(&gt;|t|)    
-(Intercept)  539.63042    5.31210  275.40000 101.585  &lt; 2e-16 ***
-housepov     -17.64847   13.21757  113.90000  -1.335    0.184    
-mathknow       1.35004    1.39168  234.50000   0.970    0.333    
-mathprep      -0.27705    1.37583  205.30000  -0.201    0.841    
-yearstea       0.01129    0.14141  226.80000   0.080    0.936    
-sex           -1.21419    2.09483 1022.50000  -0.580    0.562    
-minority     -16.18678    3.02605  704.50000  -5.349 1.20e-07 ***
-ses           10.05075    1.54484 1066.60000   6.506 1.18e-10 ***
----
-Signif. codes:  0 *** 0.001 ** 0.01 * 0.05 . 0.1   1
-
-Correlation of Fixed Effects:
-         (Intr) houspv mthknw mthprp yearst sex    minrty
-housepov -0.451                                          
-mathknow -0.083  0.058                                   
-mathprep -0.631  0.038  0.004                            
-yearstea -0.259  0.071  0.029 -0.172                     
-sex      -0.190 -0.007  0.007 -0.006  0.016              
-minority -0.320 -0.178  0.115  0.001  0.024 -0.011       
-ses      -0.121  0.082 -0.007  0.053 -0.028  0.020  0.162</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmFuZChsbWU2LjIpXG5gYGAifQ== -->
 <pre class="r"><code>rand(lme6.2)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiQW5hbHlzaXMgb2YgUmFuZG9tIGVmZmVjdHMgVGFibGU6XG4gICAgICAgICAgICAgICAgICBDaGkuc3EgQ2hpLkRGIHAudmFsdWUgICAgXG5taW5vcml0eTpzY2hvb2xpZCAgICAwLjAgICAgICAxICAgICAgIDEgICAgXG5zY2hvb2xpZC9jbGFzc2lkICAgIDU4LjIgICAgICAyICAgMmUtMTMgKioqXG4tLS1cblNpZ25pZi4gY29kZXM6ICAwIOKAmCoqKuKAmSAwLjAwMSDigJgqKuKAmSAwLjAxIOKAmCrigJkgMC4wNSDigJgu4oCZIDAuMSDigJgg4oCZIDFcbiJ9 -->
-<pre><code>Analysis of Random effects Table:
-                  Chi.sq Chi.DF p.value    
-minority:schoolid    0.0      1       1    
-schoolid/classid    58.2      2   2e-13 ***
----
-Signif. codes:  0 *** 0.001 ** 0.01 * 0.05 . 0.1   1</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
@@ -1549,63 +705,11 @@ Signif. codes:  0 *** 0.001 ** 0.01 * 0.05 . 0.1   1</code><
 <pre class="r"><code>lme6.3&lt;-lmer(math1st~housepov + mathknow + mathprep + yearstea + sex + minority + ses + (0 + ses|schoolid) + (1|schoolid/classid),data=dat)
 summary(lme6.3)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiTGluZWFyIG1peGVkIG1vZGVsIGZpdCBieSBSRU1MIFxudC10ZXN0cyB1c2UgIFNhdHRlcnRod2FpdGUgYXBwcm94aW1hdGlvbnMgdG8gZGVncmVlcyBvZiBmcmVlZG9tIFsnbG1lck1vZCddXG5Gb3JtdWxhOiBtYXRoMXN0IH4gaG91c2Vwb3YgKyBtYXRoa25vdyArIG1hdGhwcmVwICsgeWVhcnN0ZWEgKyBzZXggKyBtaW5vcml0eSArICBcbiAgICBzZXMgKyAoMCArIHNlcyB8IHNjaG9vbGlkKSArICgxIHwgc2Nob29saWQvY2xhc3NpZClcbiAgIERhdGE6IGRhdFxuXG5SRU1MIGNyaXRlcmlvbiBhdCBjb252ZXJnZW5jZTogMTA3MjQuOFxuXG5TY2FsZWQgcmVzaWR1YWxzOiBcbiAgICBNaW4gICAgICAxUSAgTWVkaWFuICAgICAgM1EgICAgIE1heCBcbi0zLjYxMzggLTAuNjE4NSAtMC4wMjkwICAwLjU3OTggIDMuNzEzMCBcblxuUmFuZG9tIGVmZmVjdHM6XG4gR3JvdXBzICAgICAgICAgICBOYW1lICAgICAgICBWYXJpYW5jZSBTdGQuRGV2LlxuIGNsYXNzaWQuc2Nob29saWQgKEludGVyY2VwdCkgICA4OC41NiAgIDkuNDExICBcbiBzY2hvb2xpZCAgICAgICAgIChJbnRlcmNlcHQpICAxNjcuOTggIDEyLjk2MSAgXG4gc2Nob29saWQuMSAgICAgICBzZXMgICAgICAgICAgIDcyLjUwICAgOC41MTUgIFxuIFJlc2lkdWFsICAgICAgICAgICAgICAgICAgICAgMTAzNS4xMiAgMzIuMTczICBcbk51bWJlciBvZiBvYnM6IDEwODEsIGdyb3VwczogIGNsYXNzaWQ6c2Nob29saWQsIDI4NTsgc2Nob29saWQsIDEwNVxuXG5GaXhlZCBlZmZlY3RzOlxuICAgICAgICAgICAgICBFc3RpbWF0ZSBTdGQuIEVycm9yICAgICAgICAgZGYgdCB2YWx1ZSBQcig+fHR8KSAgICBcbihJbnRlcmNlcHQpICA1MzkuMTM3NTEgICAgNS4yNzkxNyAgMjcwLjUwMDAwIDEwMi4xMjYgIDwgMmUtMTYgKioqXG5ob3VzZXBvdiAgICAgLTE2Ljk0NTY0ICAgMTMuMjExMTYgIDExMi44MDAwMCAgLTEuMjgzICAgIDAuMjAyICAgIFxubWF0aGtub3cgICAgICAgMS4zNTU3NiAgICAxLjM4NDU5ICAyMzIuMjAwMDAgICAwLjk3OSAgICAwLjMyOSAgICBcbm1hdGhwcmVwICAgICAgLTAuMTk4MDEgICAgMS4zNTk5NCAgMTk4LjYwMDAwICAtMC4xNDYgICAgMC44ODQgICAgXG55ZWFyc3RlYSAgICAgICAwLjAzMDc5ICAgIDAuMTQwNTIgIDIyMy45MDAwMCAgIDAuMjE5ICAgIDAuODI3ICAgIFxuc2V4ICAgICAgICAgICAtMS40MDE4NSAgICAyLjA4MTcwIDEwMTEuMzAwMDAgIC0wLjY3MyAgICAwLjUwMSAgICBcbm1pbm9yaXR5ICAgICAtMTYuNTI1MjUgICAgMy4wMjE4OSAgNzAwLjEwMDAwICAtNS40NjkgNi4zMmUtMDggKioqXG5zZXMgICAgICAgICAgICA5Ljc4OTgyICAgIDEuODIyMTcgICA3OS4wMDAwMCAgIDUuMzczIDcuNjJlLTA3ICoqKlxuLS0tXG5TaWduaWYuIGNvZGVzOiAgMCDigJgqKirigJkgMC4wMDEg4oCYKirigJkgMC4wMSDigJgq4oCZIDAuMDUg4oCYLuKAmSAwLjEg4oCYIOKAmSAxXG5cbkNvcnJlbGF0aW9uIG9mIEZpeGVkIEVmZmVjdHM6XG4gICAgICAgICAoSW50cikgaG91c3B2IG10aGtudyBtdGhwcnAgeWVhcnN0IHNleCAgICBtaW5ydHlcbmhvdXNlcG92IC0wLjQ1MSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxubWF0aGtub3cgLTAuMDc5ICAwLjA1NiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG5tYXRocHJlcCAtMC42MjggIDAuMDQxICAwLjAwMiAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbnllYXJzdGVhIC0wLjI2MCAgMC4wNzAgIDAuMDI4IC0wLjE3MiAgICAgICAgICAgICAgICAgICAgIFxuc2V4ICAgICAgLTAuMTkwIC0wLjAwNyAgMC4wMDYgLTAuMDA3ICAwLjAxOCAgICAgICAgICAgICAgXG5taW5vcml0eSAtMC4zMjMgLTAuMTgwICAwLjExMCAgMC4wMDEgIDAuMDI0IC0wLjAxMCAgICAgICBcbnNlcyAgICAgIC0wLjA5MSAgMC4wNzYgIDAuMDA2ICAwLjA0MiAtMC4wMTkgIDAuMDE3ICAwLjEyNFxuIn0= -->
-<pre><code>Linear mixed model fit by REML 
-t-tests use  Satterthwaite approximations to degrees of freedom ['lmerMod']
-Formula: math1st ~ housepov + mathknow + mathprep + yearstea + sex + minority +  
-    ses + (0 + ses | schoolid) + (1 | schoolid/classid)
-   Data: dat
-
-REML criterion at convergence: 10724.8
-
-Scaled residuals: 
-    Min      1Q  Median      3Q     Max 
--3.6138 -0.6185 -0.0290  0.5798  3.7130 
-
-Random effects:
- Groups           Name        Variance Std.Dev.
- classid.schoolid (Intercept)   88.56   9.411  
- schoolid         (Intercept)  167.98  12.961  
- schoolid.1       ses           72.50   8.515  
- Residual                     1035.12  32.173  
-Number of obs: 1081, groups:  classid:schoolid, 285; schoolid, 105
-
-Fixed effects:
-              Estimate Std. Error         df t value Pr(&gt;|t|)    
-(Intercept)  539.13751    5.27917  270.50000 102.126  &lt; 2e-16 ***
-housepov     -16.94564   13.21116  112.80000  -1.283    0.202    
-mathknow       1.35576    1.38459  232.20000   0.979    0.329    
-mathprep      -0.19801    1.35994  198.60000  -0.146    0.884    
-yearstea       0.03079    0.14052  223.90000   0.219    0.827    
-sex           -1.40185    2.08170 1011.30000  -0.673    0.501    
-minority     -16.52525    3.02189  700.10000  -5.469 6.32e-08 ***
-ses            9.78982    1.82217   79.00000   5.373 7.62e-07 ***
----
-Signif. codes:  0 *** 0.001 ** 0.01 * 0.05 . 0.1   1
-
-Correlation of Fixed Effects:
-         (Intr) houspv mthknw mthprp yearst sex    minrty
-housepov -0.451                                          
-mathknow -0.079  0.056                                   
-mathprep -0.628  0.041  0.002                            
-yearstea -0.260  0.070  0.028 -0.172                     
-sex      -0.190 -0.007  0.006 -0.007  0.018              
-minority -0.323 -0.180  0.110  0.001  0.024 -0.010       
-ses      -0.091  0.076  0.006  0.042 -0.019  0.017  0.124</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmFuZChsbWU2LjMpXG5gYGAifQ== -->
 <pre class="r"><code>rand(lme6.3)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiQW5hbHlzaXMgb2YgUmFuZG9tIGVmZmVjdHMgVGFibGU6XG4gICAgICAgICAgICAgICAgIENoaS5zcSBDaGkuREYgcC52YWx1ZSAgICBcbnNlczpzY2hvb2xpZCAgICAgICAgNC43ICAgICAgMSAgICAwLjAzICogIFxuc2Nob29saWQvY2xhc3NpZCAgIDczLjcgICAgICAyICA8MmUtMTYgKioqXG4tLS1cblNpZ25pZi4gY29kZXM6ICAwIOKAmCoqKuKAmSAwLjAwMSDigJgqKuKAmSAwLjAxIOKAmCrigJkgMC4wNSDigJgu4oCZIDAuMSDigJgg4oCZIDFcbiJ9 -->
-<pre><code>Analysis of Random effects Table:
-                 Chi.sq Chi.DF p.value    
-ses:schoolid        4.7      1    0.03 *  
-schoolid/classid   73.7      2  &lt;2e-16 ***
----
-Signif. codes:  0 *** 0.001 ** 0.01 * 0.05 . 0.1   1</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
@@ -1620,63 +724,11 @@ Signif. codes:  0 *** 0.001 ** 0.01 * 0.05 . 0.1   1</code><
 <pre class="r"><code>lme6.1.1&lt;-lmer(math1st~housepov + mathknow + mathprep + yearstea + sex + minority + ses + (sex|schoolid) + (1|classid),data=dat)
 summary(lme6.1.1)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiTGluZWFyIG1peGVkIG1vZGVsIGZpdCBieSBSRU1MIFxudC10ZXN0cyB1c2UgIFNhdHRlcnRod2FpdGUgYXBwcm94aW1hdGlvbnMgdG8gZGVncmVlcyBvZiBmcmVlZG9tIFsnbG1lck1vZCddXG5Gb3JtdWxhOiBtYXRoMXN0IH4gaG91c2Vwb3YgKyBtYXRoa25vdyArIG1hdGhwcmVwICsgeWVhcnN0ZWEgKyBzZXggKyBtaW5vcml0eSArICBcbiAgICBzZXMgKyAoc2V4IHwgc2Nob29saWQpICsgKDEgfCBjbGFzc2lkKVxuICAgRGF0YTogZGF0XG5cblJFTUwgY3JpdGVyaW9uIGF0IGNvbnZlcmdlbmNlOiAxMDcyNy42XG5cblNjYWxlZCByZXNpZHVhbHM6IFxuICAgIE1pbiAgICAgIDFRICBNZWRpYW4gICAgICAzUSAgICAgTWF4IFxuLTMuODA0OCAtMC42MDk1IC0wLjAyMjIgIDAuNTk2OSAgMy41NTI1IFxuXG5SYW5kb20gZWZmZWN0czpcbiBHcm91cHMgICBOYW1lICAgICAgICBWYXJpYW5jZSBTdGQuRGV2LiBDb3JyIFxuIGNsYXNzaWQgIChJbnRlcmNlcHQpICAgOTcuMzQgICA5Ljg2NiAgICAgICAgXG4gc2Nob29saWQgKEludGVyY2VwdCkgIDIwNi4zMyAgMTQuMzY0ICAgICAgICBcbiAgICAgICAgICBzZXggICAgICAgICAgIDg0LjA4ICAgOS4xNzAgICAtMC40M1xuIFJlc2lkdWFsICAgICAgICAgICAgIDEwNDEuNzYgIDMyLjI3NiAgICAgICAgXG5OdW1iZXIgb2Ygb2JzOiAxMDgxLCBncm91cHM6ICBjbGFzc2lkLCAyODU7IHNjaG9vbGlkLCAxMDVcblxuRml4ZWQgZWZmZWN0czpcbiAgICAgICAgICAgICAgRXN0aW1hdGUgU3RkLiBFcnJvciAgICAgICAgIGRmIHQgdmFsdWUgUHIoPnx0fCkgICAgXG4oSW50ZXJjZXB0KSAgNS4zOTllKzAyICA1LjM2M2UrMDAgIDIuNjI2ZSswMiAxMDAuNjYxICA8IDJlLTE2ICoqKlxuaG91c2Vwb3YgICAgLTEuNzQyZSswMSAgMS4zMjVlKzAxICAxLjEzNmUrMDIgIC0xLjMxNCAgICAwLjE5MSAgICBcbm1hdGhrbm93ICAgICAxLjM3OWUrMDAgIDEuMzk2ZSswMCAgMi4zNjRlKzAyICAgMC45ODggICAgMC4zMjQgICAgXG5tYXRocHJlcCAgICAtMi43OTZlLTAxICAxLjM3OGUrMDAgIDIuMDYxZSswMiAgLTAuMjAzICAgIDAuODM5ICAgIFxueWVhcnN0ZWEgICAgIDYuODc2ZS0wMyAgMS40MThlLTAxICAyLjI3N2UrMDIgICAwLjA0OCAgICAwLjk2MSAgICBcbnNleCAgICAgICAgIC0xLjM0MGUrMDAgIDIuMzAxZSswMCAgOC43NDBlKzAxICAtMC41ODIgICAgMC41NjIgICAgXG5taW5vcml0eSAgICAtMS42NDJlKzAxICAzLjAyN2UrMDAgIDcuMDc2ZSswMiAgLTUuNDI1IDcuOTZlLTA4ICoqKlxuc2VzICAgICAgICAgIDkuOTI4ZSswMCAgMS41NDBlKzAwICAxLjA1NWUrMDMgICA2LjQ0OCAxLjcyZS0xMCAqKipcbi0tLVxuU2lnbmlmLiBjb2RlczogIDAg4oCYKioq4oCZIDAuMDAxIOKAmCoq4oCZIDAuMDEg4oCYKuKAmSAwLjA1IOKAmC7igJkgMC4xIOKAmCDigJkgMVxuXG5Db3JyZWxhdGlvbiBvZiBGaXhlZCBFZmZlY3RzOlxuICAgICAgICAgKEludHIpIGhvdXNwdiBtdGhrbncgbXRocHJwIHllYXJzdCBzZXggICAgbWlucnR5XG5ob3VzZXBvdiAtMC40NDkgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbm1hdGhrbm93IC0wLjA4MiAgMC4wNjAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxubWF0aHByZXAgLTAuNjI3ICAwLjAzOCAgMC4wMDQgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG55ZWFyc3RlYSAtMC4yNTggIDAuMDcyICAwLjAyNyAtMC4xNzIgICAgICAgICAgICAgICAgICAgICBcbnNleCAgICAgIC0wLjIyMiAtMC4wMDMgIDAuMDA2IC0wLjAwNSAgMC4wMTQgICAgICAgICAgICAgIFxubWlub3JpdHkgLTAuMzE5IC0wLjE3OCAgMC4xMTQgIDAuMDA0ICAwLjAyNCAtMC4wMTEgICAgICAgXG5zZXMgICAgICAtMC4xMjEgIDAuMDgzIC0wLjAwNiAgMC4wNTMgLTAuMDI4ICAwLjAxOCAgMC4xNjNcbiJ9 -->
-<pre><code>Linear mixed model fit by REML 
-t-tests use  Satterthwaite approximations to degrees of freedom ['lmerMod']
-Formula: math1st ~ housepov + mathknow + mathprep + yearstea + sex + minority +  
-    ses + (sex | schoolid) + (1 | classid)
-   Data: dat
-
-REML criterion at convergence: 10727.6
-
-Scaled residuals: 
-    Min      1Q  Median      3Q     Max 
--3.8048 -0.6095 -0.0222  0.5969  3.5525 
-
-Random effects:
- Groups   Name        Variance Std.Dev. Corr 
- classid  (Intercept)   97.34   9.866        
- schoolid (Intercept)  206.33  14.364        
-          sex           84.08   9.170   -0.43
- Residual             1041.76  32.276        
-Number of obs: 1081, groups:  classid, 285; schoolid, 105
-
-Fixed effects:
-              Estimate Std. Error         df t value Pr(&gt;|t|)    
-(Intercept)  5.399e+02  5.363e+00  2.626e+02 100.661  &lt; 2e-16 ***
-housepov    -1.742e+01  1.325e+01  1.136e+02  -1.314    0.191    
-mathknow     1.379e+00  1.396e+00  2.364e+02   0.988    0.324    
-mathprep    -2.796e-01  1.378e+00  2.061e+02  -0.203    0.839    
-yearstea     6.876e-03  1.418e-01  2.277e+02   0.048    0.961    
-sex         -1.340e+00  2.301e+00  8.740e+01  -0.582    0.562    
-minority    -1.642e+01  3.027e+00  7.076e+02  -5.425 7.96e-08 ***
-ses          9.928e+00  1.540e+00  1.055e+03   6.448 1.72e-10 ***
----
-Signif. codes:  0 *** 0.001 ** 0.01 * 0.05 . 0.1   1
-
-Correlation of Fixed Effects:
-         (Intr) houspv mthknw mthprp yearst sex    minrty
-housepov -0.449                                          
-mathknow -0.082  0.060                                   
-mathprep -0.627  0.038  0.004                            
-yearstea -0.258  0.072  0.027 -0.172                     
-sex      -0.222 -0.003  0.006 -0.005  0.014              
-minority -0.319 -0.178  0.114  0.004  0.024 -0.011       
-ses      -0.121  0.083 -0.006  0.053 -0.028  0.018  0.163</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmFuZChsbWU2LjEuMSlcbmBgYCJ9 -->
 <pre class="r"><code>rand(lme6.1.1)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiQW5hbHlzaXMgb2YgUmFuZG9tIGVmZmVjdHMgVGFibGU6XG4gICAgICAgICAgICAgQ2hpLnNxIENoaS5ERiBwLnZhbHVlICAgXG5zZXg6c2Nob29saWQgICAxLjg2ICAgICAgMiAgIDAuMzk0ICAgXG5jbGFzc2lkICAgICAgICA3LjY0ICAgICAgMSAgIDAuMDA2ICoqXG4tLS1cblNpZ25pZi4gY29kZXM6ICAwIOKAmCoqKuKAmSAwLjAwMSDigJgqKuKAmSAwLjAxIOKAmCrigJkgMC4wNSDigJgu4oCZIDAuMSDigJgg4oCZIDFcbiJ9 -->
-<pre><code>Analysis of Random effects Table:
-             Chi.sq Chi.DF p.value   
-sex:schoolid   1.86      2   0.394   
-classid        7.64      1   0.006 **
----
-Signif. codes:  0 *** 0.001 ** 0.01 * 0.05 . 0.1   1</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
@@ -1688,63 +740,11 @@ Signif. codes:  0 *** 0.001 ** 0.01 * 0.05 . 0.1   1</code><
 <pre class="r"><code>lme6.2.1&lt;-lmer(math1st~housepov + mathknow + mathprep + yearstea + sex + minority + ses + (minority|schoolid) + (1|classid),data=dat)
 summary(lme6.2.1)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiTGluZWFyIG1peGVkIG1vZGVsIGZpdCBieSBSRU1MIFxudC10ZXN0cyB1c2UgIFNhdHRlcnRod2FpdGUgYXBwcm94aW1hdGlvbnMgdG8gZGVncmVlcyBvZiBmcmVlZG9tIFsnbG1lck1vZCddXG5Gb3JtdWxhOiBtYXRoMXN0IH4gaG91c2Vwb3YgKyBtYXRoa25vdyArIG1hdGhwcmVwICsgeWVhcnN0ZWEgKyBzZXggKyBtaW5vcml0eSArICBcbiAgICBzZXMgKyAobWlub3JpdHkgfCBzY2hvb2xpZCkgKyAoMSB8IGNsYXNzaWQpXG4gICBEYXRhOiBkYXRcblxuUkVNTCBjcml0ZXJpb24gYXQgY29udmVyZ2VuY2U6IDEwNzE3LjVcblxuU2NhbGVkIHJlc2lkdWFsczogXG4gICAgTWluICAgICAgMVEgIE1lZGlhbiAgICAgIDNRICAgICBNYXggXG4tMy44OTUyIC0wLjYzNTggLTAuMDM0NSAgMC42MTI5ICAzLjY0NDQgXG5cblJhbmRvbSBlZmZlY3RzOlxuIEdyb3VwcyAgIE5hbWUgICAgICAgIFZhcmlhbmNlIFN0ZC5EZXYuIENvcnIgXG4gY2xhc3NpZCAgKEludGVyY2VwdCkgICA4Ni42OSAgIDkuMzExICAgICAgICBcbiBzY2hvb2xpZCAoSW50ZXJjZXB0KSAgMzgxLjIwICAxOS41MjQgICAgICAgIFxuICAgICAgICAgIG1pbm9yaXR5ICAgICAzNDMuMTMgIDE4LjUyNCAgIC0wLjgzXG4gUmVzaWR1YWwgICAgICAgICAgICAgMTAzOS4zOSAgMzIuMjQwICAgICAgICBcbk51bWJlciBvZiBvYnM6IDEwODEsIGdyb3VwczogIGNsYXNzaWQsIDI4NTsgc2Nob29saWQsIDEwNVxuXG5GaXhlZCBlZmZlY3RzOlxuICAgICAgICAgICAgICBFc3RpbWF0ZSBTdGQuIEVycm9yICAgICAgICAgZGYgdCB2YWx1ZSBQcig+fHR8KSAgICBcbihJbnRlcmNlcHQpICA1LjM5NWUrMDIgIDUuNjU1ZSswMCAgMS43MzFlKzAyICA5NS4zOTkgIDwgMmUtMTYgKioqXG5ob3VzZXBvdiAgICAtMS42MDZlKzAxICAxLjI1N2UrMDEgIDEuMDAwZSswMiAgLTEuMjc3ICAgIDAuMjA0ICAgIFxubWF0aGtub3cgICAgIDEuNjMyZSswMCAgMS4zNTllKzAwICAyLjI0OGUrMDIgICAxLjIwMSAgICAwLjIzMSAgICBcbm1hdGhwcmVwICAgIC0yLjkxOGUtMDEgIDEuMzM1ZSswMCAgMS45ODFlKzAyICAtMC4yMTggICAgMC44MjcgICAgXG55ZWFyc3RlYSAgICAtNC4zNjhlLTAzICAxLjM3NmUtMDEgIDIuMTcyZSswMiAgLTAuMDMyICAgIDAuOTc1ICAgIFxuc2V4ICAgICAgICAgLTguNjI4ZS0wMSAgMi4wODRlKzAwICAxLjAyMmUrMDMgIC0wLjQxNCAgICAwLjY3OSAgICBcbm1pbm9yaXR5ICAgIC0xLjYzOGUrMDEgIDMuODk2ZSswMCAgNS44MjBlKzAxICAtNC4yMDMgOS4xN2UtMDUgKioqXG5zZXMgICAgICAgICAgOS40MzFlKzAwICAxLjU0M2UrMDAgIDEuMDYzZSswMyAgIDYuMTExIDEuMzllLTA5ICoqKlxuLS0tXG5TaWduaWYuIGNvZGVzOiAgMCDigJgqKirigJkgMC4wMDEg4oCYKirigJkgMC4wMSDigJgq4oCZIDAuMDUg4oCYLuKAmSAwLjEg4oCYIOKAmSAxXG5cbkNvcnJlbGF0aW9uIG9mIEZpeGVkIEVmZmVjdHM6XG4gICAgICAgICAoSW50cikgaG91c3B2IG10aGtudyBtdGhwcnAgeWVhcnN0IHNleCAgICBtaW5ydHlcbmhvdXNlcG92IC0wLjM5NCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxubWF0aGtub3cgLTAuMDc4ICAwLjA2MSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG5tYXRocHJlcCAtMC41NzYgIDAuMDM3IC0wLjAwMiAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbnllYXJzdGVhIC0wLjI1MyAgMC4wOTEgIDAuMDI0IC0wLjE2NyAgICAgICAgICAgICAgICAgICAgIFxuc2V4ICAgICAgLTAuMTcyIC0wLjAxMyAgMC4wMTAgLTAuMDA1ICAwLjAxNCAgICAgICAgICAgICAgXG5taW5vcml0eSAtMC40OTQgLTAuMTU3ICAwLjA5OSAtMC4wMDIgIDAuMDI3IC0wLjAxNCAgICAgICBcbnNlcyAgICAgIC0wLjEwNSAgMC4wODkgLTAuMDA1ICAwLjA1MiAtMC4wMjEgIDAuMDI0ICAwLjExM1xuIn0= -->
-<pre><code>Linear mixed model fit by REML 
-t-tests use  Satterthwaite approximations to degrees of freedom ['lmerMod']
-Formula: math1st ~ housepov + mathknow + mathprep + yearstea + sex + minority +  
-    ses + (minority | schoolid) + (1 | classid)
-   Data: dat
-
-REML criterion at convergence: 10717.5
-
-Scaled residuals: 
-    Min      1Q  Median      3Q     Max 
--3.8952 -0.6358 -0.0345  0.6129  3.6444 
-
-Random effects:
- Groups   Name        Variance Std.Dev. Corr 
- classid  (Intercept)   86.69   9.311        
- schoolid (Intercept)  381.20  19.524        
-          minority     343.13  18.524   -0.83
- Residual             1039.39  32.240        
-Number of obs: 1081, groups:  classid, 285; schoolid, 105
-
-Fixed effects:
-              Estimate Std. Error         df t value Pr(&gt;|t|)    
-(Intercept)  5.395e+02  5.655e+00  1.731e+02  95.399  &lt; 2e-16 ***
-housepov    -1.606e+01  1.257e+01  1.000e+02  -1.277    0.204    
-mathknow     1.632e+00  1.359e+00  2.248e+02   1.201    0.231    
-mathprep    -2.918e-01  1.335e+00  1.981e+02  -0.218    0.827    
-yearstea    -4.368e-03  1.376e-01  2.172e+02  -0.032    0.975    
-sex         -8.628e-01  2.084e+00  1.022e+03  -0.414    0.679    
-minority    -1.638e+01  3.896e+00  5.820e+01  -4.203 9.17e-05 ***
-ses          9.431e+00  1.543e+00  1.063e+03   6.111 1.39e-09 ***
----
-Signif. codes:  0 *** 0.001 ** 0.01 * 0.05 . 0.1   1
-
-Correlation of Fixed Effects:
-         (Intr) houspv mthknw mthprp yearst sex    minrty
-housepov -0.394                                          
-mathknow -0.078  0.061                                   
-mathprep -0.576  0.037 -0.002                            
-yearstea -0.253  0.091  0.024 -0.167                     
-sex      -0.172 -0.013  0.010 -0.005  0.014              
-minority -0.494 -0.157  0.099 -0.002  0.027 -0.014       
-ses      -0.105  0.089 -0.005  0.052 -0.021  0.024  0.113</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmFuZChsbWU2LjIuMSlcbmBgYCJ9 -->
 <pre class="r"><code>rand(lme6.2.1)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiQW5hbHlzaXMgb2YgUmFuZG9tIGVmZmVjdHMgVGFibGU6XG4gICAgICAgICAgICAgICAgICBDaGkuc3EgQ2hpLkRGIHAudmFsdWUgICBcbm1pbm9yaXR5OnNjaG9vbGlkICAxMS45NyAgICAgIDIgICAwLjAwMyAqKlxuY2xhc3NpZCAgICAgICAgICAgICA2LjA4ICAgICAgMSAgIDAuMDE0ICogXG4tLS1cblNpZ25pZi4gY29kZXM6ICAwIOKAmCoqKuKAmSAwLjAwMSDigJgqKuKAmSAwLjAxIOKAmCrigJkgMC4wNSDigJgu4oCZIDAuMSDigJgg4oCZIDFcbiJ9 -->
-<pre><code>Analysis of Random effects Table:
-                  Chi.sq Chi.DF p.value   
-minority:schoolid  11.97      2   0.003 **
-classid             6.08      1   0.014 * 
----
-Signif. codes:  0 *** 0.001 ** 0.01 * 0.05 . 0.1   1</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
@@ -1756,63 +756,11 @@ Signif. codes:  0 *** 0.001 ** 0.01 * 0.05 . 0.1   1</code><
 <pre class="r"><code>lme6.3.1&lt;-lmer(math1st~housepov + mathknow + mathprep + yearstea + sex + minority + ses + (ses|schoolid) + (1|classid),data=dat)
 summary(lme6.3.1)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiTGluZWFyIG1peGVkIG1vZGVsIGZpdCBieSBSRU1MIFxudC10ZXN0cyB1c2UgIFNhdHRlcnRod2FpdGUgYXBwcm94aW1hdGlvbnMgdG8gZGVncmVlcyBvZiBmcmVlZG9tIFsnbG1lck1vZCddXG5Gb3JtdWxhOiBtYXRoMXN0IH4gaG91c2Vwb3YgKyBtYXRoa25vdyArIG1hdGhwcmVwICsgeWVhcnN0ZWEgKyBzZXggKyBtaW5vcml0eSArICBcbiAgICBzZXMgKyAoc2VzIHwgc2Nob29saWQpICsgKDEgfCBjbGFzc2lkKVxuICAgRGF0YTogZGF0XG5cblJFTUwgY3JpdGVyaW9uIGF0IGNvbnZlcmdlbmNlOiAxMDcyNC40XG5cblNjYWxlZCByZXNpZHVhbHM6IFxuICAgIE1pbiAgICAgIDFRICBNZWRpYW4gICAgICAzUSAgICAgTWF4IFxuLTMuNTY0NiAtMC42MTY2IC0wLjAyNjQgIDAuNTg4OCAgMy43MDczIFxuXG5SYW5kb20gZWZmZWN0czpcbiBHcm91cHMgICBOYW1lICAgICAgICBWYXJpYW5jZSBTdGQuRGV2LiBDb3JyXG4gY2xhc3NpZCAgKEludGVyY2VwdCkgICA4Ni41NyAgIDkuMzA1ICAgICAgIFxuIHNjaG9vbGlkIChJbnRlcmNlcHQpICAxNzEuMTggIDEzLjA4MyAgICAgICBcbiAgICAgICAgICBzZXMgICAgICAgICAgIDczLjM3ICAgOC41NjUgICAwLjE5XG4gUmVzaWR1YWwgICAgICAgICAgICAgMTAzNS45MCAgMzIuMTg1ICAgICAgIFxuTnVtYmVyIG9mIG9iczogMTA4MSwgZ3JvdXBzOiAgY2xhc3NpZCwgMjg1OyBzY2hvb2xpZCwgMTA1XG5cbkZpeGVkIGVmZmVjdHM6XG4gICAgICAgICAgICAgIEVzdGltYXRlIFN0ZC4gRXJyb3IgICAgICAgICBkZiB0IHZhbHVlIFByKD58dHwpICAgIFxuKEludGVyY2VwdCkgIDUzOC43MjIyMiAgICA1LjI3NjQ3ICAyNzEuMTAwMDAgMTAyLjA5OSAgPCAyZS0xNiAqKipcbmhvdXNlcG92ICAgICAtMTUuODk4NzMgICAxMy4xNTM5MyAgMTExLjcwMDAwICAtMS4yMDkgICAgMC4yMjkgICAgXG5tYXRoa25vdyAgICAgICAxLjI2MDI1ICAgIDEuMzgyMDEgIDIzMC45MDAwMCAgIDAuOTEyICAgIDAuMzYzICAgIFxubWF0aHByZXAgICAgICAtMC4yMTY5NyAgICAxLjM1NjQyICAxOTcuMTAwMDAgIC0wLjE2MCAgICAwLjg3MyAgICBcbnllYXJzdGVhICAgICAgIDAuMDM2MTcgICAgMC4xNDAwMiAgMjIwLjQwMDAwICAgMC4yNTggICAgMC43OTYgICAgXG5zZXggICAgICAgICAgIC0xLjQwNDM2ICAgIDIuMDgwNzQgMTAxMS41MDAwMCAgLTAuNjc1ICAgIDAuNTAwICAgIFxubWlub3JpdHkgICAgIC0xNi4yNjY5OSAgICAzLjAzNTgwICA2NjguOTAwMDAgIC01LjM1OCAxLjE2ZS0wNyAqKipcbnNlcyAgICAgICAgICAgIDkuNzI2NDYgICAgMS44Mjk4NSAgIDc4LjQwMDAwICAgNS4zMTUgOS43NWUtMDcgKioqXG4tLS1cblNpZ25pZi4gY29kZXM6ICAwIOKAmCoqKuKAmSAwLjAwMSDigJgqKuKAmSAwLjAxIOKAmCrigJkgMC4wNSDigJgu4oCZIDAuMSDigJgg4oCZIDFcblxuQ29ycmVsYXRpb24gb2YgRml4ZWQgRWZmZWN0czpcbiAgICAgICAgIChJbnRyKSBob3VzcHYgbXRoa253IG10aHBycCB5ZWFyc3Qgc2V4ICAgIG1pbnJ0eVxuaG91c2Vwb3YgLTAuNDQ5ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG5tYXRoa25vdyAtMC4wNzcgIDAuMDU3ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbm1hdGhwcmVwIC0wLjYyNyAgMC4wMzkgIDAuMDAxICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxueWVhcnN0ZWEgLTAuMjU5ICAwLjA3MyAgMC4wMjggLTAuMTcyICAgICAgICAgICAgICAgICAgICAgXG5zZXggICAgICAtMC4xODggLTAuMDA5ICAwLjAwNSAtMC4wMDggIDAuMDE3ICAgICAgICAgICAgICBcbm1pbm9yaXR5IC0wLjMyNSAtMC4xODIgIDAuMTA4ICAwLjAwMiAgMC4wMjEgLTAuMDExICAgICAgIFxuc2VzICAgICAgLTAuMDYyICAwLjA3MCAgMC4wMDcgIDAuMDQ1IC0wLjAyMSAgMC4wMTggIDAuMTE3XG4ifQ== -->
-<pre><code>Linear mixed model fit by REML 
-t-tests use  Satterthwaite approximations to degrees of freedom ['lmerMod']
-Formula: math1st ~ housepov + mathknow + mathprep + yearstea + sex + minority +  
-    ses + (ses | schoolid) + (1 | classid)
-   Data: dat
-
-REML criterion at convergence: 10724.4
-
-Scaled residuals: 
-    Min      1Q  Median      3Q     Max 
--3.5646 -0.6166 -0.0264  0.5888  3.7073 
-
-Random effects:
- Groups   Name        Variance Std.Dev. Corr
- classid  (Intercept)   86.57   9.305       
- schoolid (Intercept)  171.18  13.083       
-          ses           73.37   8.565   0.19
- Residual             1035.90  32.185       
-Number of obs: 1081, groups:  classid, 285; schoolid, 105
-
-Fixed effects:
-              Estimate Std. Error         df t value Pr(&gt;|t|)    
-(Intercept)  538.72222    5.27647  271.10000 102.099  &lt; 2e-16 ***
-housepov     -15.89873   13.15393  111.70000  -1.209    0.229    
-mathknow       1.26025    1.38201  230.90000   0.912    0.363    
-mathprep      -0.21697    1.35642  197.10000  -0.160    0.873    
-yearstea       0.03617    0.14002  220.40000   0.258    0.796    
-sex           -1.40436    2.08074 1011.50000  -0.675    0.500    
-minority     -16.26699    3.03580  668.90000  -5.358 1.16e-07 ***
-ses            9.72646    1.82985   78.40000   5.315 9.75e-07 ***
----
-Signif. codes:  0 *** 0.001 ** 0.01 * 0.05 . 0.1   1
-
-Correlation of Fixed Effects:
-         (Intr) houspv mthknw mthprp yearst sex    minrty
-housepov -0.449                                          
-mathknow -0.077  0.057                                   
-mathprep -0.627  0.039  0.001                            
-yearstea -0.259  0.073  0.028 -0.172                     
-sex      -0.188 -0.009  0.005 -0.008  0.017              
-minority -0.325 -0.182  0.108  0.002  0.021 -0.011       
-ses      -0.062  0.070  0.007  0.045 -0.021  0.018  0.117</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmFuZChsbWU2LjMuMSlcbmBgYCJ9 -->
 <pre class="r"><code>rand(lme6.3.1)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiQW5hbHlzaXMgb2YgUmFuZG9tIGVmZmVjdHMgVGFibGU6XG4gICAgICAgICAgICAgQ2hpLnNxIENoaS5ERiBwLnZhbHVlICBcbnNlczpzY2hvb2xpZCAgIDUuMTQgICAgICAyICAgIDAuMDggLlxuY2xhc3NpZCAgICAgICAgNi4yMSAgICAgIDEgICAgMC4wMSAqXG4tLS1cblNpZ25pZi4gY29kZXM6ICAwIOKAmCoqKuKAmSAwLjAwMSDigJgqKuKAmSAwLjAxIOKAmCrigJkgMC4wNSDigJgu4oCZIDAuMSDigJgg4oCZIDFcbiJ9 -->
-<pre><code>Analysis of Random effects Table:
-             Chi.sq Chi.DF p.value  
-ses:schoolid   5.14      2    0.08 .
-classid        6.21      1    0.01 *
----
-Signif. codes:  0 *** 0.001 ** 0.01 * 0.05 . 0.1   1</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
@@ -1834,51 +782,6 @@ MATH1ST_{ijk} = b_0 + b_1HOUSEPOV_{k} + b_2MATHKNOW_{jk} + b_3MATHPREP_{jk} + b_
 <pre class="r"><code>lme.7&lt;-lmer(math1st~housepov + mathknow + mathprep + yearstea + sex + minority + ses + (0+ses|schoolid) + (minority|schoolid) + (1|classid),data=dat)
 summary(lme.7)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiTGluZWFyIG1peGVkIG1vZGVsIGZpdCBieSBSRU1MIFxudC10ZXN0cyB1c2UgIFNhdHRlcnRod2FpdGUgYXBwcm94aW1hdGlvbnMgdG8gZGVncmVlcyBvZiBmcmVlZG9tIFsnbG1lck1vZCddXG5Gb3JtdWxhOiBtYXRoMXN0IH4gaG91c2Vwb3YgKyBtYXRoa25vdyArIG1hdGhwcmVwICsgeWVhcnN0ZWEgKyBzZXggKyBtaW5vcml0eSArICBcbiAgICBzZXMgKyAoMCArIHNlcyB8IHNjaG9vbGlkKSArIChtaW5vcml0eSB8IHNjaG9vbGlkKSArICgxIHwgICAgICBjbGFzc2lkKVxuICAgRGF0YTogZGF0XG5cblJFTUwgY3JpdGVyaW9uIGF0IGNvbnZlcmdlbmNlOiAxMDcxMi40XG5cblNjYWxlZCByZXNpZHVhbHM6IFxuICAgIE1pbiAgICAgIDFRICBNZWRpYW4gICAgICAzUSAgICAgTWF4IFxuLTMuNjUyNiAtMC42MjUxIC0wLjAzMzkgIDAuNjA1MCAgMy42OTYxIFxuXG5SYW5kb20gZWZmZWN0czpcbiBHcm91cHMgICAgIE5hbWUgICAgICAgIFZhcmlhbmNlIFN0ZC5EZXYuIENvcnIgXG4gY2xhc3NpZCAgICAoSW50ZXJjZXB0KSAgIDgwLjYzICAgOC45NzkgICAgICAgIFxuIHNjaG9vbGlkICAgKEludGVyY2VwdCkgIDQwNC41NCAgMjAuMTEzICAgICAgICBcbiAgICAgICAgICAgIG1pbm9yaXR5ICAgICAzMzYuMDQgIDE4LjMzMiAgIC0wLjg0XG4gc2Nob29saWQuMSBzZXMgICAgICAgICAgIDc0Ljk0ICAgOC42NTcgICAgICAgIFxuIFJlc2lkdWFsICAgICAgICAgICAgICAgMTAwOS43MyAgMzEuNzc2ICAgICAgICBcbk51bWJlciBvZiBvYnM6IDEwODEsIGdyb3VwczogIGNsYXNzaWQsIDI4NTsgc2Nob29saWQsIDEwNVxuXG5GaXhlZCBlZmZlY3RzOlxuICAgICAgICAgICAgICBFc3RpbWF0ZSBTdGQuIEVycm9yICAgICAgICAgZGYgdCB2YWx1ZSBQcig+fHR8KSAgICBcbihJbnRlcmNlcHQpICA1MzkuMDUzMzUgICAgNS42NjQ2OCAgMTY1LjcwMDAwICA5NS4xNjAgIDwgMmUtMTYgKioqXG5ob3VzZXBvdiAgICAgLTE1LjMyMTEwICAgMTIuNDk0NDMgICA5OS4zMDAwMCAgLTEuMjI2ICAgIDAuMjIzICAgIFxubWF0aGtub3cgICAgICAgMS42NzQ3NSAgICAxLjM1MDAwICAyMjEuMzAwMDAgICAxLjI0MSAgICAwLjIxNiAgICBcbm1hdGhwcmVwICAgICAgLTAuMjM1NDYgICAgMS4zMTczMCAgMTkxLjIwMDAwICAtMC4xNzkgICAgMC44NTggICAgXG55ZWFyc3RlYSAgICAgICAwLjAyMTAyICAgIDAuMTM2NTcgIDIxMy43MDAwMCAgIDAuMTU0ICAgIDAuODc4ICAgIFxuc2V4ICAgICAgICAgICAtMS4wMzg3MSAgICAyLjA2OTUxIDEwMTAuNTAwMDAgIC0wLjUwMiAgICAwLjYxNiAgICBcbm1pbm9yaXR5ICAgICAtMTYuNzI4ODQgICAgMy45MDcyMCAgIDU1LjQwMDAwICAtNC4yODIgNy40M2UtMDUgKioqXG5zZXMgICAgICAgICAgICA5LjE5NjU0ICAgIDEuODIyNzIgICA4Mi41MDAwMCAgIDUuMDQ2IDIuNjVlLTA2ICoqKlxuLS0tXG5TaWduaWYuIGNvZGVzOiAgMCDigJgqKirigJkgMC4wMDEg4oCYKirigJkgMC4wMSDigJgq4oCZIDAuMDUg4oCYLuKAmSAwLjEg4oCYIOKAmSAxXG5cbkNvcnJlbGF0aW9uIG9mIEZpeGVkIEVmZmVjdHM6XG4gICAgICAgICAoSW50cikgaG91c3B2IG10aGtudyBtdGhwcnAgeWVhcnN0IHNleCAgICBtaW5ydHlcbmhvdXNlcG92IC0wLjM5NSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxubWF0aGtub3cgLTAuMDcyICAwLjA2MCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG5tYXRocHJlcCAtMC41NjggIDAuMDQwIC0wLjAwNCAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbnllYXJzdGVhIC0wLjI1NCAgMC4wOTMgIDAuMDI0IC0wLjE2NiAgICAgICAgICAgICAgICAgICAgIFxuc2V4ICAgICAgLTAuMTcwIC0wLjAxNCAgMC4wMTAgLTAuMDA1ICAwLjAxNyAgICAgICAgICAgICAgXG5taW5vcml0eSAtMC41MDkgLTAuMTQ5ICAwLjA5MiAtMC4wMDMgIDAuMDI3IC0wLjAxMyAgICAgICBcbnNlcyAgICAgIC0wLjA4MCAgMC4wODMgIDAuMDA2ICAwLjA0MSAtMC4wMTEgIDAuMDIwICAwLjA4N1xuIn0= -->
-<pre><code>Linear mixed model fit by REML 
-t-tests use  Satterthwaite approximations to degrees of freedom ['lmerMod']
-Formula: math1st ~ housepov + mathknow + mathprep + yearstea + sex + minority +  
-    ses + (0 + ses | schoolid) + (minority | schoolid) + (1 |      classid)
-   Data: dat
-
-REML criterion at convergence: 10712.4
-
-Scaled residuals: 
-    Min      1Q  Median      3Q     Max 
--3.6526 -0.6251 -0.0339  0.6050  3.6961 
-
-Random effects:
- Groups     Name        Variance Std.Dev. Corr 
- classid    (Intercept)   80.63   8.979        
- schoolid   (Intercept)  404.54  20.113        
-            minority     336.04  18.332   -0.84
- schoolid.1 ses           74.94   8.657        
- Residual               1009.73  31.776        
-Number of obs: 1081, groups:  classid, 285; schoolid, 105
-
-Fixed effects:
-              Estimate Std. Error         df t value Pr(&gt;|t|)    
-(Intercept)  539.05335    5.66468  165.70000  95.160  &lt; 2e-16 ***
-housepov     -15.32110   12.49443   99.30000  -1.226    0.223    
-mathknow       1.67475    1.35000  221.30000   1.241    0.216    
-mathprep      -0.23546    1.31730  191.20000  -0.179    0.858    
-yearstea       0.02102    0.13657  213.70000   0.154    0.878    
-sex           -1.03871    2.06951 1010.50000  -0.502    0.616    
-minority     -16.72884    3.90720   55.40000  -4.282 7.43e-05 ***
-ses            9.19654    1.82272   82.50000   5.046 2.65e-06 ***
----
-Signif. codes:  0 *** 0.001 ** 0.01 * 0.05 . 0.1   1
-
-Correlation of Fixed Effects:
-         (Intr) houspv mthknw mthprp yearst sex    minrty
-housepov -0.395                                          
-mathknow -0.072  0.060                                   
-mathprep -0.568  0.040 -0.004                            
-yearstea -0.254  0.093  0.024 -0.166                     
-sex      -0.170 -0.014  0.010 -0.005  0.017              
-minority -0.509 -0.149  0.092 -0.003  0.027 -0.013       
-ses      -0.080  0.083  0.006  0.041 -0.011  0.020  0.087</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
@@ -1890,23 +793,6 @@ ses      -0.080  0.083  0.006  0.041 -0.011  0.020  0.087</code></pre>
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYW5vdmEobG1lNi4zLGxtZS43KVxuYGBgIn0= -->
 <pre class="r"><code>anova(lme6.3,lme.7)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoicmVmaXR0aW5nIG1vZGVsKHMpIHdpdGggTUwgKGluc3RlYWQgb2YgUkVNTClcbiJ9 -->
-<pre><code>refitting model(s) with ML (instead of REML)</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiRGF0YTogZGF0XG5Nb2RlbHM6XG5vYmplY3Q6IG1hdGgxc3QgfiBob3VzZXBvdiArIG1hdGhrbm93ICsgbWF0aHByZXAgKyB5ZWFyc3RlYSArIHNleCArIG1pbm9yaXR5ICsgXG5vYmplY3Q6ICAgICBzZXMgKyAoMCArIHNlcyB8IHNjaG9vbGlkKSArICgxIHwgc2Nob29saWQvY2xhc3NpZClcbi4uMTogbWF0aDFzdCB+IGhvdXNlcG92ICsgbWF0aGtub3cgKyBtYXRocHJlcCArIHllYXJzdGVhICsgc2V4ICsgbWlub3JpdHkgKyBcbi4uMTogICAgIHNlcyArICgwICsgc2VzIHwgc2Nob29saWQpICsgKG1pbm9yaXR5IHwgc2Nob29saWQpICsgKDEgfCBcbi4uMTogICAgIGNsYXNzaWQpXG4gICAgICAgRGYgICBBSUMgICBCSUMgIGxvZ0xpayBkZXZpYW5jZSAgQ2hpc3EgQ2hpIERmIFByKD5DaGlzcSkgICBcbm9iamVjdCAxMiAxMDc3MiAxMDgzMiAtNTM3My45ICAgIDEwNzQ4ICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuLi4xICAgIDE0IDEwNzY0IDEwODMzIC01MzY3LjggICAgMTA3MzYgMTIuMjM5ICAgICAgMiAgICAgMC4wMDIyICoqXG4tLS1cblNpZ25pZi4gY29kZXM6ICAwIOKAmCoqKuKAmSAwLjAwMSDigJgqKuKAmSAwLjAxIOKAmCrigJkgMC4wNSDigJgu4oCZIDAuMSDigJgg4oCZIDFcbiJ9 -->
-<pre><code>Data: dat
-Models:
-object: math1st ~ housepov + mathknow + mathprep + yearstea + sex + minority + 
-object:     ses + (0 + ses | schoolid) + (1 | schoolid/classid)
-..1: math1st ~ housepov + mathknow + mathprep + yearstea + sex + minority + 
-..1:     ses + (0 + ses | schoolid) + (minority | schoolid) + (1 | 
-..1:     classid)
-       Df   AIC   BIC  logLik deviance  Chisq Chi Df Pr(&gt;Chisq)   
-object 12 10772 10832 -5373.9    10748                            
-..1    14 10764 10833 -5367.8    10736 12.239      2     0.0022 **
----
-Signif. codes:  0 *** 0.001 ** 0.01 * 0.05 . 0.1   1</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>Comparing it to just the model with correlated MINORITY random slopes:</p>
@@ -1915,31 +801,175 @@ Signif. codes:  0 *** 0.001 ** 0.01 * 0.05 . 0.1   1</code><
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYW5vdmEobG1lNi4yLjEsbG1lLjcpXG5gYGAifQ== -->
 <pre class="r"><code>anova(lme6.2.1,lme.7)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoicmVmaXR0aW5nIG1vZGVsKHMpIHdpdGggTUwgKGluc3RlYWQgb2YgUkVNTClcbiJ9 -->
-<pre><code>refitting model(s) with ML (instead of REML)</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiRGF0YTogZGF0XG5Nb2RlbHM6XG5vYmplY3Q6IG1hdGgxc3QgfiBob3VzZXBvdiArIG1hdGhrbm93ICsgbWF0aHByZXAgKyB5ZWFyc3RlYSArIHNleCArIG1pbm9yaXR5ICsgXG5vYmplY3Q6ICAgICBzZXMgKyAobWlub3JpdHkgfCBzY2hvb2xpZCkgKyAoMSB8IGNsYXNzaWQpXG4uLjE6IG1hdGgxc3QgfiBob3VzZXBvdiArIG1hdGhrbm93ICsgbWF0aHByZXAgKyB5ZWFyc3RlYSArIHNleCArIG1pbm9yaXR5ICsgXG4uLjE6ICAgICBzZXMgKyAoMCArIHNlcyB8IHNjaG9vbGlkKSArIChtaW5vcml0eSB8IHNjaG9vbGlkKSArICgxIHwgXG4uLjE6ICAgICBjbGFzc2lkKVxuICAgICAgIERmICAgQUlDICAgQklDICBsb2dMaWsgZGV2aWFuY2UgIENoaXNxIENoaSBEZiBQcig+Q2hpc3EpICBcbm9iamVjdCAxMyAxMDc2NiAxMDgzMSAtNTM3MC4yICAgIDEwNzQwICAgICAgICAgICAgICAgICAgICAgICAgICAgXG4uLjEgICAgMTQgMTA3NjQgMTA4MzMgLTUzNjcuOCAgICAxMDczNiA0Ljg1ODkgICAgICAxICAgICAwLjAyNzUgKlxuLS0tXG5TaWduaWYuIGNvZGVzOiAgMCDigJgqKirigJkgMC4wMDEg4oCYKirigJkgMC4wMSDigJgq4oCZIDAuMDUg4oCYLuKAmSAwLjEg4oCYIOKAmSAxXG4ifQ== -->
-<pre><code>Data: dat
-Models:
-object: math1st ~ housepov + mathknow + mathprep + yearstea + sex + minority + 
-object:     ses + (minority | schoolid) + (1 | classid)
-..1: math1st ~ housepov + mathknow + mathprep + yearstea + sex + minority + 
-..1:     ses + (0 + ses | schoolid) + (minority | schoolid) + (1 | 
-..1:     classid)
-       Df   AIC   BIC  logLik deviance  Chisq Chi Df Pr(&gt;Chisq)  
-object 13 10766 10831 -5370.2    10740                           
-..1    14 10764 10833 -5367.8    10736 4.8589      1     0.0275 *
----
-Signif. codes:  0 *** 0.001 ** 0.01 * 0.05 . 0.1   1</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>Both LRT show that having both the random slopes added is an improvement in the model.</p>
+</div>
+</div>
+<div id="for-ucm-write-down-v_c-v_s-v_e-for-the-three-variance-components-simply-the-estimates." class="section level2">
+<h2>For UCM, write down: V_C, V_S, V_E for the three variance components (simply the estimates).</h2>
 <!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudl9jMT04NS40Nlxudl9zMT0yODAuNjhcbnZfZTE9MTE0Ni44MFxuYGBgIn0= -->
+<pre class="r"><code>v_c1=85.46
+v_s1=280.68
+v_e1=1146.80</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<div id="think-of-them-as-possibly-varying-with-a-covariate-though.-for-the-most-complicated-all-fixed-effects-random-intercepts-only-model-what-are-v_c-v_s-v_e" class="section level3">
+<h3>Think of them as possibly varying with a covariate, though. For the most complicated (all fixed effects) random INTERCEPTS ONLY model, what are: V_C, V_S, V_E ?</h3>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudl9jMj05My44OVxudl9zMj0xNjkuNDVcbnZfZTI9MTA2NC45NVxuYGBgIn0= -->
+<pre class="r"><code>v_c2=93.89
+v_s2=169.45
+v_e2=1064.95</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="by-what-fraction-did-each-decrease-with-the-new-predictors-in-the-model" class="section level3">
+<h3>By what fraction did each decrease with the new predictors in the model?</h3>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuKHZfYzEtdl9jMikvdl9jMVxuKHZfczEtdl9zMikvdl9zMVxuKHZfZTEtdl9lMikvdl9lMVxuXG5gYGAifQ== -->
+<pre class="r"><code>(v_c1-v_c2)/v_c1
+(v_s1-v_s2)/v_s1
+(v_e1-v_e2)/v_e1
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p><em>now consider the model with a random slope in ses.<br />
+</em>what are: V_C, V_S(ses=0), V_E ? We need to list ‘ses=0’ here, or we don’t know how to use the slope variance</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5maXQ8LWxtZXIobWF0aDFzdH5ob3VzZXBvdiArIG1hdGhrbm93ICsgbWF0aHByZXAgKyB5ZWFyc3RlYSArIHNleCArIG1pbm9yaXR5ICsgc2VzICsgKDAgKyBzZXN8c2Nob29saWQpICsgKDF8c2Nob29saWQvY2xhc3NpZCksZGF0YT1kYXQpXG5zdW1tYXJ5KGZpdClcblxucHJpbnQoVmFyQ29ycihmaXQpLCBjb21wPShcIlZhcmlhbmNlXCIpKVxuXG52X2M9VmFyQ29ycihmaXQpWzFdJGNsYXNzaWQuc2Nob29saWRbMV1cbnZfcz1WYXJDb3JyKGZpdClbMl0kc2Nob29saWRbMV1cbnZfc2VzPVZhckNvcnIoZml0KVszXSRzY2hvb2xpZC4xWzFdXG5cbiNWX1Moc2VzPTApXG52X2Mrdl9zXG5cblxuXG5gYGAifQ== -->
+<pre class="r"><code>
+fit&lt;-lmer(math1st~housepov + mathknow + mathprep + yearstea + sex + minority + ses + (0 + ses|schoolid) + (1|schoolid/classid),data=dat)
+summary(fit)
+
+print(VarCorr(fit), comp=(&quot;Variance&quot;))
+
+v_c=VarCorr(fit)[1]$classid.schoolid[1]
+v_s=VarCorr(fit)[2]$schoolid[1]
+v_ses=VarCorr(fit)[3]$schoolid.1[1]
+
+#V_S(ses=0)
+v_c+v_s
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>*what are: V_S(ses=-0.50), V_S(ses=+0.5) ?</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG4jVl9TKHNlcz0tMC41MClcbnZfYyt2X3MrKC0uNV4yKSp2X3Nlc1xuXG4jVl9TKHNlcz0rMC41KVxudl9jK3ZfcysoLjVeMikqdl9zZXNcblxuXG5gYGAifQ== -->
+<pre class="r"><code>
+#V_S(ses=-0.50)
+v_c+v_s+(-.5^2)*v_ses
+
+#V_S(ses=+0.5)
+v_c+v_s+(.5^2)*v_ses
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p><em>now consider the model with a random slope in minority.<br />
+</em>what are: V_C, V_S(minority=0), V_E ? We need to list ‘minority=0’ here, or we don’t know how to use the slope variance</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5maXQ8LWxtZXIobWF0aDFzdH5ob3VzZXBvdiArIG1hdGhrbm93ICsgbWF0aHByZXAgKyB5ZWFyc3RlYSArIHNleCArIG1pbm9yaXR5ICsgc2VzICsgKDAgKyBtaW5vcml0eXxzY2hvb2xpZCkgKyAoMXxzY2hvb2xpZC9jbGFzc2lkKSxkYXRhPWRhdClcbnN1bW1hcnkoZml0KVxuXG5wcmludChWYXJDb3JyKGZpdCksIGNvbXA9KFwiVmFyaWFuY2VcIikpXG5cbnZfYz1WYXJDb3JyKGZpdClbMV0kY2xhc3NpZC5zY2hvb2xpZFsxXVxudl9zPVZhckNvcnIoZml0KVsyXSRzY2hvb2xpZFsxXVxudl9taW5vPVZhckNvcnIoZml0KVszXSRzY2hvb2xpZC4xWzFdXG5cbiNWX1MobWlub3JpdHk9MClcbnZfYyt2X3NcblxuXG5gYGAifQ== -->
+<pre class="r"><code>
+fit&lt;-lmer(math1st~housepov + mathknow + mathprep + yearstea + sex + minority + ses + (0 + minority|schoolid) + (1|schoolid/classid),data=dat)
+summary(fit)
+
+print(VarCorr(fit), comp=(&quot;Variance&quot;))
+
+v_c=VarCorr(fit)[1]$classid.schoolid[1]
+v_s=VarCorr(fit)[2]$schoolid[1]
+v_mino=VarCorr(fit)[3]$schoolid.1[1]
+
+#V_S(minority=0)
+v_c+v_s
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>*what are: V_S(minority=0.25), V_S(minority=+0.50), V_S(minority=+0.75) ?</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI1ZfUyhtaW5vcml0eT0wLjI1KVxudl9jK3ZfcysoLjI1XjIpKnZfc2VzXG5cbiNWX1MobWlub3JpdHk9MC41MClcbnZfYyt2X3MrKC41XjIpKnZfc2VzXG5cbiNWX1MobWlub3JpdHk9MC43NSlcbnZfYyt2X3MrKC43NV4yKSp2X3Nlc1xuXG5cbmBgYCJ9 -->
+<pre class="r"><code>#V_S(minority=0.25)
+v_c+v_s+(.25^2)*v_ses
+
+#V_S(minority=0.50)
+v_c+v_s+(.5^2)*v_ses
+
+#V_S(minority=0.75)
+v_c+v_s+(.75^2)*v_ses
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p><em>now consider the model with a random slope in ses &amp; minority. </em>what are: V_C, V_S(minority=0,ses=0), V_E ? We need to list ‘ses=0, minority=0’ here, or we don’t know how to use the slope variance</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZml0PC1sbWVyKG1hdGgxc3R+aG91c2Vwb3YgKyBtYXRoa25vdyArIG1hdGhwcmVwICsgeWVhcnN0ZWEgKyBzZXggKyBtaW5vcml0eSArIHNlcyArICgwICsgc2VzICsgbWlub3JpdHl8c2Nob29saWQpICsgKDF8c2Nob29saWQvY2xhc3NpZCksZGF0YT1kYXQpXG5cbnN1bW1hcnkoZml0KVxuXG5wcmludChWYXJDb3JyKGZpdCksIGNvbXA9KFwiVmFyaWFuY2VcIikpXG5cbnZfYz1WYXJDb3JyKGZpdClbMV0kY2xhc3NpZC5zY2hvb2xpZFsxXVxudl9zPVZhckNvcnIoZml0KVsyXSRzY2hvb2xpZFsxXVxudl9zZXM9VmFyQ29ycihmaXQpWzNdJHNjaG9vbGlkLjFbMV1cbnZfbWlubz1WYXJDb3JyKGZpdClbM10kc2Nob29saWQuMVs0XVxuXG4jVl9TKG1pbm9yaXR5PTAsc2VzPTApXG52X2Mrdl9zXG5cblxuYGBgIn0= -->
+<pre class="r"><code>fit&lt;-lmer(math1st~housepov + mathknow + mathprep + yearstea + sex + minority + ses + (0 + ses + minority|schoolid) + (1|schoolid/classid),data=dat)
+
+summary(fit)
+
+print(VarCorr(fit), comp=(&quot;Variance&quot;))
+
+v_c=VarCorr(fit)[1]$classid.schoolid[1]
+v_s=VarCorr(fit)[2]$schoolid[1]
+v_ses=VarCorr(fit)[3]$schoolid.1[1]
+v_mino=VarCorr(fit)[3]$schoolid.1[4]
+
+#V_S(minority=0,ses=0)
+v_c+v_s
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>*what are: V_S(ses=0,minority=0.50), V_S(ses=0.50,minority=0), V_S(ses= 0.50, minority= 0.50) ?</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI1ZfUyhzZXM9MCxtaW5vcml0eT0wLjUwKVxudl9jK3ZfcysuNV4yKnZfbWlub1xuXG4jVl9TKHNlcz0wLjUwLG1pbm9yaXR5PTApXG52X2Mrdl9zKy41XjIqdl9zZXNcblxuI1ZfUyhzZXM9IDAuNTAsIG1pbm9yaXR5PSAwLjUwKVxudl9jK3ZfcysuNV4yKnZfc2VzKy41XjIqdl9taW5vXG5cblxuYGBgIn0= -->
+<pre class="r"><code>#V_S(ses=0,minority=0.50)
+v_c+v_s+.5^2*v_mino
+
+#V_S(ses=0.50,minority=0)
+v_c+v_s+.5^2*v_ses
+
+#V_S(ses= 0.50, minority= 0.50)
+v_c+v_s+.5^2*v_ses+.5^2*v_mino
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>*In the last model, what is a “likely” (+/- 1 sd) range for _{0jk}</p>
+<p>Since _{0jk} has a mean of zero, the “likely” SD range is (-9.2963 , 9.2963)</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5wcmludChWYXJDb3JyKGZpdCksIGNvbXA9KFwiU3RkLkRldi5cIikpXG5cbmBgYCJ9 -->
+<pre class="r"><code>
+print(VarCorr(fit), comp=(&quot;Std.Dev.&quot;))
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p><em>Can we make a similar statement about <span class="math inline">\(\zeta_{0k}\)</span>?<br />
+</em>If so, are you considering either of the two random slope terms, <span class="math inline">\(\zeta_{1k}\)</span> and <span class="math inline">\(\zeta_{2k}\)</span> for ses and minority?</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-chunk-end -->
 </div>
 </div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIlIgTm90ZWJvb2siDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KDQpgYGB7cn0NCmRhdDwtcmVhZC5jc3YoIi4uL2NsYXNzcm9vbS5jc3YiKQ0KYXR0YWNoKGRhdCkNCmRhdCRtYXRoMXN0IDwtIG1hdGhraW5kICsgbWF0aGdhaW4NCmBgYA0KIyNVTU0gTU9ERUwNCg0KYGBge3IsIG1lc3NhZ2U9RkFMU0UsIHdhcm5pbmc9RkFMU0V9DQpyZXF1aXJlKGxtZTQpDQpyZXF1aXJlKGxtZXJUZXN0KQ0KdW1tLjEgPC0gbG1lcihtYXRoMXN0IH4gKDF8c2Nob29saWQvY2xhc3NpZCksIGRhdGEgPWRhdCkNCnN1bW1hcnkodW1tLjEpDQpgYGANCg0KJCQNCk1BVEgxU1Rfe2lqa30gPSBiXzAgKyBcZXRhX3tqa30gKyBcemV0YV97a30gKyBcdmFyZXBzaWxvbl97aWprfQ0KJCQNCldpdGggJFx6ZXRhX3trfSQgfiBOKDAsJFxzaWdtYV4yX3tcemV0YX0kKSwgJFxldGFfe2prfSQgfiBOKDAsJFxzaWdtYV4yX3tcZXRhfSQpLCBhbmQgJFx2YXJlcHNpbG9uX3tpamt9JCB+IE4oMCwkXHNpZ21hXjJfe1x2YXJlcHNpbG9ufSQpLCBpbmRlcGVuZGVudCBvZiBvbmUgYW5vdGhlci4NCg0KIyMjI0lDQw0KJCQNClxzaWdtYV4yX3tcZXRhfSA9IDg1LjQ2DQokJA0KJCQNClxzaWdtYV4yX3tcemV0YX0gPSAyODAuNjgNCiQkDQokJA0KXGhhdHtcc2lnbWF9XjJfe1x2YXJlcHNpbG9ufSA9IDExNDYuODANCiQkDQokJA0KSUNDID0gXGZyYWN7XHNpZ21hXjJfe1x6ZXRhfX17XHNpZ21hXjJfe1x6ZXRhfSArIFxzaWdtYV4yX3tcdmFyZXBzaWxvbn19ID0gXGZyYWN7fXszNjQuMjMgKyAxMzQ0LjV9ID0gMC4yMDczMDYNCiQkDQoNCg0KIyNBZGQgc2Nob29sIGxldmVsIHByZWRpY3RvcnMgKEhPVVNFUE9WKQ0KYGBge3J9DQpsbWUxPC1sbWVyKG1hdGgxc3R+aG91c2Vwb3YgKyAoMXxzY2hvb2xpZC9jbGFzc2lkKSxkYXRhPWRhdCkNCnN1bW1hcnkobG1lMSkNCmBgYA0KDQpgYGB7cn0NCmFub3ZhKGxtZTEsdW1tLjEpDQpgYGANCg0KQWRkaW5nIHRoZSBzY2hvb2wtbGV2ZWwgcHJlZGljdG9yIGlzIHN0YXRpc3RpY2FsbHkgc2lnbmlmaWNhbnQsIGFuZCBhbiBpbXByb3ZlbWVudCBmcm9tIHRoZSBVTU0gbW9kZWwuDQoNCiMjIyNSZXBvcnQgJFxzaWdtYV4yX3tcemV0YX0kIGFuZCAkXHNpZ21hXjJfe1x2YXJlcHNpbG9ufSQNCiQkDQpcc2lnbWFeMl97XGV0YX0gPSA4Mi4zNg0KJCQNCiQkDQpcc2lnbWFeMl97XHpldGF9ID0gMjUwLjkzDQokJA0KJCQNClxoYXR7XHNpZ21hfV4yX3tcdmFyZXBzaWxvbn0gPSAxMTQ2Ljk1DQokJA0KDQokXHNpZ21hXjJfe1x6ZXRhfSQgaXMgcmVkdWNlZCBmcm9tIDI4MC42OCB0byAyNTAuOTMuICRcc2lnbWFeMl97XGV0YX0kIGlzIHJlZHVjZWQgZnJvbSA4NS40NiB0byA4Mi4zNi4gVGhlIHJlZHVjdGlvbiBpbiBzY2hvb2wgdmFyaWFuY2UgaXMgZXhwZWN0ZWQuIFRoZSBjbGFzc3Jvb20gdmFyaWFuY2UgaXMgcmVkdWNlZCBzbGlnaHRseSBwb3NzaWJseSBkdWUgdG8gYWdncmVnYXRlIGVmZmVjdCwgd2hlcmUgY2xhc3Nyb29tIGhhcyBib3RoIHRoZSBzY2hvb2wgbGV2ZWwgYW5kIGNsYXNzcm9vbSBlZmZlY3QuDQoNCiMjQUREIENsYXNzIGxldmVsIHByZWRzICYgcmVwb3J0IGlmIGp1c3RpZmVkLg0KYGBge3J9DQpsbWUyPC1sbWVyKG1hdGgxc3R+aG91c2Vwb3YgKyBtYXRoa25vdyArIG1hdGhwcmVwICsgeWVhcnN0ZWEgKyAoMXxzY2hvb2xpZC9jbGFzc2lkKSxkYXRhPWRhdCkNCnN1bW1hcnkobG1lMikNCmBgYA0KDQpOb25lIG9mIHRoZW0gYXJlIHNpZ25pZmljYW50IGV4Y2VwdCBmb3IgaG91c2Vob2xkIHBvdmVydHkuDQoNCiMjIyNKdXN0aWZpZWQ/DQpgYGB7cn0NCmFub3ZhKGxtZTEsbG1lMikNCmBgYA0KDQoNCiMjIyNSZXBvcnQgY2hhbmdlIHRvICRcc2lnbWFeMl97XGV0YX0kDQokJA0KXHNpZ21hXjJfe1xldGF9ID0gOTQuMzYNCiQkDQokXHNpZ21hXjJfe1xldGF9JCBpbmNyZWFzZWQgZnJvbSA4Mi4zNiB0byA5NC4zNi4NCg0KIyMjI1JlcG9ydCBjaGFuZ2UgdG8gJFxzaWdtYV4yX3tcdmFyZXBzaWxvbn0kDQokJA0KXHNpZ21hXjJfe1x2YXJlcHNpbG9ufSA9IDExMzYuNDMNCiQkDQokXHNpZ21hXjJfe1x2YXJlcHNpbG9ufSQgZGVjcmVhc2VkIGZyb20gMTE0Ni45NSB0byAxMTM2LjQzLg0KDQojIyMjSHlwb3RoZXNpcyBhcyB0byB3aHkgJFxzaWdtYV4yX3tcdmFyZXBzaWxvbn0kIGlzIHJlZHVjZWQuDQpOb25lIG9mIHRoZSBjbGFzc3Jvb20tbGV2ZWwgY292YXJpYXRlcyBhcmUgc3RhdGlzdGljYWxseSBzaWduaWZpY2FudC4gQnkgYWRkaW5nIHRoZXNlIHZhcmlhYmxlcywgaXQgbWF5IGhhdmUgaW5jcmVhc2VkIHRoZSB1bmNlcnRhaW50eSBhdHRyaWJ1dGVkIHRvIHRoZSBiZXR3ZWVuIGNsYXNzcm9vbSBlZmZlY3QuDQoNCiMjQUREIHN0dWRlbnQgbGV2ZWwgcHJlZHMgJiByZXBvcnQgaWYganVzdGlmZWQuDQpgYGB7cn0NCmxtZTM8LWxtZXIobWF0aDFzdH5ob3VzZXBvdiArIG1hdGhrbm93ICsgbWF0aHByZXAgKyB5ZWFyc3RlYSArIHNleCArIG1pbm9yaXR5ICsgc2VzICsgKDF8c2Nob29saWQvY2xhc3NpZCksZGF0YT1kYXQpDQpzdW1tYXJ5KGxtZTMpDQpgYGANCg0KYGBge3J9DQphbm92YShsbWUyLGxtZTMpDQpgYGANCg0KVGhlIGFkZGl0aW9uIG9mIGFsbCB0aGUgc3R1ZGVudC1sZXZlbCBwcmVkaWN0b3JzIGlzIGFuIGltcHJvdmVtZW50IGZyb20gdGhlIHByZXZpb3VzIG1vZGVsIChMUlQgcC12YWx1ZSA8MC4wNSkuDQoNCiMjIyNSZXBvcnQgY2hhbmdlIGluIHZhcmlhbmNlIGNvbXBvbmVudHMgZm9yIGFsbCBsZXZlbHM7IHdoeSBkaWQgc2Nob29sIGxldmVsIGRyb3A/DQokJA0KXHNpZ21hXjJfe1xldGF9ID0gOTMuODkNCiQkDQokJA0KXHNpZ21hXjJfe1x6ZXRhfSA9IDE2OS40NQ0KJCQNCiQkDQpcaGF0e1xzaWdtYX1eMl97XHZhcmVwc2lsb259ID0gMTA2NC45NQ0KJCQNCg0KJFxzaWdtYV4yX3tcZXRhfSQgZHJvcHMgZnJvbSA5NC4zNiB0byA5My44OS4NCiRcc2lnbWFeMl97XHpldGF9JCBkcm9wcyBmcm9tIDIyMy4zMSB0byAxNjkuNDUuDQokXHNpZ21hfV4yX3tcdmFyZXBzaWxvbn0kIGRyb3BzIGZyb20gMTEzNi40MyB0byAxMDY0Ljk1Lg0KDQoNClNjaG9vbC1sZXZlbCB2YXJpYW5jZSBkcm9wcyBwb3NzaWJseSBkdWUgdG8gcmVwYXJ0aXRpb25pbmcuIFRoZSB2YXJpYW5jZSBwcmV2aW91c2x5IGF0dHJpYnV0ZWQgdG8gaXQgd2VyZSBleHBsYWluZWQgd2l0aCB0aGUgYWRkaXRpb24gb2YgdGhlIGZpeGVkIHNjaG9vbCB2YXJpYXRlcy4gDQoNCiQkDQpNQVRIMVNUX3tpamt9ID0gYl8wICsgYl8xSE9VU0VQT1Zfe2t9ICsgYl8yTUFUSEtOT1dfe2prfSArIGJfM01BVEhQUkVQX3tqa30gKyBiXzRZRUFSU1RFQV97amt9ICsgYl81U0VYX3tpamt9ICsgYl82TUlOT1JJVFlfe2lqa30gKyBiXzdTRVNfe2lqa30gKyBcZXRhX3tqa30gKyBcemV0YV97a30gKyBcdmFyZXBzaWxvbl97aWprfQ0KJCQNCldpdGggJFx6ZXRhX3trfSQgfiBOKDAsJFxzaWdtYV4yX3tcemV0YX0kKSwgJFxldGFfe2prfSQgfiBOKDAsJFxzaWdtYV4yX3tcZXRhfSQpLCBhbmQgJFx2YXJlcHNpbG9uX3tpamt9JCB+IE4oMCwkXHNpZ21hXjJfe1x2YXJlcHNpbG9ufSQpLCBpbmRlcGVuZGVudCBvZiBvbmUgYW5vdGhlci4NCg0KIyNBREQgYSByYW5kb20gc2xvcGUgZm9yIGVhY2ggdGVhY2hlciBsZXZlbCBwcmVkaWN0b3IuDQoNCiMjIyMgTUFUSEtOT1cNCmBgYHtyfQ0KbG1lNC4xPC1sbWVyKG1hdGgxc3R+aG91c2Vwb3YgKyBtYXRoa25vdyArIG1hdGhwcmVwICsgeWVhcnN0ZWEgKyBzZXggKyBtaW5vcml0eSArIHNlcyArICgwK21hdGhrbm93fHNjaG9vbGlkKSArICgxfHNjaG9vbGlkL2NsYXNzaWQpLGRhdGE9ZGF0KQ0Kc3VtbWFyeShsbWU0LjEpDQpgYGANCmBgYHtyfQ0KcmFuZChsbWU0LjEpDQpgYGANCg0KIyMjIyBNQVRIUFJFUA0KYGBge3J9DQpsbWU0LjI8LWxtZXIobWF0aDFzdH5ob3VzZXBvdiArIG1hdGhrbm93ICsgbWF0aHByZXAgKyB5ZWFyc3RlYSArIHNleCArIG1pbm9yaXR5ICsgc2VzICsgKDArbWF0aHByZXB8c2Nob29saWQpICsgKDF8c2Nob29saWQvY2xhc3NpZCksZGF0YT1kYXQpDQpzdW1tYXJ5KGxtZTQuMikNCmBgYA0KYGBge3J9DQpyYW5kKGxtZTQuMikNCmBgYA0KDQojIyMjIFlFQVJTVEVBDQpgYGB7cn0NCmxtZTQuMzwtbG1lcihtYXRoMXN0fmhvdXNlcG92ICsgbWF0aGtub3cgKyBtYXRocHJlcCArIHllYXJzdGVhICsgc2V4ICsgbWlub3JpdHkgKyBzZXMgKyAoMCt5ZWFyc3RlYXxzY2hvb2xpZCkgKyAoMXxzY2hvb2xpZC9jbGFzc2lkKSxkYXRhPWRhdCkNCnN1bW1hcnkobG1lNC4zKQ0KYGBgDQpgYGB7cn0NCnJhbmQobG1lNC4zKQ0KYGBgDQoNCiMjV2h5IG5vdCB0cnkgZm9yIGEgcmFuZG9tIHNsb3BlIG9uIHRoZSBob3VzZXBvdiBlZmZlY3Q/DQoNCldlIHdvdWxkIG5vdCBiZSBhYmxlIHRvIG9ic2VydmUgdGhlIGVmZmVjdCBvZiBhZGRpbmcgYSByYW5kb20gc2xvcGUgdG8gaG91c2Vwb3YgLSB0aGVyZSBpcyBubyBsZXZlbCBoaWdoZXIgdXAuDQoNCiMjUmV0cnkgdGhlIGFib3ZlLCBhbGxvd2luZyB0aGUgc2xvcGVzIHRvIGJlIGNvcnJlbGF0ZWQgd2l0aCB0aGUgcmFuZG9tIGludGVyY2VwdHMuDQoNCiMjIyMgTUFUSEtOT1cNCmBgYHtyLCBtZXNzYWdlPVRSVUUsIHdhcm5pbmc9VFJVRX0NCmxtZTQuMS4xPC1sbWVyKG1hdGgxc3R+aG91c2Vwb3YgKyBtYXRoa25vdyArIG1hdGhwcmVwICsgeWVhcnN0ZWEgKyBzZXggKyBtaW5vcml0eSArIHNlcyArIChtYXRoa25vd3xzY2hvb2xpZCkrKDF8Y2xhc3NpZCksZGF0YT1kYXQpDQpzdW1tYXJ5KGxtZTQuMS4xKQ0KYGBgDQpgYGB7cn0NCnJhbmQobG1lNC4xLjEpDQpgYGANCg0KIyMjIyBNQVRIUFJFUA0KYGBge3J9DQpsbWU0LjIuMTwtbG1lcihtYXRoMXN0fmhvdXNlcG92ICsgbWF0aGtub3cgKyBtYXRocHJlcCArIHllYXJzdGVhICsgc2V4ICsgbWlub3JpdHkgKyBzZXMgKyAobWF0aHByZXB8c2Nob29saWQpICsgKDF8Y2xhc3NpZCksZGF0YT1kYXQpDQpzdW1tYXJ5KGxtZTQuMi4xKQ0KYGBgDQpgYGB7cn0NCnJhbmQobG1lNC4yLjEpDQpgYGANCg0KDQojIyMjIFlFQVJTVEVBDQpgYGB7cn0NCmxtZTQuMy4xPC1sbWVyKG1hdGgxc3R+aG91c2Vwb3YgKyBtYXRoa25vdyArIG1hdGhwcmVwICsgeWVhcnN0ZWEgKyBzZXggKyBtaW5vcml0eSArIHNlcyArICh5ZWFyc3RlYXxzY2hvb2xpZCkgKyAoMXxjbGFzc2lkKSxkYXRhPWRhdCkNCnN1bW1hcnkobG1lNC4zLjEpDQpgYGANCmBgYHtyfQ0KcmFuZChsbWU0LjMuMSkNCmBgYA0KDQoNCiMjI3JlcG9ydCBhbnl0aGluZyB1bnVzdWFsIGFib3V0IHRoZSB2YXJpYW5jZSBjb21wb25lbnRzDQoNCg0KDQojI3RyeSB0byBhZGQgYSByYW5kb20gc2xvcGUgZm9yIGVhY2ggc3R1ZGVudCBsZXZlbCBwcmVkaWN0b3IgYXQgdGhlIGNsYXNzcm9vbSBsZXZlbCAob25lIGJ5IG9uZSAtIG5vdCBhbGwgdG9nZXRoZXIpDQoNCiMjIyMgU0VYDQpgYGB7ciwgbWVzc2FnZT1UUlVFLCB3YXJuaW5nPVRSVUV9DQpsbWU1LjE8LWxtZXIobWF0aDFzdH5ob3VzZXBvdiArIG1hdGhrbm93ICsgbWF0aHByZXAgKyB5ZWFyc3RlYSArIHNleCArIG1pbm9yaXR5ICsgc2VzICsgKDAgKyBzZXh8Y2xhc3NpZCkgKyAoMXxzY2hvb2xpZC9jbGFzc2lkKSxkYXRhPWRhdCkNCnN1bW1hcnkobG1lNS4xKQ0KYGBgDQpgYGB7cn0NCnJhbmQobG1lNS4xKQ0KYGBgDQoNCg0KIyMjIyBNSU5PUklUWQ0KYGBge3IsIG1lc3NhZ2U9VFJVRSwgd2FybmluZz1UUlVFfQ0KbG1lNS4yPC1sbWVyKG1hdGgxc3R+aG91c2Vwb3YgKyBtYXRoa25vdyArIG1hdGhwcmVwICsgeWVhcnN0ZWEgKyBzZXggKyBtaW5vcml0eSArIHNlcyArICgwICsgbWlub3JpdHl8Y2xhc3NpZCkgKyAoMXxzY2hvb2xpZC9jbGFzc2lkKSxkYXRhPWRhdCkNCnN1bW1hcnkobG1lNS4yKQ0KYGBgDQpgYGB7cn0NCnJhbmQobG1lNS4yKQ0KYGBgDQoNCg0KIyMjIyBTRVMNCmBgYHtyLCBtZXNzYWdlPVRSVUUsIHdhcm5pbmc9VFJVRX0NCmxtZTUuMzwtbG1lcihtYXRoMXN0fmhvdXNlcG92ICsgbWF0aGtub3cgKyBtYXRocHJlcCArIHllYXJzdGVhICsgc2V4ICsgbWlub3JpdHkgKyBzZXMgKyAoMCArIHNlc3xjbGFzc2lkKSArICgxfHNjaG9vbGlkL2NsYXNzaWQpLGRhdGE9ZGF0KQ0Kc3VtbWFyeShsbWU1LjMpDQpgYGANCmBgYHtyfQ0KcmFuZChsbWU1LjMpDQpgYGANCg0KDQojI3doeSBpcyBpdCBhIGJhZCBpZGVhIHRvIGluY2x1ZGUgYSBjbGFzcy1sZXZlbCB2YXJpYWJsZSB3aXRoIHJhbmRvbSBzbG9wZXMgYXQgdGhlIGNsYXNzcm9vbSBsZXZlbD8NCg0KV2Ugd2lsbCBub3QgYmUgYWJsZSB0byBvYnNlcnZlIHRoZSB2YXJ5aW5nIHNsb3BlcyBhdCB0aGUgY2xhc3Nyb29tLWxldmVsLCBvbmx5IG9uZSBsZXZlbCBoaWdoZXIgKHNjaG9vbC1sZXZlbCkuDQoNCg0KIyNyZXRyeSB0aGUgYWJvdmUsIGFsbG93aW5nIHRoZSBzbG9wZXMgdG8gYmUgY29ycmVsYXRlZCB3aXRoIHRoZSByYW5kb20gaW50ZXJjZXB0cy4NCg0KIyMjIyBTRVgNCmBgYHtyLCBtZXNzYWdlPVRSVUUsIHdhcm5pbmc9VFJVRX0NCmxtZTUuMS4xPC1sbWVyKG1hdGgxc3R+aG91c2Vwb3YgKyBtYXRoa25vdyArIG1hdGhwcmVwICsgeWVhcnN0ZWEgKyBzZXggKyBtaW5vcml0eSArIHNlcyArIChzZXh8Y2xhc3NpZCkgKyAoMXxzY2hvb2xpZCkgLGRhdGE9ZGF0KQ0Kc3VtbWFyeShsbWU1LjEuMSkNCmBgYA0KYGBge3J9DQpyYW5kKGxtZTUuMS4xKQ0KYGBgDQoNCg0KIyMjIyBNSU5PUklUWQ0KYGBge3IsIG1lc3NhZ2U9VFJVRSwgd2FybmluZz1UUlVFfQ0KbG1lNS4yLjE8LWxtZXIobWF0aDFzdH5ob3VzZXBvdiArIG1hdGhrbm93ICsgbWF0aHByZXAgKyB5ZWFyc3RlYSArIHNleCArIG1pbm9yaXR5ICsgc2VzICArIChtaW5vcml0eXxjbGFzc2lkKSArICgxfHNjaG9vbGlkKSxkYXRhPWRhdCkNCnN1bW1hcnkobG1lNS4yLjEpDQpgYGANCmBgYHtyfQ0KcmFuZChsbWU1LjIuMSkNCmBgYA0KDQoNCiMjIyMgU0VTDQpgYGB7ciwgbWVzc2FnZT1UUlVFLCB3YXJuaW5nPVRSVUV9DQpsbWU1LjMuMTwtbG1lcihtYXRoMXN0fmhvdXNlcG92ICsgbWF0aGtub3cgKyBtYXRocHJlcCArIHllYXJzdGVhICsgc2V4ICsgbWlub3JpdHkgKyBzZXMgKyAoc2VzfGNsYXNzaWQpICsgKDF8c2Nob29saWQpLGRhdGE9ZGF0KQ0Kc3VtbWFyeShsbWU1LjMuMSkNCmBgYA0KYGBge3J9DQpyYW5kKGxtZTUuMy4xKQ0KYGBgDQoNCg0KIyN0cnkgdG8gYWRkIGEgcmFuZG9tIHNsb3BlIGZvciBlYWNoIHN0dWRlbnQgbGV2ZWwgcHJlZGljdG9yIGF0IHRoZSBzY2hvb2wgbGV2ZWwgKG9uZSBieSBvbmUgLSBub3QgYWxsIHRvZ2V0aGVyKQ0KDQojIyMjU0VYDQpgYGB7cn0NCmxtZTYuMTwtbG1lcihtYXRoMXN0fmhvdXNlcG92ICsgbWF0aGtub3cgKyBtYXRocHJlcCArIHllYXJzdGVhICsgc2V4ICsgbWlub3JpdHkgKyBzZXMgKyAoMCArIHNleHxzY2hvb2xpZCkgKyAoMXxzY2hvb2xpZC9jbGFzc2lkKSxkYXRhPWRhdCkNCnN1bW1hcnkobG1lNi4xKQ0KYGBgDQpgYGB7cn0NCnJhbmQobG1lNi4xKQ0KYGBgDQoNCg0KIyMjI01JTk9SSVRZDQpgYGB7cn0NCmxtZTYuMjwtbG1lcihtYXRoMXN0fmhvdXNlcG92ICsgbWF0aGtub3cgKyBtYXRocHJlcCArIHllYXJzdGVhICsgc2V4ICsgbWlub3JpdHkgKyBzZXMgKyAoMCArIG1pbm9yaXR5fHNjaG9vbGlkKSArICgxfHNjaG9vbGlkL2NsYXNzaWQpLGRhdGE9ZGF0KQ0Kc3VtbWFyeShsbWU2LjIpDQpgYGANCmBgYHtyfQ0KcmFuZChsbWU2LjIpDQpgYGANCg0KDQojIyMjU0VTDQpgYGB7cn0NCmxtZTYuMzwtbG1lcihtYXRoMXN0fmhvdXNlcG92ICsgbWF0aGtub3cgKyBtYXRocHJlcCArIHllYXJzdGVhICsgc2V4ICsgbWlub3JpdHkgKyBzZXMgKyAoMCArIHNlc3xzY2hvb2xpZCkgKyAoMXxzY2hvb2xpZC9jbGFzc2lkKSxkYXRhPWRhdCkNCnN1bW1hcnkobG1lNi4zKQ0KYGBgDQpgYGB7cn0NCnJhbmQobG1lNi4zKQ0KYGBgDQoNCg0KIyNyZXRyeSB0aGUgYWJvdmUsIGFsbG93aW5nIHRoZSBzbG9wZXMgdG8gYmUgY29ycmVsYXRlZCB3aXRoIHRoZSByYW5kb20gaW50ZXJjZXB0cy4NCg0KIyMjI1NFWA0KYGBge3J9DQpsbWU2LjEuMTwtbG1lcihtYXRoMXN0fmhvdXNlcG92ICsgbWF0aGtub3cgKyBtYXRocHJlcCArIHllYXJzdGVhICsgc2V4ICsgbWlub3JpdHkgKyBzZXMgKyAoc2V4fHNjaG9vbGlkKSArICgxfGNsYXNzaWQpLGRhdGE9ZGF0KQ0Kc3VtbWFyeShsbWU2LjEuMSkNCmBgYA0KYGBge3J9DQpyYW5kKGxtZTYuMS4xKQ0KYGBgDQoNCg0KIyMjI01JTk9SSVRZDQpgYGB7cn0NCmxtZTYuMi4xPC1sbWVyKG1hdGgxc3R+aG91c2Vwb3YgKyBtYXRoa25vdyArIG1hdGhwcmVwICsgeWVhcnN0ZWEgKyBzZXggKyBtaW5vcml0eSArIHNlcyArIChtaW5vcml0eXxzY2hvb2xpZCkgKyAoMXxjbGFzc2lkKSxkYXRhPWRhdCkNCnN1bW1hcnkobG1lNi4yLjEpDQpgYGANCmBgYHtyfQ0KcmFuZChsbWU2LjIuMSkNCmBgYA0KDQoNCiMjIyNTRVMNCmBgYHtyfQ0KbG1lNi4zLjE8LWxtZXIobWF0aDFzdH5ob3VzZXBvdiArIG1hdGhrbm93ICsgbWF0aHByZXAgKyB5ZWFyc3RlYSArIHNleCArIG1pbm9yaXR5ICsgc2VzICsgKHNlc3xzY2hvb2xpZCkgKyAoMXxjbGFzc2lkKSxkYXRhPWRhdCkNCnN1bW1hcnkobG1lNi4zLjEpDQpgYGANCmBgYHtyfQ0KcmFuZChsbWU2LjMuMSkNCmBgYA0KDQoNCiMjI3JlcG9ydCBhbnl0aGluZyB1bnVzdWFsIGFib3V0IHRoZSB2YXJpYW5jZSBjb21wb25lbnRzDQoNCg0KIyN0YWtlIHRoZSB0d28gcHJlZGljdG9ycyB0aGF0IGhhZCAic2lnbmlmLiIgcmFuZG9tIHNsb3BlcywgaW4gdGhlIGZvcm1zIGluIHdoaWNoIHRoZXkgd29ya2VkIChpbmRlcC4gb3IgY29ycmVsYXRlZCkgDQoNClRoZSB0d28gcHJlZGljdG9ycyB0aGF0IGhhZCBzdGF0aXN0aWNhbGx5IHNpZ25pZmljYW50IHJhbmRvbSBzbG9wZXMgYXJlIHNlcyByYW5kb20gc2xvcGVzIHVuY29ycmVsYXRlZCB3aXRoIHRoZSBzY2hvb2wgcmFuZG9tIGludGVyY2VwdCwgYW5kIG1pbm9yaXR5IHJhbmRvbSBzbG9wZXMgY29ycmVsYXRlZCB3aXRoIHRoZSBzY2hvb2wgcmFuZG9tIGVmZmVjdC4NCg0KIyMjI01vZGVsOg0KJCQNCk1BVEgxU1Rfe2lqa30gPSBiXzAgKyBiXzFIT1VTRVBPVl97a30gKyBiXzJNQVRIS05PV197amt9ICsgYl8zTUFUSFBSRVBfe2prfSArIGJfNFlFQVJTVEVBX3tqa30gKyBiXzVTRVhfe2lqa30gKyBiXzZNSU5PUklUWV97aWprfSArIGJfN1NFU197aWprfSArIFxldGFfe2prfSArIFx6ZXRhX3swa30gICsgXHpldGFfezZrfU1JTk9SSVRZX3tpamt9ICsgXHpldGFfezdrfVNFU197aWprfSArIFx2YXJlcHNpbG9uX3tpamt9DQokJA0KV2l0aCAkXHpldGFfezBrfSQgfiBOKDAsJFxzaWdtYV4yX3tcemV0YV97MH19JCksICRcemV0YV97Nmt9JCB+IE4oMCwkXHNpZ21hXjJfe1x6ZXRhX3s2fX0kKSwgJFx6ZXRhX3s3a30kIH4gTigwLCRcc2lnbWFeMl97XHpldGFfezd9fSQpLCAgJFxldGFfe2prfSQgfiBOKDAsJFxzaWdtYV4yX3tcZXRhfSQpLCBhbmQgJFx2YXJlcHNpbG9uX3tpamt9JCB+IE4oMCwkXHNpZ21hXjJfe1x2YXJlcHNpbG9ufSQpLCAkY29ycihcemV0YV97MGt9LFx6ZXRhX3s2a30pID0gXHJob197XHpldGFfezBrfVx6ZXRhX3s2a319JCBhbmQgYWxsIG90aGVyIHBhaXJzIG9mIHJhbmRvbSB0ZXJtcyBpbmRlcGVuZGVudCBvZiBvbmUgYW5vdGhlci4NCg0KYGBge3J9DQpsbWUuNzwtbG1lcihtYXRoMXN0fmhvdXNlcG92ICsgbWF0aGtub3cgKyBtYXRocHJlcCArIHllYXJzdGVhICsgc2V4ICsgbWlub3JpdHkgKyBzZXMgKyAoMCtzZXN8c2Nob29saWQpICsgKG1pbm9yaXR5fHNjaG9vbGlkKSArICgxfGNsYXNzaWQpLGRhdGE9ZGF0KQ0Kc3VtbWFyeShsbWUuNykNCmBgYA0KDQoNCiMjI0p1c3RpZmllZD8NCg0KQ29tcGFyaW5nIGl0IHRvIGp1c3QgdGhlIG1vZGVsIHdpdGggdW5jb3JyZWxhdGVkIFNFUyByYW5kb20gc2xvcGVzOg0KYGBge3J9DQphbm92YShsbWU2LjMsbG1lLjcpDQpgYGANCg0KQ29tcGFyaW5nIGl0IHRvIGp1c3QgdGhlIG1vZGVsIHdpdGggY29ycmVsYXRlZCBNSU5PUklUWSByYW5kb20gc2xvcGVzOg0KYGBge3J9DQphbm92YShsbWU2LjIuMSxsbWUuNykNCmBgYA0KDQpCb3RoIExSVCBzaG93IHRoYXQgaGF2aW5nIGJvdGggdGhlIHJhbmRvbSBzbG9wZXMgYWRkZWQgaXMgYW4gaW1wcm92ZW1lbnQgaW4gdGhlIG1vZGVsLg==</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIlIgTm90ZWJvb2siDQpvdXRwdXQ6DQogIHdvcmRfZG9jdW1lbnQ6IGRlZmF1bHQNCiAgcGRmX2RvY3VtZW50OiBkZWZhdWx0DQogIGh0bWxfbm90ZWJvb2s6IGRlZmF1bHQNCi0tLQ0KDQpgYGB7cn0NCmRhdDwtcmVhZC5jc3YoIi4uL2NsYXNzcm9vbS5jc3YiKQ0KYXR0YWNoKGRhdCkNCmRhdCRtYXRoMXN0IDwtIG1hdGhraW5kICsgbWF0aGdhaW4NCmBgYA0KIyNVTU0gTU9ERUwNCg0KYGBge3IsIG1lc3NhZ2U9RkFMU0UsIHdhcm5pbmc9RkFMU0V9DQpyZXF1aXJlKGxtZTQpDQpyZXF1aXJlKGxtZXJUZXN0KQ0KdW1tLjEgPC0gbG1lcihtYXRoMXN0IH4gKDF8c2Nob29saWQvY2xhc3NpZCksIGRhdGEgPWRhdCkNCnN1bW1hcnkodW1tLjEpDQpgYGANCg0KJCQNCk1BVEgxU1Rfe2lqa30gPSBiXzAgKyBcZXRhX3tqa30gKyBcemV0YV97a30gKyBcdmFyZXBzaWxvbl97aWprfQ0KJCQNCldpdGggJFx6ZXRhX3trfSQgfiBOKDAsJFxzaWdtYV4yX3tcemV0YX0kKSwgJFxldGFfe2prfSQgfiBOKDAsJFxzaWdtYV4yX3tcZXRhfSQpLCBhbmQgJFx2YXJlcHNpbG9uX3tpamt9JCB+IE4oMCwkXHNpZ21hXjJfe1x2YXJlcHNpbG9ufSQpLCBpbmRlcGVuZGVudCBvZiBvbmUgYW5vdGhlci4NCg0KIyMjI0lDQw0KJCQNClxzaWdtYV4yX3tcZXRhfSA9IDg1LjQ2DQokJA0KJCQNClxzaWdtYV4yX3tcemV0YX0gPSAyODAuNjgNCiQkDQokJA0KXGhhdHtcc2lnbWF9XjJfe1x2YXJlcHNpbG9ufSA9IDExNDYuODANCiQkDQokJA0KSUNDID0gXGZyYWN7XHNpZ21hXjJfe1x6ZXRhfX17XHNpZ21hXjJfe1x6ZXRhfSArIFxzaWdtYV4yX3tcdmFyZXBzaWxvbn19ID0gXGZyYWN7fXszNjQuMjMgKyAxMzQ0LjV9ID0gMC4yMDczMDYNCiQkDQoNCg0KIyNBZGQgc2Nob29sIGxldmVsIHByZWRpY3RvcnMgKEhPVVNFUE9WKQ0KYGBge3J9DQpsbWUxPC1sbWVyKG1hdGgxc3R+aG91c2Vwb3YgKyAoMXxzY2hvb2xpZC9jbGFzc2lkKSxkYXRhPWRhdCkNCnN1bW1hcnkobG1lMSkNCmBgYA0KDQpgYGB7cn0NCmFub3ZhKGxtZTEsdW1tLjEpDQpgYGANCg0KQWRkaW5nIHRoZSBzY2hvb2wtbGV2ZWwgcHJlZGljdG9yIGlzIHN0YXRpc3RpY2FsbHkgc2lnbmlmaWNhbnQsIGFuZCBhbiBpbXByb3ZlbWVudCBmcm9tIHRoZSBVTU0gbW9kZWwuDQoNCiMjIyNSZXBvcnQgJFxzaWdtYV4yX3tcemV0YX0kIGFuZCAkXHNpZ21hXjJfe1x2YXJlcHNpbG9ufSQNCiQkDQpcc2lnbWFeMl97XGV0YX0gPSA4Mi4zNg0KJCQNCiQkDQpcc2lnbWFeMl97XHpldGF9ID0gMjUwLjkzDQokJA0KJCQNClxoYXR7XHNpZ21hfV4yX3tcdmFyZXBzaWxvbn0gPSAxMTQ2Ljk1DQokJA0KDQokXHNpZ21hXjJfe1x6ZXRhfSQgaXMgcmVkdWNlZCBmcm9tIDI4MC42OCB0byAyNTAuOTMuICRcc2lnbWFeMl97XGV0YX0kIGlzIHJlZHVjZWQgZnJvbSA4NS40NiB0byA4Mi4zNi4gVGhlIHJlZHVjdGlvbiBpbiBzY2hvb2wgdmFyaWFuY2UgaXMgZXhwZWN0ZWQuIFRoZSBjbGFzc3Jvb20gdmFyaWFuY2UgaXMgcmVkdWNlZCBzbGlnaHRseSBwb3NzaWJseSBkdWUgdG8gYWdncmVnYXRlIGVmZmVjdCwgd2hlcmUgY2xhc3Nyb29tIGhhcyBib3RoIHRoZSBzY2hvb2wgbGV2ZWwgYW5kIGNsYXNzcm9vbSBlZmZlY3QuDQoNCiMjQUREIENsYXNzIGxldmVsIHByZWRzICYgcmVwb3J0IGlmIGp1c3RpZmVkLg0KYGBge3J9DQpsbWUyPC1sbWVyKG1hdGgxc3R+aG91c2Vwb3YgKyBtYXRoa25vdyArIG1hdGhwcmVwICsgeWVhcnN0ZWEgKyAoMXxzY2hvb2xpZC9jbGFzc2lkKSxkYXRhPWRhdCkNCnN1bW1hcnkobG1lMikNCmBgYA0KDQpOb25lIG9mIHRoZSBjbGFzc3Jvb20gY292YXJpYXRlcyBhcmUgc2lnbmlmaWNhbnQgZXhjZXB0IGZvciBob3VzZWhvbGQgcG92ZXJ0eS4NCg0KIyMjI0p1c3RpZmllZD8NCmBgYHtyfQ0KcmVxdWlyZShhb2QpDQp3YWxkLnRlc3QoYj1maXhlZihsbWUyKSxTaWdtYT1zdW1tYXJ5KGxtZTIpJHZjb3YsVGVybXM9Mzo1KQ0KYGBgDQpUaGUgZml4ZWQgZWZmZWN0cyB1c2luZyB0aGUgV2FsZCBUZXN0IGFyZSBub3Qgc2lnbmlmaWNhbnQuDQoNCmBgYHtyfQ0KcmFuZChsbWUyKQ0KYGBgDQpIb3dldmVyLCB0aGUgY2xhc3Nyb29tLWxldmVsIHJhbmRvbSBlZmZlY3RzIGFyZSBzdGF0aXN0aWNhbGx5IHNpZ25pZmljYW50Lg0KDQojIyMjUmVwb3J0IGNoYW5nZSB0byAkXHNpZ21hXjJfe1xldGF9JA0KJCQNClxzaWdtYV4yX3tcZXRhfSA9IDk0LjM2DQokJA0KJFxzaWdtYV4yX3tcZXRhfSQgaW5jcmVhc2VkIGZyb20gODIuMzYgdG8gOTQuMzYuDQoNCiMjIyNSZXBvcnQgY2hhbmdlIHRvICRcc2lnbWFeMl97XHZhcmVwc2lsb259JA0KJCQNClxzaWdtYV4yX3tcdmFyZXBzaWxvbn0gPSAxMTM2LjQzDQokJA0KJFxzaWdtYV4yX3tcdmFyZXBzaWxvbn0kIGRlY3JlYXNlZCBmcm9tIDExNDYuOTUgdG8gMTEzNi40My4NCg0KIyMjI0h5cG90aGVzaXMgYXMgdG8gd2h5ICRcc2lnbWFeMl97XHZhcmVwc2lsb259JCBpcyByZWR1Y2VkLg0KTm9uZSBvZiB0aGUgY2xhc3Nyb29tLWxldmVsIGNvdmFyaWF0ZXMgYXJlIHN0YXRpc3RpY2FsbHkgc2lnbmlmaWNhbnQuIEJ5IGFkZGluZyB0aGVzZSB2YXJpYWJsZXMsIGl0IG1heSBoYXZlIGluY3JlYXNlZCB0aGUgdW5jZXJ0YWludHkgYXR0cmlidXRlZCB0byB0aGUgYmV0d2VlbiBjbGFzc3Jvb20gZWZmZWN0Lg0KDQojI0FERCBzdHVkZW50IGxldmVsIHByZWRzICYgcmVwb3J0IGlmIGp1c3RpZmVkLg0KYGBge3J9DQpsbWUzPC1sbWVyKG1hdGgxc3R+aG91c2Vwb3YgKyBtYXRoa25vdyArIG1hdGhwcmVwICsgeWVhcnN0ZWEgKyBzZXggKyBtaW5vcml0eSArIHNlcyArICgxfHNjaG9vbGlkL2NsYXNzaWQpLGRhdGE9ZGF0KQ0Kc3VtbWFyeShsbWUzKQ0KYGBgDQoNCmBgYHtyfQ0KYW5vdmEobG1lMixsbWUzKQ0KYGBgDQoNClRoZSBhZGRpdGlvbiBvZiBhbGwgdGhlIHN0dWRlbnQtbGV2ZWwgcHJlZGljdG9ycyBpcyBhbiBpbXByb3ZlbWVudCBmcm9tIHRoZSBwcmV2aW91cyBtb2RlbCAoTFJUIHAtdmFsdWUgPDAuMDUpLg0KDQojIyMjUmVwb3J0IGNoYW5nZSBpbiB2YXJpYW5jZSBjb21wb25lbnRzIGZvciBhbGwgbGV2ZWxzOyB3aHkgZGlkIHNjaG9vbCBsZXZlbCBkcm9wPw0KJCQNClxzaWdtYV4yX3tcZXRhfSA9IDkzLjg5DQokJA0KJCQNClxzaWdtYV4yX3tcemV0YX0gPSAxNjkuNDUNCiQkDQokJA0KXGhhdHtcc2lnbWF9XjJfe1x2YXJlcHNpbG9ufSA9IDEwNjQuOTUNCiQkDQoNCiRcc2lnbWFeMl97XGV0YX0kIGRyb3BzIGZyb20gOTQuMzYgdG8gOTMuODkuDQokXHNpZ21hXjJfe1x6ZXRhfSQgZHJvcHMgZnJvbSAyMjMuMzEgdG8gMTY5LjQ1Lg0KJFxzaWdtYX1eMl97XHZhcmVwc2lsb259JCBkcm9wcyBmcm9tIDExMzYuNDMgdG8gMTA2NC45NS4NCg0KDQpTY2hvb2wtbGV2ZWwgdmFyaWFuY2UgZHJvcHMgcG9zc2libHkgZHVlIHRvIHJlcGFydGl0aW9uaW5nLiBUaGUgdmFyaWFuY2UgcHJldmlvdXNseSBhdHRyaWJ1dGVkIHRvIGl0IHdlcmUgZXhwbGFpbmVkIHdpdGggdGhlIGFkZGl0aW9uIG9mIHRoZSBmaXhlZCBzY2hvb2wgdmFyaWF0ZXMuIA0KDQokJA0KTUFUSDFTVF97aWprfSA9IGJfMCArIGJfMUhPVVNFUE9WX3trfSArIGJfMk1BVEhLTk9XX3tqa30gKyBiXzNNQVRIUFJFUF97amt9ICsgYl80WUVBUlNURUFfe2prfSArIGJfNVNFWF97aWprfSArIGJfNk1JTk9SSVRZX3tpamt9ICsgYl83U0VTX3tpamt9ICsgXGV0YV97amt9ICsgXHpldGFfe2t9ICsgXHZhcmVwc2lsb25fe2lqa30NCiQkDQpXaXRoICRcemV0YV97a30kIH4gTigwLCRcc2lnbWFeMl97XHpldGF9JCksICRcZXRhX3tqa30kIH4gTigwLCRcc2lnbWFeMl97XGV0YX0kKSwgYW5kICRcdmFyZXBzaWxvbl97aWprfSQgfiBOKDAsJFxzaWdtYV4yX3tcdmFyZXBzaWxvbn0kKSwgaW5kZXBlbmRlbnQgb2Ygb25lIGFub3RoZXIuDQoNCiMjQUREIGEgcmFuZG9tIHNsb3BlIGZvciBlYWNoIHRlYWNoZXIgbGV2ZWwgcHJlZGljdG9yLg0KDQojIyMjIE1BVEhLTk9XDQpgYGB7cn0NCmxtZTQuMTwtbG1lcihtYXRoMXN0fmhvdXNlcG92ICsgbWF0aGtub3cgKyBtYXRocHJlcCArIHllYXJzdGVhICsgc2V4ICsgbWlub3JpdHkgKyBzZXMgKyAoMCttYXRoa25vd3xzY2hvb2xpZCkgKyAoMXxzY2hvb2xpZC9jbGFzc2lkKSxkYXRhPWRhdCkNCnN1bW1hcnkobG1lNC4xKQ0KYGBgDQpgYGB7cn0NCnJhbmQobG1lNC4xKQ0KYGBgDQoNCiMjIyMgTUFUSFBSRVANCmBgYHtyfQ0KbG1lNC4yPC1sbWVyKG1hdGgxc3R+aG91c2Vwb3YgKyBtYXRoa25vdyArIG1hdGhwcmVwICsgeWVhcnN0ZWEgKyBzZXggKyBtaW5vcml0eSArIHNlcyArICgwK21hdGhwcmVwfHNjaG9vbGlkKSArICgxfHNjaG9vbGlkL2NsYXNzaWQpLGRhdGE9ZGF0KQ0Kc3VtbWFyeShsbWU0LjIpDQpgYGANCmBgYHtyfQ0KcmFuZChsbWU0LjIpDQpgYGANCg0KIyMjIyBZRUFSU1RFQQ0KYGBge3J9DQpsbWU0LjM8LWxtZXIobWF0aDFzdH5ob3VzZXBvdiArIG1hdGhrbm93ICsgbWF0aHByZXAgKyB5ZWFyc3RlYSArIHNleCArIG1pbm9yaXR5ICsgc2VzICsgKDAreWVhcnN0ZWF8c2Nob29saWQpICsgKDF8c2Nob29saWQvY2xhc3NpZCksZGF0YT1kYXQpDQpzdW1tYXJ5KGxtZTQuMykNCmBgYA0KYGBge3J9DQpyYW5kKGxtZTQuMykNCmBgYA0KDQojI1doeSBub3QgdHJ5IGZvciBhIHJhbmRvbSBzbG9wZSBvbiB0aGUgaG91c2Vwb3YgZWZmZWN0Pw0KDQpXZSB3b3VsZCBub3QgYmUgYWJsZSB0byBvYnNlcnZlIHRoZSBlZmZlY3Qgb2YgYWRkaW5nIGEgcmFuZG9tIHNsb3BlIHRvIGhvdXNlcG92IC0gdGhlcmUgaXMgbm8gbGV2ZWwgaGlnaGVyIHVwLg0KDQojI1JldHJ5IHRoZSBhYm92ZSwgYWxsb3dpbmcgdGhlIHNsb3BlcyB0byBiZSBjb3JyZWxhdGVkIHdpdGggdGhlIHJhbmRvbSBpbnRlcmNlcHRzLg0KDQojIyMjIE1BVEhLTk9XDQpgYGB7ciwgbWVzc2FnZT1UUlVFLCB3YXJuaW5nPVRSVUV9DQpsbWU0LjEuMTwtbG1lcihtYXRoMXN0fmhvdXNlcG92ICsgbWF0aGtub3cgKyBtYXRocHJlcCArIHllYXJzdGVhICsgc2V4ICsgbWlub3JpdHkgKyBzZXMgKyAobWF0aGtub3d8c2Nob29saWQpKygxfGNsYXNzaWQpLGRhdGE9ZGF0KQ0Kc3VtbWFyeShsbWU0LjEuMSkNCmBgYA0KYGBge3J9DQpyYW5kKGxtZTQuMS4xKQ0KYGBgDQoNCiMjIyMgTUFUSFBSRVANCmBgYHtyfQ0KbG1lNC4yLjE8LWxtZXIobWF0aDFzdH5ob3VzZXBvdiArIG1hdGhrbm93ICsgbWF0aHByZXAgKyB5ZWFyc3RlYSArIHNleCArIG1pbm9yaXR5ICsgc2VzICsgKG1hdGhwcmVwfHNjaG9vbGlkKSArICgxfGNsYXNzaWQpLGRhdGE9ZGF0KQ0Kc3VtbWFyeShsbWU0LjIuMSkNCmBgYA0KYGBge3J9DQpyYW5kKGxtZTQuMi4xKQ0KYGBgDQoNCg0KIyMjIyBZRUFSU1RFQQ0KYGBge3J9DQpsbWU0LjMuMTwtbG1lcihtYXRoMXN0fmhvdXNlcG92ICsgbWF0aGtub3cgKyBtYXRocHJlcCArIHllYXJzdGVhICsgc2V4ICsgbWlub3JpdHkgKyBzZXMgKyAoeWVhcnN0ZWF8c2Nob29saWQpICsgKDF8Y2xhc3NpZCksZGF0YT1kYXQpDQpzdW1tYXJ5KGxtZTQuMy4xKQ0KYGBgDQpgYGB7cn0NCnJhbmQobG1lNC4zLjEpDQpgYGANCg0KDQojIyNyZXBvcnQgYW55dGhpbmcgdW51c3VhbCBhYm91dCB0aGUgdmFyaWFuY2UgY29tcG9uZW50cw0KDQoNCg0KIyN0cnkgdG8gYWRkIGEgcmFuZG9tIHNsb3BlIGZvciBlYWNoIHN0dWRlbnQgbGV2ZWwgcHJlZGljdG9yIGF0IHRoZSBjbGFzc3Jvb20gbGV2ZWwgKG9uZSBieSBvbmUgLSBub3QgYWxsIHRvZ2V0aGVyKQ0KDQojIyMjIFNFWA0KYGBge3IsIG1lc3NhZ2U9VFJVRSwgd2FybmluZz1UUlVFfQ0KbG1lNS4xPC1sbWVyKG1hdGgxc3R+aG91c2Vwb3YgKyBtYXRoa25vdyArIG1hdGhwcmVwICsgeWVhcnN0ZWEgKyBzZXggKyBtaW5vcml0eSArIHNlcyArICgwICsgc2V4fGNsYXNzaWQpICsgKDF8c2Nob29saWQvY2xhc3NpZCksZGF0YT1kYXQpDQpzdW1tYXJ5KGxtZTUuMSkNCmBgYA0KYGBge3J9DQpyYW5kKGxtZTUuMSkNCmBgYA0KDQoNCiMjIyMgTUlOT1JJVFkNCmBgYHtyLCBtZXNzYWdlPVRSVUUsIHdhcm5pbmc9VFJVRX0NCmxtZTUuMjwtbG1lcihtYXRoMXN0fmhvdXNlcG92ICsgbWF0aGtub3cgKyBtYXRocHJlcCArIHllYXJzdGVhICsgc2V4ICsgbWlub3JpdHkgKyBzZXMgKyAoMCArIG1pbm9yaXR5fGNsYXNzaWQpICsgKDF8c2Nob29saWQvY2xhc3NpZCksZGF0YT1kYXQpDQpzdW1tYXJ5KGxtZTUuMikNCmBgYA0KYGBge3J9DQpyYW5kKGxtZTUuMikNCmBgYA0KDQoNCiMjIyMgU0VTDQpgYGB7ciwgbWVzc2FnZT1UUlVFLCB3YXJuaW5nPVRSVUV9DQpsbWU1LjM8LWxtZXIobWF0aDFzdH5ob3VzZXBvdiArIG1hdGhrbm93ICsgbWF0aHByZXAgKyB5ZWFyc3RlYSArIHNleCArIG1pbm9yaXR5ICsgc2VzICsgKDAgKyBzZXN8Y2xhc3NpZCkgKyAoMXxzY2hvb2xpZC9jbGFzc2lkKSxkYXRhPWRhdCkNCnN1bW1hcnkobG1lNS4zKQ0KYGBgDQpgYGB7cn0NCnJhbmQobG1lNS4zKQ0KYGBgDQoNCg0KIyN3aHkgaXMgaXQgYSBiYWQgaWRlYSB0byBpbmNsdWRlIGEgY2xhc3MtbGV2ZWwgdmFyaWFibGUgd2l0aCByYW5kb20gc2xvcGVzIGF0IHRoZSBjbGFzc3Jvb20gbGV2ZWw/DQoNCldlIHdpbGwgbm90IGJlIGFibGUgdG8gb2JzZXJ2ZSB0aGUgdmFyeWluZyBzbG9wZXMgYXQgdGhlIGNsYXNzcm9vbS1sZXZlbCwgb25seSBvbmUgbGV2ZWwgaGlnaGVyIChzY2hvb2wtbGV2ZWwpLg0KDQoNCiMjcmV0cnkgdGhlIGFib3ZlLCBhbGxvd2luZyB0aGUgc2xvcGVzIHRvIGJlIGNvcnJlbGF0ZWQgd2l0aCB0aGUgcmFuZG9tIGludGVyY2VwdHMuDQoNCiMjIyMgU0VYDQpgYGB7ciwgbWVzc2FnZT1UUlVFLCB3YXJuaW5nPVRSVUV9DQpsbWU1LjEuMTwtbG1lcihtYXRoMXN0fmhvdXNlcG92ICsgbWF0aGtub3cgKyBtYXRocHJlcCArIHllYXJzdGVhICsgc2V4ICsgbWlub3JpdHkgKyBzZXMgKyAoc2V4fGNsYXNzaWQpICsgKDF8c2Nob29saWQpICxkYXRhPWRhdCkNCnN1bW1hcnkobG1lNS4xLjEpDQpgYGANCmBgYHtyfQ0KcmFuZChsbWU1LjEuMSkNCmBgYA0KDQoNCiMjIyMgTUlOT1JJVFkNCmBgYHtyLCBtZXNzYWdlPVRSVUUsIHdhcm5pbmc9VFJVRX0NCmxtZTUuMi4xPC1sbWVyKG1hdGgxc3R+aG91c2Vwb3YgKyBtYXRoa25vdyArIG1hdGhwcmVwICsgeWVhcnN0ZWEgKyBzZXggKyBtaW5vcml0eSArIHNlcyAgKyAobWlub3JpdHl8Y2xhc3NpZCkgKyAoMXxzY2hvb2xpZCksZGF0YT1kYXQpDQpzdW1tYXJ5KGxtZTUuMi4xKQ0KYGBgDQpgYGB7cn0NCnJhbmQobG1lNS4yLjEpDQpgYGANCg0KDQojIyMjIFNFUw0KYGBge3IsIG1lc3NhZ2U9VFJVRSwgd2FybmluZz1UUlVFfQ0KbG1lNS4zLjE8LWxtZXIobWF0aDFzdH5ob3VzZXBvdiArIG1hdGhrbm93ICsgbWF0aHByZXAgKyB5ZWFyc3RlYSArIHNleCArIG1pbm9yaXR5ICsgc2VzICsgKHNlc3xjbGFzc2lkKSArICgxfHNjaG9vbGlkKSxkYXRhPWRhdCkNCnN1bW1hcnkobG1lNS4zLjEpDQpgYGANCmBgYHtyfQ0KcmFuZChsbWU1LjMuMSkNCmBgYA0KDQoNCiMjdHJ5IHRvIGFkZCBhIHJhbmRvbSBzbG9wZSBmb3IgZWFjaCBzdHVkZW50IGxldmVsIHByZWRpY3RvciBhdCB0aGUgc2Nob29sIGxldmVsIChvbmUgYnkgb25lIC0gbm90IGFsbCB0b2dldGhlcikNCg0KIyMjI1NFWA0KYGBge3J9DQpsbWU2LjE8LWxtZXIobWF0aDFzdH5ob3VzZXBvdiArIG1hdGhrbm93ICsgbWF0aHByZXAgKyB5ZWFyc3RlYSArIHNleCArIG1pbm9yaXR5ICsgc2VzICsgKDAgKyBzZXh8c2Nob29saWQpICsgKDF8c2Nob29saWQvY2xhc3NpZCksZGF0YT1kYXQpDQpzdW1tYXJ5KGxtZTYuMSkNCmBgYA0KYGBge3J9DQpyYW5kKGxtZTYuMSkNCmBgYA0KDQoNCiMjIyNNSU5PUklUWQ0KYGBge3J9DQpsbWU2LjI8LWxtZXIobWF0aDFzdH5ob3VzZXBvdiArIG1hdGhrbm93ICsgbWF0aHByZXAgKyB5ZWFyc3RlYSArIHNleCArIG1pbm9yaXR5ICsgc2VzICsgKDAgKyBtaW5vcml0eXxzY2hvb2xpZCkgKyAoMXxzY2hvb2xpZC9jbGFzc2lkKSxkYXRhPWRhdCkNCnN1bW1hcnkobG1lNi4yKQ0KYGBgDQpgYGB7cn0NCnJhbmQobG1lNi4yKQ0KYGBgDQoNCg0KIyMjI1NFUw0KYGBge3J9DQpsbWU2LjM8LWxtZXIobWF0aDFzdH5ob3VzZXBvdiArIG1hdGhrbm93ICsgbWF0aHByZXAgKyB5ZWFyc3RlYSArIHNleCArIG1pbm9yaXR5ICsgc2VzICsgKDAgKyBzZXN8c2Nob29saWQpICsgKDF8c2Nob29saWQvY2xhc3NpZCksZGF0YT1kYXQpDQpzdW1tYXJ5KGxtZTYuMykNCmBgYA0KYGBge3J9DQpyYW5kKGxtZTYuMykNCmBgYA0KDQoNCiMjcmV0cnkgdGhlIGFib3ZlLCBhbGxvd2luZyB0aGUgc2xvcGVzIHRvIGJlIGNvcnJlbGF0ZWQgd2l0aCB0aGUgcmFuZG9tIGludGVyY2VwdHMuDQoNCiMjIyNTRVgNCmBgYHtyfQ0KbG1lNi4xLjE8LWxtZXIobWF0aDFzdH5ob3VzZXBvdiArIG1hdGhrbm93ICsgbWF0aHByZXAgKyB5ZWFyc3RlYSArIHNleCArIG1pbm9yaXR5ICsgc2VzICsgKHNleHxzY2hvb2xpZCkgKyAoMXxjbGFzc2lkKSxkYXRhPWRhdCkNCnN1bW1hcnkobG1lNi4xLjEpDQpgYGANCmBgYHtyfQ0KcmFuZChsbWU2LjEuMSkNCmBgYA0KDQoNCiMjIyNNSU5PUklUWQ0KYGBge3J9DQpsbWU2LjIuMTwtbG1lcihtYXRoMXN0fmhvdXNlcG92ICsgbWF0aGtub3cgKyBtYXRocHJlcCArIHllYXJzdGVhICsgc2V4ICsgbWlub3JpdHkgKyBzZXMgKyAobWlub3JpdHl8c2Nob29saWQpICsgKDF8Y2xhc3NpZCksZGF0YT1kYXQpDQpzdW1tYXJ5KGxtZTYuMi4xKQ0KYGBgDQpgYGB7cn0NCnJhbmQobG1lNi4yLjEpDQpgYGANCg0KDQojIyMjU0VTDQpgYGB7cn0NCmxtZTYuMy4xPC1sbWVyKG1hdGgxc3R+aG91c2Vwb3YgKyBtYXRoa25vdyArIG1hdGhwcmVwICsgeWVhcnN0ZWEgKyBzZXggKyBtaW5vcml0eSArIHNlcyArIChzZXN8c2Nob29saWQpICsgKDF8Y2xhc3NpZCksZGF0YT1kYXQpDQpzdW1tYXJ5KGxtZTYuMy4xKQ0KYGBgDQpgYGB7cn0NCnJhbmQobG1lNi4zLjEpDQpgYGANCg0KDQojIyNyZXBvcnQgYW55dGhpbmcgdW51c3VhbCBhYm91dCB0aGUgdmFyaWFuY2UgY29tcG9uZW50cw0KDQoNCiMjdGFrZSB0aGUgdHdvIHByZWRpY3RvcnMgdGhhdCBoYWQgInNpZ25pZi4iIHJhbmRvbSBzbG9wZXMsIGluIHRoZSBmb3JtcyBpbiB3aGljaCB0aGV5IHdvcmtlZCAoaW5kZXAuIG9yIGNvcnJlbGF0ZWQpIA0KDQpUaGUgdHdvIHByZWRpY3RvcnMgdGhhdCBoYWQgc3RhdGlzdGljYWxseSBzaWduaWZpY2FudCByYW5kb20gc2xvcGVzIGFyZSBzZXMgcmFuZG9tIHNsb3BlcyB1bmNvcnJlbGF0ZWQgd2l0aCB0aGUgc2Nob29sIHJhbmRvbSBpbnRlcmNlcHQsIGFuZCBtaW5vcml0eSByYW5kb20gc2xvcGVzIGNvcnJlbGF0ZWQgd2l0aCB0aGUgc2Nob29sIHJhbmRvbSBlZmZlY3QuDQoNCiMjIyNNb2RlbDoNCiQkDQpNQVRIMVNUX3tpamt9ID0gYl8wICsgYl8xSE9VU0VQT1Zfe2t9ICsgYl8yTUFUSEtOT1dfe2prfSArIGJfM01BVEhQUkVQX3tqa30gKyBiXzRZRUFSU1RFQV97amt9ICsgYl81U0VYX3tpamt9ICsgYl82TUlOT1JJVFlfe2lqa30gKyBiXzdTRVNfe2lqa30gKyBcZXRhX3tqa30gKyBcemV0YV97MGt9ICArIFx6ZXRhX3s2a31NSU5PUklUWV97aWprfSArIFx6ZXRhX3s3a31TRVNfe2lqa30gKyBcdmFyZXBzaWxvbl97aWprfQ0KJCQNCldpdGggJFx6ZXRhX3swa30kIH4gTigwLCRcc2lnbWFeMl97XHpldGFfezB9fSQpLCAkXHpldGFfezZrfSQgfiBOKDAsJFxzaWdtYV4yX3tcemV0YV97Nn19JCksICRcemV0YV97N2t9JCB+IE4oMCwkXHNpZ21hXjJfe1x6ZXRhX3s3fX0kKSwgICRcZXRhX3tqa30kIH4gTigwLCRcc2lnbWFeMl97XGV0YX0kKSwgYW5kICRcdmFyZXBzaWxvbl97aWprfSQgfiBOKDAsJFxzaWdtYV4yX3tcdmFyZXBzaWxvbn0kKSwgJGNvcnIoXHpldGFfezBrfSxcemV0YV97Nmt9KSA9IFxyaG9fe1x6ZXRhX3swa31cemV0YV97Nmt9fSQgYW5kIGFsbCBvdGhlciBwYWlycyBvZiByYW5kb20gdGVybXMgaW5kZXBlbmRlbnQgb2Ygb25lIGFub3RoZXIuDQoNCmBgYHtyfQ0KbG1lLjc8LWxtZXIobWF0aDFzdH5ob3VzZXBvdiArIG1hdGhrbm93ICsgbWF0aHByZXAgKyB5ZWFyc3RlYSArIHNleCArIG1pbm9yaXR5ICsgc2VzICsgKDArc2VzfHNjaG9vbGlkKSArIChtaW5vcml0eXxzY2hvb2xpZCkgKyAoMXxjbGFzc2lkKSxkYXRhPWRhdCkNCnN1bW1hcnkobG1lLjcpDQpgYGANCg0KDQojIyNKdXN0aWZpZWQ/DQoNCkNvbXBhcmluZyBpdCB0byBqdXN0IHRoZSBtb2RlbCB3aXRoIHVuY29ycmVsYXRlZCBTRVMgcmFuZG9tIHNsb3BlczoNCmBgYHtyfQ0KYW5vdmEobG1lNi4zLGxtZS43KQ0KYGBgDQoNCkNvbXBhcmluZyBpdCB0byBqdXN0IHRoZSBtb2RlbCB3aXRoIGNvcnJlbGF0ZWQgTUlOT1JJVFkgcmFuZG9tIHNsb3BlczoNCmBgYHtyfQ0KYW5vdmEobG1lNi4yLjEsbG1lLjcpDQpgYGANCg0KQm90aCBMUlQgc2hvdyB0aGF0IGhhdmluZyBib3RoIHRoZSByYW5kb20gc2xvcGVzIGFkZGVkIGlzIGFuIGltcHJvdmVtZW50IGluIHRoZSBtb2RlbC4NCg0KDQojI0ZvciBVQ00sIHdyaXRlIGRvd246IFZfQywgVl9TLCBWX0UgZm9yIHRoZSB0aHJlZSB2YXJpYW5jZSBjb21wb25lbnRzIChzaW1wbHkgdGhlIGVzdGltYXRlcykuICANCmBgYHtyfQ0Kdl9jMT04NS40Ng0Kdl9zMT0yODAuNjgNCnZfZTE9MTE0Ni44MA0KYGBgDQoNCg0KIyMjVGhpbmsgb2YgdGhlbSBhcyBwb3NzaWJseSB2YXJ5aW5nIHdpdGggYSBjb3ZhcmlhdGUsIHRob3VnaC4gRm9yIHRoZSBtb3N0IGNvbXBsaWNhdGVkIChhbGwgZml4ZWQgZWZmZWN0cykgcmFuZG9tIElOVEVSQ0VQVFMgT05MWSBtb2RlbCwgd2hhdCBhcmU6IFZfQywgVl9TLCBWX0UgPw0KDQpgYGB7cn0NCnZfYzI9OTMuODkNCnZfczI9MTY5LjQ1DQp2X2UyPTEwNjQuOTUNCmBgYA0KDQojIyNCeSB3aGF0IGZyYWN0aW9uIGRpZCAgZWFjaCBkZWNyZWFzZSB3aXRoIHRoZSBuZXcgcHJlZGljdG9ycyBpbiB0aGUgbW9kZWw/DQoNCmBgYHtyfQ0KKHZfYzEtdl9jMikvdl9jMQ0KKHZfczEtdl9zMikvdl9zMQ0KKHZfZTEtdl9lMikvdl9lMQ0KDQpgYGANCg0KKm5vdyBjb25zaWRlciB0aGUgbW9kZWwgd2l0aCBhIHJhbmRvbSBzbG9wZSBpbiBzZXMuICANCip3aGF0IGFyZTogVl9DLCBWX1Moc2VzPTApLCBWX0UgPyAgIFdlIG5lZWQgdG8gbGlzdCAnc2VzPTAnIGhlcmUsIG9yIHdlIGRvbid0IGtub3cgaG93IHRvIHVzZSB0aGUgc2xvcGUgdmFyaWFuY2UNCg0KYGBge3J9DQoNCmZpdDwtbG1lcihtYXRoMXN0fmhvdXNlcG92ICsgbWF0aGtub3cgKyBtYXRocHJlcCArIHllYXJzdGVhICsgc2V4ICsgbWlub3JpdHkgKyBzZXMgKyAoMCArIHNlc3xzY2hvb2xpZCkgKyAoMXxzY2hvb2xpZC9jbGFzc2lkKSxkYXRhPWRhdCkNCnN1bW1hcnkoZml0KQ0KDQpwcmludChWYXJDb3JyKGZpdCksIGNvbXA9KCJWYXJpYW5jZSIpKQ0KDQp2X2M9VmFyQ29ycihmaXQpWzFdJGNsYXNzaWQuc2Nob29saWRbMV0NCnZfcz1WYXJDb3JyKGZpdClbMl0kc2Nob29saWRbMV0NCnZfc2VzPVZhckNvcnIoZml0KVszXSRzY2hvb2xpZC4xWzFdDQoNCiNWX1Moc2VzPTApDQp2X2Mrdl9zDQoNCg0KDQpgYGANCg0KKndoYXQgYXJlOiBWX1Moc2VzPS0wLjUwKSwgVl9TKHNlcz0rMC41KSA/ICAgDQoNCmBgYHtyfQ0KDQojVl9TKHNlcz0tMC41MCkNCnZfYyt2X3MrKC0uNV4yKSp2X3Nlcw0KDQojVl9TKHNlcz0rMC41KQ0Kdl9jK3ZfcysoLjVeMikqdl9zZXMNCg0KDQpgYGANCg0KDQoqbm93IGNvbnNpZGVyIHRoZSBtb2RlbCB3aXRoIGEgcmFuZG9tIHNsb3BlIGluIG1pbm9yaXR5LiAgDQoqd2hhdCBhcmU6IFZfQywgVl9TKG1pbm9yaXR5PTApLCBWX0UgPyAgIFdlIG5lZWQgdG8gbGlzdCAnbWlub3JpdHk9MCcgaGVyZSwgb3Igd2UgZG9uJ3Qga25vdyBob3cgdG8gdXNlIHRoZSBzbG9wZSB2YXJpYW5jZQ0KDQpgYGB7cn0NCg0KZml0PC1sbWVyKG1hdGgxc3R+aG91c2Vwb3YgKyBtYXRoa25vdyArIG1hdGhwcmVwICsgeWVhcnN0ZWEgKyBzZXggKyBtaW5vcml0eSArIHNlcyArICgwICsgbWlub3JpdHl8c2Nob29saWQpICsgKDF8c2Nob29saWQvY2xhc3NpZCksZGF0YT1kYXQpDQpzdW1tYXJ5KGZpdCkNCg0KcHJpbnQoVmFyQ29ycihmaXQpLCBjb21wPSgiVmFyaWFuY2UiKSkNCg0Kdl9jPVZhckNvcnIoZml0KVsxXSRjbGFzc2lkLnNjaG9vbGlkWzFdDQp2X3M9VmFyQ29ycihmaXQpWzJdJHNjaG9vbGlkWzFdDQp2X21pbm89VmFyQ29ycihmaXQpWzNdJHNjaG9vbGlkLjFbMV0NCg0KI1ZfUyhtaW5vcml0eT0wKQ0Kdl9jK3Zfcw0KDQoNCmBgYA0KDQoNCip3aGF0IGFyZTogVl9TKG1pbm9yaXR5PTAuMjUpLCBWX1MobWlub3JpdHk9KzAuNTApLCBWX1MobWlub3JpdHk9KzAuNzUpID8gICANCmBgYHtyfQ0KI1ZfUyhtaW5vcml0eT0wLjI1KQ0Kdl9jK3ZfcysoLjI1XjIpKnZfc2VzDQoNCiNWX1MobWlub3JpdHk9MC41MCkNCnZfYyt2X3MrKC41XjIpKnZfc2VzDQoNCiNWX1MobWlub3JpdHk9MC43NSkNCnZfYyt2X3MrKC43NV4yKSp2X3Nlcw0KDQoNCmBgYA0KDQoqbm93IGNvbnNpZGVyIHRoZSBtb2RlbCB3aXRoIGEgcmFuZG9tIHNsb3BlIGluIHNlcyAmIG1pbm9yaXR5Lg0KKndoYXQgYXJlOiBWX0MsIFZfUyhtaW5vcml0eT0wLHNlcz0wKSwgVl9FID8gICBXZSBuZWVkIHRvIGxpc3QgJ3Nlcz0wLCBtaW5vcml0eT0wJyBoZXJlLCBvciB3ZSBkb24ndCBrbm93IGhvdyB0byB1c2UgdGhlIHNsb3BlIHZhcmlhbmNlDQoNCmBgYHtyfQ0KZml0PC1sbWVyKG1hdGgxc3R+aG91c2Vwb3YgKyBtYXRoa25vdyArIG1hdGhwcmVwICsgeWVhcnN0ZWEgKyBzZXggKyBtaW5vcml0eSArIHNlcyArICgwICsgc2VzICsgbWlub3JpdHl8c2Nob29saWQpICsgKDF8c2Nob29saWQvY2xhc3NpZCksZGF0YT1kYXQpDQoNCnN1bW1hcnkoZml0KQ0KDQpwcmludChWYXJDb3JyKGZpdCksIGNvbXA9KCJWYXJpYW5jZSIpKQ0KDQp2X2M9VmFyQ29ycihmaXQpWzFdJGNsYXNzaWQuc2Nob29saWRbMV0NCnZfcz1WYXJDb3JyKGZpdClbMl0kc2Nob29saWRbMV0NCnZfc2VzPVZhckNvcnIoZml0KVszXSRzY2hvb2xpZC4xWzFdDQp2X21pbm89VmFyQ29ycihmaXQpWzNdJHNjaG9vbGlkLjFbNF0NCg0KI1ZfUyhtaW5vcml0eT0wLHNlcz0wKQ0Kdl9jK3Zfcw0KDQoNCmBgYA0KDQoNCip3aGF0IGFyZTogVl9TKHNlcz0wLG1pbm9yaXR5PTAuNTApLCBWX1Moc2VzPTAuNTAsbWlub3JpdHk9MCksIFZfUyhzZXM9IDAuNTAsIG1pbm9yaXR5PSAwLjUwKSA/IA0KDQpgYGB7cn0NCiNWX1Moc2VzPTAsbWlub3JpdHk9MC41MCkNCnZfYyt2X3MrLjVeMip2X21pbm8NCg0KI1ZfUyhzZXM9MC41MCxtaW5vcml0eT0wKQ0Kdl9jK3ZfcysuNV4yKnZfc2VzDQoNCiNWX1Moc2VzPSAwLjUwLCBtaW5vcml0eT0gMC41MCkNCnZfYyt2X3MrLjVeMip2X3NlcysuNV4yKnZfbWlubw0KDQoNCmBgYA0KDQoNCipJbiB0aGUgbGFzdCBtb2RlbCwgd2hhdCBpcyBhICJsaWtlbHkiICgrLy0gMSBzZCkgcmFuZ2UgZm9yIFxldGFfezBqa30NCg0KU2luY2UgXGV0YV97MGprfSBoYXMgYSBtZWFuIG9mIHplcm8sIHRoZSAibGlrZWx5IiBTRCByYW5nZSBpcyAoLTkuMjk2MyAsIDkuMjk2MykNCg0KDQpgYGB7cn0NCg0KcHJpbnQoVmFyQ29ycihmaXQpLCBjb21wPSgiU3RkLkRldi4iKSkNCg0KYGBgDQoNCg0KKkNhbiB3ZSBtYWtlIGEgc2ltaWxhciBzdGF0ZW1lbnQgYWJvdXQgJFx6ZXRhX3swa30kPyAgDQoqSWYgc28sIGFyZSB5b3UgY29uc2lkZXJpbmcgZWl0aGVyIG9mIHRoZSB0d28gcmFuZG9tIHNsb3BlIHRlcm1zLCAkXHpldGFfezFrfSQgYW5kICRcemV0YV97Mmt9JCBmb3Igc2VzIGFuZCBtaW5vcml0eT8NCg0KYGBge3J9DQoNCg0KYGBg</div>
 
 
 

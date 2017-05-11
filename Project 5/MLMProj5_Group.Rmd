@@ -1,6 +1,8 @@
 ---
 title: "R Notebook"
-output: html_notebook
+output:
+  html_notebook: default
+  word_document: default
 ---
 
 ```{r}
@@ -114,7 +116,7 @@ qqline(eta0)
 use "classroom.dta"
 gen math1st = mathkind + mathgain
 ```{r}
-dat <- read.csv("classroom.csv")
+dat <- read.csv("../classroom.csv")
 dat$math1st <- dat$mathkind + dat$mathgain
 dat <- dat[(complete.cases(dat)),]
 attach(dat)
@@ -206,7 +208,7 @@ qqline(eta0)
 
 #No Correlation
 ```{r}
-library(calibrate)
+#library(calibrate)
 ```
 
 
