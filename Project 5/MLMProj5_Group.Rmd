@@ -27,24 +27,24 @@ summary(fit1)
 * then subtract it from the outcome; call this residual: resFE
 ```{r}
 pred.yhat <- predict(fit1, re.form = ~0)
-res1 <- cc.data$math1st - pred.yhat
+resFE <- cc.data$math1st - pred.yhat
 ```
 
 *show that this residual is not independent within schools in some manner.  Hint: boxplot?
 ```{r}
 dec.schoolid <- as.numeric(names(sort(table(schoolid))))
 cc.data$schoolid <- ordered(cc.data$schoolid, levels = dec.schoolid )
-with(cc.data, boxplot(res1~schoolid))
+with(cc.data, boxplot(resFE~schoolid))
 abline(h=0, col = "red")
 
-ord<-order(unlist(tapply(res1,schoolid,median)))
-boxplot(split(res1,schoolid)[ord])
+ord<-order(unlist(tapply(resFE,schoolid,median)))
+boxplot(split(resFE,schoolid)[ord])
 ```
 
 ```{r}
 dec.classid <- as.numeric(names(sort(table(classid))))
 cc.data$classid <- ordered(cc.data$classid, levels = dec.classid )
-with(cc.data, boxplot(res1~classid))
+with(cc.data, boxplot(resFE~classid))
 abline(h=0, col = "red")
 
 ```
@@ -73,7 +73,6 @@ resFE_RE <- math1st - pred.yhat - cc.data$zeta0 - cc.data$eta0
 
 * show that these new residuals, resFE_RE are MUCH LESS (if not completely un-) correlated within school 
 * using the same method as before (boxplot?)
-### ZARNI
 ```{r}
 with(cc.data, boxplot(resFE_RE~schoolid))
 abline(h=1, col="red")
@@ -87,6 +86,8 @@ boxplot(split(resFE_RE,schoolid)[ord2])
 *examine the two sets of BLUPs (for random effects zeta0 and eta0) for normality
 *first 'tag' a single value from each grouping (e.g., school or classroom) so that you only have 
 * as many BLUPs as the grouping factor (should be less of an issue in R)
+
+### Did we tag?
 ```{r}
 plot(density(zeta0))
 qqnorm(zeta0)
@@ -99,6 +100,8 @@ qqnorm(eta0)
 qqline(eta0)
 ```
 
+
+### Jemar & Zarni
 *if In a simpler setting, with no classroom level, if H0: \sigma^2_{\zeta_0}=0 were true, 
 * and you sampled 100 schools of size 10, what would be a potential expected estimate of \sigma_{\zeta_0} 
 * if you know that \sigma_{\epsilon}=1 ?  HINT: the Central Limit Theorem applies.  Simulate to find out.
@@ -115,8 +118,6 @@ dat <- read.csv("classroom.csv")
 dat$math1st <- dat$mathkind + dat$mathgain
 dat <- dat[(complete.cases(dat)),]
 attach(dat)
-
-
 ```
 
 
@@ -144,6 +145,8 @@ dat$zeta0 <- zeta0[idx.sch]
 resFE <- dat$math1st - pred.yhat.2 
 ```
 
+
+### Jemar & Zarni
 *show that this residual is not independent within schools in some manner.  Hint: boxplot?
 ```{r}
 
@@ -169,6 +172,7 @@ resFE_RE <- dat$math1st - (pred.yhat.2 + dat$zeta0 + dat$minority * dat$zeta1 + 
 
 *      from the outcome
 
+### Jemar & Zarni
 * show that these new residuals, resFE_RE are MUCH LESS (if not completely un-) correlated within school 
 * using the same method as before (boxplot?)
 ```{r}
@@ -193,7 +197,7 @@ qqnorm(eta0)
 qqline(eta0)
 ```
 
-
+### Jemar & Zarni
 *first 'tag' a single value from each grouping (e.g., school or classroom) so that you only have 
 * as many BLUPs as the grouping factor (should be less of an issue in R)
 
@@ -215,7 +219,7 @@ textxy(zeta0[1:10], zeta1[1:10], schoolid[1:10])
 
 ```
 
-
+### Jemar & Zarni
 *track down those odd points in the scatterplot.  What schools are they?
 ```{r}
 
