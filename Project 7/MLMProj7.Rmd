@@ -36,7 +36,7 @@ head(comb.data)
 
 Model:
 $$
-MATH = b_0 + b_1YEAR_{ijk} +  \zeta_{0k} + \zeta_{1k}+ \eta_{jk} + \varepsilon_{ijk}
+MATH = b_0 + b_1YEAR_{ijk} +  \zeta_{0k} + \zeta_{1k}YEAR_{ijk} + \eta_{jk} + \varepsilon_{ijk}
 $$
 With $\zeta_{k}$ ~ N(0,$\sigma^2_{\zeta}$), $\eta_{jk}$ ~ N(0,$\sigma^2_{\eta}$), and $\varepsilon_{ijk}$ ~ N(0,$\sigma^2_{\varepsilon}$), $corr(\zeta_{0k},\zeta_{1k}) = \rho_{\zeta_{0k}\zeta_{1k}}$ and all other pairs independent of one another.
 
