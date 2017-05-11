@@ -1,13 +1,10 @@
 ---
-title: "R Notebook"
+title: "Project 7 - Intro to Longitudinal Data"
 output: html_notebook
 ---
 
-use "classroom.dta"
-*intro to nested longitudinal data
-*make a person-period file
-gen math0 = mathkind
-gen math1 = mathkind+mathgain
+## step 1: make a person-period file
+
 ```{r}
 library(readr)
 dat <- read.csv("../classroom.csv")
@@ -15,9 +12,6 @@ cc.data <- dat[(complete.cases(dat)),]
 cc.data$math0 <- cc.data$mathkind
 cc.data$math1 <- cc.data$mathkind + cc.data$mathgain
 ```
-
-reshape long math, i(childid) j(year)
-save "class_pp", replace
 
 ```{r}
 firstpart <- cc.data
@@ -34,12 +28,19 @@ names(secondpart)[13] <- c("math")
 ```{r}
 library(dplyr)
 comb.data <- bind_rows(firstpart, secondpart)
+head(comb.data)
 ```
 
 
-*fit a baseline model (called unconditional growth) for this nested longitudinal data, ignoring classrooms:
-mixed math year || schoolid: year, cov(un) || childid:
-*write down this model
+## Fit a baseline model (called unconditional growth) for this nested longitudinal data, ignoring classrooms:
+
+Model:
+$$
+MATH = b_0 + b_1YEAR_{ijk} +  \zeta_{0k} + \zeta_{1k}+ \eta_{jk} + \varepsilon_{ijk}
+$$
+With $\zeta_{k}$ ~ N(0,$\sigma^2_{\zeta}$), $\eta_{jk}$ ~ N(0,$\sigma^2_{\eta}$), and $\varepsilon_{ijk}$ ~ N(0,$\sigma^2_{\varepsilon}$), $corr(\zeta_{0k},\zeta_{1k}) = \rho_{\zeta_{0k}\zeta_{1k}}$ and all other pairs independent of one another.
+
+
 ```{r}
 require(lme4)
 require(lmerTest)
@@ -48,36 +49,53 @@ summary(und.grow)
 ```
 
 
-*add student, classroom and school-level fixed effects ; fit the model
-*write down the model
+
+
+## Add student, classroom and school-level fixed effects ; fit the model
+
+Model:
+$$
+MATH = b_0 + b_1YEAR_{ijk} + b_2HOUSEPOV_{k} + b_3MATHKNOW_{jk} + b_4MATHPREP_{jk} + b_5YEARSTEA_{jk} + b_6SEX_{ijk} + b_7MINORITY_{ijk} + b_7SES_{ijk} \zeta_{0k} + \zeta_{1k}+ \eta_{jk} + \varepsilon_{ijk}
+$$
+
+With $\zeta_{k}$ ~ N(0,$\sigma^2_{\zeta}$), $\eta_{jk}$ ~ N(0,$\sigma^2_{\eta}$), and $\varepsilon_{ijk}$ ~ N(0,$\sigma^2_{\varepsilon}$), $corr(\zeta_{0k},\zeta_{1k}) = \rho_{\zeta_{0k}\zeta_{1k}}$ and all other pairs independent of one another.
+
 ```{r}
 und.grow2 <- lmer(math ~ housepov + mathprep + yearstea + mathknow + sex + minority + ses  + year + (year|schoolid) + (1|schoolid:childid), data=comb.data)
 summary(und.grow2)
 ```
-*for year==0:
-*what percent of between school differences were explained as you go from the baseline to the second model?
+
+
+## For year==0: what percent of between school differences were explained as you go from the baseline to the second model?
+
 (373.5-249.2)/373.5 = 0.3327979 ~ 33%
 
-*what percent of between child differences were explained as you go from the baseline to the second model?
+###What percent of between child differences were explained as you go from the baseline to the second model?
+
 (749.0-689.5)/749.0 = 0.07943925 ~ 8%
 
-*for year==1:
-*what percent of between school differences were explained as you go from the baseline to the second model?
+## For year==1: what percent of between school differences were explained as you go from the baseline to the second model?
+
 ((373.5+112.4) - (249.2+114.2))/(373.5+112.4) = 0.2521095 ~ 25%
 
-*what percent of between child differences were explained as you go from the baseline to the second model?
+### What percent of between child differences were explained as you go from the baseline to the second model?
+
 ((749.0+112.4) - (689.5+114.2))/(749.0+112.4) = 0.06698398 ~ 7%
 
-*based on significance, 
-*  what factors seem useful in describing ("explaining") differences between student outcomes? 
+
+## Based on significance...
+
+###  what factors seem useful in describing ("explaining") differences between student outcomes? 
+
 Minority and SES
-*    Point out the direction of the effect.
+
+### Point out the direction of the effect.
+
 Minority (negative)
 SES (positive)
 
 
-*add a random slope for ses, indep. of the year or intercept but that varies at the school-level 
-*   (hint: in STATA, you are adding || schoolid: ses BEFORE THE OTHER || schoolid: year, cov(un) entry.
+## Add a random slope for ses, indep. of the year or intercept but that varies at the school-level 
 
 ```{r}
 und.grow3 <- lmer(math ~ housepov + mathprep + yearstea + mathknow + sex + minority + ses+(0+ses|schoolid)+ year + (year|schoolid) + (1|schoolid:childid), data=comb.data)
@@ -85,12 +103,14 @@ summary(und.grow3)
 ```
 
 
-*is the estimated s.d. (square root of variance) of the random slope associated with SES large enough 
-*  so that a value +/- 1 s.d. is sufficient to "cancel" (or flip the sign) the fixed effect for this predictor?
+### Is the estimated s.d. (square root of variance) of the random slope associated with SES large enough so that a value +/- 1 s.d. is sufficient to "cancel" (or flip the sign) the fixed effect for this predictor?
+
 The estimated s.d. (6.752) of the random slope associated with SES is not large enough to flip the sign of the fixed effect for this predictor.
 
-*compute residuals in this final model.  generate a qq plot and density (STATA: qnorm; kdensity ..., normal) 
-*Is there any reason to question the normality assumption?
+### Compute residuals in this final model.  Generate a qq plot and density.
+
+
+###Is there any reason to question the normality assumption?
 After looking at the tails, there is reason to question the normality assumption. 
 ```{r}
 pred.yhat <- predict(und.grow3, re.form = ~0)
@@ -100,6 +120,4 @@ qqline(res1)
 ```
 
 
-*compute BLUPs for all 4 random effects.  generate an all pairs scatter plot matrix (4x4) of these 
-*  (STATA: graph matrix ...; R: pairs(...))
-* note whether or not you identify any concerns from these scatterplots.
+##compute BLUPs for all 4 random effects.  generate an all pairs scatter plot matrix (4x4) of these 
