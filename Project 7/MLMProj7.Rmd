@@ -10,7 +10,7 @@ gen math0 = mathkind
 gen math1 = mathkind+mathgain
 ```{r}
 library(readr)
-dat <- read_csv("~/Desktop/NYU/SP 2017/APSTA-GE.2042 Multilevel classroom.csv")
+dat <- read.csv("../classroom.csv")
 cc.data <- dat[(complete.cases(dat)),]
 cc.data$math0 <- cc.data$mathkind
 cc.data$math1 <- cc.data$mathkind + cc.data$mathgain

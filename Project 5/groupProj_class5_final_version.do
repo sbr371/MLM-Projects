@@ -3,6 +3,7 @@ use "classroom.dta"
 gen math1st = mathkind + mathgain
 mixed math1st housepov yearstea mathprep mathknow ses sex minority || schoolid: || classid:, reml 
 est store M1
+
 *manually construct the residual that removes only the 'fixed effects'
 *hint: predict yhat, xb will generate the prediction for the outcome based on the fixed effects only
 * then subtract it from the outcome; call this residual: resFE

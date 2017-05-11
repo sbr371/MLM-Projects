@@ -7,7 +7,7 @@ library(reshape) # for wide to long reshape
 
 #use "classroom.dta"
 
-dat<-read.csv("/Users/sarahrosenbach/Dropbox/Documents/Coursework/Spring 2017/MLM/Datasets/classroom.csv")
+dat<-read.csv("../classroom.csv")
 attach(dat)
 
 #make a person-period file

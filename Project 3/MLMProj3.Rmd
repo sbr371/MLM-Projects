@@ -4,7 +4,7 @@ output: html_notebook
 ---
 
 ```{r}
-dat<-read.csv("C:/Users/james/Documents/NYU Coursework/MLM_Spring17/classroom.csv")
+dat<-read.csv("../classroom.csv")
 attach(dat)
 dat$math1st <- mathkind + mathgain
 ```
@@ -20,7 +20,7 @@ summary(umm.1)
 $$
 MATH1ST_{ijk} = b_0 + \eta_{jk} + \zeta_{k} + \varepsilon_{ijk}
 $$
-With $\zeta_{k}$ ~ N(0,$\sigma^2_{\zeta}$), $\eta_{jk}$ ~ N(0,$\sigma^2_{\eta}$), and $\varepsilon_{ijk}$ ~ N(0,$\sigma^2_{\varepsilon}$)
+With $\zeta_{k}$ ~ N(0,$\sigma^2_{\zeta}$), $\eta_{jk}$ ~ N(0,$\sigma^2_{\eta}$), and $\varepsilon_{ijk}$ ~ N(0,$\sigma^2_{\varepsilon}$), independent of one another.
 
 ####ICC
 $$
@@ -44,10 +44,12 @@ summary(lme1)
 ```
 
 ```{r}
-rand(lme1)
+anova(lme1,umm.1)
 ```
 
-####Report $\sigma^2_{\zeta}$
+Adding the school-level predictor is statistically significant, and an improvement from the UMM model.
+
+####Report $\sigma^2_{\zeta}$ and $\sigma^2_{\varepsilon}$
 $$
 \sigma^2_{\eta} = 82.36
 $$
@@ -70,27 +72,36 @@ None of them are significant except for household poverty.
 
 ####Justified?
 ```{r}
-rand(lme2)
+anova(lme1,lme2)
 ```
-SIGNIFICANT
 
-####Report change in $\hat{\sigma}^2_{\eta}$.
+
+####Report change to $\sigma^2_{\eta}$
 $$
 \sigma^2_{\eta} = 94.36
 $$
-####Report change in $\hat{\sigma}^2_{\varepsilon}.
+$\sigma^2_{\eta}$ increased from 82.36 to 94.36.
+
+####Report change to $\sigma^2_{\varepsilon}$
 $$
 \sigma^2_{\varepsilon} = 1136.43
 $$
+$\sigma^2_{\varepsilon}$ decreased from 1146.95 to 1136.43.
 
-####Hypothesis as to why sigma^2_epsilon is reduced, but not sigma^2_eta.
-repartitioning due to unbalanced design.
+####Hypothesis as to why $\sigma^2_{\varepsilon}$ is reduced.
+None of the classroom-level covariates are statistically significant. By adding these variables, it may have increased the uncertainty attributed to the between classroom effect.
 
 ##ADD student level preds & report if justifed.
 ```{r}
 lme3<-lmer(math1st~housepov + mathknow + mathprep + yearstea + sex + minority + ses + (1|schoolid/classid),data=dat)
 summary(lme3)
 ```
+
+```{r}
+anova(lme2,lme3)
+```
+
+The addition of all the student-level predictors is an improvement from the previous model (LRT p-value <0.05).
 
 ####Report change in variance components for all levels; why did school level drop?
 $$
@@ -103,10 +114,17 @@ $$
 \hat{\sigma}^2_{\varepsilon} = 1064.95
 $$
 
+$\sigma^2_{\eta}$ drops from 94.36 to 93.89.
+$\sigma^2_{\zeta}$ drops from 223.31 to 169.45.
+$\sigma}^2_{\varepsilon}$ drops from 1136.43 to 1064.95.
+
+
+School-level variance drops possibly due to repartitioning. The variance previously attributed to it were explained with the addition of the fixed school variates. 
+
 $$
-MATH1ST_{ijk} = b_0 + HOUSEPOV_{k} + MATHKNOW_{jk} + MATHPREP_{jk} + YEARSTEA_{jk} + SEX_{ijk} + MINORITY_{ijk} + SES_{ijk} + \eta_{jk} + \zeta_{k} + \varepsilon_{ijk}
+MATH1ST_{ijk} = b_0 + b_1HOUSEPOV_{k} + b_2MATHKNOW_{jk} + b_3MATHPREP_{jk} + b_4YEARSTEA_{jk} + b_5SEX_{ijk} + b_6MINORITY_{ijk} + b_7SES_{ijk} + \eta_{jk} + \zeta_{k} + \varepsilon_{ijk}
 $$
-With $\zeta_{k}$ ~ N(0,$\sigma^2_{\zeta}$), $\eta_{jk}$ ~ N(0,$\sigma^2_{\eta}$), and $\varepsilon_{ijk}$ ~ N(0,$\sigma^2_{\varepsilon}$)
+With $\zeta_{k}$ ~ N(0,$\sigma^2_{\zeta}$), $\eta_{jk}$ ~ N(0,$\sigma^2_{\eta}$), and $\varepsilon_{ijk}$ ~ N(0,$\sigma^2_{\varepsilon}$), independent of one another.
 
 ##ADD a random slope for each teacher level predictor.
 
@@ -115,11 +133,17 @@ With $\zeta_{k}$ ~ N(0,$\sigma^2_{\zeta}$), $\eta_{jk}$ ~ N(0,$\sigma^2_{\eta}$)
 lme4.1<-lmer(math1st~housepov + mathknow + mathprep + yearstea + sex + minority + ses + (0+mathknow|schoolid) + (1|schoolid/classid),data=dat)
 summary(lme4.1)
 ```
+```{r}
+rand(lme4.1)
+```
 
 #### MATHPREP
 ```{r}
 lme4.2<-lmer(math1st~housepov + mathknow + mathprep + yearstea + sex + minority + ses + (0+mathprep|schoolid) + (1|schoolid/classid),data=dat)
 summary(lme4.2)
+```
+```{r}
+rand(lme4.2)
 ```
 
 #### YEARSTEA
@@ -127,9 +151,13 @@ summary(lme4.2)
 lme4.3<-lmer(math1st~housepov + mathknow + mathprep + yearstea + sex + minority + ses + (0+yearstea|schoolid) + (1|schoolid/classid),data=dat)
 summary(lme4.3)
 ```
+```{r}
+rand(lme4.3)
+```
 
 ##Why not try for a random slope on the housepov effect?
-You can't because we can't observe higher level up.
+
+We would not be able to observe the effect of adding a random slope to housepov - there is no level higher up.
 
 ##Retry the above, allowing the slopes to be correlated with the random intercepts.
 
@@ -138,89 +166,196 @@ You can't because we can't observe higher level up.
 lme4.1.1<-lmer(math1st~housepov + mathknow + mathprep + yearstea + sex + minority + ses + (mathknow|schoolid)+(1|classid),data=dat)
 summary(lme4.1.1)
 ```
+```{r}
+rand(lme4.1.1)
+```
 
 #### MATHPREP
 ```{r}
 lme4.2.1<-lmer(math1st~housepov + mathknow + mathprep + yearstea + sex + minority + ses + (mathprep|schoolid) + (1|classid),data=dat)
 summary(lme4.2.1)
 ```
+```{r}
+rand(lme4.2.1)
+```
+
 
 #### YEARSTEA
 ```{r}
 lme4.3.1<-lmer(math1st~housepov + mathknow + mathprep + yearstea + sex + minority + ses + (yearstea|schoolid) + (1|classid),data=dat)
 summary(lme4.3.1)
 ```
+```{r}
+rand(lme4.3.1)
+```
 
 
-##report anything unusual about the variance components
+###report anything unusual about the variance components
+
+
 
 ##try to add a random slope for each student level predictor at the classroom level (one by one - not all together)
 
 #### SEX
 ```{r, message=TRUE, warning=TRUE}
-lme4.1.2<-lmer(math1st~housepov + mathknow + mathprep + yearstea + sex + minority + ses + (0 + sex|schoolid/classid) + (1|schoolid/classid),data=dat)
-summary(lme4.1.2)
+lme5.1<-lmer(math1st~housepov + mathknow + mathprep + yearstea + sex + minority + ses + (0 + sex|classid) + (1|schoolid/classid),data=dat)
+summary(lme5.1)
 ```
+```{r}
+rand(lme5.1)
+```
+
 
 #### MINORITY
 ```{r, message=TRUE, warning=TRUE}
-lme4.2.2<-lmer(math1st~housepov + mathknow + mathprep + yearstea + sex + minority + ses + (0 + minority|schoolid/classid) + (1|schoolid/classid),data=dat)
-summary(lme4.2.2)
+lme5.2<-lmer(math1st~housepov + mathknow + mathprep + yearstea + sex + minority + ses + (0 + minority|classid) + (1|schoolid/classid),data=dat)
+summary(lme5.2)
 ```
+```{r}
+rand(lme5.2)
+```
+
 
 #### SES
 ```{r, message=TRUE, warning=TRUE}
-lme4.3.2<-lmer(math1st~housepov + mathknow + mathprep + yearstea + sex + minority + ses + (0 + ses|schoolid/classid) + (1|schoolid/classid),data=dat)
-summary(lme4.3.2)
+lme5.3<-lmer(math1st~housepov + mathknow + mathprep + yearstea + sex + minority + ses + (0 + ses|classid) + (1|schoolid/classid),data=dat)
+summary(lme5.3)
 ```
+```{r}
+rand(lme5.3)
+```
+
+
+##why is it a bad idea to include a class-level variable with random slopes at the classroom level?
+
+We will not be able to observe the varying slopes at the classroom-level, only one level higher (school-level).
+
 
 ##retry the above, allowing the slopes to be correlated with the random intercepts.
+
 #### SEX
 ```{r, message=TRUE, warning=TRUE}
-lme4.1.3<-lmer(math1st~housepov + mathknow + mathprep + yearstea + sex + minority + ses + (sex|schoolid) + (1|classid) ,data=dat)
-summary(lme4.1.3)
+lme5.1.1<-lmer(math1st~housepov + mathknow + mathprep + yearstea + sex + minority + ses + (sex|classid) + (1|schoolid) ,data=dat)
+summary(lme5.1.1)
 ```
+```{r}
+rand(lme5.1.1)
+```
+
 
 #### MINORITY
 ```{r, message=TRUE, warning=TRUE}
-lme4.2.3<-lmer(math1st~housepov + mathknow + mathprep + yearstea + sex + minority + ses  + (minority|schoolid) + (1|classid),data=dat)
-summary(lme4.2.3)
+lme5.2.1<-lmer(math1st~housepov + mathknow + mathprep + yearstea + sex + minority + ses  + (minority|classid) + (1|schoolid),data=dat)
+summary(lme5.2.1)
 ```
+```{r}
+rand(lme5.2.1)
+```
+
 
 #### SES
 ```{r, message=TRUE, warning=TRUE}
-lme4.3.3<-lmer(math1st~housepov + mathknow + mathprep + yearstea + sex + minority + ses + (ses|schoolid) + (1|classid),data=dat)
-summary(lme4.3.3)
+lme5.3.1<-lmer(math1st~housepov + mathknow + mathprep + yearstea + sex + minority + ses + (ses|classid) + (1|schoolid),data=dat)
+summary(lme5.3.1)
+```
+```{r}
+rand(lme5.3.1)
 ```
 
 
-gen math1st = mathkind + mathgain
-*FIT ALL MODELS WITH REML (not default in STATA)
-*Compute the UMM with random intercepts for schools and classrooms
-*report ICC
-*WRITE OUT THIS MODEL in the notation given to you in class
-*ADD School level preds & report if justifed
-*report change in sigma^2_zeta
-*ADD Class level preds & report if justifed
-*report change in sigma^2_eta
-*report change in sigma^2_epsilon
-*any hypothesis as to why sigma^2_epsilon is reduced, but not sigma^2_eta?
-*ADD student level preds & report if justifed
-*report change in variance components for all levels; why did school level drop?
-*WRITE OUT THIS MODEL in the notation given to you in class
-*try to add a random slope for each teacher level predictor at the school level (one by one - not all together)
-*why not try for a random slope on the housepov effect?
-*retry the above, allowing the slopes to be correlated with the random intercepts.
-*report anything unusual about the variance components
-*try to add a random slope for each student level predictor at the classroom level (one by one - not all together)
-*why not consider a class-level variable with random slopes at the classroom level?
-*retry the above, allowing the slopes to be correlated with the random intercepts.
-*try to add a random slope for each student level predictor at the school level (one by one - not all together)
-*retry the above, allowing the slopes to be correlated with the random intercepts.
-*report anything unusual about the variance components
-*take the two predictors that had "signif." random slopes, in the forms in which they worked (indep. or correlated) 
-*and add both to the model, and test for need of one conditional on needing the other
-*is the more complex model justified?
-*WRITE OUT THIS MODEL in the notation given to you in class
+##try to add a random slope for each student level predictor at the school level (one by one - not all together)
 
-*report findings.  discuss.
+####SEX
+```{r}
+lme6.1<-lmer(math1st~housepov + mathknow + mathprep + yearstea + sex + minority + ses + (0 + sex|schoolid) + (1|schoolid/classid),data=dat)
+summary(lme6.1)
+```
+```{r}
+rand(lme6.1)
+```
+
+
+####MINORITY
+```{r}
+lme6.2<-lmer(math1st~housepov + mathknow + mathprep + yearstea + sex + minority + ses + (0 + minority|schoolid) + (1|schoolid/classid),data=dat)
+summary(lme6.2)
+```
+```{r}
+rand(lme6.2)
+```
+
+
+####SES
+```{r}
+lme6.3<-lmer(math1st~housepov + mathknow + mathprep + yearstea + sex + minority + ses + (0 + ses|schoolid) + (1|schoolid/classid),data=dat)
+summary(lme6.3)
+```
+```{r}
+rand(lme6.3)
+```
+
+
+##retry the above, allowing the slopes to be correlated with the random intercepts.
+
+####SEX
+```{r}
+lme6.1.1<-lmer(math1st~housepov + mathknow + mathprep + yearstea + sex + minority + ses + (sex|schoolid) + (1|classid),data=dat)
+summary(lme6.1.1)
+```
+```{r}
+rand(lme6.1.1)
+```
+
+
+####MINORITY
+```{r}
+lme6.2.1<-lmer(math1st~housepov + mathknow + mathprep + yearstea + sex + minority + ses + (minority|schoolid) + (1|classid),data=dat)
+summary(lme6.2.1)
+```
+```{r}
+rand(lme6.2.1)
+```
+
+
+####SES
+```{r}
+lme6.3.1<-lmer(math1st~housepov + mathknow + mathprep + yearstea + sex + minority + ses + (ses|schoolid) + (1|classid),data=dat)
+summary(lme6.3.1)
+```
+```{r}
+rand(lme6.3.1)
+```
+
+
+###report anything unusual about the variance components
+
+
+##take the two predictors that had "signif." random slopes, in the forms in which they worked (indep. or correlated) 
+
+The two predictors that had statistically significant random slopes are ses random slopes uncorrelated with the school random intercept, and minority random slopes correlated with the school random effect.
+
+####Model:
+$$
+MATH1ST_{ijk} = b_0 + b_1HOUSEPOV_{k} + b_2MATHKNOW_{jk} + b_3MATHPREP_{jk} + b_4YEARSTEA_{jk} + b_5SEX_{ijk} + b_6MINORITY_{ijk} + b_7SES_{ijk} + \eta_{jk} + \zeta_{0k}  + \zeta_{6k}MINORITY_{ijk} + \zeta_{7k}SES_{ijk} + \varepsilon_{ijk}
+$$
+With $\zeta_{0k}$ ~ N(0,$\sigma^2_{\zeta_{0}}$), $\zeta_{6k}$ ~ N(0,$\sigma^2_{\zeta_{6}}$), $\zeta_{7k}$ ~ N(0,$\sigma^2_{\zeta_{7}}$),  $\eta_{jk}$ ~ N(0,$\sigma^2_{\eta}$), and $\varepsilon_{ijk}$ ~ N(0,$\sigma^2_{\varepsilon}$), $corr(\zeta_{0k},\zeta_{6k}) = \rho_{\zeta_{0k}\zeta_{6k}}$ and all other pairs of random terms independent of one another.
+
+```{r}
+lme.7<-lmer(math1st~housepov + mathknow + mathprep + yearstea + sex + minority + ses + (0+ses|schoolid) + (minority|schoolid) + (1|classid),data=dat)
+summary(lme.7)
+```
+
+
+###Justified?
+
+Comparing it to just the model with uncorrelated SES random slopes:
+```{r}
+anova(lme6.3,lme.7)
+```
+
+Comparing it to just the model with correlated MINORITY random slopes:
+```{r}
+anova(lme6.2.1,lme.7)
+```
+
+Both LRT show that having both the random slopes added is an improvement in the model.

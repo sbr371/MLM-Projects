@@ -5,7 +5,7 @@ output: html_notebook
 
 ```{r}
 library(readr)
-dat <- read_csv("classroom.csv")
+dat <- read.csv("../classroom.csv")
 cc.data <- dat[(complete.cases(dat)),]
 ```
 
