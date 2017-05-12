@@ -1,0 +1,121 @@
+---
+title: "Project 6 - Intro to Nested Longitudinal Data"
+author: 
+-Sarah Rosenbach
+-James Wu
+-Zarni Htet
+-Jemar R. Bather
+-Martha Moreno
+output: html_notebook
+---
+
+```{r}
+require(foreign)
+require(lme4)
+require(lattice)
+require(lmerTest)
+require(aod)#for wald test
+require(reshape) # for wide to long reshape
+
+dat<-read.csv("../classroom.csv")
+attach(dat)
+```
+
+## Make a person-period file
+
+```{r}
+dat$math0 <- mathkind
+dat$math1 <- mathkind + mathgain
+```
+
+####reshape long math, i(childid) t(year) to save as "class_pp", replace
+
+```{r}
+class_pp <- reshape(dat, varying = c("math0", "math1"), v.names = "math", timevar = "year",
+                    times = c(0, 1), direction = "long")
+
+attach(class_pp)
+```
+
+
+##Fit a model with math as outcome, and fixed effect for time trend (year), and random intercepts for schools
+
+```{r}
+fit6.1 <- lmer(math ~ year + (1|schoolid), data = class_pp)
+summary(fit6.1)
+```
+
+
+### Write down model
+$$MATH_{tijk} = b_0 + b_1YEAR_{tijk} + \zeta_{k} + \varepsilon_{tijk} \textrm{ with } \zeta_{k} \textrm{~ N(0,} \sigma^2_{\zeta} \textrm{) and } \varepsilon_{tijk} \textrm{ ~ N(0,} \sigma^2_{\varepsilon} \textrm{), independent of each other.} $$
+##Add random intercepts for child
+```{r}
+fit6.2 <- lmer(math ~ year + (1 | schoolid) + (1 | childid), data = class_pp)
+print(summary(fit6.2))
+```
+
+###Write down model
+$$MATH_{tijk} = b_0 + b_1YEAR_{tijk} + \zeta_{k} + \delta_{0ijk} + \varepsilon_{tijk} \textrm{ with } \zeta_{k} \textrm{~ N(0,} \sigma^2_{\zeta} \textrm{), } \delta_{0ijk} \textrm{~ N(0,} \sigma^2_{\delta} \textrm{), and } \varepsilon_{tijk} \textrm{ ~ N(0,} \sigma^2_{\varepsilon} \textrm{) all independent of each other.}$$
+
+##Report original and new variance estimates for zeta0 (between schools) and epsilon (within schools)
+$$\textrm{Fit 6.1: } \zeta_{k} = 348.7 \textrm{ and } \varepsilon_{tijk} = 1268.4 \\ \textrm{Fit 6.2: } \zeta_{k} = 307.5 \textrm{ and } \varepsilon_{tijk} = 599.1$$
+##Compute a pseudo R^2 relating the between school variation and ignoring between students in the same school. In other words, what fraction of the total variance in the first model is 'explained' by the addition of a student random effect?
+
+$$\textrm{Pseudo } R^2 =\frac{(348.7 - 307.5)}{348.7} = 0.12$$
+##Does the total variation stay about the same (adding between children within schools variance as well, to the second model results)?
+$$\textrm{Fit 6.1: } \zeta_{k} + \varepsilon = 348.7 + 1268.4 = 1617.11 \\ \textrm{Fit 6.2: } \delta_{0ijk} +\zeta_{k} + \varepsilon = 702.0 + 307.5 + 599.1 = 1608.6 \\ \textrm{Yes, the total variation stays about the same.}$$
+
+##Add a random slope (zeta1) for time trend (year) within schools (uncorrelated with level (zeta0))
+```{r}
+fit6.3 <- lmer(math ~ year + (year || schoolid) + (1 | childid), data = class_pp)
+print(summary(fit6.3))
+```
+
+##Generate the BLUPs for the random effects and and examine whether the independence between zeta0 and zeta1 is REFLECTED in a scatterplot of these two sets of effects.
+```{r}
+ranefs <- ranef(fit6.3)
+zeta0 <- ranefs$schoolid[, 1]
+zeta1 <- ranefs$schoolid[, 2]
+
+idx.sch <- match(class_pp$schoolid, sort(unique(class_pp$schoolid))) #locations of the unique indices
+
+class_pp$zeta0 <- zeta0[idx.sch]
+class_pp$zeta1 <- zeta1[idx.sch]
+
+plot(class_pp$zeta0,class_pp$zeta1)
+cor(class_pp$zeta0,class_pp$zeta1)
+```
+
+$$\textrm{As confirmed by the correlation }(p = -0.15) \textrm{, } \zeta_{0} \textrm{ and } \zeta_{1} \textrm{ appear very slightly negatively correlated.}$$
+
+##Compute V_S(year=0) and V_S(year=1).  Since there are only two years, this is a form of heteroscedasticity in the random effects.
+
+$$V_S = (\sigma_{\zeta_0} + YEAR^2*\sigma_{\zeta_1}) \\ V_S(year=0) = 324.79 \\ V_S(year=1) = 324.79 + 88.67 = 413.46$$
+##In which year is there more between school variation, net of all else (year==0 or year==1)?
+
+$$\textrm{There is more between school variation when year = 1.}$$
+
+##If you ran the model separately BY YEAR, and removed the year trend from the model, would you get the same estimates for the variance between schools?  TRY IT
+
+```{r}
+fit6.4 <- lmer(math ~ (1 | schoolid), data=class_pp0)
+print(summary(fit6.4))
+
+fit6.5 <- lmer(math ~ (1 | schoolid), data=class_pp1)
+print(summary(fit6.5))
+```
+
+$$V_S(year=0) = 364.3 \\ V_S(year=1) = 306.8 \\ \textrm{They are not the same as the variance terms for Fit6.3.}$$
+##Rerun the last nested longitudinal model, allowing correlation between intercept and slope.  Is the correl. signif.?
+
+```{r}
+fit6.6 <- lmer(math ~ year + (year | schoolid) + (1 | childid), data = class_pp)
+print(summary(fit6.6))
+anova(fit6.3,fit6.6)
+```
+
+$$\textrm{The LRT test says it's significant.}$$
+
+##Compute V_S(year=0) and V_S(year=1) for this new model.  Is this more consistent with the separate grade analysis? You are implicitly testing model fit here.
+
+$$V_S = \sigma_{\zeta_0}^2 + YEAR^2*\sigma_{\zeta_1}^2 + 2*YEAR*Cov(\sigma_{\zeta_0},\sigma_{\zeta_1})= \sigma_{\zeta_0}^2 + YEAR^2*\sigma_{\zeta_1}^2 + 2*YEAR*\sigma_{\zeta_0}*\sigma_{\zeta_1}\\ V_S(year=0) = 370.6 + 0 + 0 = 370.6 \textrm{ (vs. 364.3)} \\ V_S(year=1) = 324.79 + (1^2)*109.17 + (2 * 19.25 * 10.44 * -0.45) = 253.087 \textrm{ (vs. 306.8)} \\ \textrm{These values are more consistent with the separate grade analysis.}$$
