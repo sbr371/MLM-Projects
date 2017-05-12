@@ -1,72 +1,62 @@
 ---
 title: "R Notebook"
-output: html_notebook
+output:
+  html_notebook: default
+  word_document: default
 ---
 
-use "classroom.dta"
-*intro to nested longitudinal data
-*make a person-period file
-gen math0 = mathkind
-gen math1 = mathkind+mathgain
+#use "classroom.dta"
+#intro to nested longitudinal data
+#make a person-period file
+#gen math0 = mathkind
+#gen math1 = mathkind+mathgain
 ```{r}
-library(readr)
 dat <- read.csv("../classroom.csv")
 cc.data <- dat[(complete.cases(dat)),]
 cc.data$math0 <- cc.data$mathkind
 cc.data$math1 <- cc.data$mathkind + cc.data$mathgain
 ```
 
-reshape long math, i(childid) j(year)
-save "class_pp", replace
+#reshape long math, i(childid) j(year)
+#save "class_pp", replace
 
 ```{r}
-firstpart <- cc.data
-firstpart$year <- rep(0,1081)
-firstpart <- firstpart[,-14]
-names(firstpart)[13] <- c("math")
+class_pp <- reshape(cc.data, varying = c("math0", "math1"), v.names = "math", timevar = "year",
+                    times = c(0, 1), direction = "long")
 
-secondpart <- cc.data
-secondpart$year <- rep(1,1081)
-secondpart <- secondpart[,-13]
-names(secondpart)[13] <- c("math")
+attach(class_pp)
 ```
-
-```{r}
-library(dplyr)
-comb.data <- bind_rows(firstpart, secondpart)
-```
-
-
-*fit a baseline model (called unconditional growth) for this nested longitudinal data, ignoring classrooms:
-mixed math year || schoolid: year, cov(un) || childid:
-*write down this model
+#fit a baseline model (called unconditional growth) for this nested longitudinal data, ignoring classrooms:
+#mixed math year || schoolid: year, cov(un) || childid:
 ```{r}
 require(lme4)
 require(lmerTest)
-und.grow <- lmer(math ~ year + (year|schoolid) + (1|schoolid:childid), data=comb.data)
+und.grow <- lmer(math ~ year + (year || schoolid) + (1 | childid), data=class_pp)
 summary(und.grow)
 ```
-
+write down this model
+$$MATH_{tijk} = b_0 + b_1YEAR_{tijk} + \zeta_{0k} + \zeta_{1k}YEAR_{tijk}+ \delta_{0ijk} + \varepsilon_{tijk} \textrm{ with } \zeta_{0k} \textrm{~ N(0,} \sigma^2_{\zeta} \textrm{), }\zeta_{1k} \textrm{~ N(0,} \sigma^2_{\zeta} \textrm{), } \delta_{0ijk} \textrm{~ N(0,} \sigma^2_{\delta} \textrm{), and } \varepsilon_{tijk} \textrm{ ~ N(0,} \sigma^2_{\varepsilon} \textrm{) all independent of each other.}$$
 
 *add student, classroom and school-level fixed effects ; fit the model
 *write down the model
 ```{r}
-und.grow2 <- lmer(math ~ housepov + mathprep + yearstea + mathknow + sex + minority + ses  + year + (year|schoolid) + (1|schoolid:childid), data=comb.data)
+und.grow2 <- lmer(math ~ housepov + mathprep + yearstea + mathknow + sex + minority + ses  + year + (year||schoolid) + (1|schoolid:childid), data=class_pp)
 summary(und.grow2)
 ```
+$$MATH_{tijk} = b_0 + b_1YEAR_{tijk} + b_2housepov_{k} + b_3mathprep_{jk} + b_4yearstea_{jk} + b_5mathknow_{jk} + b_6sex_{ijk} + b_7minority_{ijk} + b_8ses_{ijk} \\ + \zeta_{0k} + \zeta_{1k}YEAR_{tijk} + \delta_{0ijk} + \varepsilon_{tijk} \textrm{ with } \zeta_{0k} \textrm{~ N(0,} \sigma^2_{\zeta} \textrm{), }\zeta_{1k} \textrm{~ N(0,} \sigma^2_{\zeta} \textrm{), } \delta_{0ijk} \textrm{~ N(0,} \sigma^2_{\delta} \textrm{), and } \varepsilon_{tijk} \textrm{ ~ N(0,} \sigma^2_{\varepsilon} \textrm{) all independent of each other.}$$
 *for year==0:
 *what percent of between school differences were explained as you go from the baseline to the second model?
-(373.5-249.2)/373.5 = 0.3327979 ~ 33%
+(324.79-196.00)/324.79 = 0.3965331 ~ 40%
 
 *what percent of between child differences were explained as you go from the baseline to the second model?
-(749.0-689.5)/749.0 = 0.07943925 ~ 8%
+(725.13-686.14)/725.13 = 0.05376967 ~ 5%
 
 *for year==1:
 *what percent of between school differences were explained as you go from the baseline to the second model?
-((373.5+112.4) - (249.2+114.2))/(373.5+112.4) = 0.2521095 ~ 25%
+((324.79+88.67) - (196.00+82.13))/(324.79+88.67) = 0.327311 ~ 33%
 
 *what percent of between child differences were explained as you go from the baseline to the second model?
-((749.0+112.4) - (689.5+114.2))/(749.0+112.4) = 0.06698398 ~ 7%
+(725.13-686.14)/725.13 = 0.05376967 ~ 5%
 
 *based on significance, 
 *  what factors seem useful in describing ("explaining") differences between student outcomes? 
@@ -75,26 +65,25 @@ Minority and SES
 Minority (negative)
 SES (positive)
 
-
 *add a random slope for ses, indep. of the year or intercept but that varies at the school-level 
 *   (hint: in STATA, you are adding || schoolid: ses BEFORE THE OTHER || schoolid: year, cov(un) entry.
 
 ```{r}
-und.grow3 <- lmer(math ~ housepov + mathprep + yearstea + mathknow + sex + minority + ses+(0+ses|schoolid)+ year + (year|schoolid) + (1|schoolid:childid), data=comb.data)
+und.grow3 <- lmer(math ~ housepov + mathprep + yearstea + mathknow + sex + minority + ses+(0+ses|schoolid)+ year + (year||schoolid) + (1|schoolid:childid), data=class_pp)
 summary(und.grow3)
 ```
 
 
 *is the estimated s.d. (square root of variance) of the random slope associated with SES large enough 
 *  so that a value +/- 1 s.d. is sufficient to "cancel" (or flip the sign) the fixed effect for this predictor?
-The estimated s.d. (6.752) of the random slope associated with SES is not large enough to flip the sign of the fixed effect for this predictor.
+The estimated s.d. (6.600) of the random slope associated with SES is not large enough to flip the sign of the fixed effect for this predictor.
 
 *compute residuals in this final model.  generate a qq plot and density (STATA: qnorm; kdensity ..., normal) 
 *Is there any reason to question the normality assumption?
 After looking at the tails, there is reason to question the normality assumption. 
 ```{r}
 pred.yhat <- predict(und.grow3, re.form = ~0)
-res1 <- comb.data$math - pred.yhat
+res1 <- class_pp$math - pred.yhat
 qqnorm(res1)
 qqline(res1)
 ```
@@ -102,4 +91,23 @@ qqline(res1)
 
 *compute BLUPs for all 4 random effects.  generate an all pairs scatter plot matrix (4x4) of these 
 *  (STATA: graph matrix ...; R: pairs(...))
+```{r}
+ranefs <- ranef(und.grow3)
+zeta0 <- ranefs$schoolid[, 1]
+zeta1 <- ranefs$schoolid[, 2]
+zeta3 <- ranefs$schoolid[, 3]
+delta0 <-ranefs$`schoolid:childid`[,1]
+
+idx.sch <- match(class_pp$schoolid, sort(unique(class_pp$schoolid))) #locations of the unique indices
+idx.child <- match(class_pp$childid, sort(unique(class_pp$childid)))
+
+class_pp$zeta0 <- zeta0[idx.sch]
+class_pp$zeta1 <- zeta1[idx.sch]
+class_pp$zeta3 <- zeta3[idx.sch]
+class_pp$delta0 <- delta0[idx.sch]
+
+
+pairs(class_pp[,16:19])
+```
 * note whether or not you identify any concerns from these scatterplots.
+Scales are not the same so it's hard to tell if there is anything to be concerned about.

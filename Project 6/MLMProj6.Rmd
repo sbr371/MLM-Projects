@@ -28,7 +28,7 @@ dat$math0 <- mathkind
 dat$math1 <- mathkind + mathgain
 ```
 
-####reshape long math, i(childid) t(year) to save as "class_pp", replace
+####reshape long math, i(childid) j(year) to save as "class_pp", replace
 
 ```{r}
 class_pp <- reshape(dat, varying = c("math0", "math1"), v.names = "math", timevar = "year",
@@ -47,7 +47,7 @@ summary(fit6.1)
 
 
 ### Write down model
-$$MATH_{tijk} = b_0 + b_1YEAR_{tijk} + \zeta_{k} + \varepsilon_{tijk} \textrm{ with } \zeta_{k} \textrm{~ N(0,} \sigma^2_{\zeta} \textrm{) and } \varepsilon_{tijk} \textrm{ ~ N(0,} \sigma^2_{\varepsilon} \textrm{), independent of each other.} $$
+$$MATH_{tijk} = b_0 + b_1YEAR_{tijk} + \zeta_{0k} + \varepsilon_{tijk} \textrm{ with } \zeta_{0k} \textrm{~ N(0,} \sigma^2_{\zeta_0} \textrm{) and } \varepsilon_{tijk} \textrm{ ~ N(0,} \sigma^2_{\varepsilon} \textrm{), independent of each other.}$$
 ##Add random intercepts for child
 ```{r}
 fit6.2 <- lmer(math ~ year + (1 | schoolid) + (1 | childid), data = class_pp)
@@ -55,7 +55,7 @@ print(summary(fit6.2))
 ```
 
 ###Write down model
-$$MATH_{tijk} = b_0 + b_1YEAR_{tijk} + \zeta_{k} + \delta_{0ijk} + \varepsilon_{tijk} \textrm{ with } \zeta_{k} \textrm{~ N(0,} \sigma^2_{\zeta} \textrm{), } \delta_{0ijk} \textrm{~ N(0,} \sigma^2_{\delta} \textrm{), and } \varepsilon_{tijk} \textrm{ ~ N(0,} \sigma^2_{\varepsilon} \textrm{) all independent of each other.}$$
+$$MATH_{tijk} = b_0 + b_1YEAR_{tijk} + \zeta_{0k} + \delta_{0ijk} + \varepsilon_{tijk} \textrm{ with } \zeta_{0k} \textrm{~ N(0,} \sigma^2_{\zeta} \textrm{), } \delta_{0ijk} \textrm{~ N(0,} \sigma^2_{\delta} \textrm{), and } \varepsilon_{tijk} \textrm{ ~ N(0,} \sigma^2_{\varepsilon} \textrm{) all independent of each other.}$$
 
 ##Report original and new variance estimates for zeta0 (between schools) and epsilon (within schools)
 $$\textrm{Fit 6.1: } \zeta_{k} = 348.7 \textrm{ and } \varepsilon_{tijk} = 1268.4 \\ \textrm{Fit 6.2: } \zeta_{k} = 307.5 \textrm{ and } \varepsilon_{tijk} = 599.1$$
