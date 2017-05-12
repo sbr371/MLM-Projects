@@ -1,8 +1,13 @@
 ---
 title: "R Notebook"
 output:
+<<<<<<< HEAD
   word_document: default
   html_notebook: default
+=======
+  html_notebook: default
+  word_document: default
+>>>>>>> origin/master
 ---
 
 ```{r}
@@ -198,9 +203,13 @@ qqline(eta0)
 * as many BLUPs as the grouping factor (should be less of an issue in R)
 
 ```{r}
+<<<<<<< HEAD
 require(lattice)
 xyplot(mathkind ~ ses | schoolid, data = dat[dat$schoolid < 13, ], type = c("p",
 "r")) #close enough
+=======
+#library(calibrate)
+>>>>>>> origin/master
 ```
 
 
