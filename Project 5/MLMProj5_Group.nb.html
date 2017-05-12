@@ -174,13 +174,11 @@ $(document).ready(function () {
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZGF0IDwtIHJlYWRfY3N2KFwiLi4vY2xhc3Nyb29tLmNzdlwiKVxuXG5gYGAifQ== -->
-<pre class="r"><code>dat &lt;- read_csv(&quot;../classroom.csv&quot;)
-</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShyZWFkcilcbmRhdCA8LSByZWFkLmNzdihcIi4uL2NsYXNzcm9vbS5jc3ZcIilcbmNjLmRhdGEgPC0gZGF0Wyhjb21wbGV0ZS5jYXNlcyhkYXQpKSxdXG5gYGAifQ== -->
+<pre class="r"><code>library(readr)
+dat &lt;- read.csv(&quot;../classroom.csv&quot;)
+cc.data &lt;- dat[(complete.cases(dat)),]</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiRXJyb3I6IGNvdWxkIG5vdCBmaW5kIGZ1bmN0aW9uIFwicmVhZF9jc3ZcIlxuIn0= -->
-<pre><code>Error: could not find function &quot;read_csv&quot;</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>*we have two models to consider, but we first focus on the simpler one:</p>
@@ -194,9 +192,9 @@ cc.data$math1st &lt;- mathkind + mathgain</code></pre>
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmVxdWlyZShsbWU0KVxucmVxdWlyZShsbWVyVGVzdClcbmZpdDEgPC0gbG1lcihtYXRoMXN0IH4gaG91c2Vwb3YgKyB5ZWFyc3RlYSArIG1hdGhwcmVwICsgbWF0aGtub3cgKyBzZXMgKyBzZXggKyBtaW5vcml0eSArICgxfHNjaG9vbGlkL2NsYXNzaWQpLCBkYXRhPWNjLmRhdGEpXG5zdW1tYXJ5KGZpdDEpXG5gYGAifQ== -->
-<pre class="r"><code>require(lme4)
-require(lmerTest)
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI3JlcXVpcmUobG1lNClcbiNyZXF1aXJlKGxtZXJUZXN0KVxuZml0MSA8LSBsbWVyKG1hdGgxc3QgfiBob3VzZXBvdiArIHllYXJzdGVhICsgbWF0aHByZXAgKyBtYXRoa25vdyArIHNlcyArIHNleCArIG1pbm9yaXR5ICsgKDF8c2Nob29saWQvY2xhc3NpZCksIGRhdGE9Y2MuZGF0YSlcbnN1bW1hcnkoZml0MSlcbmBgYCJ9 -->
+<pre class="r"><code>#require(lme4)
+#require(lmerTest)
 fit1 &lt;- lmer(math1st ~ housepov + yearstea + mathprep + mathknow + ses + sex + minority + (1|schoolid/classid), data=cc.data)
 summary(fit1)</code></pre>
 <!-- rnb-source-end -->
@@ -205,34 +203,19 @@ summary(fit1)</code></pre>
 <p><em>manually construct the residual that removes only the ‘fixed effects’ </em>hint: predict yhat, xb will generate the prediction for the outcome based on the fixed effects only * then subtract it from the outcome; call this residual: resFE</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHJlZC55aGF0IDwtIHByZWRpY3QoZml0MSwgcmUuZm9ybSA9IH4wKVxucmVzMSA8LSBjYy5kYXRhJG1hdGgxc3QgLSBwcmVkLnloYXRcbmBgYCJ9 -->
-<pre class="r"><code>pred.yhat &lt;- predict(fit1, re.form = ~0)
-res1 &lt;- cc.data$math1st - pred.yhat</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHJlZC55aGF0IDwtIHByZWRpY3QoZml0MSwgcmUuZm9ybSA9IH4wKSAjVGhpcyBpZ25vcmUgcmFuZG9tIGVmZmVjdHNcbnJlc0ZFIDwtIGNjLmRhdGEkbWF0aDFzdCAtIHByZWQueWhhdCBcbmBgYCJ9 -->
+<pre class="r"><code>pred.yhat &lt;- predict(fit1, re.form = ~0) #This ignore random effects
+resFE &lt;- cc.data$math1st - pred.yhat </code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>*show that this residual is not independent within schools in some manner. Hint: boxplot?</p>
+<p>*show that this residual is not independent within schools in some manner.</p>
+<p>Below, we have sorted each of the fixed effect residuals for the schools by their median from lowest to highest. If we are assuming independence of residuals withink schools, then, we would expect to see a flat-line showing that residuals across schools is random. However, since we are seeing a positive trending line, we can conclude that residuals are not random and it may be dependent on school.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZGVjLnNjaG9vbGlkIDwtIGFzLm51bWVyaWMobmFtZXMoc29ydCh0YWJsZShzY2hvb2xpZCkpKSlcbmNjLmRhdGEkc2Nob29saWQgPC0gb3JkZXJlZChjYy5kYXRhJHNjaG9vbGlkLCBsZXZlbHMgPSBkZWMuc2Nob29saWQgKVxud2l0aChjYy5kYXRhLCBib3hwbG90KHJlczF+c2Nob29saWQpKVxuYWJsaW5lKGg9MCwgY29sID0gXCJyZWRcIilcblxub3JkPC1vcmRlcih1bmxpc3QodGFwcGx5KHJlczEsc2Nob29saWQsbWVkaWFuKSkpXG5ib3hwbG90KHNwbGl0KHJlczEsc2Nob29saWQpW29yZF0pXG5gYGAifQ== -->
-<pre class="r"><code>dec.schoolid &lt;- as.numeric(names(sort(table(schoolid))))
-cc.data$schoolid &lt;- ordered(cc.data$schoolid, levels = dec.schoolid )
-with(cc.data, boxplot(res1~schoolid))
-abline(h=0, col = &quot;red&quot;)
-
-ord&lt;-order(unlist(tapply(res1,schoolid,median)))
-boxplot(split(res1,schoolid)[ord])</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZGVjLmNsYXNzaWQgPC0gYXMubnVtZXJpYyhuYW1lcyhzb3J0KHRhYmxlKGNsYXNzaWQpKSkpXG5jYy5kYXRhJGNsYXNzaWQgPC0gb3JkZXJlZChjYy5kYXRhJGNsYXNzaWQsIGxldmVscyA9IGRlYy5jbGFzc2lkIClcbndpdGgoY2MuZGF0YSwgYm94cGxvdChyZXMxfmNsYXNzaWQpKVxuYWJsaW5lKGg9MCwgY29sID0gXCJyZWRcIilcblxuYGBgIn0= -->
-<pre class="r"><code>dec.classid &lt;- as.numeric(names(sort(table(classid))))
-cc.data$classid &lt;- ordered(cc.data$classid, levels = dec.classid )
-with(cc.data, boxplot(res1~classid))
-abline(h=0, col = &quot;red&quot;)
-</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxub3JkPC1vcmRlcih1bmxpc3QodGFwcGx5KHJlc0ZFLHNjaG9vbGlkLG1lZGlhbikpKVxuYm94cGxvdChzcGxpdChyZXNGRSxzY2hvb2xpZClbb3JkXSwgbWFpbiA9IFwicmVzRkUgMXN0IEJveFBsb3RcIilcbmBgYCJ9 -->
+<pre class="r"><code>ord&lt;-order(unlist(tapply(resFE,schoolid,median)))
+boxplot(split(resFE,schoolid)[ord], main = &quot;resFE 1st BoxPlot&quot;)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
@@ -247,33 +230,32 @@ idx.cls &lt;- match(cc.data$classid, sort(unique(cc.data$classid))) </code></pre
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYXR0YWNoKGNjLmRhdGEpXG5yYW5lZnMgPC0gcmFuZWYoZml0MSlcbnpldGEwIDwtIHJhbmVmcyRzY2hvb2xpZFssIDFdXG5ldGEwIDwtIHJhbmVmcyRjbGFzc2lkWywgMV1cbmNjLmRhdGEkemV0YTAgPC0gemV0YTBbaWR4LnNjaF1cbmNjLmRhdGEkZXRhMCA8LSBldGEwW2lkeC5jbHNdXG5yZXNGRV9SRSA8LSBtYXRoMXN0IC0gcHJlZC55aGF0IC0gY2MuZGF0YSR6ZXRhMCAtIGNjLmRhdGEkZXRhMFxuYGBgIn0= -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYXR0YWNoKGNjLmRhdGEpXG5yYW5lZnMgPC0gcmFuZWYoZml0MSkgI1B1bGxpbmcgb3V0IHRoZSByYW5kb20gZWZmZWN0c1xuemV0YTAgPC0gcmFuZWZzJHNjaG9vbGlkWywgMV0gI1JhbmRvbSBJbnRlcmNlcHQgZm9yIFNjaG9vbFxuZXRhMCA8LSByYW5lZnMkY2xhc3NpZFssIDFdICNSYW5kb20gSW50ZXJjZXB0IGZvciBDbGFzc1xuY2MuZGF0YSR6ZXRhMCA8LSB6ZXRhMFtpZHguc2NoXSAjIFB1dHRpbmcgUmFuZG9tIEludGVyY2VwdCBvZiBTY2hvb2wgYmFjayBpbnRvIHRoZSBkYXRhIHNldFxuY2MuZGF0YSRldGEwIDwtIGV0YTBbaWR4LmNsc10gI1B1dHRpbmcgUmFuZG9tIEludGVyY2VwdCBvZiBDbGFzcyBiYWNrIGludG8gdGhlIGRhdGEgc2V0XG5yZXNGRV9SRSA8LSBtYXRoMXN0IC0gcHJlZC55aGF0IC0gY2MuZGF0YSR6ZXRhMCAtIGNjLmRhdGEkZXRhMCAjVGhpcyBhY2NvdW50cyBmb3IgcmVtb3ZpbmcgYm90aCBmaXhlZCBhbmQgcmFuZG9tIGVmZmVjdHMgYW5kIHRoZSByYW5kb20gZWZmZWN0cyBhcmUgcmVtb3ZlZCBtYW51YWxseS4gVGhlcmVmb3JlLCByZXNpZHVhbHMgc2hvdWxkIGJlIGxlc3MgZGVwZW5kZW50IHRoYW4gdGhlIHByZXZpb3VzIG9uZS4gVGh1cywgd2UgZXhwZWN0IHRvIHNlZSBhIGZsYXR0ZXIgbGluZS5cbmBgYCJ9 -->
 <pre class="r"><code>attach(cc.data)
-ranefs &lt;- ranef(fit1)
-zeta0 &lt;- ranefs$schoolid[, 1]
-eta0 &lt;- ranefs$classid[, 1]
-cc.data$zeta0 &lt;- zeta0[idx.sch]
-cc.data$eta0 &lt;- eta0[idx.cls]
-resFE_RE &lt;- math1st - pred.yhat - cc.data$zeta0 - cc.data$eta0</code></pre>
+ranefs &lt;- ranef(fit1) #Pulling out the random effects
+zeta0 &lt;- ranefs$schoolid[, 1] #Random Intercept for School
+eta0 &lt;- ranefs$classid[, 1] #Random Intercept for Class
+cc.data$zeta0 &lt;- zeta0[idx.sch] # Putting Random Intercept of School back into the data set
+cc.data$eta0 &lt;- eta0[idx.cls] #Putting Random Intercept of Class back into the data set
+resFE_RE &lt;- math1st - pred.yhat - cc.data$zeta0 - cc.data$eta0 #This accounts for removing both fixed and random effects and the random effects are removed manually. Therefore, residuals should be less dependent than the previous one. Thus, we expect to see a flatter line.</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <ul>
 <li>show that these new residuals, resFE_RE are MUCH LESS (if not completely un-) correlated within school</li>
-<li>using the same method as before (boxplot?) ### ZARNI</li>
+<li>using the same method as before (boxplot?)</li>
 </ul>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxud2l0aChjYy5kYXRhLCBib3hwbG90KHJlc0ZFX1JFfnNjaG9vbGlkKSlcbmFibGluZShoPTEsIGNvbD1cInJlZFwiKVxuXG5vcmQyPC1vcmRlcih1bmxpc3QodGFwcGx5KHJlc0ZFX1JFLHNjaG9vbGlkLG1lZGlhbikpKVxuYm94cGxvdChzcGxpdChyZXNGRV9SRSxzY2hvb2xpZClbb3JkMl0pXG5cbmBgYCJ9 -->
-<pre class="r"><code>with(cc.data, boxplot(resFE_RE~schoolid))
-abline(h=1, col=&quot;red&quot;)
-
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI1dlIGFyZSBleHBlY3RpbmcgYSBmbGF0dGVyIGxpbmUgYnV0LCB0aGUgbGluZSBpcyB1cHdhcmQgc2xvcGluZy4gQ29tZSBiYWNrIHRvIGl0IGFzIGEgZ3JvdXAuXG5vcmQyPC1vcmRlcih1bmxpc3QodGFwcGx5KHJlc0ZFX1JFLHNjaG9vbGlkLG1lZGlhbikpKVxuYm94cGxvdChzcGxpdChyZXNGRV9SRSxzY2hvb2xpZClbb3JkMl0sIG1haW4gPSBcInJlc0ZFX1JFX0JveFBsb3QgMlwiKVxuYGBgIn0= -->
+<pre class="r"><code>#We are expecting a flatter line but, the line is upward sloping. Come back to it as a group.
 ord2&lt;-order(unlist(tapply(resFE_RE,schoolid,median)))
-boxplot(split(resFE_RE,schoolid)[ord2])
-</code></pre>
+boxplot(split(resFE_RE,schoolid)[ord2], main = &quot;resFE_RE_BoxPlot 2&quot;)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+<div id="did-we-tag" class="section level3">
+<h3>Did we tag?</h3>
 <p><em>examine the two sets of BLUPs (for random effects zeta0 and eta0) for normality </em>first ‘tag’ a single value from each grouping (e.g., school or classroom) so that you only have * as many BLUPs as the grouping factor (should be less of an issue in R)</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
@@ -293,6 +275,9 @@ qqline(eta0)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+</div>
+<div id="jemar-zarni" class="section level3">
+<h3>Jemar &amp; Zarni</h3>
 <p>*if In a simpler setting, with no classroom level, if H0: ^2_{<em>0}=0 were true, * and you sampled 100 schools of size 10, what would be a potential expected estimate of </em>{<em>0} * if you know that </em>{}=1 ? HINT: the Central Limit Theorem applies. Simulate to find out.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
@@ -301,24 +286,28 @@ qqline(eta0)</code></pre>
 <p>*now reload the data and fit a slightly more complicated model: use “classroom.dta” gen math1st = mathkind + mathgain</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZGF0IDwtIHJlYWQuY3N2KFwiY2xhc3Nyb29tLmNzdlwiKVxuZGF0JG1hdGgxc3QgPC0gZGF0JG1hdGhraW5kICsgZGF0JG1hdGhnYWluXG5kYXQgPC0gZGF0Wyhjb21wbGV0ZS5jYXNlcyhkYXQpKSxdXG5hdHRhY2goZGF0KVxuXG5cbmBgYCJ9 -->
-<pre class="r"><code>dat &lt;- read.csv(&quot;classroom.csv&quot;)
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZGF0IDwtIHJlYWQuY3N2KFwiLi4vY2xhc3Nyb29tLmNzdlwiKVxuZGF0JG1hdGgxc3QgPC0gZGF0JG1hdGhraW5kICsgZGF0JG1hdGhnYWluXG5kYXQgPC0gZGF0Wyhjb21wbGV0ZS5jYXNlcyhkYXQpKSxdXG5hdHRhY2goZGF0KVxuYGBgIn0= -->
+<pre class="r"><code>dat &lt;- read.csv(&quot;../classroom.csv&quot;)
 dat$math1st &lt;- dat$mathkind + dat$mathgain
 dat &lt;- dat[(complete.cases(dat)),]
-attach(dat)
-</code></pre>
+attach(dat)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>mixed math1st housepov yearstea mathprep mathknow ses sex minority |||schoolid: minority, cov(un) || classid:, reml est store M2</p>
+</div>
+<div id="come-back-and-check-0minorityschoolid-later" class="section level1">
+<h1>Come back and check (0+minority|schoolid) later</h1>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuTTIgPC0gbG1lcihtYXRoMXN0IH4gaG91c2Vwb3YgKyB5ZWFyc3RlYSArIG1hdGhwcmVwICsgbWF0aGtub3cgKyBzZXMgKyBzZXggKyBtaW5vcml0eSArICgwK21pbm9yaXR5fHNjaG9vbGlkKSArICgxfHNjaG9vbGlkKSArICgxfGNsYXNzaWQpKVxuc3VtbWFyeShNMilcblxuYGBgIn0= -->
-<pre class="r"><code>M2 &lt;- lmer(math1st ~ housepov + yearstea + mathprep + mathknow + ses + sex + minority + (0+minority|schoolid) + (1|schoolid) + (1|classid))
-summary(M2)
-</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI1RoZSBtb2RlbCBpcyBzbGlnaHRseSBtb3JlIGNvbXBsaWNhdGVkIHdpdGggYW4gdW5jb3JyZWxhdGVkIHJhbmRvbSBzbG9wZSBzY2hvb2wgbGV2ZWwgdmFyaWFiaWxpdHkgb2YgbWlub3JpdHkuXG5NMiA8LSBsbWVyKG1hdGgxc3QgfiBob3VzZXBvdiArIHllYXJzdGVhICsgbWF0aHByZXAgKyBtYXRoa25vdyArIHNlcyArIHNleCArIG1pbm9yaXR5ICsgKDArbWlub3JpdHl8c2Nob29saWQpICsgKDF8c2Nob29saWQpICsgKDF8Y2xhc3NpZCkpXG5wcmludChzdW1tYXJ5KE0yKSlcbmBgYCJ9 -->
+<pre class="r"><code>#The model is slightly more complicated with an uncorrelated random slope school level variability of minority.
+M2 &lt;- lmer(math1st ~ housepov + yearstea + mathprep + mathknow + ses + sex + minority + (0+minority|schoolid) + (1|schoolid) + (1|classid))
+print(summary(M2))</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaWR4LnNjaCA8LSBtYXRjaChkYXQkc2Nob29saWQsIHNvcnQodW5pcXVlKGRhdCRzY2hvb2xpZCkpKVxuaWR4LmNscyA8LSBtYXRjaChkYXQkY2xhc3NpZCwgc29ydCh1bmlxdWUoZGF0JGNsYXNzaWQpKSkgXG5gYGAifQ== -->
 <pre class="r"><code>idx.sch &lt;- match(dat$schoolid, sort(unique(dat$schoolid)))
@@ -329,45 +318,64 @@ idx.cls &lt;- match(dat$classid, sort(unique(dat$classid))) </code></pre>
 <p>*manually construct the residual that removes only the ‘fixed effects’, call this residual: resFE</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHJlZC55aGF0LjIgPC0gcHJlZGljdChNMiwgcmUuZm9ybSA9IH4wKVxucmFuZWZzIDwtIHJhbmVmKE0yKVxuemV0YTAgPC0gcmFuZWZzJHNjaG9vbGlkWywgMV1cbmRhdCR6ZXRhMCA8LSB6ZXRhMFtpZHguc2NoXVxucmVzRkUgPC0gZGF0JG1hdGgxc3QgLSBwcmVkLnloYXQuMiBcbmBgYCJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHJlZC55aGF0LjIgPC0gcHJlZGljdChNMiwgcmUuZm9ybSA9IH4wKVxucmFuZWZzIDwtIHJhbmVmKE0yKVxuemV0YTAgPC0gcmFuZWZzJHNjaG9vbGlkWywgMV1cbmRhdCR6ZXRhMCA8LSB6ZXRhMFtpZHguc2NoXVxucmVzRkUuMiA8LSBkYXQkbWF0aDFzdCAtIHByZWQueWhhdC4yIFxuYGBgIn0= -->
 <pre class="r"><code>pred.yhat.2 &lt;- predict(M2, re.form = ~0)
 ranefs &lt;- ranef(M2)
 zeta0 &lt;- ranefs$schoolid[, 1]
 dat$zeta0 &lt;- zeta0[idx.sch]
-resFE &lt;- dat$math1st - pred.yhat.2 </code></pre>
+resFE.2 &lt;- dat$math1st - pred.yhat.2 </code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>*show that this residual is not independent within schools in some manner. Hint: boxplot?</p>
+<div id="jemar-zarni-1" class="section level3">
+<h3>Jemar &amp; Zarni</h3>
+<p>Below, we have sorted each of the fixed effect residuals for the schools by their median from lowest to highest. If we are assuming independence of residuals within schools, then, we would expect to see a flat-line showing that residuals across schools is random. However, since we are seeing a positive trending line which is similar to the one above as the random slope for miniority is non existent with variance being zero, we can conclude that residuals are not random and it appears to be dependent on school like the results of the less complicated model above.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxub3JkMzwtb3JkZXIodW5saXN0KHRhcHBseShyZXNGRS4yLHNjaG9vbGlkLG1lZGlhbikpKVxuYm94cGxvdChzcGxpdChyZXNGRS4yLHNjaG9vbGlkKVtvcmQzXSwgbWFpbiA9IFwicmVzRkUuMiBCb3hwbG90XzNcIilcbmBgYCJ9 -->
+<pre class="r"><code>ord3&lt;-order(unlist(tapply(resFE.2,schoolid,median)))
+boxplot(split(resFE.2,schoolid)[ord3], main = &quot;resFE.2 Boxplot_3&quot;)</code></pre>
+<!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p><em>construct the residual that utilizes the BLUPs for the random effects. Do it in these stages: </em> i) predict and save zeta0 AND zeta1 (you need to give them in reverse order in STATA - ask me why if you want) * ii) predit and save eta0 * iii) generate a new residual, called resFE_RE which subtracts yhat, zeta0, MINORITY*zeta1 and eta0</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmFuZXJyIDwtIHJhbmVmKE0yKVxuemV0YTAgPC0gcmFuZXJyJHNjaG9vbGlkWywxXVxuemV0YTEgPC0gcmFuZXJyJHNjaG9vbGlkWywyXVxuZXRhMCA8LSByYW5lcnIkY2xhc3NpZFssMV1cbmRhdCR6ZXRhMCA8LSBkYXQkemV0YTBbaWR4LnNjaF1cbmRhdCR6ZXRhMSA8LSBkYXQkemV0YTFbaWR4LnNjaF1cbmRhdCRldGEwIDwtIGRhdCRldGEwW2lkeC5jbHNdXG5yZXNGRV9SRSA8LSBkYXQkbWF0aDFzdCAtIChwcmVkLnloYXQuMiArIGRhdCR6ZXRhMCArIGRhdCRtaW5vcml0eSAqIGRhdCR6ZXRhMSArIGRhdCRldGEwKVxuYGBgIn0= -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmFuZXJyIDwtIHJhbmVmKE0yKVxuemV0YTAgPC0gcmFuZXJyJHNjaG9vbGlkWywxXVxuemV0YTEgPC0gcmFuZXJyJHNjaG9vbGlkWywyXSAjSXQgaXMgdGhlIHJhbmRvbSBzbG9wZSBvZiB0aGUgbWlub3JpdHkgaW50ZXJjZXB0XG5ldGEwIDwtIHJhbmVyciRjbGFzc2lkWywxXSAjVGhpcyBpcyB0aGUgcmFuZG9tIGludGVyY2VwdCBmb3IgdGhlIGNsYXNzcm9vbSBsZXZlbC5cbmRhdCR6ZXRhMCA8LSB6ZXRhMFtpZHguc2NoXVxuZGF0JHpldGExIDwtIHpldGExW2lkeC5zY2hdXG5kYXQkZXRhMCA8LSBldGEwW2lkeC5jbHNdXG5yZXNGRV9SRS4yIDwtIGRhdCRtYXRoMXN0IC0gKHByZWQueWhhdC4yICsgZGF0JHpldGEwICsgKGRhdCRtaW5vcml0eSAqIGRhdCR6ZXRhMSkgKyBkYXQkZXRhMCkjVGhpcyBhY2NvdW50cyBmb3IgcmVtb3ZpbmcgYm90aCBmaXhlZCBhbmQgcmFuZG9tIGVmZmVjdHMgYW5kIHRoZSByYW5kb20gZWZmZWN0cyBhcmUgcmVtb3ZlZCBtYW51YWxseS4gVGhlcmVmb3JlLCByZXNpZHVhbHMgc2hvdWxkIGJlIGxlc3MgZGVwZW5kZW50IHRoYW4gdGhlIHByZXZpb3VzIG9uZS4gVGh1cywgd2UgZXhwZWN0IHRvIHNlZSBhIGZsYXR0ZXIgbGluZS5cbmBgYCJ9 -->
 <pre class="r"><code>ranerr &lt;- ranef(M2)
 zeta0 &lt;- ranerr$schoolid[,1]
-zeta1 &lt;- ranerr$schoolid[,2]
-eta0 &lt;- ranerr$classid[,1]
-dat$zeta0 &lt;- dat$zeta0[idx.sch]
-dat$zeta1 &lt;- dat$zeta1[idx.sch]
-dat$eta0 &lt;- dat$eta0[idx.cls]
-resFE_RE &lt;- dat$math1st - (pred.yhat.2 + dat$zeta0 + dat$minority * dat$zeta1 + dat$eta0)</code></pre>
+zeta1 &lt;- ranerr$schoolid[,2] #It is the random slope of the minority intercept
+eta0 &lt;- ranerr$classid[,1] #This is the random intercept for the classroom level.
+dat$zeta0 &lt;- zeta0[idx.sch]
+dat$zeta1 &lt;- zeta1[idx.sch]
+dat$eta0 &lt;- eta0[idx.cls]
+resFE_RE.2 &lt;- dat$math1st - (pred.yhat.2 + dat$zeta0 + (dat$minority * dat$zeta1) + dat$eta0)#This accounts for removing both fixed and random effects and the random effects are removed manually. Therefore, residuals should be less dependent than the previous one. Thus, we expect to see a flatter line.</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <ul>
-<li><p>from the outcome</p></li>
+<li>from the outcome</li>
+</ul>
+</div>
+<div id="jemar-zarni-2" class="section level3">
+<h3>Jemar &amp; Zarni</h3>
+</div>
+<div id="we-can-check-this-by-subtracting-the-total-sum-off-and-the-one-which-is-greater-will-have-a-positive-total-slope-shoot-an-email-to-marc-on-this" class="section level2">
+<h2>We can check this by subtracting the total sum off and the one which is greater will have a positive total slope? #Shoot an email to Marc on this</h2>
+<ul>
 <li>show that these new residuals, resFE_RE are MUCH LESS (if not completely un-) correlated within school</li>
-<li><p>using the same method as before (boxplot?)</p></li>
+<li>using the same method as before (boxplot?)</li>
 </ul>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxub3JkNDwtb3JkZXIodW5saXN0KHRhcHBseShyZXNGRV9SRS4yLHNjaG9vbGlkLG1lZGlhbikpKVxuYm94cGxvdChzcGxpdChyZXNGRV9SRS4yLHNjaG9vbGlkKVtvcmQ0XSwgbWFpbiA9IFwicmVzRkVfUkUuMiBCb3hsb3QgNFwiKVxuYGBgIn0= -->
+<pre class="r"><code>ord4&lt;-order(unlist(tapply(resFE_RE.2,schoolid,median)))
+boxplot(split(resFE_RE.2,schoolid)[ord4], main = &quot;resFE_RE.2 Boxlot 4&quot;)</code></pre>
+<!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>*examine the three sets of BLUPs (for random effects zeta0 and eta0) for normality</p>
+<p>This is the BLUP for random intercept at the school level and for the most part, it appears to be normal except in the tails end.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucXFub3JtKHpldGEwKVxucXFsaW5lKHpldGEwKVxuYGBgIn0= -->
@@ -378,12 +386,14 @@ qqline(zeta0)</code></pre>
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucXFub3JtKHpldGExKVxucXFsaW5lKHpldGExKVxuYGBgIn0= -->
-<pre class="r"><code>qqnorm(zeta1)
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI0N1cnJlbnRseSwgd2UgaGF2ZSBmb3VuZCBhIHJhbmRvbSBzbG9wZSBvZiB6ZXJvIGZvciB0aGUgbWlub3JpdHkuIFdlIHdpbGwgaGF2ZSB0byBjb21lIGJhY2sgdG8gdGhpcy5cbnFxbm9ybSh6ZXRhMSlcbnFxbGluZSh6ZXRhMSlcbmBgYCJ9 -->
+<pre class="r"><code>#Currently, we have found a random slope of zero for the minority. We will have to come back to this.
+qqnorm(zeta1)
 qqline(zeta1)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+<p>The classroom level random intercept appears to be normal except in the tails end.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucXFub3JtKGV0YTApXG5xcWxpbmUoZXRhMClcbmBgYCJ9 -->
@@ -392,17 +402,19 @@ qqline(eta0)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+<div id="jemar-zarni-3" class="section level3">
+<h3>Jemar &amp; Zarni</h3>
 <p><em>first ‘tag’ a single value from each grouping (e.g., school or classroom) so that you only have </em> as many BLUPs as the grouping factor (should be less of an issue in R)</p>
-<p><em>plot zeta0 vs. zeta1 to see whether the estimated correlation is consistent with the observed. </em> Use tag to subset as before</p>
-<div id="no-correlation" class="section level1">
-<h1>No Correlation</h1>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShjYWxpYnJhdGUpXG5gYGAifQ== -->
-<pre class="r"><code>library(calibrate)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmVxdWlyZShsYXR0aWNlKVxueHlwbG90KG1hdGhraW5kIH4gc2VzIHwgc2Nob29saWQsIGRhdGEgPSBkYXRbZGF0JHNjaG9vbGlkIDwgMTMsIF0sIHR5cGUgPSBjKFwicFwiLFxuXCJyXCIpKSAjY2xvc2UgZW5vdWdoXG5gYGAifQ== -->
+<pre class="r"><code>require(lattice)
+xyplot(mathkind ~ ses | schoolid, data = dat[dat$schoolid &lt; 13, ], type = c(&quot;p&quot;,
+&quot;r&quot;)) #close enough</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+<p><em>plot zeta0 vs. zeta1 to see whether the estimated correlation is consistent with the observed. </em> Use tag to subset as before</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucGxvdChqaXR0ZXIoemV0YTApLCB6ZXRhMSlcbnRleHQoemV0YTAsIHpldGExLCBsYWJlbHM9c2Nob29saWQsIGNleD0gMC43LCBwb3M9MylcblxucGxvdChqaXR0ZXIoemV0YTBbMToxMF0sIHpldGExWzE6MTBdKSlcbnRleHR4eSh6ZXRhMFsxOjEwXSwgemV0YTFbMToxMF0sIHNjaG9vbGlkWzE6MTBdKVxuXG5gYGAifQ== -->
@@ -415,13 +427,18 @@ textxy(zeta0[1:10], zeta1[1:10], schoolid[1:10])
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+</div>
+<div id="jemar-zarni-much-easier-to-figure-out" class="section level3">
+<h3>Jemar &amp; Zarni Much easier to figure out</h3>
 <p>*track down those odd points in the scatterplot. What schools are they?</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-chunk-end -->
 </div>
+</div>
+</div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIlIgTm90ZWJvb2siDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KDQpgYGB7cn0NCmxpYnJhcnkocmVhZHIpDQpkYXQgPC0gcmVhZC5jc3YoIi4uL2NsYXNzcm9vbS5jc3YiKQ0KY2MuZGF0YSA8LSBkYXRbKGNvbXBsZXRlLmNhc2VzKGRhdCkpLF0NCmBgYA0KDQoqd2UgaGF2ZSB0d28gbW9kZWxzIHRvIGNvbnNpZGVyLCBidXQgd2UgZmlyc3QgZm9jdXMgb24gdGhlIHNpbXBsZXIgb25lOg0KYGBge3J9DQphdHRhY2goY2MuZGF0YSkNCmNjLmRhdGEkbWF0aDFzdCA8LSBtYXRoa2luZCArIG1hdGhnYWluDQpgYGANCg0KYGBge3J9DQpyZXF1aXJlKGxtZTQpDQpyZXF1aXJlKGxtZXJUZXN0KQ0KZml0MSA8LSBsbWVyKG1hdGgxc3QgfiBob3VzZXBvdiArIHllYXJzdGVhICsgbWF0aHByZXAgKyBtYXRoa25vdyArIHNlcyArIHNleCArIG1pbm9yaXR5ICsgKDF8c2Nob29saWQvY2xhc3NpZCksIGRhdGE9Y2MuZGF0YSkNCnN1bW1hcnkoZml0MSkNCmBgYA0KDQoqbWFudWFsbHkgY29uc3RydWN0IHRoZSByZXNpZHVhbCB0aGF0IHJlbW92ZXMgb25seSB0aGUgJ2ZpeGVkIGVmZmVjdHMnDQoqaGludDogcHJlZGljdCB5aGF0LCB4YiB3aWxsIGdlbmVyYXRlIHRoZSBwcmVkaWN0aW9uIGZvciB0aGUgb3V0Y29tZSBiYXNlZCBvbiB0aGUgZml4ZWQgZWZmZWN0cyBvbmx5DQoqIHRoZW4gc3VidHJhY3QgaXQgZnJvbSB0aGUgb3V0Y29tZTsgY2FsbCB0aGlzIHJlc2lkdWFsOiByZXNGRQ0KYGBge3J9DQpwcmVkLnloYXQgPC0gcHJlZGljdChmaXQxLCByZS5mb3JtID0gfjApDQpyZXMxIDwtIGNjLmRhdGEkbWF0aDFzdCAtIHByZWQueWhhdA0KYGBgDQoNCipzaG93IHRoYXQgdGhpcyByZXNpZHVhbCBpcyBub3QgaW5kZXBlbmRlbnQgd2l0aGluIHNjaG9vbHMgaW4gc29tZSBtYW5uZXIuICBIaW50OiBib3hwbG90Pw0KYGBge3J9DQpkZWMuc2Nob29saWQgPC0gYXMubnVtZXJpYyhuYW1lcyhzb3J0KHRhYmxlKHNjaG9vbGlkKSkpKQ0KY2MuZGF0YSRzY2hvb2xpZCA8LSBvcmRlcmVkKGNjLmRhdGEkc2Nob29saWQsIGxldmVscyA9IGRlYy5zY2hvb2xpZCApDQp3aXRoKGNjLmRhdGEsIGJveHBsb3QocmVzMX5zY2hvb2xpZCkpDQphYmxpbmUoaD0wLCBjb2wgPSAicmVkIikNCg0Kb3JkPC1vcmRlcih1bmxpc3QodGFwcGx5KHJlczEsc2Nob29saWQsbWVkaWFuKSkpDQpib3hwbG90KHNwbGl0KHJlczEsc2Nob29saWQpW29yZF0pDQpgYGANCg0KYGBge3J9DQpkZWMuY2xhc3NpZCA8LSBhcy5udW1lcmljKG5hbWVzKHNvcnQodGFibGUoY2xhc3NpZCkpKSkNCmNjLmRhdGEkY2xhc3NpZCA8LSBvcmRlcmVkKGNjLmRhdGEkY2xhc3NpZCwgbGV2ZWxzID0gZGVjLmNsYXNzaWQgKQ0Kd2l0aChjYy5kYXRhLCBib3hwbG90KHJlczF+Y2xhc3NpZCkpDQphYmxpbmUoaD0wLCBjb2wgPSAicmVkIikNCg0KYGBgDQoNCg0KKmNvbnN0cnVjdCB0aGUgcmVzaWR1YWwgdGhhdCB1dGlsaXplcyB0aGUgQkxVUHMgZm9yIHRoZSByYW5kb20gZWZmZWN0cy4gIERvIGl0IGluIHRoZXNlIHN0YWdlczoNCiogaSkgcHJlZGljdCBhbmQgc2F2ZSB6ZXRhMCANCiogaWkpIHByZWRpdCBhbmQgc2F2ZSBldGEwDQoqIGlpaSkgZ2VuZXJhdGUgYSBuZXcgcmVzaWR1YWwsIGNhbGxlZCByZXNGRV9SRSB3aGljaCBzdWJ0cmFjdHMgeWhhdCwgemV0YTAgYW5kIGV0YTAgZnJvbSB0aGUgb3V0Y29tZQ0KKm5vdGU6IHRoZXJlIGlzIGFuIGVhc2llciB3YXkgdG8gZ2V0IHRoZSByZXNpZHVhbHMgaW4gdGhpcyBjYXNlLCBwcmVkaWN0IC4uLiwgcmVzaWR1YWxzLCBidXQgd2UgbmVlZCB0byBkbyBpdCBtYW51YWxseS4NCmBgYHtyfQ0KaWR4LnNjaCA8LSBtYXRjaChjYy5kYXRhJHNjaG9vbGlkLCBzb3J0KHVuaXF1ZShjYy5kYXRhJHNjaG9vbGlkKSkpDQppZHguY2xzIDwtIG1hdGNoKGNjLmRhdGEkY2xhc3NpZCwgc29ydCh1bmlxdWUoY2MuZGF0YSRjbGFzc2lkKSkpIA0KYGBgDQoNCmBgYHtyfQ0KYXR0YWNoKGNjLmRhdGEpDQpyYW5lZnMgPC0gcmFuZWYoZml0MSkNCnpldGEwIDwtIHJhbmVmcyRzY2hvb2xpZFssIDFdDQpldGEwIDwtIHJhbmVmcyRjbGFzc2lkWywgMV0NCmNjLmRhdGEkemV0YTAgPC0gemV0YTBbaWR4LnNjaF0NCmNjLmRhdGEkZXRhMCA8LSBldGEwW2lkeC5jbHNdDQpyZXNGRV9SRSA8LSBtYXRoMXN0IC0gcHJlZC55aGF0IC0gY2MuZGF0YSR6ZXRhMCAtIGNjLmRhdGEkZXRhMA0KYGBgDQoNCg0KKiBzaG93IHRoYXQgdGhlc2UgbmV3IHJlc2lkdWFscywgcmVzRkVfUkUgYXJlIE1VQ0ggTEVTUyAoaWYgbm90IGNvbXBsZXRlbHkgdW4tKSBjb3JyZWxhdGVkIHdpdGhpbiBzY2hvb2wgDQoqIHVzaW5nIHRoZSBzYW1lIG1ldGhvZCBhcyBiZWZvcmUgKGJveHBsb3Q/KQ0KIyMjIFpBUk5JDQpgYGB7cn0NCndpdGgoY2MuZGF0YSwgYm94cGxvdChyZXNGRV9SRX5zY2hvb2xpZCkpDQphYmxpbmUoaD0xLCBjb2w9InJlZCIpDQoNCm9yZDI8LW9yZGVyKHVubGlzdCh0YXBwbHkocmVzRkVfUkUsc2Nob29saWQsbWVkaWFuKSkpDQpib3hwbG90KHNwbGl0KHJlc0ZFX1JFLHNjaG9vbGlkKVtvcmQyXSkNCg0KYGBgDQoNCg0KKmV4YW1pbmUgdGhlIHR3byBzZXRzIG9mIEJMVVBzIChmb3IgcmFuZG9tIGVmZmVjdHMgemV0YTAgYW5kIGV0YTApIGZvciBub3JtYWxpdHkNCipmaXJzdCAndGFnJyBhIHNpbmdsZSB2YWx1ZSBmcm9tIGVhY2ggZ3JvdXBpbmcgKGUuZy4sIHNjaG9vbCBvciBjbGFzc3Jvb20pIHNvIHRoYXQgeW91IG9ubHkgaGF2ZSANCiogYXMgbWFueSBCTFVQcyBhcyB0aGUgZ3JvdXBpbmcgZmFjdG9yIChzaG91bGQgYmUgbGVzcyBvZiBhbiBpc3N1ZSBpbiBSKQ0KYGBge3J9DQpwbG90KGRlbnNpdHkoemV0YTApKQ0KcXFub3JtKHpldGEwKQ0KcXFsaW5lKHpldGEwKQ0KYGBgDQoNCmBgYHtyfQ0KcGxvdChkZW5zaXR5KGV0YTApKQ0KcXFub3JtKGV0YTApDQpxcWxpbmUoZXRhMCkNCmBgYA0KDQoqaWYgSW4gYSBzaW1wbGVyIHNldHRpbmcsIHdpdGggbm8gY2xhc3Nyb29tIGxldmVsLCBpZiBIMDogXHNpZ21hXjJfe1x6ZXRhXzB9PTAgd2VyZSB0cnVlLCANCiogYW5kIHlvdSBzYW1wbGVkIDEwMCBzY2hvb2xzIG9mIHNpemUgMTAsIHdoYXQgd291bGQgYmUgYSBwb3RlbnRpYWwgZXhwZWN0ZWQgZXN0aW1hdGUgb2YgXHNpZ21hX3tcemV0YV8wfSANCiogaWYgeW91IGtub3cgdGhhdCBcc2lnbWFfe1xlcHNpbG9ufT0xID8gIEhJTlQ6IHRoZSBDZW50cmFsIExpbWl0IFRoZW9yZW0gYXBwbGllcy4gIFNpbXVsYXRlIHRvIGZpbmQgb3V0Lg0KYGBge3J9DQoNCmBgYA0KDQoNCipub3cgcmVsb2FkIHRoZSBkYXRhIGFuZCBmaXQgYSBzbGlnaHRseSBtb3JlIGNvbXBsaWNhdGVkIG1vZGVsOg0KdXNlICJjbGFzc3Jvb20uZHRhIg0KZ2VuIG1hdGgxc3QgPSBtYXRoa2luZCArIG1hdGhnYWluDQpgYGB7cn0NCmRhdCA8LSByZWFkLmNzdigiY2xhc3Nyb29tLmNzdiIpDQpkYXQkbWF0aDFzdCA8LSBkYXQkbWF0aGtpbmQgKyBkYXQkbWF0aGdhaW4NCmRhdCA8LSBkYXRbKGNvbXBsZXRlLmNhc2VzKGRhdCkpLF0NCmF0dGFjaChkYXQpDQoNCg0KYGBgDQoNCg0KDQptaXhlZCBtYXRoMXN0IGhvdXNlcG92IHllYXJzdGVhIG1hdGhwcmVwIG1hdGhrbm93IHNlcyBzZXggbWlub3JpdHkgfHx8c2Nob29saWQ6IG1pbm9yaXR5LCBjb3YodW4pIHx8IGNsYXNzaWQ6LCByZW1sIA0KZXN0IHN0b3JlIE0yDQoNCmBgYHtyfQ0KTTIgPC0gbG1lcihtYXRoMXN0IH4gaG91c2Vwb3YgKyB5ZWFyc3RlYSArIG1hdGhwcmVwICsgbWF0aGtub3cgKyBzZXMgKyBzZXggKyBtaW5vcml0eSArICgwK21pbm9yaXR5fHNjaG9vbGlkKSArICgxfHNjaG9vbGlkKSArICgxfGNsYXNzaWQpKQ0Kc3VtbWFyeShNMikNCg0KYGBgDQpgYGB7cn0NCmlkeC5zY2ggPC0gbWF0Y2goZGF0JHNjaG9vbGlkLCBzb3J0KHVuaXF1ZShkYXQkc2Nob29saWQpKSkNCmlkeC5jbHMgPC0gbWF0Y2goZGF0JGNsYXNzaWQsIHNvcnQodW5pcXVlKGRhdCRjbGFzc2lkKSkpIA0KYGBgDQoNCg0KKm1hbnVhbGx5IGNvbnN0cnVjdCB0aGUgcmVzaWR1YWwgdGhhdCByZW1vdmVzIG9ubHkgdGhlICdmaXhlZCBlZmZlY3RzJywgY2FsbCB0aGlzIHJlc2lkdWFsOiByZXNGRQ0KYGBge3J9DQpwcmVkLnloYXQuMiA8LSBwcmVkaWN0KE0yLCByZS5mb3JtID0gfjApDQpyYW5lZnMgPC0gcmFuZWYoTTIpDQp6ZXRhMCA8LSByYW5lZnMkc2Nob29saWRbLCAxXQ0KZGF0JHpldGEwIDwtIHpldGEwW2lkeC5zY2hdDQpyZXNGRSA8LSBkYXQkbWF0aDFzdCAtIHByZWQueWhhdC4yIA0KYGBgDQoNCipzaG93IHRoYXQgdGhpcyByZXNpZHVhbCBpcyBub3QgaW5kZXBlbmRlbnQgd2l0aGluIHNjaG9vbHMgaW4gc29tZSBtYW5uZXIuICBIaW50OiBib3hwbG90Pw0KYGBge3J9DQoNCg0KDQpgYGANCg0KKmNvbnN0cnVjdCB0aGUgcmVzaWR1YWwgdGhhdCB1dGlsaXplcyB0aGUgQkxVUHMgZm9yIHRoZSByYW5kb20gZWZmZWN0cy4gIERvIGl0IGluIHRoZXNlIHN0YWdlczoNCiogaSkgcHJlZGljdCBhbmQgc2F2ZSB6ZXRhMCBBTkQgemV0YTEgKHlvdSBuZWVkIHRvIGdpdmUgdGhlbSBpbiByZXZlcnNlIG9yZGVyIGluIFNUQVRBIC0gYXNrIG1lIHdoeSBpZiB5b3Ugd2FudCkNCiogaWkpIHByZWRpdCBhbmQgc2F2ZSBldGEwDQoqIGlpaSkgZ2VuZXJhdGUgYSBuZXcgcmVzaWR1YWwsIGNhbGxlZCByZXNGRV9SRSB3aGljaCBzdWJ0cmFjdHMgeWhhdCwgemV0YTAsIE1JTk9SSVRZKnpldGExIGFuZCBldGEwIA0KYGBge3J9DQpyYW5lcnIgPC0gcmFuZWYoTTIpDQp6ZXRhMCA8LSByYW5lcnIkc2Nob29saWRbLDFdDQp6ZXRhMSA8LSByYW5lcnIkc2Nob29saWRbLDJdDQpldGEwIDwtIHJhbmVyciRjbGFzc2lkWywxXQ0KZGF0JHpldGEwIDwtIGRhdCR6ZXRhMFtpZHguc2NoXQ0KZGF0JHpldGExIDwtIGRhdCR6ZXRhMVtpZHguc2NoXQ0KZGF0JGV0YTAgPC0gZGF0JGV0YTBbaWR4LmNsc10NCnJlc0ZFX1JFIDwtIGRhdCRtYXRoMXN0IC0gKHByZWQueWhhdC4yICsgZGF0JHpldGEwICsgZGF0JG1pbm9yaXR5ICogZGF0JHpldGExICsgZGF0JGV0YTApDQpgYGANCg0KDQoqICAgICAgZnJvbSB0aGUgb3V0Y29tZQ0KDQoqIHNob3cgdGhhdCB0aGVzZSBuZXcgcmVzaWR1YWxzLCByZXNGRV9SRSBhcmUgTVVDSCBMRVNTIChpZiBub3QgY29tcGxldGVseSB1bi0pIGNvcnJlbGF0ZWQgd2l0aGluIHNjaG9vbCANCiogdXNpbmcgdGhlIHNhbWUgbWV0aG9kIGFzIGJlZm9yZSAoYm94cGxvdD8pDQpgYGB7cn0NCg0KDQoNCmBgYA0KDQoqZXhhbWluZSB0aGUgdGhyZWUgc2V0cyBvZiBCTFVQcyAoZm9yIHJhbmRvbSBlZmZlY3RzIHpldGEwIGFuZCBldGEwKSBmb3Igbm9ybWFsaXR5DQpgYGB7cn0NCnFxbm9ybSh6ZXRhMCkNCnFxbGluZSh6ZXRhMCkNCmBgYA0KDQpgYGB7cn0NCnFxbm9ybSh6ZXRhMSkNCnFxbGluZSh6ZXRhMSkNCmBgYA0KDQpgYGB7cn0NCnFxbm9ybShldGEwKQ0KcXFsaW5lKGV0YTApDQpgYGANCg0KDQoqZmlyc3QgJ3RhZycgYSBzaW5nbGUgdmFsdWUgZnJvbSBlYWNoIGdyb3VwaW5nIChlLmcuLCBzY2hvb2wgb3IgY2xhc3Nyb29tKSBzbyB0aGF0IHlvdSBvbmx5IGhhdmUgDQoqIGFzIG1hbnkgQkxVUHMgYXMgdGhlIGdyb3VwaW5nIGZhY3RvciAoc2hvdWxkIGJlIGxlc3Mgb2YgYW4gaXNzdWUgaW4gUikNCg0KKnBsb3QgemV0YTAgdnMuIHpldGExIHRvIHNlZSB3aGV0aGVyIHRoZSBlc3RpbWF0ZWQgY29ycmVsYXRpb24gaXMgY29uc2lzdGVudCB3aXRoIHRoZSBvYnNlcnZlZC4gDQoqIFVzZSB0YWcgdG8gc3Vic2V0IGFzIGJlZm9yZQ0KDQojTm8gQ29ycmVsYXRpb24NCmBgYHtyfQ0KbGlicmFyeShjYWxpYnJhdGUpDQpgYGANCg0KDQpgYGB7cn0NCnBsb3Qoaml0dGVyKHpldGEwKSwgemV0YTEpDQp0ZXh0KHpldGEwLCB6ZXRhMSwgbGFiZWxzPXNjaG9vbGlkLCBjZXg9IDAuNywgcG9zPTMpDQoNCnBsb3Qoaml0dGVyKHpldGEwWzE6MTBdLCB6ZXRhMVsxOjEwXSkpDQp0ZXh0eHkoemV0YTBbMToxMF0sIHpldGExWzE6MTBdLCBzY2hvb2xpZFsxOjEwXSkNCg0KYGBgDQoNCg0KKnRyYWNrIGRvd24gdGhvc2Ugb2RkIHBvaW50cyBpbiB0aGUgc2NhdHRlcnBsb3QuICBXaGF0IHNjaG9vbHMgYXJlIHRoZXk/DQpgYGB7cn0NCg0KDQoNCmBgYA0K</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vayIKb3V0cHV0OgogIHdvcmRfZG9jdW1lbnQ6IGRlZmF1bHQKICBodG1sX25vdGVib29rOiBkZWZhdWx0Ci0tLQoKYGBge3J9CmxpYnJhcnkocmVhZHIpCmRhdCA8LSByZWFkLmNzdigiLi4vY2xhc3Nyb29tLmNzdiIpCmNjLmRhdGEgPC0gZGF0Wyhjb21wbGV0ZS5jYXNlcyhkYXQpKSxdCmBgYAoKKndlIGhhdmUgdHdvIG1vZGVscyB0byBjb25zaWRlciwgYnV0IHdlIGZpcnN0IGZvY3VzIG9uIHRoZSBzaW1wbGVyIG9uZToKYGBge3J9CmF0dGFjaChjYy5kYXRhKQpjYy5kYXRhJG1hdGgxc3QgPC0gbWF0aGtpbmQgKyBtYXRoZ2FpbgpgYGAKCmBgYHtyfQojcmVxdWlyZShsbWU0KQojcmVxdWlyZShsbWVyVGVzdCkKZml0MSA8LSBsbWVyKG1hdGgxc3QgfiBob3VzZXBvdiArIHllYXJzdGVhICsgbWF0aHByZXAgKyBtYXRoa25vdyArIHNlcyArIHNleCArIG1pbm9yaXR5ICsgKDF8c2Nob29saWQvY2xhc3NpZCksIGRhdGE9Y2MuZGF0YSkKc3VtbWFyeShmaXQxKQpgYGAKCiptYW51YWxseSBjb25zdHJ1Y3QgdGhlIHJlc2lkdWFsIHRoYXQgcmVtb3ZlcyBvbmx5IHRoZSAnZml4ZWQgZWZmZWN0cycKKmhpbnQ6IHByZWRpY3QgeWhhdCwgeGIgd2lsbCBnZW5lcmF0ZSB0aGUgcHJlZGljdGlvbiBmb3IgdGhlIG91dGNvbWUgYmFzZWQgb24gdGhlIGZpeGVkIGVmZmVjdHMgb25seQoqIHRoZW4gc3VidHJhY3QgaXQgZnJvbSB0aGUgb3V0Y29tZTsgY2FsbCB0aGlzIHJlc2lkdWFsOiByZXNGRQpgYGB7cn0KcHJlZC55aGF0IDwtIHByZWRpY3QoZml0MSwgcmUuZm9ybSA9IH4wKSAjVGhpcyBpZ25vcmUgcmFuZG9tIGVmZmVjdHMKcmVzRkUgPC0gY2MuZGF0YSRtYXRoMXN0IC0gcHJlZC55aGF0IApgYGAKCipzaG93IHRoYXQgdGhpcyByZXNpZHVhbCBpcyBub3QgaW5kZXBlbmRlbnQgd2l0aGluIHNjaG9vbHMgaW4gc29tZSBtYW5uZXIuCgpCZWxvdywgd2UgaGF2ZSBzb3J0ZWQgZWFjaCBvZiB0aGUgZml4ZWQgZWZmZWN0IHJlc2lkdWFscyBmb3IgdGhlIHNjaG9vbHMgYnkgdGhlaXIgbWVkaWFuIGZyb20gbG93ZXN0IHRvIGhpZ2hlc3QuIElmIHdlIGFyZSBhc3N1bWluZyBpbmRlcGVuZGVuY2Ugb2YgcmVzaWR1YWxzIHdpdGhpbmsgc2Nob29scywgdGhlbiwgd2Ugd291bGQgZXhwZWN0IHRvIHNlZSBhIGZsYXQtbGluZSBzaG93aW5nIHRoYXQgcmVzaWR1YWxzIGFjcm9zcyBzY2hvb2xzIGlzIHJhbmRvbS4gSG93ZXZlciwgc2luY2Ugd2UgYXJlIHNlZWluZyBhIHBvc2l0aXZlIHRyZW5kaW5nIGxpbmUsIHdlIGNhbiBjb25jbHVkZSB0aGF0IHJlc2lkdWFscyBhcmUgbm90IHJhbmRvbSBhbmQgaXQgbWF5IGJlIGRlcGVuZGVudCBvbiBzY2hvb2wuCmBgYHtyfQpvcmQ8LW9yZGVyKHVubGlzdCh0YXBwbHkocmVzRkUsc2Nob29saWQsbWVkaWFuKSkpCmJveHBsb3Qoc3BsaXQocmVzRkUsc2Nob29saWQpW29yZF0sIG1haW4gPSAicmVzRkUgMXN0IEJveFBsb3QiKQpgYGAKCgoqY29uc3RydWN0IHRoZSByZXNpZHVhbCB0aGF0IHV0aWxpemVzIHRoZSBCTFVQcyBmb3IgdGhlIHJhbmRvbSBlZmZlY3RzLiAgRG8gaXQgaW4gdGhlc2Ugc3RhZ2VzOgoqIGkpIHByZWRpY3QgYW5kIHNhdmUgemV0YTAgCiogaWkpIHByZWRpdCBhbmQgc2F2ZSBldGEwCiogaWlpKSBnZW5lcmF0ZSBhIG5ldyByZXNpZHVhbCwgY2FsbGVkIHJlc0ZFX1JFIHdoaWNoIHN1YnRyYWN0cyB5aGF0LCB6ZXRhMCBhbmQgZXRhMCBmcm9tIHRoZSBvdXRjb21lCipub3RlOiB0aGVyZSBpcyBhbiBlYXNpZXIgd2F5IHRvIGdldCB0aGUgcmVzaWR1YWxzIGluIHRoaXMgY2FzZSwgcHJlZGljdCAuLi4sIHJlc2lkdWFscywgYnV0IHdlIG5lZWQgdG8gZG8gaXQgbWFudWFsbHkuCmBgYHtyfQppZHguc2NoIDwtIG1hdGNoKGNjLmRhdGEkc2Nob29saWQsIHNvcnQodW5pcXVlKGNjLmRhdGEkc2Nob29saWQpKSkKaWR4LmNscyA8LSBtYXRjaChjYy5kYXRhJGNsYXNzaWQsIHNvcnQodW5pcXVlKGNjLmRhdGEkY2xhc3NpZCkpKSAKYGBgCgpgYGB7cn0KYXR0YWNoKGNjLmRhdGEpCnJhbmVmcyA8LSByYW5lZihmaXQxKSAjUHVsbGluZyBvdXQgdGhlIHJhbmRvbSBlZmZlY3RzCnpldGEwIDwtIHJhbmVmcyRzY2hvb2xpZFssIDFdICNSYW5kb20gSW50ZXJjZXB0IGZvciBTY2hvb2wKZXRhMCA8LSByYW5lZnMkY2xhc3NpZFssIDFdICNSYW5kb20gSW50ZXJjZXB0IGZvciBDbGFzcwpjYy5kYXRhJHpldGEwIDwtIHpldGEwW2lkeC5zY2hdICMgUHV0dGluZyBSYW5kb20gSW50ZXJjZXB0IG9mIFNjaG9vbCBiYWNrIGludG8gdGhlIGRhdGEgc2V0CmNjLmRhdGEkZXRhMCA8LSBldGEwW2lkeC5jbHNdICNQdXR0aW5nIFJhbmRvbSBJbnRlcmNlcHQgb2YgQ2xhc3MgYmFjayBpbnRvIHRoZSBkYXRhIHNldApyZXNGRV9SRSA8LSBtYXRoMXN0IC0gcHJlZC55aGF0IC0gY2MuZGF0YSR6ZXRhMCAtIGNjLmRhdGEkZXRhMCAjVGhpcyBhY2NvdW50cyBmb3IgcmVtb3ZpbmcgYm90aCBmaXhlZCBhbmQgcmFuZG9tIGVmZmVjdHMgYW5kIHRoZSByYW5kb20gZWZmZWN0cyBhcmUgcmVtb3ZlZCBtYW51YWxseS4gVGhlcmVmb3JlLCByZXNpZHVhbHMgc2hvdWxkIGJlIGxlc3MgZGVwZW5kZW50IHRoYW4gdGhlIHByZXZpb3VzIG9uZS4gVGh1cywgd2UgZXhwZWN0IHRvIHNlZSBhIGZsYXR0ZXIgbGluZS4KYGBgCgoKKiBzaG93IHRoYXQgdGhlc2UgbmV3IHJlc2lkdWFscywgcmVzRkVfUkUgYXJlIE1VQ0ggTEVTUyAoaWYgbm90IGNvbXBsZXRlbHkgdW4tKSBjb3JyZWxhdGVkIHdpdGhpbiBzY2hvb2wgCiogdXNpbmcgdGhlIHNhbWUgbWV0aG9kIGFzIGJlZm9yZSAoYm94cGxvdD8pCmBgYHtyfQojV2UgYXJlIGV4cGVjdGluZyBhIGZsYXR0ZXIgbGluZSBidXQsIHRoZSBsaW5lIGlzIHVwd2FyZCBzbG9waW5nLiBDb21lIGJhY2sgdG8gaXQgYXMgYSBncm91cC4Kb3JkMjwtb3JkZXIodW5saXN0KHRhcHBseShyZXNGRV9SRSxzY2hvb2xpZCxtZWRpYW4pKSkKYm94cGxvdChzcGxpdChyZXNGRV9SRSxzY2hvb2xpZClbb3JkMl0sIG1haW4gPSAicmVzRkVfUkVfQm94UGxvdCAyIikKYGBgCgojIyMgRGlkIHdlIHRhZz8KKmV4YW1pbmUgdGhlIHR3byBzZXRzIG9mIEJMVVBzIChmb3IgcmFuZG9tIGVmZmVjdHMgemV0YTAgYW5kIGV0YTApIGZvciBub3JtYWxpdHkKKmZpcnN0ICd0YWcnIGEgc2luZ2xlIHZhbHVlIGZyb20gZWFjaCBncm91cGluZyAoZS5nLiwgc2Nob29sIG9yIGNsYXNzcm9vbSkgc28gdGhhdCB5b3Ugb25seSBoYXZlIAoqIGFzIG1hbnkgQkxVUHMgYXMgdGhlIGdyb3VwaW5nIGZhY3RvciAoc2hvdWxkIGJlIGxlc3Mgb2YgYW4gaXNzdWUgaW4gUikKCgpgYGB7cn0KcGxvdChkZW5zaXR5KHpldGEwKSkKcXFub3JtKHpldGEwKQpxcWxpbmUoemV0YTApCmBgYAoKYGBge3J9CnBsb3QoZGVuc2l0eShldGEwKSkKcXFub3JtKGV0YTApCnFxbGluZShldGEwKQpgYGAKCgojIyMgSmVtYXIgJiBaYXJuaQoqaWYgSW4gYSBzaW1wbGVyIHNldHRpbmcsIHdpdGggbm8gY2xhc3Nyb29tIGxldmVsLCBpZiBIMDogXHNpZ21hXjJfe1x6ZXRhXzB9PTAgd2VyZSB0cnVlLCAKKiBhbmQgeW91IHNhbXBsZWQgMTAwIHNjaG9vbHMgb2Ygc2l6ZSAxMCwgd2hhdCB3b3VsZCBiZSBhIHBvdGVudGlhbCBleHBlY3RlZCBlc3RpbWF0ZSBvZiBcc2lnbWFfe1x6ZXRhXzB9IAoqIGlmIHlvdSBrbm93IHRoYXQgXHNpZ21hX3tcZXBzaWxvbn09MSA/ICBISU5UOiB0aGUgQ2VudHJhbCBMaW1pdCBUaGVvcmVtIGFwcGxpZXMuICBTaW11bGF0ZSB0byBmaW5kIG91dC4KYGBge3J9CgpgYGAKCgoqbm93IHJlbG9hZCB0aGUgZGF0YSBhbmQgZml0IGEgc2xpZ2h0bHkgbW9yZSBjb21wbGljYXRlZCBtb2RlbDoKdXNlICJjbGFzc3Jvb20uZHRhIgpnZW4gbWF0aDFzdCA9IG1hdGhraW5kICsgbWF0aGdhaW4KYGBge3J9CmRhdCA8LSByZWFkLmNzdigiLi4vY2xhc3Nyb29tLmNzdiIpCmRhdCRtYXRoMXN0IDwtIGRhdCRtYXRoa2luZCArIGRhdCRtYXRoZ2FpbgpkYXQgPC0gZGF0Wyhjb21wbGV0ZS5jYXNlcyhkYXQpKSxdCmF0dGFjaChkYXQpCmBgYAoKCgptaXhlZCBtYXRoMXN0IGhvdXNlcG92IHllYXJzdGVhIG1hdGhwcmVwIG1hdGhrbm93IHNlcyBzZXggbWlub3JpdHkgfHx8c2Nob29saWQ6IG1pbm9yaXR5LCBjb3YodW4pIHx8IGNsYXNzaWQ6LCByZW1sIAplc3Qgc3RvcmUgTTIKCiNDb21lIGJhY2sgYW5kIGNoZWNrICgwK21pbm9yaXR5fHNjaG9vbGlkKSBsYXRlcgpgYGB7cn0KI1RoZSBtb2RlbCBpcyBzbGlnaHRseSBtb3JlIGNvbXBsaWNhdGVkIHdpdGggYW4gdW5jb3JyZWxhdGVkIHJhbmRvbSBzbG9wZSBzY2hvb2wgbGV2ZWwgdmFyaWFiaWxpdHkgb2YgbWlub3JpdHkuCk0yIDwtIGxtZXIobWF0aDFzdCB+IGhvdXNlcG92ICsgeWVhcnN0ZWEgKyBtYXRocHJlcCArIG1hdGhrbm93ICsgc2VzICsgc2V4ICsgbWlub3JpdHkgKyAoMCttaW5vcml0eXxzY2hvb2xpZCkgKyAoMXxzY2hvb2xpZCkgKyAoMXxjbGFzc2lkKSkKcHJpbnQoc3VtbWFyeShNMikpCmBgYAoKYGBge3J9CmlkeC5zY2ggPC0gbWF0Y2goZGF0JHNjaG9vbGlkLCBzb3J0KHVuaXF1ZShkYXQkc2Nob29saWQpKSkKaWR4LmNscyA8LSBtYXRjaChkYXQkY2xhc3NpZCwgc29ydCh1bmlxdWUoZGF0JGNsYXNzaWQpKSkgCmBgYAoKCiptYW51YWxseSBjb25zdHJ1Y3QgdGhlIHJlc2lkdWFsIHRoYXQgcmVtb3ZlcyBvbmx5IHRoZSAnZml4ZWQgZWZmZWN0cycsIGNhbGwgdGhpcyByZXNpZHVhbDogcmVzRkUKYGBge3J9CnByZWQueWhhdC4yIDwtIHByZWRpY3QoTTIsIHJlLmZvcm0gPSB+MCkKcmFuZWZzIDwtIHJhbmVmKE0yKQp6ZXRhMCA8LSByYW5lZnMkc2Nob29saWRbLCAxXQpkYXQkemV0YTAgPC0gemV0YTBbaWR4LnNjaF0KcmVzRkUuMiA8LSBkYXQkbWF0aDFzdCAtIHByZWQueWhhdC4yIApgYGAKCgojIyMgSmVtYXIgJiBaYXJuaQoKQmVsb3csIHdlIGhhdmUgc29ydGVkIGVhY2ggb2YgdGhlIGZpeGVkIGVmZmVjdCByZXNpZHVhbHMgZm9yIHRoZSBzY2hvb2xzIGJ5IHRoZWlyIG1lZGlhbiBmcm9tIGxvd2VzdCB0byBoaWdoZXN0LiBJZiB3ZSBhcmUgYXNzdW1pbmcgaW5kZXBlbmRlbmNlIG9mIHJlc2lkdWFscyB3aXRoaW4gc2Nob29scywgdGhlbiwgd2Ugd291bGQgZXhwZWN0IHRvIHNlZSBhIGZsYXQtbGluZSBzaG93aW5nIHRoYXQgcmVzaWR1YWxzIGFjcm9zcyBzY2hvb2xzIGlzIHJhbmRvbS4gSG93ZXZlciwgc2luY2Ugd2UgYXJlIHNlZWluZyBhIHBvc2l0aXZlIHRyZW5kaW5nIGxpbmUgd2hpY2ggaXMgc2ltaWxhciB0byB0aGUgb25lIGFib3ZlIGFzIHRoZSByYW5kb20gc2xvcGUgZm9yIG1pbmlvcml0eSBpcyBub24gZXhpc3RlbnQgd2l0aCB2YXJpYW5jZSBiZWluZyB6ZXJvLCB3ZSBjYW4gY29uY2x1ZGUgdGhhdCByZXNpZHVhbHMgYXJlIG5vdCByYW5kb20gYW5kIGl0IGFwcGVhcnMgdG8gYmUgZGVwZW5kZW50IG9uIHNjaG9vbCBsaWtlIHRoZSByZXN1bHRzIG9mIHRoZSBsZXNzIGNvbXBsaWNhdGVkIG1vZGVsIGFib3ZlLgoKYGBge3J9Cm9yZDM8LW9yZGVyKHVubGlzdCh0YXBwbHkocmVzRkUuMixzY2hvb2xpZCxtZWRpYW4pKSkKYm94cGxvdChzcGxpdChyZXNGRS4yLHNjaG9vbGlkKVtvcmQzXSwgbWFpbiA9ICJyZXNGRS4yIEJveHBsb3RfMyIpCmBgYAoKKmNvbnN0cnVjdCB0aGUgcmVzaWR1YWwgdGhhdCB1dGlsaXplcyB0aGUgQkxVUHMgZm9yIHRoZSByYW5kb20gZWZmZWN0cy4gIERvIGl0IGluIHRoZXNlIHN0YWdlczoKKiBpKSBwcmVkaWN0IGFuZCBzYXZlIHpldGEwIEFORCB6ZXRhMSAoeW91IG5lZWQgdG8gZ2l2ZSB0aGVtIGluIHJldmVyc2Ugb3JkZXIgaW4gU1RBVEEgLSBhc2sgbWUgd2h5IGlmIHlvdSB3YW50KQoqIGlpKSBwcmVkaXQgYW5kIHNhdmUgZXRhMAoqIGlpaSkgZ2VuZXJhdGUgYSBuZXcgcmVzaWR1YWwsIGNhbGxlZCByZXNGRV9SRSB3aGljaCBzdWJ0cmFjdHMgeWhhdCwgemV0YTAsIE1JTk9SSVRZKnpldGExIGFuZCBldGEwIApgYGB7cn0KcmFuZXJyIDwtIHJhbmVmKE0yKQp6ZXRhMCA8LSByYW5lcnIkc2Nob29saWRbLDFdCnpldGExIDwtIHJhbmVyciRzY2hvb2xpZFssMl0gI0l0IGlzIHRoZSByYW5kb20gc2xvcGUgb2YgdGhlIG1pbm9yaXR5IGludGVyY2VwdApldGEwIDwtIHJhbmVyciRjbGFzc2lkWywxXSAjVGhpcyBpcyB0aGUgcmFuZG9tIGludGVyY2VwdCBmb3IgdGhlIGNsYXNzcm9vbSBsZXZlbC4KZGF0JHpldGEwIDwtIHpldGEwW2lkeC5zY2hdCmRhdCR6ZXRhMSA8LSB6ZXRhMVtpZHguc2NoXQpkYXQkZXRhMCA8LSBldGEwW2lkeC5jbHNdCnJlc0ZFX1JFLjIgPC0gZGF0JG1hdGgxc3QgLSAocHJlZC55aGF0LjIgKyBkYXQkemV0YTAgKyAoZGF0JG1pbm9yaXR5ICogZGF0JHpldGExKSArIGRhdCRldGEwKSNUaGlzIGFjY291bnRzIGZvciByZW1vdmluZyBib3RoIGZpeGVkIGFuZCByYW5kb20gZWZmZWN0cyBhbmQgdGhlIHJhbmRvbSBlZmZlY3RzIGFyZSByZW1vdmVkIG1hbnVhbGx5LiBUaGVyZWZvcmUsIHJlc2lkdWFscyBzaG91bGQgYmUgbGVzcyBkZXBlbmRlbnQgdGhhbiB0aGUgcHJldmlvdXMgb25lLiBUaHVzLCB3ZSBleHBlY3QgdG8gc2VlIGEgZmxhdHRlciBsaW5lLgpgYGAKCgoqICAgICAgZnJvbSB0aGUgb3V0Y29tZQoKIyMjIEplbWFyICYgWmFybmkKIyMgV2UgY2FuIGNoZWNrIHRoaXMgYnkgc3VidHJhY3RpbmcgdGhlIHRvdGFsIHN1bSBvZmYgYW5kIHRoZSBvbmUgd2hpY2ggaXMgZ3JlYXRlciB3aWxsIGhhdmUgYSBwb3NpdGl2ZSB0b3RhbCBzbG9wZT8gI1Nob290IGFuIGVtYWlsIHRvIE1hcmMgb24gdGhpcwoKKiBzaG93IHRoYXQgdGhlc2UgbmV3IHJlc2lkdWFscywgcmVzRkVfUkUgYXJlIE1VQ0ggTEVTUyAoaWYgbm90IGNvbXBsZXRlbHkgdW4tKSBjb3JyZWxhdGVkIHdpdGhpbiBzY2hvb2wgCiogdXNpbmcgdGhlIHNhbWUgbWV0aG9kIGFzIGJlZm9yZSAoYm94cGxvdD8pCmBgYHtyfQpvcmQ0PC1vcmRlcih1bmxpc3QodGFwcGx5KHJlc0ZFX1JFLjIsc2Nob29saWQsbWVkaWFuKSkpCmJveHBsb3Qoc3BsaXQocmVzRkVfUkUuMixzY2hvb2xpZClbb3JkNF0sIG1haW4gPSAicmVzRkVfUkUuMiBCb3hsb3QgNCIpCmBgYAoKKmV4YW1pbmUgdGhlIHRocmVlIHNldHMgb2YgQkxVUHMgKGZvciByYW5kb20gZWZmZWN0cyB6ZXRhMCBhbmQgZXRhMCkgZm9yIG5vcm1hbGl0eQoKVGhpcyBpcyB0aGUgQkxVUCBmb3IgcmFuZG9tIGludGVyY2VwdCBhdCB0aGUgc2Nob29sIGxldmVsIGFuZCBmb3IgdGhlIG1vc3QgcGFydCwgaXQgYXBwZWFycyB0byBiZSBub3JtYWwgZXhjZXB0IGluIHRoZSB0YWlscyBlbmQuCmBgYHtyfQpxcW5vcm0oemV0YTApCnFxbGluZSh6ZXRhMCkKYGBgCgpgYGB7cn0KI0N1cnJlbnRseSwgd2UgaGF2ZSBmb3VuZCBhIHJhbmRvbSBzbG9wZSBvZiB6ZXJvIGZvciB0aGUgbWlub3JpdHkuIFdlIHdpbGwgaGF2ZSB0byBjb21lIGJhY2sgdG8gdGhpcy4KcXFub3JtKHpldGExKQpxcWxpbmUoemV0YTEpCmBgYAoKVGhlIGNsYXNzcm9vbSBsZXZlbCByYW5kb20gaW50ZXJjZXB0IGFwcGVhcnMgdG8gYmUgbm9ybWFsIGV4Y2VwdCBpbiB0aGUgdGFpbHMgZW5kLgpgYGB7cn0KcXFub3JtKGV0YTApCnFxbGluZShldGEwKQpgYGAKCiMjIyBKZW1hciAmIFphcm5pCipmaXJzdCAndGFnJyBhIHNpbmdsZSB2YWx1ZSBmcm9tIGVhY2ggZ3JvdXBpbmcgKGUuZy4sIHNjaG9vbCBvciBjbGFzc3Jvb20pIHNvIHRoYXQgeW91IG9ubHkgaGF2ZSAKKiBhcyBtYW55IEJMVVBzIGFzIHRoZSBncm91cGluZyBmYWN0b3IgKHNob3VsZCBiZSBsZXNzIG9mIGFuIGlzc3VlIGluIFIpCgpgYGB7cn0KcmVxdWlyZShsYXR0aWNlKQp4eXBsb3QobWF0aGtpbmQgfiBzZXMgfCBzY2hvb2xpZCwgZGF0YSA9IGRhdFtkYXQkc2Nob29saWQgPCAxMywgXSwgdHlwZSA9IGMoInAiLAoiciIpKSAjY2xvc2UgZW5vdWdoCmBgYAoKCgoKCipwbG90IHpldGEwIHZzLiB6ZXRhMSB0byBzZWUgd2hldGhlciB0aGUgZXN0aW1hdGVkIGNvcnJlbGF0aW9uIGlzIGNvbnNpc3RlbnQgd2l0aCB0aGUgb2JzZXJ2ZWQuIAoqIFVzZSB0YWcgdG8gc3Vic2V0IGFzIGJlZm9yZQoKCmBgYHtyfQpwbG90KGppdHRlcih6ZXRhMCksIHpldGExKQp0ZXh0KHpldGEwLCB6ZXRhMSwgbGFiZWxzPXNjaG9vbGlkLCBjZXg9IDAuNywgcG9zPTMpCgpwbG90KGppdHRlcih6ZXRhMFsxOjEwXSwgemV0YTFbMToxMF0pKQp0ZXh0eHkoemV0YTBbMToxMF0sIHpldGExWzE6MTBdLCBzY2hvb2xpZFsxOjEwXSkKCmBgYAoKIyMjIEplbWFyICYgWmFybmkgTXVjaCBlYXNpZXIgdG8gZmlndXJlIG91dAoqdHJhY2sgZG93biB0aG9zZSBvZGQgcG9pbnRzIGluIHRoZSBzY2F0dGVycGxvdC4gIFdoYXQgc2Nob29scyBhcmUgdGhleT8KYGBge3J9CgoKYGBg</div>
 
 
 

@@ -1,6 +1,8 @@
 ---
 title: "R Notebook"
-output: html_notebook
+output:
+  word_document: default
+  html_notebook: default
 ---
 
 ```{r}
@@ -16,8 +18,8 @@ cc.data$math1st <- mathkind + mathgain
 ```
 
 ```{r}
-require(lme4)
-require(lmerTest)
+#require(lme4)
+#require(lmerTest)
 fit1 <- lmer(math1st ~ housepov + yearstea + mathprep + mathknow + ses + sex + minority + (1|schoolid/classid), data=cc.data)
 summary(fit1)
 ```
@@ -26,27 +28,16 @@ summary(fit1)
 *hint: predict yhat, xb will generate the prediction for the outcome based on the fixed effects only
 * then subtract it from the outcome; call this residual: resFE
 ```{r}
-pred.yhat <- predict(fit1, re.form = ~0)
-resFE <- cc.data$math1st - pred.yhat
+pred.yhat <- predict(fit1, re.form = ~0) #This ignore random effects
+resFE <- cc.data$math1st - pred.yhat 
 ```
 
-*show that this residual is not independent within schools in some manner.  Hint: boxplot?
-```{r}
-dec.schoolid <- as.numeric(names(sort(table(schoolid))))
-cc.data$schoolid <- ordered(cc.data$schoolid, levels = dec.schoolid )
-with(cc.data, boxplot(resFE~schoolid))
-abline(h=0, col = "red")
+*show that this residual is not independent within schools in some manner.
 
+Below, we have sorted each of the fixed effect residuals for the schools by their median from lowest to highest. If we are assuming independence of residuals withink schools, then, we would expect to see a flat-line showing that residuals across schools is random. However, since we are seeing a positive trending line, we can conclude that residuals are not random and it may be dependent on school.
+```{r}
 ord<-order(unlist(tapply(resFE,schoolid,median)))
-boxplot(split(resFE,schoolid)[ord])
-```
-
-```{r}
-dec.classid <- as.numeric(names(sort(table(classid))))
-cc.data$classid <- ordered(cc.data$classid, levels = dec.classid )
-with(cc.data, boxplot(resFE~classid))
-abline(h=0, col = "red")
-
+boxplot(split(resFE,schoolid)[ord], main = "resFE 1st BoxPlot")
 ```
 
 
@@ -62,32 +53,29 @@ idx.cls <- match(cc.data$classid, sort(unique(cc.data$classid)))
 
 ```{r}
 attach(cc.data)
-ranefs <- ranef(fit1)
-zeta0 <- ranefs$schoolid[, 1]
-eta0 <- ranefs$classid[, 1]
-cc.data$zeta0 <- zeta0[idx.sch]
-cc.data$eta0 <- eta0[idx.cls]
-resFE_RE <- math1st - pred.yhat - cc.data$zeta0 - cc.data$eta0
+ranefs <- ranef(fit1) #Pulling out the random effects
+zeta0 <- ranefs$schoolid[, 1] #Random Intercept for School
+eta0 <- ranefs$classid[, 1] #Random Intercept for Class
+cc.data$zeta0 <- zeta0[idx.sch] # Putting Random Intercept of School back into the data set
+cc.data$eta0 <- eta0[idx.cls] #Putting Random Intercept of Class back into the data set
+resFE_RE <- math1st - pred.yhat - cc.data$zeta0 - cc.data$eta0 #This accounts for removing both fixed and random effects and the random effects are removed manually. Therefore, residuals should be less dependent than the previous one. Thus, we expect to see a flatter line.
 ```
 
 
 * show that these new residuals, resFE_RE are MUCH LESS (if not completely un-) correlated within school 
 * using the same method as before (boxplot?)
 ```{r}
-with(cc.data, boxplot(resFE_RE~schoolid))
-abline(h=1, col="red")
-
+#We are expecting a flatter line but, the line is upward sloping. Come back to it as a group.
 ord2<-order(unlist(tapply(resFE_RE,schoolid,median)))
-boxplot(split(resFE_RE,schoolid)[ord2])
-
+boxplot(split(resFE_RE,schoolid)[ord2], main = "resFE_RE_BoxPlot 2")
 ```
 
-
+### Did we tag?
 *examine the two sets of BLUPs (for random effects zeta0 and eta0) for normality
 *first 'tag' a single value from each grouping (e.g., school or classroom) so that you only have 
 * as many BLUPs as the grouping factor (should be less of an issue in R)
 
-### Did we tag?
+
 ```{r}
 plot(density(zeta0))
 qqnorm(zeta0)
@@ -114,7 +102,7 @@ qqline(eta0)
 use "classroom.dta"
 gen math1st = mathkind + mathgain
 ```{r}
-dat <- read.csv("classroom.csv")
+dat <- read.csv("../classroom.csv")
 dat$math1st <- dat$mathkind + dat$mathgain
 dat <- dat[(complete.cases(dat)),]
 attach(dat)
@@ -125,11 +113,13 @@ attach(dat)
 mixed math1st housepov yearstea mathprep mathknow ses sex minority |||schoolid: minority, cov(un) || classid:, reml 
 est store M2
 
+#Come back and check (0+minority|schoolid) later
 ```{r}
+#The model is slightly more complicated with an uncorrelated random slope school level variability of minority.
 M2 <- lmer(math1st ~ housepov + yearstea + mathprep + mathknow + ses + sex + minority + (0+minority|schoolid) + (1|schoolid) + (1|classid))
-summary(M2)
-
+print(summary(M2))
 ```
+
 ```{r}
 idx.sch <- match(dat$schoolid, sort(unique(dat$schoolid)))
 idx.cls <- match(dat$classid, sort(unique(dat$classid))) 
@@ -142,16 +132,17 @@ pred.yhat.2 <- predict(M2, re.form = ~0)
 ranefs <- ranef(M2)
 zeta0 <- ranefs$schoolid[, 1]
 dat$zeta0 <- zeta0[idx.sch]
-resFE <- dat$math1st - pred.yhat.2 
+resFE.2 <- dat$math1st - pred.yhat.2 
 ```
 
 
 ### Jemar & Zarni
-*show that this residual is not independent within schools in some manner.  Hint: boxplot?
+
+Below, we have sorted each of the fixed effect residuals for the schools by their median from lowest to highest. If we are assuming independence of residuals within schools, then, we would expect to see a flat-line showing that residuals across schools is random. However, since we are seeing a positive trending line which is similar to the one above as the random slope for miniority is non existent with variance being zero, we can conclude that residuals are not random and it appears to be dependent on school like the results of the less complicated model above.
+
 ```{r}
-
-
-
+ord3<-order(unlist(tapply(resFE.2,schoolid,median)))
+boxplot(split(resFE.2,schoolid)[ord3], main = "resFE.2 Boxplot_3")
 ```
 
 *construct the residual that utilizes the BLUPs for the random effects.  Do it in these stages:
@@ -161,37 +152,42 @@ resFE <- dat$math1st - pred.yhat.2
 ```{r}
 ranerr <- ranef(M2)
 zeta0 <- ranerr$schoolid[,1]
-zeta1 <- ranerr$schoolid[,2]
-eta0 <- ranerr$classid[,1]
-dat$zeta0 <- dat$zeta0[idx.sch]
-dat$zeta1 <- dat$zeta1[idx.sch]
-dat$eta0 <- dat$eta0[idx.cls]
-resFE_RE <- dat$math1st - (pred.yhat.2 + dat$zeta0 + dat$minority * dat$zeta1 + dat$eta0)
+zeta1 <- ranerr$schoolid[,2] #It is the random slope of the minority intercept
+eta0 <- ranerr$classid[,1] #This is the random intercept for the classroom level.
+dat$zeta0 <- zeta0[idx.sch]
+dat$zeta1 <- zeta1[idx.sch]
+dat$eta0 <- eta0[idx.cls]
+resFE_RE.2 <- dat$math1st - (pred.yhat.2 + dat$zeta0 + (dat$minority * dat$zeta1) + dat$eta0)#This accounts for removing both fixed and random effects and the random effects are removed manually. Therefore, residuals should be less dependent than the previous one. Thus, we expect to see a flatter line.
 ```
 
 
 *      from the outcome
 
 ### Jemar & Zarni
+## We can check this by subtracting the total sum off and the one which is greater will have a positive total slope? #Shoot an email to Marc on this
+
 * show that these new residuals, resFE_RE are MUCH LESS (if not completely un-) correlated within school 
 * using the same method as before (boxplot?)
 ```{r}
-
-
-
+ord4<-order(unlist(tapply(resFE_RE.2,schoolid,median)))
+boxplot(split(resFE_RE.2,schoolid)[ord4], main = "resFE_RE.2 Boxlot 4")
 ```
 
 *examine the three sets of BLUPs (for random effects zeta0 and eta0) for normality
+
+This is the BLUP for random intercept at the school level and for the most part, it appears to be normal except in the tails end.
 ```{r}
 qqnorm(zeta0)
 qqline(zeta0)
 ```
 
 ```{r}
+#Currently, we have found a random slope of zero for the minority. We will have to come back to this.
 qqnorm(zeta1)
 qqline(zeta1)
 ```
 
+The classroom level random intercept appears to be normal except in the tails end.
 ```{r}
 qqnorm(eta0)
 qqline(eta0)
@@ -201,13 +197,18 @@ qqline(eta0)
 *first 'tag' a single value from each grouping (e.g., school or classroom) so that you only have 
 * as many BLUPs as the grouping factor (should be less of an issue in R)
 
+```{r}
+require(lattice)
+xyplot(mathkind ~ ses | schoolid, data = dat[dat$schoolid < 13, ], type = c("p",
+"r")) #close enough
+```
+
+
+
+
+
 *plot zeta0 vs. zeta1 to see whether the estimated correlation is consistent with the observed. 
 * Use tag to subset as before
-
-#No Correlation
-```{r}
-library(calibrate)
-```
 
 
 ```{r}
@@ -219,10 +220,9 @@ textxy(zeta0[1:10], zeta1[1:10], schoolid[1:10])
 
 ```
 
-### Jemar & Zarni
+### Jemar & Zarni Much easier to figure out
 *track down those odd points in the scatterplot.  What schools are they?
 ```{r}
-
 
 
 ```
